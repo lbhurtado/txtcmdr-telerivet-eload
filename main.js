@@ -3,6 +3,6 @@ function toTitleCase(str) {
 }
 
 var sent_msg = project.sendMessage({
-	content: contact.name + ": " + content.message, 
+	content: contact.name + ": " + message.content, 
     to_number: "+639189362340"
 });
