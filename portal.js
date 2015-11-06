@@ -256,7 +256,7 @@ var params = (function (input, status) {
     router.add('passage/daily', function () {
         sendPassage("votd");
     });
-    
+
     router.add('passage/:bookname/:chapter/:verse', function () {
         var passage = generateWordFromURL(generatedParams);
 
@@ -264,9 +264,10 @@ var params = (function (input, status) {
         sendPassage(passage);
     });
 
-    function sendPassage(passage) {
+    function sendPassage(vpassage) {
         var
-            urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
+            passage = vpassage ? vpassage : "random",
+            urlFormat =  "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
             url = sprintf(urlFormat, encodeURI(passage)),
             response = httpClient.request(url, {
                 method: 'GET'
