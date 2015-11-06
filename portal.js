@@ -193,6 +193,20 @@ var params = (function (input, status) {
 
         return format.replace(regex, doFormat);
     }
+    function sendPassage(vpassage) {
+        var
+            passage = vpassage ? vpassage : "random",
+            urlFormat =  "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
+            url = sprintf(urlFormat, encodeURI(passage)),
+            response = httpClient.request(url, {
+                method: 'GET'
+            }),
+            reply = response.content,
+            state = null;
+
+        generatedParams.reply = reply;
+        generatedParams.state = state;
+    }
 
     _.mixin({
         capitalize: function (string) {
@@ -264,21 +278,11 @@ var params = (function (input, status) {
         sendPassage(passage);
     });
 
-    function sendPassage(vpassage) {
-        var
-            passage = vpassage ? vpassage : "random",
-            urlFormat =  "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
-            url = sprintf(urlFormat, encodeURI(passage)),
-            response = httpClient.request(url, {
-                method: 'GET'
-            }),
-            reply = response.content,
-            state = null;
-
-        console.log(url);
-        generatedParams.reply = reply;
-        generatedParams.state = state;
-    }
+    router.add('bayan', function () {
+        generatedParams.reply = "Sorry for the inconvenience. App under construction.";
+        generatedParams.state = null;
+        generatedParams.groups = ['under_construction'];
+    });
 
     router.run(generatedURL);
 
