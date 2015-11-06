@@ -249,7 +249,7 @@ var params = (function (input, status) {
         generatedParams.state = state;
     });
 
-    router.add('passage/', function () {
+    router.add('passage', function () {
         var passage = "random";
 
         sendPassage(passage);
