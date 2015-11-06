@@ -249,13 +249,14 @@ var params = (function (input, status) {
         generatedParams.state = state;
     });
 
-    router.add('passage', function () {
-        var passage = "random";
-
-        console.log('random here');
-        sendPassage(passage);
+    router.add('passage/random', function () {
+        sendPassage("random");
     });
 
+    router.add('passage/daily', function () {
+        sendPassage("votd");
+    });
+    
     router.add('passage/:bookname/:chapter/:verse', function () {
         var passage = generateWordFromURL(generatedParams);
 
