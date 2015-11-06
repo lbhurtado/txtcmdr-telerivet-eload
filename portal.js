@@ -249,18 +249,20 @@ var params = (function (input, status) {
         generatedParams.state = state;
     });
 
-    router.add('passage/:bookname/:chapter/:verse', function () {
-        var passage = generateWordFromURL(generatedParams);
-
-        sendPassage(passage);
-    });
-
     router.add('passage', function () {
         var passage = "random";
 
+        console.log('random here');
         sendPassage(passage);
     });
-    
+
+    router.add('passage/:bookname/:chapter/:verse', function () {
+        var passage = generateWordFromURL(generatedParams);
+
+        console.log('passage/:bookname/:chapter/:verse');
+        sendPassage(passage);
+    });
+
     function sendPassage(passage) {
         var
             urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
