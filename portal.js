@@ -366,9 +366,14 @@ var Router = {
         console.log('id = ' + id);
     },
     bible: function () {
-        console.log('arguments = ' + arguments);
         console.log('bible');
-        console.log('param = ' + arguments[0]);
+
+        var i = this.arguments.length;
+        while( i-- ){
+            console.log('>>>> arguments ' + i + ' = ' + arguments);
+        }
+
+        //console.log('param = ' + arguments[0]);
 
         //var args = ArgumentsToArray(arguments);
 
