@@ -314,7 +314,7 @@ var Router = {
         "/gallery/:tag/:perPage/": "galleryPage",
         "/gallery/:tag/:perPage/page/:page/": "galleryPage",
         "/artwork/:id/": "artworkPage",
-        "passage >param": "passage"
+        "bible >param": "bible"
     },
     init: function (){
         this._routes = [];
@@ -324,6 +324,7 @@ var Router = {
                 .replace(/:\w+/g, '(\\w+)')
                 .replace(/>\w+/g, '([^&]+)') //everything after >
                 ;
+            console.log('regex = ' + regex);
             this._routes.push({
                 //pattern: new RegExp('^'+route.replace(/:\w+/g, '(\\w+)')+'$'),
                 pattern: new RegExp('^' + regex + '$'),
@@ -366,8 +367,8 @@ var Router = {
         //    ManagerView.set("artwork", item);
         //});
     },
-    passage: function (param) {
-        console.log('passage');
+    bible: function (param) {
+        console.log('bible');
         console.log('param = ' + param);
     }
 };
