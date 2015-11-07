@@ -193,10 +193,11 @@ var params = (function (input, status) {
 
         return format.replace(regex, doFormat);
     }
+
     function sendPassage(vpassage) {
         var
             passage = vpassage ? vpassage : "random",
-            urlFormat =  "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
+            urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
             url = sprintf(urlFormat, encodeURI(passage)),
             response = httpClient.request(url, {
                 method: 'GET'
@@ -306,3 +307,53 @@ if (params.reply)
     sendReply(params.reply);
 
 
+var Router = {
+    routes: {
+        "/": "indexPage",
+        "/gallery/:tag/": "galleryPage",
+        "/gallery/:tag/:perPage/": "galleryPage",
+        "/gallery/:tag/:perPage/page/:page/": "galleryPage",
+        "/artwork/:id/": "artworkPage",
+    },
+    init: function (){
+        this._routes = [];
+        for( var route in this.routes ){
+            var methodName = this.routes[route];
+            var re = new RegExp('^'+route.replace(/:\w+/, '(\\w+)')+'$');
+            console.log('re.source = ' + re.source);
+            this._routes.push({
+                pattern: new RegExp('^'+route.replace(/:\w+/, '(\\w+)')+'$'),
+                callback: this[methodName]
+            });
+        }
+    },
+    nav: function (path){
+        var i = this._routes.length;
+        while( i-- ){
+            var args = path.match(this._routes[i].pattern);
+            if( args ){
+                this._routes[i].callback.apply(this, args.slice(1));
+            }
+        }
+    },
+    indexPage: function (){
+        ManagerView.set("index");
+    },
+    galleryPage: function (tag, perPage, page){
+        var query = {
+            tag: tag,
+            page: page,
+            perPage: perPage
+        };
+        api.find(query, function (items){
+            ManagerView.set("gallery", items);
+        });
+    },
+    artworkPage: function (id){
+        api.findById(id, function (item){
+            ManagerView.set("artwork", item);
+        });
+    }
+};
+
+Router.init();
