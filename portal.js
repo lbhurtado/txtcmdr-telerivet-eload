@@ -314,16 +314,19 @@ var Router = {
         "/gallery/:tag/:perPage/": "galleryPage",
         "/gallery/:tag/:perPage/page/:page/": "galleryPage",
         "/artwork/:id/": "artworkPage",
-        "passage :param": "passage"
+        "passage >param": "passage"
     },
     init: function (){
         this._routes = [];
         for( var route in this.routes ){
             var methodName = this.routes[route];
-            var re = new RegExp('^'+route.replace(/:\w+/g, '(\\w+)')+'$');
-            //console.log('re.source = ' + re.source);
+            var regex = route
+                .replace(/:\w+/g, '(\\w+)')
+                .replace(/>\w+/g, '([^&]+)') //everything after >
+                ;
             this._routes.push({
-                pattern: new RegExp('^'+route.replace(/:\w+/g, '(\\w+)')+'$'),
+                //pattern: new RegExp('^'+route.replace(/:\w+/g, '(\\w+)')+'$'),
+                pattern: new RegExp('^' + regex + '$'),
                 callback: this[methodName]
             });
         }
