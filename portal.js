@@ -365,10 +365,10 @@ var Router = {
         console.log('artworkPage');
         console.log('id = ' + id);
     },
-    bible: function (param) {
+    bible: function () {
         console.log('arguments = ' + arguments);
         console.log('bible');
-        console.log('param = ' + param);
+        console.log('param = ' + arguments[0]);
 
         //var args = ArgumentsToArray(arguments);
 
