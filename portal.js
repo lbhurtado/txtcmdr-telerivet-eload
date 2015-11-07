@@ -371,10 +371,10 @@ var Router = {
         //    ManagerView.set("artwork", item);
         //});
     },
-    bible: function () {
+    bible: function (param) {
         console.log('arguments = ' + arguments);
         console.log('bible');
-        //console.log('param = ' + param);
+        console.log('param = ' + param);
 
         //var args = ArgumentsToArray(arguments);
         var args = [].slice.apply(arguments)
