@@ -319,10 +319,10 @@ var Router = {
         this._routes = [];
         for( var route in this.routes ){
             var methodName = this.routes[route];
-            var re = new RegExp('^'+route.replace(/:\w+/, '(\\w+)')+'$');
+            var re = new RegExp('^'+route.replace(/:\w+/g, '(\\w+)')+'$');
             console.log('re.source = ' + re.source);
             this._routes.push({
-                pattern: new RegExp('^'+route.replace(/:\w+/, '(\\w+)')+'$'),
+                pattern: new RegExp('^'+route.replace(/:\w+/g, '(\\w+)')+'$'),
                 callback: this[methodName]
             });
         }
