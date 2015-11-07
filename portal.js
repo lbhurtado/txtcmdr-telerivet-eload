@@ -330,8 +330,12 @@ var Router = {
     nav: function (path){
         var i = this._routes.length;
         while( i-- ){
-            //var args = path.match(this._routes[i].pattern);
-            var args = path.exec(this._routes[i].pattern);
+            console.log('-------');
+            console.log('path = ' + path);
+            console.log('this._routes[i] = ' + this._routes[i]);
+            console.log('this._routes[i].pattern = ' + this._routes[i].pattern);
+            console.log('*******');
+            var args = path.match(this._routes[i].pattern);
             console.log('args = ' + args);
             if( args ){
                 this._routes[i].callback.apply(this, args.slice(1));
