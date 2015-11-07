@@ -318,7 +318,7 @@ var Router = {
         "/gallery/:tag/:perPage/": "galleryPage",
         "/gallery/:tag/:perPage/page/:page/": "galleryPage",
         "/artwork/:id/": "artworkPage",
-        "bible >param": "bible"
+        "bible?": "bible"
     },
     init: function (){
         this._routes = [];
@@ -327,6 +327,7 @@ var Router = {
             var regex = route
                 .replace(/:\w+/g, '(\\w+)')
                 .replace(/>\w+/g, '([^&]+)') //everything after >
+                .replace(/\?$/, '(\\?|\\&)([^=]+)\\=([^&]+)') //query string after ?
                 ;
             console.log('regex = ' + regex);
             this._routes.push({
