@@ -368,7 +368,7 @@ var Router = {
     bible: function () {
         console.log('bible');
 
-        var i = this.arguments.length;
+        var i = arguments.length;
         while( i-- ){
             console.log('>>>> arguments ' + i + ' = ' + arguments);
         }
