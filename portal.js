@@ -363,9 +363,11 @@ var Router = {
         //    ManagerView.set("gallery", items);
         //});
     },
-    artworkPage: function (id, id2, id3){
+    artworkPage: function (id){
         console.log('artworkPage');
-        console.log('id = ', id);
+        console.log('id = ' + id);
+        var x = id;
+        console.log('x = ' + x);
         //api.findById(id, function (item){
         //    ManagerView.set("artwork", item);
         //});
