@@ -340,7 +340,7 @@ var Router = {
             if( args ){
                 console.log('args.slice(1) = ' + args.slice(1));
                 //this._routes[i].callback.apply(this, args.slice(1));
-                this._routes[i].callback.apply(null, [3,2,4]);
+                this._routes[i].callback.call(null, 3, 2, 1);
             }
         }
     },
