@@ -381,6 +381,7 @@ var Router = {
             output.push(matches[1]);
         }
 
+        console.log('output = ' + output);
     }
 };
 
