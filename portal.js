@@ -331,13 +331,15 @@ var Router = {
         var i = this._routes.length;
         while( i-- ){
             var args = path.match(this._routes[i].pattern);
+            console.log('args = ' + args);
             if( args ){
                 this._routes[i].callback.apply(this, args.slice(1));
             }
         }
     },
     indexPage: function (){
-        ManagerView.set("index");
+        //ManagerView.set("index");
+        console.log('index');
     },
     galleryPage: function (tag, perPage, page){
         var query = {
@@ -345,15 +347,22 @@ var Router = {
             page: page,
             perPage: perPage
         };
-        api.find(query, function (items){
-            ManagerView.set("gallery", items);
-        });
+        console.log('galleryPage');
+        console.log('tag = ', tag);
+        console.log('perPage = ', perPage);
+        console.log('page = ', page);
+        //api.find(query, function (items){
+        //    ManagerView.set("gallery", items);
+        //});
     },
     artworkPage: function (id){
-        api.findById(id, function (item){
-            ManagerView.set("artwork", item);
-        });
+        console.log('artworkPage');
+        console.log('id = ', id);
+        //api.findById(id, function (item){
+        //    ManagerView.set("artwork", item);
+        //});
     }
 };
 
 Router.init();
+Router.nav(message.content);
