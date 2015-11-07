@@ -370,7 +370,7 @@ var Router = {
 
         var i = arguments.length;
         while( i-- ){
-            console.log('>>>> arguments ' + i + ' = ' + arguments);
+            console.log('>>>> arguments ' + i + ' = ' + arguments[i]);
         }
 
         //console.log('param = ' + arguments[0]);
