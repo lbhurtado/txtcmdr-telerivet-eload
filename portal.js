@@ -209,6 +209,10 @@ var params = (function (input, status) {
         generatedParams.state = state;
     }
 
+    function ArgumentsToArray(args) {
+        return [].slice.apply(args);
+    }
+
     _.mixin({
         capitalize: function (string) {
             return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
@@ -368,8 +372,15 @@ var Router = {
         //});
     },
     bible: function (param) {
+        console.log(arguments);
         console.log('bible');
         console.log('param = ' + param);
+
+        args = ArgumentsToArray(arguments);
+
+        args.forEach(function(value) {
+            console.log('value ===', value);
+        });
     }
 };
 
