@@ -371,13 +371,14 @@ var Router = {
         //    ManagerView.set("artwork", item);
         //});
     },
-    bible: function (param) {
-        console.log(arguments);
+    bible: function () {
+        console.log('arguments = ' + arguments);
         console.log('bible');
-        console.log('param = ' + param);
+        //console.log('param = ' + param);
 
-        var args = ArgumentsToArray(arguments);
-        
+        //var args = ArgumentsToArray(arguments);
+        var args = [].slice.apply(arguments)
+
         args.forEach(function(value) {
             console.log('value ===', value);
         });
