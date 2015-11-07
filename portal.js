@@ -314,6 +314,7 @@ var Router = {
         "/gallery/:tag/:perPage/": "galleryPage",
         "/gallery/:tag/:perPage/page/:page/": "galleryPage",
         "/artwork/:id/": "artworkPage",
+        "passage :param": "passage"
     },
     init: function (){
         this._routes = [];
@@ -330,18 +331,10 @@ var Router = {
     nav: function (path){
         var i = this._routes.length;
         while( i-- ){
-            console.log('-------');
-            console.log('path = ' + path);
-            console.log('this._routes[i] = ' + this._routes[i]);
-            console.log('this._routes[i].pattern = ' + this._routes[i].pattern);
-            console.log('*******');
             var args = path.match(this._routes[i].pattern);
             console.log('args = ' + args);
             if( args ){
-                //console.log('args.slice(1) = ' + args.slice(1));
                 this._routes[i].callback.apply(this, args.slice(1));
-                //this._routes[i].callback.call(null, 3, 2, 1);
-                this.artworkPage(54);
             }
         }
     },
@@ -356,9 +349,9 @@ var Router = {
             perPage: perPage
         };
         console.log('galleryPage');
-        console.log('tag = ', tag);
-        console.log('perPage = ', perPage);
-        console.log('page = ', page);
+        console.log('tag = '+ tag);
+        console.log('perPage = ' + perPage);
+        console.log('page = '+ page);
         //api.find(query, function (items){
         //    ManagerView.set("gallery", items);
         //});
@@ -366,15 +359,15 @@ var Router = {
     artworkPage: function (id){
         console.log('artworkPage');
         console.log('id = ' + id);
-        var x = id;
-        console.log('x = ' + x);
         //api.findById(id, function (item){
         //    ManagerView.set("artwork", item);
         //});
+    },
+    passage: function (param) {
+        console.log('passage');
+        console.log('param = ' + param);
     }
 };
 
 Router.init();
 Router.nav(message.content);
-console.log('+++++++++++');
-Router.artworkPage(66);
