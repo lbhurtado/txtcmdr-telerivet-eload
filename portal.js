@@ -318,7 +318,7 @@ var Router = {
         "/gallery/:tag/:perPage/": "galleryPage",
         "/gallery/:tag/:perPage/page/:page/": "galleryPage",
         "/artwork/:id/": "artworkPage",
-        "bible?q1=1&q2=2": "bible"
+        "bible q1=1&q2=2": "bible"
     },
     init: function (){
         this._routes = [];
@@ -374,13 +374,13 @@ var Router = {
             console.log('>>>> arguments ' + i + ' = ' + arguments[i]);
         }
 
-        var input = "?q1=1&q2=2";
-        var regex = /(\?|\&)([^=]+)\=([^&]+)/ig;
-
-        var matches, output = [];
-        while (matches = regex.exec(input)) {
-            output.push(matches[2] + '=' + matches[3]);
-        }
+        //var input = "?q1=1&q2=2";
+        //var regex = /(\?|\&)([^=]+)\=([^&]+)/ig;
+        //
+        //var matches, output = [];
+        //while (matches = regex.exec(input)) {
+        //    output.push(matches[2] + '=' + matches[3]);
+        //}
 
         console.log('output = ' + output);
     }
