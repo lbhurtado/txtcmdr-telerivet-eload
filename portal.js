@@ -378,7 +378,7 @@ var Router = {
 
         var matches, output = [];
         while (matches = regex.exec(input)) {
-            output.push(matches[1]);
+            output.push(matches[2] + '=' + matches[3]);
         }
 
         console.log('output = ' + output);
