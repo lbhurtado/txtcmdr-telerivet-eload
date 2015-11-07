@@ -360,16 +360,10 @@ var Router = {
         console.log('tag = '+ tag);
         console.log('perPage = ' + perPage);
         console.log('page = '+ page);
-        //api.find(query, function (items){
-        //    ManagerView.set("gallery", items);
-        //});
     },
     artworkPage: function (id){
         console.log('artworkPage');
         console.log('id = ' + id);
-        //api.findById(id, function (item){
-        //    ManagerView.set("artwork", item);
-        //});
     },
     bible: function (param) {
         console.log('arguments = ' + arguments);
@@ -377,10 +371,11 @@ var Router = {
         console.log('param = ' + param);
 
         //var args = ArgumentsToArray(arguments);
+
         var args = [].slice.apply(arguments)
 
         args.forEach(function(value) {
-            console.log('value ===', value);
+            console.log('value ===' + value);
         });
     }
 };
