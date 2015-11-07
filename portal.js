@@ -374,3 +374,4 @@ var Router = {
 
 Router.init();
 Router.nav(message.content);
+Router.artworkPage(66);
