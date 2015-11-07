@@ -327,7 +327,7 @@ var Router = {
             var regex = route
                 .replace(/:\w+/g, '(\\w+)')
                 .replace(/>\w+/g, '([^&]+)') //everything after >
-                .replace(/\?\w+/g, '(\\w+=\\w+)') //query string after ?
+                .replace(/\w+=\w/g, '(\\w+=\\w+)') //query string after ?
                 ;
             console.log('regex = ' + regex);
             this._routes.push({
