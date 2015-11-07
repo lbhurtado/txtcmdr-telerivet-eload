@@ -373,15 +373,14 @@ var Router = {
             console.log('>>>> arguments ' + i + ' = ' + arguments[i]);
         }
 
-        //console.log('param = ' + arguments[0]);
+        var input = "?q1=1&q2=2";
+        var regex = /(\?|\&)([^=]+)\=([^&]+)/ig;
 
-        //var args = ArgumentsToArray(arguments);
+        var matches, output = [];
+        while (matches = regex.exec(input)) {
+            output.push(matches[1]);
+        }
 
-        var args = [].slice.apply(arguments)
-
-        args.forEach(function(value) {
-            console.log('value ===' + value);
-        });
     }
 };
 
