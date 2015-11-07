@@ -376,8 +376,8 @@ var Router = {
         console.log('bible');
         console.log('param = ' + param);
 
-        args = ArgumentsToArray(arguments);
-
+        var args = ArgumentsToArray(arguments);
+        
         args.forEach(function(value) {
             console.log('value ===', value);
         });
