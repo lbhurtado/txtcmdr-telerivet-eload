@@ -338,9 +338,10 @@ var Router = {
             var args = path.match(this._routes[i].pattern);
             console.log('args = ' + args);
             if( args ){
-                console.log('args.slice(1) = ' + args.slice(1));
-                //this._routes[i].callback.apply(this, args.slice(1));
-                this._routes[i].callback.call(null, 3, 2, 1);
+                //console.log('args.slice(1) = ' + args.slice(1));
+                this._routes[i].callback.apply(this, args.slice(1));
+                //this._routes[i].callback.call(null, 3, 2, 1);
+                this.artworkPage(54);
             }
         }
     },
