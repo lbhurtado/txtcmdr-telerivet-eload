@@ -320,7 +320,7 @@ var Router = {
         for( var route in this.routes ){
             var methodName = this.routes[route];
             var re = new RegExp('^'+route.replace(/:\w+/g, '(\\w+)')+'$');
-            console.log('re.source = ' + re.source);
+            //console.log('re.source = ' + re.source);
             this._routes.push({
                 pattern: new RegExp('^'+route.replace(/:\w+/g, '(\\w+)')+'$'),
                 callback: this[methodName]
@@ -339,7 +339,8 @@ var Router = {
             console.log('args = ' + args);
             if( args ){
                 console.log('args.slice(1) = ' + args.slice(1));
-                this._routes[i].callback.apply(this, args.slice(1));
+                //this._routes[i].callback.apply(this, args.slice(1));
+                this._routes[i].callback.apply(this, [3,2,4]);
             }
         }
     },
@@ -361,7 +362,7 @@ var Router = {
         //    ManagerView.set("gallery", items);
         //});
     },
-    artworkPage: function (id){
+    artworkPage: function (id, id2, id3){
         console.log('artworkPage');
         console.log('id = ', id);
         //api.findById(id, function (item){
