@@ -232,7 +232,7 @@ var params = (function (input, status) {
             'challenge :origin :mobile': "challenge",
             'ping*': "ping",
             'bayan': "bayan",
-            'forex': "forex"
+            'forex*': "forex"
         },
         init: function () {
             this._routes = [];
