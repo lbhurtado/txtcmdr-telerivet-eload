@@ -303,7 +303,7 @@ var params = (function (input, status) {
         },
         ping: function (params) {
             var
-                domain = "whoapi.com",
+                domain = "128.199.81.129",
                 r = "taken",
                 apikey = "10bbc818a52b549a755d60eda87986fd",
                 url = 'http://api.whoapi.com/?domain=' + domain + '&r=' + r + '&apikey=' + apikey,
