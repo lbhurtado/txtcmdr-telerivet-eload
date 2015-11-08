@@ -229,7 +229,8 @@ var params = (function (input, status) {
             'subscribe *': "subscribe",
             'passage *': "passage",
             'info': "info",
-            'challenge :origin :mobile': "challenge"
+            'challenge :origin :mobile': "challenge",
+            'ping': "ping",
         },
         init: function () {
             this._routes = [];
@@ -294,6 +295,9 @@ var params = (function (input, status) {
                     method: 'POST'
                 });
             console.log(url);
+        },
+        ping: function () {
+            generatedParams.reply = "PING ka rin!";
         }
     };
 
