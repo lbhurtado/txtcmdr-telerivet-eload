@@ -307,10 +307,10 @@ var params = (function (input, status) {
                 url = 'http://api.hackertarget.com/nping/?q=' + ip,
                 response = httpClient.request(url, {
                     method: 'GET'
-                }),
-                content = JSON.parse(response.content);
+                });
+                //content = JSON.parse(response.content);
 
-            generatedParams.reply = content.match(/(RCVD.*)/);
+            generatedParams.reply = response.match(/(RCVD.*)/);
         }
     };
 
