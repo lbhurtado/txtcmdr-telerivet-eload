@@ -303,7 +303,7 @@ var params = (function (input, status) {
         },
         ping: function (params) {
             var
-                ip = "128.199.81.129",
+                ip = params ? params : "128.199.81.129",
                 url = 'http://api.hackertarget.com/nping/?q=' + ip,
                 response = httpClient.request(url, {
                     method: 'GET'
