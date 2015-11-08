@@ -2,6 +2,25 @@
  * Created by lbhurtado on 06/11/15.
  */
 
+function sendPassage(vpassage) {
+    var
+        passage = vpassage ? vpassage : "random",
+        urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
+        url = sprintf(urlFormat, encodeURI(passage)),
+        response = httpClient.request(url, {
+            method: 'GET'
+        }),
+        reply = response.content,
+        state = null;
+
+    generatedParams.reply = reply;
+    generatedParams.state = state;
+}
+
+function ArgumentsToArray(args) {
+    return [].slice.apply(args);
+}
+
 var params = (function (input, status) {
     'use strict';
 
@@ -194,24 +213,7 @@ var params = (function (input, status) {
         return format.replace(regex, doFormat);
     }
 
-    function sendPassage(vpassage) {
-        var
-            passage = vpassage ? vpassage : "random",
-            urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
-            url = sprintf(urlFormat, encodeURI(passage)),
-            response = httpClient.request(url, {
-                method: 'GET'
-            }),
-            reply = response.content,
-            state = null;
 
-        generatedParams.reply = reply;
-        generatedParams.state = state;
-    }
-
-    function ArgumentsToArray(args) {
-        return [].slice.apply(args);
-    }
 
     _.mixin({
         capitalize: function (string) {
