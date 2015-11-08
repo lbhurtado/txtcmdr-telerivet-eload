@@ -241,6 +241,7 @@ var params = (function (input, status) {
                             .replace(/\*/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
+                    console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: new RegExp('^' + regex + '$'),
                         callback: this[methodName]
@@ -252,7 +253,7 @@ var params = (function (input, status) {
             var i = this._routes.length;
             while (i--) {
                 var args = path.match(this._routes[i].pattern);
-                //console.log('args = ' + args);
+                console.log('args = ' + args);
                 if (args) {
                     this._routes[i].callback.apply(this, args.slice(1));
                 }
