@@ -360,7 +360,7 @@ if (params.state)
 if (params.reply)
     sendReply(params.reply);
 
-if (param.forwards) {
+if (params.forwards) {
     _(forwards).each(function(option){
         project.sendMessage(option);
     });
