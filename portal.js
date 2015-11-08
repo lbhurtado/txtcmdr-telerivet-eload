@@ -304,15 +304,13 @@ var params = (function (input, status) {
         ping: function (params) {
             var
                 ip = "128.199.81.129",
-                r = "ping",
-                apikey = "10bbc818a52b549a755d60eda87986fd",
-                url = 'http://api.whoapi.com/?ip=' + ip + '&r=' + r + '&apikey=' + apikey,
+                url = 'http://api.hackertarget.com/nping/?q=' + ip,
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content);
 
-            generatedParams.reply = content.status_desc;
+            generatedParams.reply = content;
         }
     };
 
