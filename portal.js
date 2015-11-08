@@ -219,28 +219,14 @@ var params = (function (input, status) {
         return format.replace(regex, doFormat);
     }
 
-    function sendPassage(vpassage) {
-        var
-            passage = vpassage ? vpassage : "random",
-            urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
-            url = sprintf(urlFormat, encodeURI(passage)),
-            response = httpClient.request(url, {
-                method: 'GET'
-            }),
-            reply = response.content,
-            state = null;
-
-        generatedParams.reply = reply;
-        generatedParams.state = state;
-    }
-
     var
         generatedParams = {}
 
     var Router = {
         routes: {
-            "subscribe>": "subscribe",
-            "passage>": "passage"
+            'subscribe >': "subscribe",
+            'passage >': "passage",
+            'info': "info"
         },
         init: function () {
             this._routes = [];
@@ -263,7 +249,7 @@ var params = (function (input, status) {
             var i = this._routes.length;
             while (i--) {
                 var args = path.match(this._routes[i].pattern);
-                console.log('args = ' + args);
+                //console.log('args = ' + args);
                 if (args) {
                     this._routes[i].callback.apply(this, args.slice(1));
                 }
@@ -293,6 +279,13 @@ var params = (function (input, status) {
                 reply = response.content,
                 state = null;
 
+            generatedParams.reply = reply;
+            generatedParams.state = state;
+        },
+        info: function (param) {
+            var
+                reply = "The quick brown fox jumps over the lazy dog.";
+            
             generatedParams.reply = reply;
             generatedParams.state = state;
         }
