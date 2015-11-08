@@ -306,7 +306,7 @@ var params = (function (input, status) {
                 domain = "whoapi.com",
                 r = "taken",
                 apikey = "10bbc818a52b549a755d60eda87986fd",
-                url = 'http://api.whoapi.com/?domain=' + params + '&r=' + r + '&apikey=' + apikey,
+                url = 'http://api.whoapi.com/?domain=' + domain + '&r=' + r + '&apikey=' + apikey,
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
