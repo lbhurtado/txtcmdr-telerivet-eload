@@ -308,9 +308,9 @@ var params = (function (input, status) {
                 response = httpClient.request(url, {
                     method: 'GET'
                 });
-                content = JSON.parse(response.content);
+                //content = JSON.parse(response.content);
 
-            generatedParams.reply = content;
+            generatedParams.reply = response.content;
         }
     };
 
