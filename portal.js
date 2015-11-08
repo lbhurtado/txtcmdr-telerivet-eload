@@ -318,16 +318,17 @@ var Router = {
         "/gallery/:tag/:perPage/": "galleryPage",
         "/gallery/:tag/:perPage/page/:page/": "galleryPage",
         "/artwork/:id/": "artworkPage",
-        "bible q1=1&q2=2": "bible"
+        "bible>": "bible"
     },
-    init: function (){
+    init: function () {
         this._routes = [];
-        for( var route in this.routes ){
+        for (var route in this.routes) {
             var methodName = this.routes[route];
             var regex = route
-                .replace(/:\w+/g, '(\\w+)')
-                .replace(/>\w+/g, '([^&]+)') //everything after >
-                .replace(/\w+=\w+/g, '(\\w+=\\w+)') //query string after ?
+                    .replace(/:\w+/g, '(\\w+)')
+                    .replace(/>/, '[ \t]*([^\n\r]*)') //everything after >
+                    //.replace(/>\w+/g, '([^&]+)') //everything after >
+                    .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                 ;
             console.log('regex = ' + regex);
             this._routes.push({
@@ -337,32 +338,32 @@ var Router = {
             });
         }
     },
-    nav: function (path){
+    nav: function (path) {
         var i = this._routes.length;
-        while( i-- ){
+        while (i--) {
             var args = path.match(this._routes[i].pattern);
             console.log('args = ' + args);
-            if( args ){
+            if (args) {
                 this._routes[i].callback.apply(this, args.slice(1));
             }
         }
     },
-    indexPage: function (){
+    indexPage: function () {
         //ManagerView.set("index");
         console.log('index');
     },
-    galleryPage: function (tag, perPage, page){
+    galleryPage: function (tag, perPage, page) {
         var query = {
             tag: tag,
             page: page,
             perPage: perPage
         };
         console.log('galleryPage');
-        console.log('tag = '+ tag);
+        console.log('tag = ' + tag);
         console.log('perPage = ' + perPage);
-        console.log('page = '+ page);
+        console.log('page = ' + page);
     },
-    artworkPage: function (id){
+    artworkPage: function (id) {
         console.log('artworkPage');
         console.log('id = ' + id);
     },
@@ -370,7 +371,7 @@ var Router = {
         console.log('bible');
 
         var i = arguments.length;
-        while( i-- ){
+        while (i--) {
             console.log('>>>> arguments ' + i + ' = ' + arguments[i]);
         }
 
