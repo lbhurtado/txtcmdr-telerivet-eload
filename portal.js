@@ -316,8 +316,7 @@ var params = (function (input, status) {
         forex: function (params) {
             var
                 pair = params ? params : "USDPHP",
-                urlFormat = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22%s%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=",
-                url = sprintf(urlFormat, encodeURI(pair.toUpperCase())),
+                url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22"+ pair +"%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=",
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
