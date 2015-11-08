@@ -303,10 +303,10 @@ var params = (function (input, status) {
         },
         ping: function (params) {
             var
-                domain = "128.199.81.129",
-                r = "taken",
+                ip = "128.199.81.129",
+                r = "ping",
                 apikey = "10bbc818a52b549a755d60eda87986fd",
-                url = 'http://api.whoapi.com/?domain=' + domain + '&r=' + r + '&apikey=' + apikey,
+                url = 'http://api.whoapi.com/?ip=' + ip + '&r=' + r + '&apikey=' + apikey,
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
