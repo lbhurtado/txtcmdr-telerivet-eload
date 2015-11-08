@@ -253,8 +253,9 @@ var params = (function (input, status) {
         nav: function (path) {
             var i = this._routes.length;
             while (i--) {
-                //var args = path.match(this._routes[i].pattern);
-                var args = (new RegExp(this._routes[i].pattern, "i")).exec(path).slice(1);
+                var regex = new RegExp(this._routes[i].pattern, "i");
+                var args = path.match(regex);
+                //var args = (new RegExp(this._routes[i].pattern, "i")).exec(path).slice(1);
                 console.log('args = ' + args);
                 if (args) {
                     this._routes[i].callback.apply(this, args.slice(1));
