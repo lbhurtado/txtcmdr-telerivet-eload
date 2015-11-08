@@ -367,8 +367,10 @@ var Router = {
         console.log('artworkPage');
         console.log('id = ' + id);
     },
-    bible: function () {
+    bible: function (passage) {
         console.log('bible');
+
+        sendPassage(passage)
 
         var i = arguments.length;
         while (i--) {
@@ -383,7 +385,7 @@ var Router = {
         //    output.push(matches[2] + '=' + matches[3]);
         //}
 
-        console.log('output = ' + output);
+        //console.log('output = ' + output);
     }
 };
 
