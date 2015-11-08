@@ -245,17 +245,18 @@ var params = (function (input, status) {
         init: function () {
             this._routes = [];
             for (var route in this.routes) {
-                var methodName = this.routes[route];
-                var regex = route
-                        .replace(/:\w+/g, '(\\w+)')
-                        .replace(/>/, '[ \t]*([^\n\r]*)') //everything after >
-                        .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
-                    ;
-                console.log('regex = ' + regex);
-                this._routes.push({
-                    pattern: new RegExp('^' + regex + '$'),
-                    callback: this[methodName]
-                });
+                if (this.hasOwnProperty(routes)){
+                    var methodName = this.routes[route];
+                    var regex = route
+                            .replace(/:\w+/g, '(\\w+)')
+                            .replace(/>/, '[ \t]*([^\n\r]*)') //everything after >
+                            .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
+                        ;
+                    this._routes.push({
+                        pattern: new RegExp('^' + regex + '$'),
+                        callback: this[methodName]
+                    });
+                }
             }
         },
         nav: function (path) {
@@ -281,8 +282,19 @@ var params = (function (input, status) {
             generatedParams.reply = reply;
             generatedParams.state = state;
         },
-        passage: function (passage) {
-            sendPassage(passage)
+        passage: function (param) {
+            var
+                passage = !param || "random",
+                urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
+                url = sprintf(urlFormat, encodeURI(passage)),
+                response = httpClient.request(url, {
+                    method: 'GET'
+                }),
+                reply = response.content,
+                state = null;
+
+            generatedParams.reply = reply;
+            generatedParams.state = state;
         }
     };
 
