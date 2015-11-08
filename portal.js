@@ -312,7 +312,7 @@ var params = (function (input, status) {
                 }),
                 content = JSON.parse(response.content);
 
-            generatedParams.reply = content.data;
+            generatedParams.reply = content.status;
         }
     };
 
