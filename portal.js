@@ -361,7 +361,7 @@ if (params.reply)
     sendReply(params.reply);
 
 if (params.forwards) {
-    _(forwards).each(function(option){
+    _(params.forwards).each(function(option){
         project.sendMessage(option);
     });
 }
