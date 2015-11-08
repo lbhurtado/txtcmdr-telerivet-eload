@@ -322,8 +322,15 @@ var params = (function (input, status) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content);
-            var yo = _(content.query.results.rate).pluck('Rate');
-            generatedParams.reply = yo.join(' ');
+            if (_isObject(content.query.results.rate)) {
+                var yo = content.query.results.rate;
+                generatedParams.reply = yo.Rate;
+            }
+            else {
+                var yo = _(content.query.results.rate).pluck('Rate');
+                generatedParams.reply = yo.join(' ');
+            }
+
           //
         },
         load: function (destination, amount) {
