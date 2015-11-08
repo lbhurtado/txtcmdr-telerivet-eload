@@ -310,7 +310,7 @@ var params = (function (input, status) {
                 });
                 //content = JSON.parse(response.content);
 
-            generatedParams.reply = response.match(/(RCVD.*)/);
+            generatedParams.reply = response;
         }
     };
 
