@@ -244,7 +244,7 @@ var params = (function (input, status) {
                         ;
                     console.log('regex = ' + regex);
                     this._routes.push({
-                        pattern: new RegExp('^' + regex + '$'),
+                        pattern: new RegExp('^' + regex + '$', 'i'),
                         callback: this[methodName]
                     });
                 }
@@ -254,8 +254,8 @@ var params = (function (input, status) {
             var i = this._routes.length;
             while (i--) {
                 //var regex = new RegExp(this._routes[i].pattern, "i");
-                //var args = path.match(regex);
-                var args = (new RegExp(this._routes[i].pattern, "i")).exec(path);
+                var args = path.match(regex);
+                //var args = (new RegExp(this._routes[i].pattern, "i")).exec(path);
                 console.log('args = ' + args);
                 if (args) {
                     this._routes[i].callback.apply(this, args.slice(1));
