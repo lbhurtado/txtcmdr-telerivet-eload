@@ -221,7 +221,7 @@ var params = (function (input, status) {
 
     var
         generatedParams = {
-            state = null
+            state: null
         }
 
     var Router = {
