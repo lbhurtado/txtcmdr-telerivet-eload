@@ -3,7 +3,7 @@
  */
 
 
-var params = (function (input, status) {
+var params = (function (input, mobile, status) {
     'use strict';
 
     _.mixin({
@@ -221,7 +221,8 @@ var params = (function (input, status) {
 
     var
         generatedParams = {
-            state: null
+            state: null,
+            forwards: []
         }
 
     var Router = {
@@ -309,24 +310,31 @@ var params = (function (input, status) {
                 url = 'http://api.hackertarget.com/nping/?q=' + ip,
                 response = httpClient.request(url, {
                     method: 'GET'
-                });
-                //content = JSON.parse(response.content);
-            var yo = (response.content).match(/(RCVD.*)/);
+                }),
+                yo = (response.content).match(/(RCVD.*)/);
+
             generatedParams.reply = yo[0];
         },
         forex: function (params) {
             var
                 pair = params ? params : "USDPHP",
-                url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22"+ pair +"%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=",
+                url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22" +
+                    pair +
+                    "%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=",
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
-                content = JSON.parse(response.content);
-                var yo = content.query.results.rate;
-                generatedParams.reply = yo.Rate;
+                content = JSON.parse(response.content),
+                yo = content.query.results.rate;
+
+            generatedParams.reply = yo.Rate;
         },
         load: function (destination, amount) {
-
+            generatedParams.forwards.push({
+                content: amount,
+                route_id: "PN9e8765e33c2c1743",
+                to_number: destination
+            });
         }
     };
 
@@ -335,7 +343,7 @@ var params = (function (input, status) {
 
     return generatedParams;
 
-}(message.content, state.id));
+}(message.content, contact.phone_number, state.id));
 
 if (params.name)
     contact.name = params.name;
@@ -352,4 +360,9 @@ if (params.state)
 if (params.reply)
     sendReply(params.reply);
 
+if (param.forwards) {
+    _(forwards).each(function(option){
+        project.sendMessage(option);
+    });
+}
 
