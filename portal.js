@@ -231,7 +231,8 @@ var params = (function (input, status) {
             'info': "info",
             'challenge :origin :mobile': "challenge",
             'ping*': "ping",
-            'bayan': "bayan"
+            'bayan': "bayan",
+            'forex': "forex"
         },
         init: function () {
             this._routes = [];
@@ -311,7 +312,19 @@ var params = (function (input, status) {
                 //content = JSON.parse(response.content);
             var yo = (response.content).match(/(RCVD.*)/);
             generatedParams.reply = yo[0];
-        }
+        },
+        forex: function (params) {
+            var
+                ip = params ? params : "USDPHP",
+                url = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDPHP%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=',
+                response = httpClient.request(url, {
+                    method: 'GET'
+                }),
+                content = JSON.parse(response.content);
+            var yo = content.query.results.rate.Rate;
+            generatedParams.reply = yo;
+          //
+        },
     };
 
     Router.init();
