@@ -322,7 +322,7 @@ var params = (function (input, status) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content);
-            if (_isObject(content.query.results.rate)) {
+            if (_(content.query.results.rate).isObject()) {
                 var yo = content.query.results.rate;
                 generatedParams.reply = yo.Rate;
             }
