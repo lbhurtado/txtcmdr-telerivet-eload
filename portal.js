@@ -284,7 +284,7 @@ var params = (function (input, status) {
         },
         passage: function (param) {
             var
-                passage = !param || "random",
+                passage = param ? param : "random",
                 urlFormat = "http://labs.bible.org/api/?passage=%s&formatting=plain&type=text",
                 url = sprintf(urlFormat, encodeURI(passage)),
                 response = httpClient.request(url, {
