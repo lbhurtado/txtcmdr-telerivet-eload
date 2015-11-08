@@ -322,8 +322,8 @@ var params = (function (input, status) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content);
-            var yo = content.query.results.rate.Rate;
-            generatedParams.reply = yo;
+            var yo = _(content.query.results.rate).pluck('Rate');
+            generatedParams.reply = yo.join(' ');
           //
         },
         load: function (destination, amount) {
