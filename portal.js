@@ -227,10 +227,10 @@ var params = (function (input, status) {
     var Router = {
         routes: {
             'subscribe *': "subscribe",
-            'passage *': "passage",
+            'passage*': "passage",
             'info': "info",
             'challenge :origin :mobile': "challenge",
-            'ping *': "ping",
+            'ping*': "ping",
         },
         init: function () {
             this._routes = [];
@@ -298,7 +298,7 @@ var params = (function (input, status) {
             console.log(url);
         },
         ping: function (params) {
-            generatedParams.reply = "PING - " + params;
+            generatedParams.reply = "PING" + params ? " - " + params : "";
         }
     };
 
