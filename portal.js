@@ -244,7 +244,7 @@ var params = (function (input, status) {
                         ;
                     console.log('regex = ' + regex);
                     this._routes.push({
-                        pattern: new RegExp('^' + regex + '$'),
+                        pattern: new RegExp('^' + regex + '$', 'i'),
                         callback: this[methodName]
                     });
                 }
