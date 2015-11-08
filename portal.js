@@ -302,7 +302,7 @@ var params = (function (input, status) {
             generatedParams.reply = "Sorry for the inconvenience. App under construction."
         },
         ping: function (params) {
-            generatedParams.reply = "PING" + params ? " - " + params : "";
+            generatedParams.reply = "PING" + (params ? " - " + params : "");
         }
     };
 
