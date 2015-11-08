@@ -220,13 +220,16 @@ var params = (function (input, status) {
     }
 
     var
-        generatedParams = {}
+        generatedParams = {
+            state = null
+        }
 
     var Router = {
         routes: {
-            'subscribe >': "subscribe",
-            'passage >': "passage",
-            'info': "info"
+            'subscribe *': "subscribe",
+            'passage *': "passage",
+            'info': "info",
+            'challenge :origin :mobile': "challenge"
         },
         init: function () {
             this._routes = [];
@@ -235,7 +238,7 @@ var params = (function (input, status) {
                     var methodName = this.routes[route];
                     var regex = route
                             .replace(/:\w+/g, '(\\w+)')
-                            .replace(/>/, '[ \t]*([^\n\r]*)') //everything after >
+                            .replace(/\*/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
                     this._routes.push({
@@ -276,18 +279,20 @@ var params = (function (input, status) {
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
-                reply = response.content,
-                state = null;
+                reply = response.content;
 
             generatedParams.reply = reply;
-            generatedParams.state = state;
         },
         info: function (param) {
+            generatedParams.reply = "The quick brown fox jumps over the lazy dog.";
+        },
+        challenge: function (vorigin, vmobile) {
             var
-                reply = "The quick brown fox jumps over the lazy dog.";
-            
-            generatedParams.reply = reply;
-            generatedParams.state = state;
+                url = "http://128.199.81.129/txtcmdr/challenge/" + vorigin + "/" + vmobile,
+                response = httpClient.request(url, {
+                    method: 'POST'
+                });
+            console.log(url);
         }
     };
 
