@@ -223,7 +223,63 @@ var params = (function (input, mobile, status) {
         generatedParams = {
             state: null,
             forwards: []
-        }
+        },
+        Library = {
+            loader: function (telco) {
+                switch (telco) {
+                    case 'SMART':
+                        return '639209456856';
+                    case 'GLOBE':
+                        return '639178662418';
+                    case 'SUN':
+                        return '639229990214';
+                }
+            },
+            prefixes: {
+                'SMART': ['813', '900', '907', '908', '909', '910', '911', '912', '913', '914', '918', '920', '921', '928', '929', '930', '931', '938', '939', '940', '946', '947', '948', '949', '971', '980', '989', '998', '999'],
+                'GLOBE': ['817', '905', '915', '916', '917', '926', '927', '935', '936', '937', '945', '946', '975', '977', '978', '979', '994', '995', '996', '997'],
+                'TM': ['906'],
+                'SUN': ['922', '923', '924', '925', '932', '933', '934', '942', '943', '944']
+            },
+            telco: function (mobile) {
+                var getPrefix = function () {
+                        var regex = /^(63|0)(\d{3})\d{7}$/;
+                        var matches = mobile.match(regex);
+                        return !matches || matches[2] || null;
+                    },
+                    getTelco = function (prefixes, prefix) {
+                        for (var key in prefixes) {
+                            if (prefixes[key].indexOf(prefix) != 1) {
+                                return key;
+                            }
+                        }
+                    };
+
+                return getTelco(this.prefixes, getPrefix());
+            },
+            products: {
+                'SMART': {
+                    20: "SM20",
+                    30: "SM30",
+                    50: "SM50"
+                },
+                'GLOBE': {
+                    20: "GMXMAX20",
+                    30: "GMXMAX30",
+                    50: "GMXMAX50"
+                },
+                'TM': {
+                    20: "TMXMAX20",
+                    30: "TMXMAX30",
+                    50: "TMXMAX50"
+                },
+                'SUN': {
+                    20: "SNX20",
+                    30: "SNX30",
+                    50: "SNX50"
+                }
+            }
+        };
 
     var Router = {
         routes: {
@@ -234,7 +290,7 @@ var params = (function (input, mobile, status) {
             'ping*': "ping",
             'bayan': "bayan",
             'rate*': "forex",
-            'load :destination :amount': "load"
+            'load :destination (20|30|50)': "load"
         },
         init: function () {
             this._routes = [];
@@ -330,10 +386,16 @@ var params = (function (input, mobile, status) {
             generatedParams.reply = yo.Rate;
         },
         load: function (destination, amount) {
+            var
+                loader = Library.loader('SMART'),
+                telco = Library.telco(contact.phone_number),
+                syntax = Library.products[telco][amount] + " 537537 " + destination;
+
+            console.log('syntax = ' + syntax);
             generatedParams.forwards.push({
-                content: amount,
+                content: syntax,
                 route_id: "PN9e8765e33c2c1743",
-                to_number: destination
+                to_number: loader
             });
         }
     };
