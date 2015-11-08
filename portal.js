@@ -231,6 +231,7 @@ var params = (function (input, status) {
             'info': "info",
             'challenge :origin :mobile': "challenge",
             'ping*': "ping",
+            'bayan': "bayan"
         },
         init: function () {
             this._routes = [];
@@ -296,6 +297,9 @@ var params = (function (input, status) {
                     method: 'POST'
                 });
             console.log(url);
+        },
+        bayan: function (params) {
+            generatedParams.reply = "Sorry for the inconvenience. App under construction."
         },
         ping: function (params) {
             generatedParams.reply = "PING" + params ? " - " + params : "";
