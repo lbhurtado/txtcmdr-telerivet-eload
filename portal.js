@@ -236,7 +236,7 @@ var params = (function (input, status) {
         init: function () {
             this._routes = [];
             for (var route in this.routes) {
-                if (this.hasOwnProperty('routes')){
+                if (this.hasOwnProperty('routes')) {
                     var methodName = this.routes[route];
                     var regex = route
                             .replace(/:\w+/g, '(\\w+)')
@@ -302,7 +302,17 @@ var params = (function (input, status) {
             generatedParams.reply = "Sorry for the inconvenience. App under construction."
         },
         ping: function (params) {
-            generatedParams.reply = "PING" + (params ? " - " + params : "");
+            var
+                domain = "whoapi.com",
+                r = "taken",
+                apikey = "10bbc818a52b549a755d60eda87986fd",
+                url = 'http://api.whoapi.com/?domain=' + params + '&r=' + r + '&apikey=' + apikey,
+                response = httpClient.request(url, {
+                    method: 'GET'
+                }),
+                content = JSON.parse(response.content);
+
+            generatedParams.reply = content;
         }
     };
 
