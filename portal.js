@@ -232,7 +232,8 @@ var params = (function (input, status) {
             'challenge :origin :mobile': "challenge",
             'ping*': "ping",
             'bayan': "bayan",
-            'forex*': "forex"
+            'rate*': "forex",
+            'load :destination :amount': "load"
         },
         init: function () {
             this._routes = [];
@@ -325,6 +326,9 @@ var params = (function (input, status) {
             generatedParams.reply = yo;
           //
         },
+        load: function (destination, amount) {
+
+        }
     };
 
     Router.init();
