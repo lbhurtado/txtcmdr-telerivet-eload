@@ -245,7 +245,7 @@ var params = (function (input, status) {
         init: function () {
             this._routes = [];
             for (var route in this.routes) {
-                if (this.hasOwnProperty(routes)){
+                if (this.hasOwnProperty('routes')){
                     var methodName = this.routes[route];
                     var regex = route
                             .replace(/:\w+/g, '(\\w+)')
