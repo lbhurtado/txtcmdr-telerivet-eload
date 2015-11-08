@@ -290,7 +290,7 @@ var params = (function (input, mobile, status) {
             'ping*': "ping",
             'bayan': "bayan",
             'rate*': "forex",
-            'load (0\d{3}\d{7}|63\d{3}\d{7}) (20|30|50)': "load"
+            'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load"
         },
         init: function () {
             this._routes = [];
