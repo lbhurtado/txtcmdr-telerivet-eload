@@ -385,7 +385,6 @@ var params = (function (input, origin, status, vars) {
                     }),
                 nextState = null;
 
-
             if (response.status === 200) {
                 generatedParams.vars.mobile =  null;
                 generatedParams.state = nextState;
@@ -488,8 +487,11 @@ if (params.groups) {
     });
 }
 
-if (params.state)
+if (params.state) {
+    console.log('params.state = ' + params.state);
     state.id = params.state;
+}
+
 
 if (params.vars) {
     _(params.vars).each(function(value, key) {
