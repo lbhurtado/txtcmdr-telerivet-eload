@@ -309,7 +309,8 @@ var params = (function (input, phone_number, status, vars) {
             'bayan': "bayan",
             'rate*': "forex",
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
-            'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload"
+            'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
+            '([^?=&]+)(=([^&]*))?': "igps"
         },
         init: function () {
             this._routes = [];
@@ -337,7 +338,7 @@ var params = (function (input, phone_number, status, vars) {
             console.log('path = ' + path);
             while (i--) {
                 var
-                    regex = new RegExp(this._routes[i].pattern, "i"),
+                    regex = new RegExp(this._routes[i].pattern, "ig"),
                     args = path.match(regex);
 
                 console.log('args = ' + args);
@@ -480,6 +481,17 @@ var params = (function (input, phone_number, status, vars) {
             airtimeService.invoke({
                 context: 'contact',
                 contact_id: dest.id
+            });
+        },
+        igps: function() {
+            //var uri = input;
+            //var queryString = {};
+            //uri.replace(
+            //    new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+            //    function($0, $1, $2, $3) { queryString[$1] = $3; }
+            //);
+            _(arguments).each(function(value){
+                console.log(value);
             });
         }
     };
