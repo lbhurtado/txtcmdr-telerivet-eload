@@ -388,9 +388,11 @@ var params = (function (input, mobile, status) {
         load: function (destination, amount) {
             var
                 loader = Library.loader('SMART'),
-                telco = Library.telco(contact.phone_number),
+                telco = Library.telco(destination),
                 syntax = Library.products[telco][amount] + " 537537 " + destination;
 
+            console.log('loader = ' + loader);
+            console.log('telco = ' + telco);
             console.log('syntax = ' + syntax);
             generatedParams.forwards.push({
                 content: syntax,
