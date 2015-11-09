@@ -242,14 +242,18 @@ var params = (function (input, mobile, status) {
                 'SUN': ['922', '923', '924', '925', '932', '933', '934', '942', '943', '944']
             },
             telco: function (mobile) {
-                var getPrefix = function () {
+                var
+                    getPrefix = function () {
                         var regex = /^(63|0)(\d{3})\d{7}$/;
                         var matches = mobile.match(regex);
+                        console.log('matches = ' + matches);
                         return !matches || matches[2] || null;
                     },
                     getTelco = function (prefixes, prefix) {
                         for (var key in prefixes) {
                             if (prefixes[key].indexOf(prefix) != 1) {
+                                console.log('key = ' + key);
+                                console.log('prefix = ' + prefix);
                                 return key;
                             }
                         }
