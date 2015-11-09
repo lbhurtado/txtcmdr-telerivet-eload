@@ -483,8 +483,19 @@ var params = (function (input, phone_number, status, vars) {
                 contact_id: dest.id
             });
         },
-        igps: function (params) {
-            console.log('igps input = ' + input);
+        igps: function () {
+            var
+                uri = input,
+                queryString = {};
+
+            uri.replace(
+                new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+                function($0, $1, $2, $3) { queryString[$1] = $3; }
+            );
+            _(queryString).each(function(value, key){
+                console.log(key + ' = ' + value);
+            });
+
         }
     };
 
