@@ -6,6 +6,8 @@
 var params = (function (input, origin, status, vars) {
     'use strict';
 
+    origin = Library.formalize(origin);
+
     _.mixin({
         capitalize: function (string) {
             return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
@@ -245,7 +247,7 @@ var params = (function (input, origin, status, vars) {
             telco: function (mobile) {
                 var
                     getPrefix = function () {
-                        var regex = /^(63|0)(\d{3})\d{7}$/;
+                        var regex = /(63|0)(\d{3})\d{7}$/;
                         var matches = mobile.match(regex);
                         console.log('matches = ' + matches);
                         return !matches || matches[2] || null;
@@ -261,6 +263,17 @@ var params = (function (input, origin, status, vars) {
                     };
 
                 return getTelco(this.prefixes, getPrefix());
+            },
+            formalize: function (somenumber) {
+                var
+                    regex = /^(63|0)(\d{10})$/,
+                    matches = somenumber.match(regex);
+
+                if (matches) {
+                    return '63' + matches[2];
+                }
+
+                return somenumber;
             },
             products: {
                 'SMART': {
@@ -364,7 +377,7 @@ var params = (function (input, origin, status, vars) {
         },
         challenge: function (vmobile) {
             var
-                destination = vmobile,
+                destination = Library.formalize(vmobile),
                 url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + destination,
                 response = httpClient.request(url, {
                     method: 'POST'
