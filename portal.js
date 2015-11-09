@@ -478,6 +478,11 @@ if (params.groups) {
 if (params.state)
     state.id = params.state;
 
+if (params.vars) {
+    _(params.vars).each(function(value, key) {
+       contact.vars[key] = value;
+    });
+}
 if (params.reply)
     sendReply(params.reply);
 
