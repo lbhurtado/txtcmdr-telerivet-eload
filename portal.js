@@ -310,7 +310,7 @@ var params = (function (input, phone_number, status, vars) {
             'rate*': "forex",
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
-            '^(m=\d{15}.*)': "igps"
+            'm=\\d{15}.*': "igps"
         },
         init: function () {
             this._routes = [];
@@ -484,13 +484,7 @@ var params = (function (input, phone_number, status, vars) {
             });
         },
         igps: function (params) {
-            //var uri = input;
-            //var queryString = {};
-            //uri.replace(
-            //    new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-            //    function($0, $1, $2, $3) { queryString[$1] = $3; }
-            //);
-            console.log('igps params = ' + params);
+            console.log('igps input = ' + input);
         }
     };
 

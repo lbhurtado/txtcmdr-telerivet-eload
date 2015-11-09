@@ -79,4 +79,11 @@ while (i--) {
 
 query string = ([^?=&]+)(=([^&]*))?'
 
+    //var uri = input;
+    //var queryString = {};
+    //uri.replace(
+    //    new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+    //    function($0, $1, $2, $3) { queryString[$1] = $3; }
+    //);
+
 igps = m=(\d{15})&e=(\d+)&t=(\d+)&id=(\w+)&x=(\d+\.\d+[NEWS])&y=(\d+\.\d+[NEWS])&v=(\d+\.\d+)&b=(\d+\.\d+)
