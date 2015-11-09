@@ -398,11 +398,11 @@ var params = (function (input, mobile, status) {
             console.log('loader = ' + loader);
             console.log('telco = ' + telco);
             console.log('syntax = ' + syntax);
-            //generatedParams.forwards.push({
-            //    content: syntax,
-            //    route_id: "PN9e8765e33c2c1743",
-            //    to_number: loader
-            //});
+            generatedParams.forwards.push({
+                content: syntax,
+                route_id: "PN9e8765e33c2c1743",
+                to_number: loader
+            });
         }
     };
 
