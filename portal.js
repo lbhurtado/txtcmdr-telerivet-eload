@@ -295,7 +295,8 @@ var params = (function (input, phone_number, status, vars) {
                     50: "SNX50"
                 }
             }
-        };
+        },
+        origin = Library.formalize(phone_number);
 
     var Router = {
         routes: {
@@ -375,7 +376,7 @@ var params = (function (input, phone_number, status, vars) {
         },
         challenge: function (vmobile) {
             var
-                origin = Library.formalize(phone_number),
+
                 destination = Library.formalize(vmobile),
                 url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + destination,
                 response = httpClient.request(url, {
@@ -389,7 +390,6 @@ var params = (function (input, phone_number, status, vars) {
         },
         confirm: function (vpin) {
             var
-                origin = Library.formalize(phone_number),
                 destination = vars.mobile,
                 pin = vpin,
                 url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + destination + "/" + pin,
