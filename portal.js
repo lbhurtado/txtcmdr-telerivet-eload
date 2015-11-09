@@ -294,7 +294,7 @@ var params = (function (input, mobile, status) {
             'ping*': "ping",
             'bayan': "bayan",
             'rate*': "forex",
-            'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load"
+            'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "cloudload"
         },
         init: function () {
             this._routes = [];
@@ -403,6 +403,24 @@ var params = (function (input, mobile, status) {
                 route_id: "PN9e8765e33c2c1743",
                 to_number: loader
             });
+        },
+        cloudload: function (destination, amount) {
+            var
+                SERVICE_ID = "SVfe986cc377492c69",
+                airtimeService = project.getServiceById(SERVICE_ID),
+                cursor = project.queryContacts({
+                    phone_number: {'eq': destination}
+                });
+
+            cursor.limit(1);
+
+            if (cursor.hasNext()) {
+                var dest = cursor.next();
+                airtimeService.invoke({
+                    context: 'contact',
+                    contact_id: dest.id
+                });
+            }
         }
     };
 
@@ -429,7 +447,7 @@ if (params.reply)
     sendReply(params.reply);
 
 if (params.forwards) {
-    _(params.forwards).each(function(option){
+    _(params.forwards).each(function (option) {
         project.sendMessage(option);
     });
 }
