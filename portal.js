@@ -3,7 +3,7 @@
  */
 
 
-var params = (function (input, mobile, status) {
+var params = (function (input, origin, status, vars) {
     'use strict';
 
     _.mixin({
@@ -222,6 +222,7 @@ var params = (function (input, mobile, status) {
     var
         generatedParams = {
             state: null,
+            vars: {},
             forwards: []
         },
         Library = {
@@ -237,8 +238,8 @@ var params = (function (input, mobile, status) {
             },
             prefixes: {
                 'SMART': ['813', '900', '907', '908', '909', '910', '911', '912', '913', '914', '918', '920', '921', '928', '929', '930', '931', '938', '939', '940', '946', '947', '948', '949', '971', '980', '989', '998', '999'],
-                'GLOBE': ['817', '905', '915', '916', '917', '927', '935', '936', '937', '945', '946', '975', '977', '978', '979', '994', '995', '996', '997'],
-                'TM': ['906', '926'],
+                'GLOBE': ['817', '905', '915', '916', '917', '927', '936', '937', '945', '946', '977', '978', '979', '994', '995', '996', '997'],
+                'TM': ['906', '926', '935', '975'],
                 'SUN': ['922', '923', '924', '925', '932', '933', '934', '942', '943', '944']
             },
             telco: function (mobile) {
@@ -290,11 +291,12 @@ var params = (function (input, mobile, status) {
             'subscribe *': "subscribe",
             'passage*': "passage",
             'info': "info",
-            'challenge :origin :mobile': "challenge",
+            'challenge :mobile': "challenge",
             'ping*': "ping",
             'bayan': "bayan",
             'rate*': "forex",
-            'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "cloudload"
+            'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
+            'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload"
         },
         init: function () {
             this._routes = [];
@@ -353,13 +355,51 @@ var params = (function (input, mobile, status) {
         info: function (param) {
             generatedParams.reply = "The quick brown fox jumps over the lazy dog.";
         },
-        challenge: function (vorigin, vmobile) {
+        challenge: function (vmobile) {
             var
-                url = "http://128.199.81.129/txtcmdr/challenge/" + vorigin + "/" + vmobile,
+                destination = vmobile,
+                url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + destination,
                 response = httpClient.request(url, {
                     method: 'POST'
                 });
-            console.log(url);
+
+            console.log('challenge url = ' + url);
+            generatedParams.vars.mobile = destination;
+        },
+        confirm: function (vpin) {
+            var
+                destination = vars.mobile,
+                pin = vpin,
+                url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + destination + "/" + pin,
+                response = !pin || httpClient.request(url, {
+                        method: 'POST'
+                    });
+
+            generatedParams.vars.mobile = (response.status !== 200) || undefined;
+
+            if (response.status === 200) {
+                generatedParams.forwards.push({
+                    content: "Go go go!",
+                    to_number: destination
+                });
+
+                //var mobilecursor = project.queryContacts({
+                //    phone_number: {'eq': mobile}
+                //});
+                //mobilecursor.limit(1);
+                //if (mobilecursor.hasNext()) {
+                //    var mobilecontact = mobilecursor.next();
+                //    var mobilestate = service.setContactState(mobilecontact, value.success.mobile.state);
+                //    var group = project.getOrCreateGroup(value.success.mobile.group);
+                //    mobilecontact.addToGroup(group);
+                //}
+                //TODO: add regions, provinces, towns
+            }
+            else {
+
+            }
+            console.log('confirm url = ' + url);
+            console.log('confirm response.content = ' + response.content);
         },
         bayan: function (params) {
             generatedParams.reply = "Sorry for the inconvenience. App under construction."
@@ -412,10 +452,6 @@ var params = (function (input, mobile, status) {
                     phone_number: destination
                 });
 
-            console.log('destination = ' + destination);
-
-            console.log('dest.id = ' + dest.id);
-            
             airtimeService.invoke({
                 context: 'contact',
                 contact_id: dest.id
@@ -428,7 +464,7 @@ var params = (function (input, mobile, status) {
 
     return generatedParams;
 
-}(message.content, contact.phone_number, state.id));
+}(message.content, contact.phone_number, state.id, contact.vars));
 
 if (params.name)
     contact.name = params.name;
