@@ -77,5 +77,6 @@ while (i--) {
     console.log('>>>> arguments ' + i + ' = ' + arguments[i]);
 }
 
+query string = ([^?=&]+)(=([^&]*))?'
 
-m=(\d{15})&e=(\d+)&t=(\d+)&id=(\w+)&x=(\d+(\.\d{1,26})?)
+igps = m=(\d{15})&e=(\d+)&t=(\d+)&id=(\w+)&x=(\d+\.\d+[NEWS])&y=(\d+\.\d+[NEWS])&v=(\d+\.\d+)&b=(\d+\.\d+)

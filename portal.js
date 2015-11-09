@@ -310,7 +310,7 @@ var params = (function (input, phone_number, status, vars) {
             'rate*': "forex",
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
-            '([^?=&]+)(=([^&]*))?': "igps"
+            '^(m=\d{15}.*)': "igps"
         },
         init: function () {
             this._routes = [];
@@ -338,7 +338,7 @@ var params = (function (input, phone_number, status, vars) {
             console.log('path = ' + path);
             while (i--) {
                 var
-                    regex = new RegExp(this._routes[i].pattern, "ig"),
+                    regex = new RegExp(this._routes[i].pattern, "i"),
                     args = path.match(regex);
 
                 console.log('args = ' + args);
@@ -400,7 +400,7 @@ var params = (function (input, phone_number, status, vars) {
                 nextState = null;
 
             if (response.status === 200) {
-                generatedParams.vars.mobile =  null;
+                generatedParams.vars.mobile = null;
                 generatedParams.state = nextState;
                 generatedParams.forwards.push({
                     content: "Go go go!",
@@ -409,17 +409,17 @@ var params = (function (input, phone_number, status, vars) {
             }
 
             //if (response.status === 200) {
-                //var mobilecursor = project.queryContacts({
-                //    phone_number: {'eq': mobile}
-                //});
-                //mobilecursor.limit(1);
-                //if (mobilecursor.hasNext()) {
-                //    var mobilecontact = mobilecursor.next();
-                //    var mobilestate = service.setContactState(mobilecontact, value.success.mobile.state);
-                //    var group = project.getOrCreateGroup(value.success.mobile.group);
-                //    mobilecontact.addToGroup(group);
-                //}
-                //TODO: add regions, provinces, towns
+            //var mobilecursor = project.queryContacts({
+            //    phone_number: {'eq': mobile}
+            //});
+            //mobilecursor.limit(1);
+            //if (mobilecursor.hasNext()) {
+            //    var mobilecontact = mobilecursor.next();
+            //    var mobilestate = service.setContactState(mobilecontact, value.success.mobile.state);
+            //    var group = project.getOrCreateGroup(value.success.mobile.group);
+            //    mobilecontact.addToGroup(group);
+            //}
+            //TODO: add regions, provinces, towns
             //}
             //else {
             //
@@ -483,16 +483,14 @@ var params = (function (input, phone_number, status, vars) {
                 contact_id: dest.id
             });
         },
-        igps: function() {
+        igps: function (params) {
             //var uri = input;
             //var queryString = {};
             //uri.replace(
             //    new RegExp("([^?=&]+)(=([^&]*))?", "g"),
             //    function($0, $1, $2, $3) { queryString[$1] = $3; }
             //);
-            _(arguments).each(function(value){
-                console.log(value);
-            });
+            console.log('igps params = ' + params);
         }
     };
 
@@ -519,8 +517,8 @@ if (params.state !== undefined) {
 
 
 if (params.vars) {
-    _(params.vars).each(function(value, key) {
-       contact.vars[key] = value;
+    _(params.vars).each(function (value, key) {
+        contact.vars[key] = value;
     });
 }
 if (params.reply)
