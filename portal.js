@@ -322,6 +322,7 @@ var params = (function (input, origin, status, vars) {
                 path = status ? status + " " + vpath : vpath,
                 i = this._routes.length;
 
+            console.log('path = ' + path);
             while (i--) {
                 var
                     regex = new RegExp(this._routes[i].pattern, "i"),
