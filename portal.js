@@ -221,7 +221,7 @@ var params = (function (input, origin, status, vars) {
 
     var
         generatedParams = {
-            state: null,
+            state: undefined,
             vars: {},
             forwards: []
         },
@@ -487,7 +487,7 @@ if (params.groups) {
     });
 }
 
-if (params.state) {
+if (params.state !== undefined) {
     console.log('params.state = ' + params.state);
     state.id = params.state;
 }
