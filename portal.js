@@ -291,8 +291,8 @@ var params = (function (input, origin, status, vars) {
             'subscribe *': "subscribe",
             'passage*': "passage",
             'info': "info",
-            'challenge :mobile': "challenge",
-            'confirm :pin': "confirm",
+            'challenge (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "challenge",
+            'confirm (\d{4,6})': "confirm",
             'ping*': "ping",
             'bayan': "bayan",
             'rate*': "forex",
@@ -317,11 +317,16 @@ var params = (function (input, origin, status, vars) {
                 }
             }
         },
-        nav: function (path) {
-            var i = this._routes.length;
+        nav: function (vpath) {
+            var
+                path = status ? status + " " + vpath : vpath,
+                i = this._routes.length;
+
             while (i--) {
-                var regex = new RegExp(this._routes[i].pattern, "i");
-                var args = path.match(regex);
+                var
+                    regex = new RegExp(this._routes[i].pattern, "i"),
+                    args = path.match(regex);
+
                 console.log('args = ' + args);
                 if (args) {
                     this._routes[i].callback.apply(this, args.slice(1));
@@ -362,10 +367,12 @@ var params = (function (input, origin, status, vars) {
                 url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + destination,
                 response = httpClient.request(url, {
                     method: 'POST'
-                });
+                }),
+                nextState = 'confirm';
 
             console.log('challenge url = ' + url);
             generatedParams.vars.mobile = destination;
+            generatedParams.state = nextState;
         },
         confirm: function (vpin) {
             var
@@ -374,9 +381,11 @@ var params = (function (input, origin, status, vars) {
                 url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + destination + "/" + pin,
                 response = !pin || httpClient.request(url, {
                         method: 'POST'
-                    });
+                    }),
+                nextState = null;
 
             generatedParams.vars.mobile = (response.status !== 200) || undefined;
+            generatedParams.state = (response.status !== 200) || nextState;
 
             if (response.status === 200) {
                 generatedParams.forwards.push({

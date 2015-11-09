@@ -76,3 +76,6 @@ var i = arguments.length;
 while (i--) {
     console.log('>>>> arguments ' + i + ' = ' + arguments[i]);
 }
+
+
+m=(\d{15})&e=(\d+)&t=(\d+)&id=(\w+)&x=(\d+(\.\d{1,26})?)
