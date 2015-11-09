@@ -3,7 +3,7 @@
  */
 
 
-var params = (function (input, origin, status, vars) {
+var params = (function (input, phone_number, status, vars) {
     'use strict';
 
     _.mixin({
@@ -264,7 +264,7 @@ var params = (function (input, origin, status, vars) {
             },
             formalize: function (somenumber) {
                 var
-                    regex = /^(63|0)(\d{10})$/,
+                    regex = /(63|0)(\d{10})$/,
                     matches = somenumber.match(regex);
 
                 if (matches) {
@@ -311,8 +311,6 @@ var params = (function (input, origin, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload"
         },
         init: function () {
-            origin = Library.formalize(origin);
-            
             this._routes = [];
             for (var route in this.routes) {
                 if (this.hasOwnProperty('routes')) {
@@ -377,6 +375,7 @@ var params = (function (input, origin, status, vars) {
         },
         challenge: function (vmobile) {
             var
+                origin = Library.formalize(phone_number),
                 destination = Library.formalize(vmobile),
                 url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + destination,
                 response = httpClient.request(url, {
@@ -390,6 +389,7 @@ var params = (function (input, origin, status, vars) {
         },
         confirm: function (vpin) {
             var
+                origin = Library.formalize(phone_number),
                 destination = vars.mobile,
                 pin = vpin,
                 url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + destination + "/" + pin,
