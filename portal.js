@@ -416,10 +416,11 @@ var params = (function (input, mobile, status) {
 
             if (cursor.hasNext()) {
                 var dest = cursor.next();
-                airtimeService.invoke({
-                    context: 'contact',
-                    contact_id: dest.id
-                });
+                console.log(dest.id)
+                //airtimeService.invoke({
+                //    context: 'contact',
+                //    contact_id: dest.id
+                //});
             }
         }
     };
