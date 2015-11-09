@@ -292,7 +292,7 @@ var params = (function (input, origin, status, vars) {
             'passage*': "passage",
             'info': "info",
             'challenge (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "challenge",
-            'confirm (\d{4,6})': "confirm",
+            'confirm (\\d{4,6})': "confirm",
             'ping*': "ping",
             'bayan': "bayan",
             'rate*': "forex",
