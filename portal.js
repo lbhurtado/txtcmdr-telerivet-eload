@@ -385,15 +385,16 @@ var params = (function (input, origin, status, vars) {
                     }),
                 nextState = null;
 
-            generatedParams.vars.mobile = (response.status !== 200) || undefined;
-            generatedParams.state = (response.status !== 200) || nextState;
-
             if (response.status === 200) {
+                generatedParams.vars.mobile =  undefined;
+                generatedParams.state = nextState;
                 generatedParams.forwards.push({
                     content: "Go go go!",
                     to_number: destination
                 });
+            }
 
+            //if (response.status === 200) {
                 //var mobilecursor = project.queryContacts({
                 //    phone_number: {'eq': mobile}
                 //});
@@ -405,10 +406,10 @@ var params = (function (input, origin, status, vars) {
                 //    mobilecontact.addToGroup(group);
                 //}
                 //TODO: add regions, provinces, towns
-            }
-            else {
-
-            }
+            //}
+            //else {
+            //
+            //}
             console.log('confirm url = ' + url);
             console.log('confirm response.content = ' + response.content);
         },
