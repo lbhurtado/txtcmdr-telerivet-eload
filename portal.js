@@ -292,6 +292,7 @@ var params = (function (input, origin, status, vars) {
             'passage*': "passage",
             'info': "info",
             'challenge :mobile': "challenge",
+            'confirm :pin': "confirm",
             'ping*': "ping",
             'bayan': "bayan",
             'rate*': "forex",
