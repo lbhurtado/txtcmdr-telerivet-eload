@@ -408,21 +408,18 @@ var params = (function (input, mobile, status) {
             var
                 SERVICE_ID = "SVfe986cc377492c69",
                 airtimeService = project.getServiceById(SERVICE_ID),
-                cursor = project.queryContacts({
-                    phone_number: {'eq': destination}
+                dest = project.getOrCreateContact({
+                    phone_number: destination
                 });
 
             console.log('destination = ' + destination);
-            cursor.limit(1);
 
-            if (cursor.hasNext()) {
-                var dest = cursor.next();
-                console.log('dest.id = ' + dest.id);
-                //airtimeService.invoke({
-                //    context: 'contact',
-                //    contact_id: dest.id
-                //});
-            }
+            console.log('dest.id = ' + dest.id);
+            
+            airtimeService.invoke({
+                context: 'contact',
+                contact_id: dest.id
+            });
         }
     };
 
