@@ -486,13 +486,20 @@ var params = (function (input, phone_number, status, vars) {
         igps: function () {
             var
                 uri = input,
-                queryString = {};
+                records = {};
 
             uri.replace(
                 new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-                function($0, $1, $2, $3) { queryString[$1] = $3; }
+                function ($0, $1, $2, $3) {
+                    records[$1] = $3;
+                }
             );
-            _(queryString).each(function(value, key){
+
+            generatedParams.posts.push({
+               'igps': records
+            });
+
+            _(records).each(function (value, key) {
                 console.log(key + ' = ' + value);
             });
 
@@ -532,6 +539,19 @@ if (params.reply)
 if (params.forwards) {
     _(params.forwards).each(function (option) {
         project.sendMessage(option);
+    });
+}
+
+if (params.posts) {
+    _(params.posts).each(function (value, key) {
+        var
+            table = project.getOrCreateDataTable(key),
+            records = value;
+
+            table.createRow({
+                contact_id: contact.id,
+                vars: records
+            });
     });
 }
 
