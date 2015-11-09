@@ -6,8 +6,6 @@
 var params = (function (input, origin, status, vars) {
     'use strict';
 
-    origin = Library.formalize(origin);
-
     _.mixin({
         capitalize: function (string) {
             return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
@@ -313,6 +311,8 @@ var params = (function (input, origin, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload"
         },
         init: function () {
+            origin = Library.formalize(origin);
+            
             this._routes = [];
             for (var route in this.routes) {
                 if (this.hasOwnProperty('routes')) {
