@@ -385,8 +385,9 @@ var params = (function (input, origin, status, vars) {
                     }),
                 nextState = null;
 
+
             if (response.status === 200) {
-                generatedParams.vars.mobile =  undefined;
+                generatedParams.vars.mobile =  null;
                 generatedParams.state = nextState;
                 generatedParams.forwards.push({
                     content: "Go go go!",
@@ -411,7 +412,7 @@ var params = (function (input, origin, status, vars) {
             //
             //}
             console.log('confirm url = ' + url);
-            console.log('confirm response.content = ' + response.content);
+            console.log('response.status = ' + response.status);
         },
         bayan: function (params) {
             generatedParams.reply = "Sorry for the inconvenience. App under construction."
