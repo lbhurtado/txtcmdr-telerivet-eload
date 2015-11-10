@@ -610,17 +610,21 @@ var params = (function (input, phone_number, status, vars) {
 
                     return null;
                 },
-                missive = function () {
-                    if (group_id() && params) {
+                getMissive = function (vgroup_id, vmessage) {
+                    if (vgroup_id && params) {
                         return {
-                            content: "[[contact.name]], " + params,
-                            group_id: group_id(),
+                            content: "[[contact.name]], " + vmessage,
+                            group_id: vgroup_id,
                             is_template: true
                         };
                     }
-                };
+
+                    return null;
+                },
+                missive = getMissive(group_id(), params);
 
             console.log('group_id = ' + group_id());
+            console.log('missive = ' + missive.content);
 
             generatedParams.forwards.push(missive);
         }
