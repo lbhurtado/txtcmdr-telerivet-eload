@@ -359,7 +359,7 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*': "igps",
             'news*': "news",
-            'broadcast *': "broadcast"
+            'broadcast*': "broadcast"
         },
         init: function () {
             this._routes = [];
