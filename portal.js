@@ -524,7 +524,7 @@ var params = (function (input, phone_number, status, vars) {
                     return x.join("\n");
                 };
 
-            generatedParams.reply = reply;
+            generatedParams.reply = reply();
         }
     };
 
