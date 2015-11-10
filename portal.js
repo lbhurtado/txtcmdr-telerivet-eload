@@ -260,7 +260,7 @@ var params = (function (input, phone_number, status, vars) {
         var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
             commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
         return input.replace(commentsAndPhpTags, '')
-            .replace(tags, function($0, $1) {
+            .replace(tags, function ($0, $1) {
                 return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
             });
     }
@@ -359,6 +359,7 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*': "igps",
             'news*': "news",
+            'broadcast *': "broadcast"
         },
         init: function () {
             this._routes = [];
@@ -570,12 +571,12 @@ var params = (function (input, phone_number, status, vars) {
                 }),
                 content = JSON.parse(response.content),
                 yo = content.query.results.item,
-                reply = function() {
+                reply = function () {
                     var x = [];
                     for (var i = 0, len = yo.length; i < len; i++) {
                         var y = yo[i],
-                            z = y.title.replace(/&rsquo;/g,"'"),
-                            z = z.replace(/&#39;/g,"'"),
+                            z = y.title.replace(/&rsquo;/g, "'"),
+                            z = z.replace(/&#39;/g, "'"),
                             z = strip_tags(z);
                         x.push(z);
                     }
@@ -583,6 +584,14 @@ var params = (function (input, phone_number, status, vars) {
                 };
 
             generatedParams.reply = reply() + "\n - brought to you by CANDIDATE";
+        },
+        broadcast: function (params) {
+            var group = project.getOrCreateGroup("subscriber");
+            project.sendMessages({
+                content: "[[contact.name]], " + params,
+                group_id: group.id,
+                is_template: true
+            });
         }
     };
 
