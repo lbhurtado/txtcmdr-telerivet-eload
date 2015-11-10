@@ -359,7 +359,7 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*': "igps",
             'news*': "news",
-            'broadcast*': "broadcast"
+            'broadcast *': "broadcast"
         },
         init: function () {
             this._routes = [];
@@ -432,9 +432,9 @@ var params = (function (input, phone_number, status, vars) {
                     method: 'POST'
                 }),
                 reply = "One-time PIN has been sent.  Ask your recruit and reply using that PIN.",
-                nextState = 'confirm';
+                nextState = "confirm";
 
-            console.log('challenge url = ' + url);
+            console.log('recruit url = ' + url);
 
             if (response.status === 200) {
                 generatedParams.reply = reply;
@@ -451,15 +451,16 @@ var params = (function (input, phone_number, status, vars) {
                 response = !pin || httpClient.request(url, {
                         method: 'POST'
                     }),
+                missive = {
+                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ.",
+                    to_number: destination
+                },
                 nextState = null;
 
             if (response.status === 200) {
                 generatedParams.vars.mobile = null;
+                generatedParams.forwards.push(missive);
                 generatedParams.state = nextState;
-                generatedParams.forwards.push({
-                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ.",
-                    to_number: destination
-                });
                 this.load(destination, 20);
             }
 
@@ -586,14 +587,17 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.reply = reply() + "\n - brought to you by CANDIDATE";
         },
         broadcast: function (params) {
-            var group = project.getOrCreateGroup("subscriber");
+            var
+                group = project.getOrCreateGroup("subscriber"),
+                missive = {
+                    content: "[[contact.name]], " + params,
+                    group_id: group.id,
+                    is_template: true
+                };
 
             console.log('broadcast: group = ' + group + "\nmessage: " + params);
-            project.sendMessages({
-                content: "[[contact.name]], " + params,
-                group_id: group.id,
-                is_template: true
-            });
+
+            generatedParams.forwards.push(missive);
         }
     };
 
