@@ -223,7 +223,8 @@ var params = (function (input, phone_number, status, vars) {
         generatedParams = {
             state: undefined,
             vars: {},
-            forwards: []
+            forwards: [],
+            posts: []
         },
         Library = {
             loader: function (telco) {
