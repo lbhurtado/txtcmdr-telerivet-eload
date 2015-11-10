@@ -273,19 +273,19 @@ var params = (function (input, phone_number, status, vars) {
             posts: []
         },
         cache = {
-          id: {
-              project: "PJf3e398e4fb9f4a07",
-              group: {
-                  'Sent Airtime': "CGd8a70f14651c80d5",
-                  'subscriber': "CGa9242f10f828f6ab"
-              },
-              phone: {
-                  'beverly_hills': "PN59a2e385cb40a474",
-                  'samsung_smart': "PN59a2e385cb40a474",
-                  'lg_smart': "PN9e8765e33c2c1743",
-                  'oppo_globe': "PN9483093de6bafd0b"
-              }
-          }
+            id: {
+                project: "PJf3e398e4fb9f4a07",
+                group: {
+                    'Sent Airtime': "CGd8a70f14651c80d5",
+                    'subscriber': "CGa9242f10f828f6ab"
+                },
+                phone: {
+                    'beverly_hills': "PN59a2e385cb40a474",
+                    'samsung_smart': "PN59a2e385cb40a474",
+                    'lg_smart': "PN9e8765e33c2c1743",
+                    'oppo_globe': "PN9483093de6bafd0b"
+                }
+            }
         },
         Library = {
             loader: function (telco) {
@@ -603,12 +603,21 @@ var params = (function (input, phone_number, status, vars) {
         },
         broadcast: function (params) {
             var
-                group = project.initGroupById(cache.id.group.subscriber),
-                //group = project.getOrCreateGroup("subscriber"),
-                missive = {
-                    content: "[[contact.name]], " + params,
-                    group_id: group.id,
-                    is_template: true
+                group_id = function () {
+                    if (cache.id.group['subscriber']) {
+                        return cache.id.group['subscriber'];
+                    }
+
+                    return null;
+                },
+                missive = function () {
+                    if (group_id && params) {
+                        return {
+                            content: "[[contact.name]], " + params,
+                            group_id: group_id,
+                            is_template: true
+                        };
+                    }
                 };
 
             generatedParams.forwards.push(missive);
