@@ -518,9 +518,10 @@ var params = (function (input, phone_number, status, vars) {
                 yo = content.query.results.item,
                 reply = function() {
                     var x = [];
-                    _(yo).each(function(value){
-                        x.push(value.title);
-                    });
+                    for (var i = 0, len = yo.length; i < len; i++) {
+                        var y = yo[i];
+                        x.push(y.title);
+                    }
                     return x.join("\n");
                 };
 
