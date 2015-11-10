@@ -497,7 +497,8 @@ var params = (function (input, phone_number, status, vars) {
             );
 
             generatedParams.posts.push({
-               'igps': records
+                table: "igps",
+                data: records
             });
 
             _(records).each(function (value, key) {
@@ -544,10 +545,10 @@ if (params.forwards) {
 }
 
 if (params.posts) {
-    _(params.posts).each(function (value, key) {
+    _(params.posts).each(function (option) {
         var
-            table = project.getOrCreateDataTable(key),
-            records = value;
+            table = project.getOrCreateDataTable(option.table),
+            records = option.data;
 
             table.createRow({
                 contact_id: contact.id,
