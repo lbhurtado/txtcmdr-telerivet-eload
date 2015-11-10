@@ -633,7 +633,14 @@ if (params.reply)
 
 if (params.forwards) {
     _(params.forwards).each(function (option) {
-        project.sendMessage(option);
+        switch (true) {
+            case option.phone_number:
+                project.sendMessage(option);
+                break;
+            case option.group_id:
+                project.sendMessage(option);
+                break;
+        }
     });
 }
 
