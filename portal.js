@@ -350,7 +350,7 @@ var params = (function (input, phone_number, status, vars) {
             'subscribe *': "subscribe",
             'passage*': "passage",
             'info': "info",
-            'challenge (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "challenge",
+            'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
             'confirm (\\d{4,6})': "confirm",
             'ping*': "ping",
             'bayan': "bayan",
@@ -423,19 +423,24 @@ var params = (function (input, phone_number, status, vars) {
         info: function (param) {
             generatedParams.reply = "The quick brown fox jumps over the lazy dog.";
         },
-        challenge: function (vmobile) {
+        recruit: function (vmobile) {
             var
-
                 destination = Library.formalize(vmobile),
                 url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + destination,
                 response = httpClient.request(url, {
                     method: 'POST'
                 }),
+                reply = "One-time PIN has been sent.  Ask your recruit and reply using that PIN.",
                 nextState = 'confirm';
 
             console.log('challenge url = ' + url);
-            generatedParams.vars.mobile = destination;
-            generatedParams.state = nextState;
+
+            if (response.status === 200) {
+                generatedParams.reply = reply;
+                generatedParams.vars.mobile = destination;
+                generatedParams.state = nextState;
+            }
+
         },
         confirm: function (vpin) {
             var
@@ -501,7 +506,7 @@ var params = (function (input, phone_number, status, vars) {
                 content = JSON.parse(response.content),
                 yo = content.query.results.rate;
 
-            generatedParams.reply = yo.Rate;
+            generatedParams.reply = yo.Rate + "\n - brought to you by CANDIDATE";
         },
         load: function (destination, amount) {
             var
@@ -576,7 +581,7 @@ var params = (function (input, phone_number, status, vars) {
                     return x.join("\n");
                 };
 
-            generatedParams.reply = reply();
+            generatedParams.reply = reply() + "\n - brought to you by CANDIDATE";
         }
     };
 
