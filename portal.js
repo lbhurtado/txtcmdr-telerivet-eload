@@ -501,9 +501,9 @@ var params = (function (input, phone_number, status, vars) {
                 data: records
             });
 
-            _(records).each(function (value, key) {
-                console.log(key + ' = ' + value);
-            });
+            //_(records).each(function (value, key) {
+            //    console.log(key + ' = ' + value);
+            //});
 
         }
     };
@@ -546,14 +546,20 @@ if (params.forwards) {
 
 if (params.posts) {
     _(params.posts).each(function (option) {
-        var
-            table = project.getOrCreateDataTable(option.table),
-            records = option.data;
+        console.log('table = ' + option.table);
 
-            table.createRow({
-                contact_id: contact.id,
-                vars: records
-            });
+        _(option.data).each(function (value, key) {
+            console.log(key + ' = ' + value);
+        });
+
+        //var
+        //    table = project.getOrCreateDataTable(option.table),
+        //    records = option.data;
+        //
+        //    table.createRow({
+        //        contact_id: contact.id,
+        //        vars: records
+        //    });
     });
 }
 
