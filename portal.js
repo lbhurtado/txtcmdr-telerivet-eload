@@ -565,8 +565,10 @@ var params = (function (input, phone_number, status, vars) {
                 reply = function() {
                     var x = [];
                     for (var i = 0, len = yo.length; i < len; i++) {
-                        var y = yo[i];
-                        x.push(strip_tags(y.title).replace('&apos;',"'"));
+                        var y = yo[i],
+                            z = y.title.replace('&#39;',"'"),
+                            z = strip_tags(z);
+                        x.push(z);
                     }
                     return x.join("\n");
                 };
