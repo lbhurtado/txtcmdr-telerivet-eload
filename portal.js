@@ -311,7 +311,8 @@ var params = (function (input, phone_number, status, vars) {
             'rate*': "forex",
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
-            'm=\\d{15}.*': "igps"
+            'm=\\d{15}.*': "igps",
+            'news*': "news",
         },
         init: function () {
             this._routes = [];
@@ -505,6 +506,25 @@ var params = (function (input, phone_number, status, vars) {
             //    console.log(key + ' = ' + value);
             //});
 
+        },
+        news: function (params) {
+            var
+                pair = params ? params : "metro",
+                url = "https://query.yahooapis.com/v1/public/yql?q=select%20title%20from%20rss%20where%20url%3D%22http%3A%2F%2Fwww.gmanetwork.com%2Fnews%2Frss%2Fnews%2Fmetro%22%20%7C%20truncate(count%3D4)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=",
+                response = httpClient.request(url, {
+                    method: 'GET'
+                }),
+                content = JSON.parse(response.content),
+                yo = content.query.results.item,
+                reply = function() {
+                    var x = [];
+                    _(yo).each(function(value){
+                        x.push(value);
+                    });
+                    return x.join("\n");
+                };
+
+            generatedParams.reply = reply;
         }
     };
 
