@@ -635,9 +635,11 @@ if (params.forwards) {
     _(params.forwards).each(function (option) {
         switch (true) {
             case option.phone_number:
+                console.log('phone_number');
                 project.sendMessage(option);
                 break;
             case option.group_id:
+                console.log('group_id');
                 project.sendMessage(option);
                 break;
         }
