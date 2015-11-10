@@ -567,7 +567,7 @@ var params = (function (input, phone_number, status, vars) {
                     for (var i = 0, len = yo.length; i < len; i++) {
                         var y = yo[i],
                             z = y.title.replace(/&rsquo;/g,"'"),
-                            z = y.title.replace(/&#39;/g,"'"),
+                            z = z.replace(/&#39;/g,"'"),
                             z = strip_tags(z);
                         x.push(z);
                     }
