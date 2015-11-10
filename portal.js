@@ -456,9 +456,10 @@ var params = (function (input, phone_number, status, vars) {
                 generatedParams.vars.mobile = null;
                 generatedParams.state = nextState;
                 generatedParams.forwards.push({
-                    content: "Go go go!",
+                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ.",
                     to_number: destination
                 });
+                this.load(destination, 20);
             }
 
             //if (response.status === 200) {
