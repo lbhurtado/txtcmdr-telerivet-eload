@@ -519,7 +519,7 @@ var params = (function (input, phone_number, status, vars) {
                 reply = function() {
                     var x = [];
                     _(yo).each(function(value){
-                        x.push(value);
+                        x.push(value.title);
                     });
                     return x.join("\n");
                 };
