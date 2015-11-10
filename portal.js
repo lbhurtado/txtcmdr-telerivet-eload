@@ -587,6 +587,8 @@ var params = (function (input, phone_number, status, vars) {
         },
         broadcast: function (params) {
             var group = project.getOrCreateGroup("subscriber");
+
+            console.log('broadcast: group = ' + group + "\nmessage: " + params);
             project.sendMessages({
                 content: "[[contact.name]], " + params,
                 group_id: group.id,
