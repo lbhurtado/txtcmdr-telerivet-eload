@@ -566,7 +566,7 @@ var params = (function (input, phone_number, status, vars) {
                     var x = [];
                     for (var i = 0, len = yo.length; i < len; i++) {
                         var y = yo[i];
-                        x.push(strip_tags(y.title));
+                        x.push(strip_tags(y.title).replace('&apos;',"'"));
                     }
                     return x.join("\n");
                 };
