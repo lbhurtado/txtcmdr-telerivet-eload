@@ -556,11 +556,10 @@ if (params.posts) {
             tbl = project.getOrCreateDataTable(option.table),
             recs = option.data;
 
-        //
-        //    table.createRow({
-        //        contact_id: contact.id,
-        //        vars: records
-        //    });
+        tbl.createRow({
+            contact_id: contact.id,
+            vars: recs
+        });
     });
 }
 
