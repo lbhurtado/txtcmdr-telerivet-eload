@@ -611,14 +611,16 @@ var params = (function (input, phone_number, status, vars) {
                     return null;
                 },
                 missive = function () {
-                    if (group_id && params) {
+                    if (group_id() && params) {
                         return {
                             content: "[[contact.name]], " + params,
-                            group_id: group_id,
+                            group_id: group_id(),
                             is_template: true
                         };
                     }
                 };
+
+            console.log('group_id = ' + group_id());
 
             generatedParams.forwards.push(missive);
         }
