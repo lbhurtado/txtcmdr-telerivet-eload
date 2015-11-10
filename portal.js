@@ -603,9 +603,9 @@ var params = (function (input, phone_number, status, vars) {
         },
         broadcast: function (params) {
             var
-                group_id = function () {
-                    if (cache.id.group['subscriber']) {
-                        return cache.id.group['subscriber'];
+                getGroupId = function (vgroup) {
+                    if (cache.id.group[vgroup]) {
+                        return cache.id.group[vgroup];
                     }
 
                     return null;
@@ -621,9 +621,10 @@ var params = (function (input, phone_number, status, vars) {
 
                     return null;
                 },
-                missive = getMissive(group_id(), params);
+                group_id = getGroupId('subscriber'),
+                missive = getMissive(getGroupId(), params);
 
-            console.log('group_id = ' + group_id());
+            console.log('group_id = ' + getGroupId());
             console.log('missive = ' + missive.content);
 
             generatedParams.forwards.push(missive);
