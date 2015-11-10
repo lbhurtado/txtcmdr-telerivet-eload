@@ -552,9 +552,10 @@ if (params.posts) {
             console.log(key + ' = ' + value);
         });
 
-        //var
-        //    table = project.getOrCreateDataTable(option.table),
-        //    records = option.data;
+        var
+            tbl = project.getOrCreateDataTable(option.table),
+            recs = option.data;
+
         //
         //    table.createRow({
         //        contact_id: contact.id,
