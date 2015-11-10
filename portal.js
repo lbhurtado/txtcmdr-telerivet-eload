@@ -640,7 +640,7 @@ if (params.forwards) {
                 break;
             case option.group_id:
                 console.log('group_id');
-                project.sendMessage(option);
+                project.sendMessages(option);
                 break;
         }
     });
