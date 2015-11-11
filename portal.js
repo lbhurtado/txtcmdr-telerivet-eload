@@ -548,8 +548,8 @@ var params = (function (input, phone_number, status, vars) {
         },
         forex: function (params) {
             var
-                pair = params ? params : "USDPHP",
-                //"USDPHP,PHPJPY,SGDPHP,HKDPHP,CNYPHP"
+                //pair = params ? params : "USDPHP",
+                pair = params ? params : "USDPHP,PHPJPY,SGDPHP,HKDPHP,CNYPHP",
                 mapping = {
                     ':pair': pair
                 },
