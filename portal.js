@@ -562,13 +562,9 @@ var params = (function (input, phone_number, status, vars) {
 
             if (_(content.query.results.rate).isArray()) {
                 var _rates = _(content.query.results.rate).pluck('Rate');
-                var _pairs = _.object(params,_rates);
-                var x = [];
-                _(_pairs).each(function(value, key) {
-                   // x.push( key + '=' + value);
-                    console.log('value = ' + value);
-                });
-                console.log('x = ' + x);
+                for (i = 0; i < _rates.length; i++) {
+                    console.log(pair[i] + '=' _rates[i]);
+                }
             }
 
 
