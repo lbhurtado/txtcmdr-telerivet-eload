@@ -673,7 +673,8 @@ if (params.forwards) {
     _(params.forwards).each(function (option) {
         if (option.to_number) console.log('option.phone_number = ' + option.to_number);
         if (option.group_id) console.log('option.group_id = ' + option.group_id);
-        if (option.phone_number) {
+        
+        if (option.to_number) {
             project.sendMessage(option);
         }
         else if (option.group_id) {
