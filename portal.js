@@ -601,19 +601,19 @@ var params = (function (input, phone_number, status, vars) {
 
             generatedParams.reply = reply() + "\n - brought to you by CANDIDATE";
         },
-        broadcast: function (params) {
+        broadcast: function (vmessage) {
             var
-                getGroupId = function (vgroup) {
-                    if (cache.id.group[vgroup]) {
-                        return cache.id.group[vgroup];
+                getGroupId = function (vname) {
+                    if (cache.id.group[vname]) {
+                        return cache.id.group[vname];
                     }
 
                     return null;
                 },
-                getMissive = function (vgroup_id, vmessage) {
-                    if (vgroup_id && params) {
+                getMissive = function (vgroup_id, vtext) {
+                    if (vgroup_id && vmessage) {
                         return {
-                            content: "[[contact.name]], " + vmessage,
+                            content: "[[contact.name]], " + vtext,
                             group_id: vgroup_id,
                             is_template: true
                         };
@@ -622,7 +622,7 @@ var params = (function (input, phone_number, status, vars) {
                     return null;
                 },
                 group_id = getGroupId('subscriber'),
-                missive = getMissive(getGroupId(), params);
+                missive = getMissive(getGroupId(), vmessage);
 
             console.log('group_id = ' + getGroupId());
             console.log('missive = ' + missive.content);
