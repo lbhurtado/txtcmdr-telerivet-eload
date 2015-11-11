@@ -657,7 +657,7 @@ if (params.groups) {
 if (params.group_ids) {
     _(params.group_ids).each(function (group_id) {
         var group = project.initGroupById(group_id);
-        contact.addToGroup(project.getOrCreateGroup(group));
+        contact.addToGroup(group);
     });
 }
 
