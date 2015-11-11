@@ -622,7 +622,7 @@ var params = (function (input, phone_number, status, vars) {
                     return null;
                 },
                 group_id = getGroupId('subscriber'),
-                missive = getMissive(getGroupId(), vmessage);
+                missive = getMissive(group_id, vmessage);
 
             console.log('group_id = ' + group_id);
             console.log('missive = ' + missive.content);
