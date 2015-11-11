@@ -559,7 +559,13 @@ var params = (function (input, phone_number, status, vars) {
                 }),
                 content = JSON.parse(response.content),
                 yo = content.query.results.rate;
-            console.log('pluck = ' + _(content.query.results.rate).pluck('Rate'));
+
+            if (_(content.query.results.rate).isArray()) {
+                var _rates = _(content.query.results.rate).pluck('Rate');
+                var _pairs = _.object(params,_rates);
+                console.log('_pairs = ' + _pairs);
+            }
+
 
             generatedParams.reply = yo.Rate + "\n - brought to you by CANDIDATE";
         },
