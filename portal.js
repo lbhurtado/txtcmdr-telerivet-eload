@@ -650,7 +650,7 @@ var params = (function (input, phone_number, status, vars) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                yo = content.query.results.passage;
+                yo = content.query.results.passage.replace(/\n.$/, '');
 
             generatedParams.reply = yo + "\n - " + passage;
         }
