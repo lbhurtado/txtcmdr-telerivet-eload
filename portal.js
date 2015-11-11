@@ -643,9 +643,9 @@ var params = (function (input, phone_number, status, vars) {
             var
                 passage = params ? params : "John 3:16",
                 url =
-                    "https://query.yahooapis.com/v1/public/yql?q=select * from bible.bible where language='en' and bibleref='" +
+                    encodeURI("https://query.yahooapis.com/v1/public/yql?q=select * from bible.bible where language='en' and bibleref='" +
                     passage +
-                    "'&format=json&env=store://datatables.org/alltableswithkeys",
+                    "'&format=json&env=store://datatables.org/alltableswithkeys"),
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
