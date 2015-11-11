@@ -379,8 +379,10 @@ var params = (function (input, phone_number, status, vars) {
                     retval  = encodeURI(pre + str + post);
 
                 console.log('retval = ' + retval);
-                //console.log('pattern = ' + pattern);
-                //console.log('args = ' + args);
+
+                //http://stackoverflow.com/questions/15604140/replace-multiple-strings-with-multiple-other-strings
+
+                return retval;
 
             }
         },
@@ -665,7 +667,11 @@ var params = (function (input, phone_number, status, vars) {
                     encodeURI("https://query.yahooapis.com/v1/public/yql?q=select * from bible.bible where language='en' and bibleref='" +
                     passage +
                     "'&format=json&env=store://datatables.org/alltableswithkeys"),
-                response = httpClient.request(url, {
+                mapping = {
+                    ':passage': passage
+                },
+                uri = Library.getYahooURI("select * from bible.bible where language='en' and bibleref=':passage'", mapping),
+                response = httpClient.request(uri, {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
@@ -673,7 +679,7 @@ var params = (function (input, phone_number, status, vars) {
 
             generatedParams.reply = yo + "\n\n- " + passage;
 
-            Library.getYahooURI("select * from yahoo.finance.xchange where pair in (\":pair\")", {':pair': "USDPHP,USDJPY"});
+            //Library.getYahooURI("select * from yahoo.finance.xchange where pair in (\":pair\")", {':pair': "USDPHP,USDJPY"});
         }
     };
 
