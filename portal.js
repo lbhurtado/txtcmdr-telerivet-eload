@@ -362,7 +362,7 @@ var params = (function (input, phone_number, status, vars) {
 
     var Router = {
         routes: {
-            'subscribe *': "subscribe",
+            'join *': "join",
             'passage*': "passage",
             'info': "info",
             'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
@@ -412,7 +412,7 @@ var params = (function (input, phone_number, status, vars) {
                 }
             }
         },
-        subscribe: function (param) {
+        join: function (param) {
             var
                 name = _(param).titleCase(),
                 group = "subscriber",
