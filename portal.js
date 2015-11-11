@@ -565,7 +565,8 @@ var params = (function (input, phone_number, status, vars) {
                 var _pairs = _.object(params,_rates);
                 var x = [];
                 _(_pairs).each(function(value, key) {
-                    x.push( key + '=' + value);
+                   // x.push( key + '=' + value);
+                    console.log('value = ' + value);
                 });
                 console.log('x = ' + x);
             }
