@@ -391,7 +391,7 @@ var params = (function (input, phone_number, status, vars) {
                     var methodName = this.routes[route];
                     var regex = route
                             .replace(/:\w+/g, '(\\w+)')
-                            .replace(/\*/, '[ \t]*([^\n\r]*)') //everything after >
+                            .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
                     //console.log('regex = ' + regex);
