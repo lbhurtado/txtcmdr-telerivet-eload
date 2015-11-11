@@ -369,14 +369,14 @@ var params = (function (input, phone_number, status, vars) {
                     pre = "https://query.yahooapis.com/v1/public/yql?q=",
                     post = "&format=json&env=store://datatables.org/alltableswithkeys",
                     route = "",
-                    template = vtemplate.replace(/:\w+/g, '(\\w+)'),
-                    pattern = '^' + template + '$',
-                    regex = new RegExp(pattern, "i"),
-                    args = vtemplate.match(regex);
+                    template = vtemplate.replace(/:\w+/g, 'John 3:16', 'word2');
+                    //pattern = '^' + template + '$',
+                    //regex = new RegExp(pattern, "i"),
+                    //args = vtemplate.match(regex);
 
                 console.log('template = ' + template);
-                console.log('pattern = ' + pattern);
-                console.log('args = ' + args);
+                //console.log('pattern = ' + pattern);
+                //console.log('args = ' + args);
 
             }
         },
