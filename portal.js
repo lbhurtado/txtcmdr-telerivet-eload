@@ -370,19 +370,19 @@ var params = (function (input, phone_number, status, vars) {
     var Router = {
         routes: {
             'join :group *username': "join",
-            'passage*': "passage",
+            'passage*params': "passage",
             'info': "info",
             'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
             'confirm (\\d{4,6})': "confirm",
             'ping*': "ping",
             'bayan': "bayan",
-            'rate*': "forex",
+            'rate*pair': "forex",
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
-            'm=\\d{15}.*': "igps",
-            'news*': "news",
-            'broadcast :group *': "broadcast",
-            '@:group *': "broadcast"
+            'm=\\d{15}.*querystring': "igps",
+            'news*params': "news",
+            'broadcast :group *message': "broadcast",
+            '@:group *message': "broadcast"
         },
         init: function () {
             this._routes = [];
