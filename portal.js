@@ -374,7 +374,8 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*': "igps",
             'news*': "news",
-            'broadcast :group *': "broadcast"
+            'broadcast :group *': "broadcast",
+            '@:group *': "broadcast"
         },
         init: function () {
             this._routes = [];
@@ -386,7 +387,7 @@ var params = (function (input, phone_number, status, vars) {
                             .replace(/\*/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
-                    console.log('regex = ' + regex);
+                    //console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
                         callback: this[methodName]
@@ -612,7 +613,6 @@ var params = (function (input, phone_number, status, vars) {
                 },
                 getMissive = function (vgroup_id, vtext) {
                     if (!vgroup_id) {
-                        console.log('getMissive origin = ' + origin);
                         return {
                             content: "[[contact.name]], the group '" + vgroup + "' does not exists.",
                             to_number: origin,
@@ -632,10 +632,7 @@ var params = (function (input, phone_number, status, vars) {
                 group_id = getGroupId(vgroup),
                 missive = getMissive(group_id, vmessage);
 
-            if (missive.content) console.log('missive.content = ' + missive.content);
-            //if (missive.to_number) console.log('missive.phone_number = ' + missive.to_number);
-            //if (missive.group_id) console.log('missive.group_id = ' + missive.group_id);
-                generatedParams.forwards.push(missive);
+            generatedParams.forwards.push(missive);
         }
     };
 
@@ -671,9 +668,6 @@ if (params.reply)
 
 if (params.forwards) {
     _(params.forwards).each(function (option) {
-        if (option.to_number) console.log('option.phone_number = ' + option.to_number);
-        if (option.group_id) console.log('option.group_id = ' + option.group_id);
-        
         if (option.to_number) {
             project.sendMessage(option);
         }
