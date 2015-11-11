@@ -369,7 +369,7 @@ var params = (function (input, phone_number, status, vars) {
 
     var Router = {
         routes: {
-            'join :group *': "join",
+            'join :group *username': "join",
             'passage*': "passage",
             'info': "info",
             'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
@@ -419,17 +419,16 @@ var params = (function (input, phone_number, status, vars) {
                 }
             }
         },
-        join: function (vgroup, vname) {
+        join: function (vgroup, vusername) {
             var
-                name = _(vname).titleCase(),
+                username = _(vusername).titleCase(),
                 group = vgroup.toLowerCase(),
                 group_id = Library.getGroupId(group),
                 replyFormat = "%s, you are now a subscriber.",
-                reply = sprintf(replyFormat, name),
+                reply = sprintf(replyFormat, username),
                 state = null;
 
-            generatedParams.name = name;
-            //generatedParams.groups = [group];
+            generatedParams.name = username;
             generatedParams.group_ids = [group_id];
             generatedParams.reply = reply;
             generatedParams.state = state;
