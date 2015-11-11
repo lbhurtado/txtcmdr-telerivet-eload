@@ -631,11 +631,11 @@ var params = (function (input, phone_number, status, vars) {
                 },
                 group_id = getGroupId(vgroup),
                 missive = getMissive(group_id, vmessage);
-            
+
             if (missive.content) console.log('missive.content = ' + missive.content);
-            if (missive.phone_number) console.log('missive.phone_number = ' + missive.phone_number);
-            if (missive.group_id) console.log('missive.group_id = ' + missive.group_id);
-            //generatedParams.forwards.push(missive);
+            //if (missive.phone_number) console.log('missive.phone_number = ' + missive.phone_number);
+            //if (missive.group_id) console.log('missive.group_id = ' + missive.group_id);
+            generatedParams.forwards.push(missive);
         }
     };
 
@@ -671,6 +671,8 @@ if (params.reply)
 
 if (params.forwards) {
     _(params.forwards).each(function (option) {
+        if (option.phone_number) console.log('missive.phone_number = ' + option.phone_number);
+        if (option.group_id) console.log('missive.group_id = ' + option.group_id);
         if (option.phone_number) {
             project.sendMessage(option);
         }
