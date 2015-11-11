@@ -369,7 +369,7 @@ var params = (function (input, phone_number, status, vars) {
                     pre = "https://query.yahooapis.com/v1/public/yql?q=",
                     post = "&format=json&env=store://datatables.org/alltableswithkeys",
                     route = "",
-                    template = vtemplate.replace(/:\w+/g, 'John 3:16', 'word2');
+                    template = vtemplate.replace(/:\w+/g, 'USDPHP', 'USDJPY');
                     //pattern = '^' + template + '$',
                     //regex = new RegExp(pattern, "i"),
                     //args = vtemplate.match(regex);
@@ -669,7 +669,7 @@ var params = (function (input, phone_number, status, vars) {
 
             generatedParams.reply = yo + "\n\n- " + passage;
 
-            Library.getYahooURI("select * from yahoo.finance.xchange where pair in (:pairs)");
+            Library.getYahooURI("select * from yahoo.finance.xchange where pair in (\":pair1\") (\":pair2\")");
         }
     };
 
