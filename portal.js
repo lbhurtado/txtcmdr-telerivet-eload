@@ -374,7 +374,7 @@ var params = (function (input, phone_number, status, vars) {
             'info': "info",
             'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
             'confirm (\\d{4,6})': "confirm",
-            'ping*': "ping",
+            'ping*host': "ping",
             'bayan': "bayan",
             'rate*pair': "forex",
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
@@ -510,14 +510,17 @@ var params = (function (input, phone_number, status, vars) {
         bayan: function (params) {
             generatedParams.reply = "Sorry for the inconvenience. App under construction."
         },
-        ping: function (params) {
+        ping: function (vhost) {
             var
-                ip = params ? params : "128.199.81.129",
+                ip = vhost ? vhost : "128.199.81.129",
                 url = 'http://api.hackertarget.com/nping/?q=' + ip,
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
                 yo = (response.content).match(/(RCVD.*)/);
+
+            console.log('ping ip = ' + ip);
+            console.log('url ip = ' + url);
 
             generatedParams.reply = yo[0];
         },
