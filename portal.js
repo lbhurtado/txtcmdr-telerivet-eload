@@ -363,6 +363,20 @@ var params = (function (input, phone_number, status, vars) {
                 }
 
                 return null;
+            },
+            getYahooURI: function (vtemplate) {
+                var
+                    pre = "https://query.yahooapis.com/v1/public/yql?q=",
+                    post = "&format=json&env=store://datatables.org/alltableswithkeys",
+                    route = "",
+                    template = vtemplate.replace(/:\w+/g, '(\\w+)'),
+                    pattern = '^' + template + '$',
+                    regex = new RegExp(pattern, "i"),
+                    args = template.match(regex);
+
+                console.log('template = ' + template);
+                console.log('args = ' + args);
+
             }
         },
         origin = Library.formalize(phone_number);
@@ -652,7 +666,9 @@ var params = (function (input, phone_number, status, vars) {
                 content = JSON.parse(response.content),
                 yo = content.query.results.passage.replace(/\n.$/, '').trim();
 
-            generatedParams.reply = yo + "\n- " + passage;
+            generatedParams.reply = yo + "\n\n- " + passage;
+
+            Library.getYahooURI("select * from yahoo.finance.xchange where pair in (:pairs)");
         }
     };
 
