@@ -632,10 +632,11 @@ var params = (function (input, phone_number, status, vars) {
                 group_id = getGroupId(vgroup),
                 missive = getMissive(group_id, vmessage);
 
+
             !group_id || console.log('group_id = ' + group_id);
             console.log('missive = ' + missive.content);
 
-            generatedParams.forwards.push(missive);
+            //generatedParams.forwards.push(missive);
         }
     };
 
