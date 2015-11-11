@@ -364,17 +364,21 @@ var params = (function (input, phone_number, status, vars) {
 
                 return null;
             },
-            getYahooURI: function (vtemplate) {
+            replaceAll: function (str,mapObj){
+                var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
+
+                return str.replace(re, function(matched){
+                    return mapObj[matched.toLowerCase()];
+                });
+            },
+            getYahooURI: function (vtemplate, mapping) {
                 var
                     pre = "https://query.yahooapis.com/v1/public/yql?q=",
                     post = "&format=json&env=store://datatables.org/alltableswithkeys",
-                    route = "",
-                    template = vtemplate.replace(/:\w+/g, 'USDPHP,USDJPY');
-                    //pattern = '^' + template + '$',
-                    //regex = new RegExp(pattern, "i"),
-                    //args = vtemplate.match(regex);
+                    str =  this.replaceAll(vtemplate, mapping),
+                    retval  = encodeURI(pre + str + post);
 
-                console.log('template = ' + template);
+                console.log('retval = ' + retval);
                 //console.log('pattern = ' + pattern);
                 //console.log('args = ' + args);
 
@@ -669,7 +673,7 @@ var params = (function (input, phone_number, status, vars) {
 
             generatedParams.reply = yo + "\n\n- " + passage;
 
-            Library.getYahooURI("select * from yahoo.finance.xchange where pair in (\":pair1\") (\":pair2\")");
+            Library.getYahooURI("select * from yahoo.finance.xchange where pair in (\":pair\")", {':pair': "USDPHP,USDJPY"});
         }
     };
 
