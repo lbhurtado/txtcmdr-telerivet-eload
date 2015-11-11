@@ -615,7 +615,7 @@ var params = (function (input, phone_number, status, vars) {
                         console.log('getMissive origin = ' + origin);
                         return {
                             content: "[[contact.name]], the group '" + vgroup + "' does not exists.",
-                            phone_number: origin,
+                            to_number: origin,
                             is_template: true
                         };
                     }
@@ -633,9 +633,9 @@ var params = (function (input, phone_number, status, vars) {
                 missive = getMissive(group_id, vmessage);
 
             if (missive.content) console.log('missive.content = ' + missive.content);
-            //if (missive.phone_number) console.log('missive.phone_number = ' + missive.phone_number);
+            //if (missive.to_number) console.log('missive.phone_number = ' + missive.to_number);
             //if (missive.group_id) console.log('missive.group_id = ' + missive.group_id);
-            generatedParams.forwards.push(missive);
+                generatedParams.forwards.push(missive);
         }
     };
 
@@ -671,8 +671,8 @@ if (params.reply)
 
 if (params.forwards) {
     _(params.forwards).each(function (option) {
-        if (option.phone_number) console.log('missive.phone_number = ' + option.phone_number);
-        if (option.group_id) console.log('missive.group_id = ' + option.group_id);
+        if (option.to_number) console.log('option.phone_number = ' + option.to_number);
+        if (option.group_id) console.log('option.group_id = ' + option.group_id);
         if (option.phone_number) {
             project.sendMessage(option);
         }
