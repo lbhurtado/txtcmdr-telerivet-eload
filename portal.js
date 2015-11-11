@@ -549,10 +549,12 @@ var params = (function (input, phone_number, status, vars) {
         forex: function (params) {
             var
                 pair = params ? params : "USDPHP",
-                url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22" +
-                    pair +
-                    "%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=",
-                response = httpClient.request(url, {
+                //"USDPHP,PHPJPY,SGDPHP,HKDPHP,CNYPHP"
+                mapping = {
+                    ':pair': pair
+                },
+                uri = Library.getYahooURI("select * from yahoo.finance.xchange where pair in (':pair')", mapping),
+                response = httpClient.request(uri, {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
@@ -663,10 +665,6 @@ var params = (function (input, phone_number, status, vars) {
         bible: function (params) {
             var
                 passage = params ? _(params).titleCase() : "John 3:16",
-                url =
-                    encodeURI("https://query.yahooapis.com/v1/public/yql?q=select * from bible.bible where language='en' and bibleref='" +
-                    passage +
-                    "'&format=json&env=store://datatables.org/alltableswithkeys"),
                 mapping = {
                     ':passage': passage
                 },
