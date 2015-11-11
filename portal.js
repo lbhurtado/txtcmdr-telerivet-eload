@@ -624,7 +624,7 @@ var params = (function (input, phone_number, status, vars) {
                 group_id = getGroupId('subscriber'),
                 missive = getMissive(getGroupId(), vmessage);
 
-            console.log('group_id = ' + getGroupId());
+            console.log('group_id = ' + group_id);
             console.log('missive = ' + missive.content);
 
             generatedParams.forwards.push(missive);
