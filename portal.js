@@ -369,7 +369,7 @@ var params = (function (input, phone_number, status, vars) {
                     pre = "https://query.yahooapis.com/v1/public/yql?q=",
                     post = "&format=json&env=store://datatables.org/alltableswithkeys",
                     route = "",
-                    template = vtemplate.replace(/:\w+/g, 'USDPHP', 'USDJPY');
+                    template = vtemplate.replace(/:\w+/g, 'USDPHP,USDJPY');
                     //pattern = '^' + template + '$',
                     //regex = new RegExp(pattern, "i"),
                     //args = vtemplate.match(regex);
