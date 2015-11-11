@@ -611,7 +611,14 @@ var params = (function (input, phone_number, status, vars) {
                     return null;
                 },
                 getMissive = function (vgroup_id, vtext) {
-                    if (vgroup_id && vmessage) {
+                    if (!vgroup_id) {
+                        return {
+                            content: "[[contact.name]], the group '" + vgroup + "' does not exists.",
+                            phone_number: phone_number,
+                            is_template: true
+                        };
+                    }
+                    if (vtext) {
                         return {
                             content: "[[contact.name]], " + vtext,
                             group_id: vgroup_id,
