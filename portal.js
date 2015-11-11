@@ -356,6 +356,13 @@ var params = (function (input, phone_number, status, vars) {
                     30: "SNX30",
                     50: "SNX50"
                 }
+            },
+            getGroupId: function (vname) {
+                if (cache.id.group[vname]) {
+                    return cache.id.group[vname];
+                }
+
+                return null;
             }
         },
         origin = Library.formalize(phone_number);
@@ -416,12 +423,14 @@ var params = (function (input, phone_number, status, vars) {
             var
                 name = _(vname).titleCase(),
                 group = vgroup.toLowerCase(),
+                group_id = Library.getGroupId(group),
                 replyFormat = "%s, you are now a subscriber.",
                 reply = sprintf(replyFormat, name),
                 state = null;
 
             generatedParams.name = name;
-            generatedParams.groups = [group];
+            //generatedParams.groups = [group];
+            generatedParams.group_ids = [group_id];
             generatedParams.reply = reply;
             generatedParams.state = state;
         },
@@ -604,13 +613,6 @@ var params = (function (input, phone_number, status, vars) {
         },
         broadcast: function (vgroup, vmessage) {
             var
-                getGroupId = function (vname) {
-                    if (cache.id.group[vname]) {
-                        return cache.id.group[vname];
-                    }
-
-                    return null;
-                },
                 getMissive = function (vgroup_id, vtext) {
                     if (!vgroup_id) {
                         return {
@@ -629,7 +631,7 @@ var params = (function (input, phone_number, status, vars) {
 
                     return null;
                 },
-                group_id = getGroupId(vgroup),
+                group_id = Library.getGroupId(vgroup),
                 missive = getMissive(group_id, vmessage);
 
             generatedParams.forwards.push(missive);
@@ -648,6 +650,13 @@ if (params.name)
 
 if (params.groups) {
     _(params.groups).each(function (group) {
+        contact.addToGroup(project.getOrCreateGroup(group));
+    });
+}
+
+if (params.group_ids) {
+    _(params.group_ids).each(function (group_id) {
+        var group = project.initGroupById(group_id);
         contact.addToGroup(project.getOrCreateGroup(group));
     });
 }
