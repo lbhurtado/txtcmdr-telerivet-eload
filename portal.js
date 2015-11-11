@@ -374,7 +374,7 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*': "igps",
             'news*': "news",
-            'broadcast *': "broadcast"
+            'broadcast :group *': "broadcast"
         },
         init: function () {
             this._routes = [];
@@ -601,7 +601,7 @@ var params = (function (input, phone_number, status, vars) {
 
             generatedParams.reply = reply() + "\n - brought to you by CANDIDATE";
         },
-        broadcast: function (vmessage) {
+        broadcast: function (vgroup, vmessage) {
             var
                 getGroupId = function (vname) {
                     if (cache.id.group[vname]) {
@@ -621,7 +621,7 @@ var params = (function (input, phone_number, status, vars) {
 
                     return null;
                 },
-                group_id = getGroupId('subscriber'),
+                group_id = getGroupId(vgroup),
                 missive = getMissive(group_id, vmessage);
 
             console.log('group_id = ' + group_id);
