@@ -558,21 +558,21 @@ var params = (function (input, phone_number, status, vars) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                yo = content.query.results.rate;
+                yo = '';
 
             if (_(content.query.results.rate).isArray()) {
                 var _pairs = pair.split(',');
                 var _rates = _(content.query.results.rate).pluck('Rate');
                 for (i = 0, j=_rates.length ; i <j ; i++) {
-                    console.log(_pairs[i] + '=' + _rates[i]);
+                    yo = yo + _pairs[i].toUpperCase() + '=' + _rates[i] + "\n";
                 }
             }
             else {
-                console.log(pair + '=' + content.query.results.rate.Rate);
+                yo = pair.toUpperCase() + '=' + content.query.results.rate.Rate;
             }
 
 
-            generatedParams.reply = yo.Rate + "\n - brought to you by CANDIDATE";
+            generatedParams.reply = yo + "\n - brought to you by CANDIDATE";
         },
         load: function (destination, amount) {
             var
