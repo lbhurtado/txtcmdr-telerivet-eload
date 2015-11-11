@@ -631,11 +631,10 @@ var params = (function (input, phone_number, status, vars) {
                 },
                 group_id = getGroupId(vgroup),
                 missive = getMissive(group_id, vmessage);
-
-
-            !group_id || console.log('group_id = ' + group_id);
-            console.log('missive = ' + missive.content);
-
+            
+            if (missive.content) console.log('missive.content = ' + missive.content);
+            if (missive.phone_number) console.log('missive.phone_number = ' + missive.phone_number);
+            if (missive.group_id) console.log('missive.group_id = ' + missive.group_id);
             //generatedParams.forwards.push(missive);
         }
     };
