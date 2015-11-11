@@ -362,7 +362,7 @@ var params = (function (input, phone_number, status, vars) {
 
     var Router = {
         routes: {
-            'join *': "join",
+            'join :group *': "join",
             'passage*': "passage",
             'info': "info",
             'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
@@ -412,10 +412,10 @@ var params = (function (input, phone_number, status, vars) {
                 }
             }
         },
-        join: function (param) {
+        join: function (vgroup, vname) {
             var
-                name = _(param).titleCase(),
-                group = "subscriber",
+                name = _(vname).titleCase(),
+                group = vgroup.toLowerCase(),
                 replyFormat = "%s, you are now a subscriber.",
                 reply = sprintf(replyFormat, name),
                 state = null;
