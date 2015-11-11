@@ -382,7 +382,8 @@ var params = (function (input, phone_number, status, vars) {
             'm=\\d{15}.*querystring': "igps",
             'news*params': "news",
             'broadcast :group *message': "broadcast",
-            '@:group *message': "broadcast"
+            '@:group *message': "broadcast",
+            'bible*passage': "bible"
         },
         init: function () {
             this._routes = [];
@@ -637,6 +638,20 @@ var params = (function (input, phone_number, status, vars) {
                 missive = getMissive(group_id, vmessage);
 
             generatedParams.forwards.push(missive);
+        },
+        bible: function (params) {
+            var
+                passage = param ? param : "John 3:16",
+                url =
+                    "https://query.yahooapis.com/v1/public/yql?q=select * from bible.bible where language='en' and bibleref='" +
+                    passage +
+                    "'&format=json&env=store://datatables.org/alltableswithkeys",
+                response = httpClient.request(url, {
+                    method: 'GET'
+                }),
+                yo = content.query.results.passage;
+
+            generatedParams.reply = yo + "\n - brought to you by CANDIDATE";
         }
     };
 
