@@ -372,9 +372,10 @@ var params = (function (input, phone_number, status, vars) {
                     template = vtemplate.replace(/:\w+/g, '(\\w+)'),
                     pattern = '^' + template + '$',
                     regex = new RegExp(pattern, "i"),
-                    args = template.match(regex);
+                    args = vtemplate.match(regex);
 
                 console.log('template = ' + template);
+                console.log('pattern = ' + pattern);
                 console.log('args = ' + args);
 
             }
