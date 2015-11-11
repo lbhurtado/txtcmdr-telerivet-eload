@@ -652,7 +652,7 @@ var params = (function (input, phone_number, status, vars) {
                 content = JSON.parse(response.content),
                 yo = content.query.results.passage;
 
-            generatedParams.reply = yo + "\n - passage";
+            generatedParams.reply = yo + "\n - " + passage;
         }
     };
 
