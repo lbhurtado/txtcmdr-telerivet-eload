@@ -612,6 +612,7 @@ var params = (function (input, phone_number, status, vars) {
                 },
                 getMissive = function (vgroup_id, vtext) {
                     if (!vgroup_id) {
+                        console.log('getMissive origin = ' + origin);
                         return {
                             content: "[[contact.name]], the group '" + vgroup + "' does not exists.",
                             phone_number: origin,
@@ -631,7 +632,7 @@ var params = (function (input, phone_number, status, vars) {
                 group_id = getGroupId(vgroup),
                 missive = getMissive(group_id, vmessage);
 
-            console.log('group_id = ' + group_id);
+            !group_id || console.log('group_id = ' + group_id);
             console.log('missive = ' + missive.content);
 
             generatedParams.forwards.push(missive);
