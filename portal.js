@@ -559,6 +559,7 @@ var params = (function (input, phone_number, status, vars) {
                 }),
                 content = JSON.parse(response.content),
                 yo = content.query.results.rate;
+            console.log('pluck = ' + _(content.query.results.rate).pluck('Rate'));
 
             generatedParams.reply = yo.Rate + "\n - brought to you by CANDIDATE";
         },
