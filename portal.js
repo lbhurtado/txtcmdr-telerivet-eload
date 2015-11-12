@@ -406,7 +406,7 @@ var params = (function (input, phone_number, status, vars) {
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
             'bible*passage': "bible",
-            'weather *location': "weather"
+            'weather*location': "weather"
         },
         init: function () {
             this._routes = [];
@@ -743,7 +743,7 @@ var params = (function (input, phone_number, status, vars) {
                 '\n'
             ];
             _(yo.forecast).each(function (forecast) {
-                conditions.push(forecast.date + " (" + forecast.day + ") " + forecast.text + " [" + forecast.low + "℃ -" + forecast.high + "℃]");
+                conditions.push(forecast.date + " (" + forecast.day + ") " + forecast.text + " [" + forecast.low + "℃-" + forecast.high + "℃]");
             });
 
             generatedParams.reply = conditions.join("\n");
