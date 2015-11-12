@@ -730,7 +730,7 @@ var params = (function (input, phone_number, status, vars) {
                 mapping = {
                     ':location': location
                 },
-                uri = Library.getYahooURI("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location')", mapping),
+                uri = Library.getYahooURI("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location') and u='c'", mapping),
                 response = httpClient.request(uri, {
                     method: 'GET'
                 }),
@@ -739,11 +739,11 @@ var params = (function (input, phone_number, status, vars) {
 
             var conditions = [
                 yo.title,
-                yo.condition.date,
-                yo.condition.text
+                yo.condition.text,
+                '\n'
             ];
             _(yo.forecast).each(function (forecast) {
-                conditions.push(forecast.date + ' ' + forecast.text);
+                conditions.push(forecast.date + " (" + forecast.day + ") " + forecast.text + " [" + forecast.low + "-" + forecast.low + "]");
             });
 
             generatedParams.reply = conditions.join("\n");
