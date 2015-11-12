@@ -730,7 +730,7 @@ var params = (function (input, phone_number, status, vars) {
                 getLocation = function() {
                     var
                         _arr = default_location.split(','),
-                        _cnt = _arr.length();
+                        _cnt = _arr.length;
 
                     if (_cnt === 1) {
                         _arr.push('Philippines');
