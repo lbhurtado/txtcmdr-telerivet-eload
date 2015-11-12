@@ -737,7 +737,12 @@ var params = (function (input, phone_number, status, vars) {
                 content = JSON.parse(response.content),
                 yo = content.query.results.channel.item;
 
-            generatedParams.reply = yo.title + "\n" + yo.condition.text;
+            var conditions = [
+                yo.title,
+                yo.condition.date,
+                yo.condition.text
+            ];
+            generatedParams.reply = yo.join("\n");
         }
     };
 
