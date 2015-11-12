@@ -457,7 +457,7 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.state = state;
         },
         baligod: function (vusername) {
-            join('subscriber', vusername);
+            this.join('subscriber', vusername);
         },
         passage: function (param) {
             var
