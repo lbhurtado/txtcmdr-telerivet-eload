@@ -405,7 +405,8 @@ var params = (function (input, phone_number, status, vars) {
             'news*params': "news",
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
-            'bible*passage': "bible"
+            'bible*passage': "bible",
+            'weather *location': "weather"
         },
         init: function () {
             this._routes = [];
@@ -724,8 +725,19 @@ var params = (function (input, phone_number, status, vars) {
             //Library.getYahooURI("select * from yahoo.finance.xchange where pair in (\":pair\")", {':pair': "USDPHP,USDJPY"});
         },
         weather: function (params) {
+            var
+                location = params ? params : "Manila",
+                mapping = {
+                    ':location': location
+                },
+                uri = Library.getYahooURI("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location, Philippines')", mapping),
+                response = httpClient.request(uri, {
+                    method: 'GET'
+                }),
+                content = JSON.parse(response.content),
+                yo = content.query.results.channel.item;
 
-            //select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="Manila, Philippines")
+            generatedParams.reply = yo.title + "\n" + yo.condition.text;
         }
     };
 
