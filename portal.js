@@ -457,7 +457,18 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.state = state;
         },
         baligod: function (vusername) {
-            this.join('subscriber', vusername);
+            var
+                username = _(vusername).titleCase(),
+                group = "subscriber",
+                group_id = Library.getGroupId(group),
+                replyFormat = "%s, you are now part of Atty. Baligod's campaign.",
+                reply = sprintf(replyFormat, username),
+                state = null;
+
+            generatedParams.name = username;
+            generatedParams.group_ids = [group_id];
+            generatedParams.reply = reply;
+            generatedParams.state = state;
         },
         passage: function (param) {
             var
