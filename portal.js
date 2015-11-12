@@ -726,19 +726,7 @@ var params = (function (input, phone_number, status, vars) {
         },
         weather: function (params) {
             var
-                default_location = params ? params : "Manila, Philippines",
-                getLocation = function() {
-                    var
-                        _arr = default_location.split(','),
-                        _cnt = _arr.length;
-
-                    if (_cnt === 1) {
-                        _arr.push('Philippines');
-                    }
-
-                    return _arr.join(',');
-                },
-                location = getLocation(),
+                location = params ? params : "Manila, Philippines",
                 mapping = {
                     ':location': location
                 },
@@ -754,6 +742,9 @@ var params = (function (input, phone_number, status, vars) {
                 yo.condition.date,
                 yo.condition.text
             ];
+            (yo.forecast).forEach(function (forecast) {
+                conditions.push(forecast.date + ' ' + forecast.text);
+            });
 
             generatedParams.reply = conditions.join("\n");
         }
