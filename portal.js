@@ -742,6 +742,7 @@ var params = (function (input, phone_number, status, vars) {
                 yo.condition.date,
                 yo.condition.text
             ];
+            
             generatedParams.reply = conditions.join("\n");
         }
     };
