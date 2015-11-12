@@ -391,6 +391,7 @@ var params = (function (input, phone_number, status, vars) {
     var Router = {
         routes: {
             'join :group *username': "join",
+            'baligod *username': "baligod",
             'passage*params': "passage",
             'info': "info",
             'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
@@ -454,6 +455,9 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.group_ids = [group_id];
             generatedParams.reply = reply;
             generatedParams.state = state;
+        },
+        baligod: function (vusername) {
+            join('subscriber', vusername);
         },
         passage: function (param) {
             var
@@ -707,6 +711,10 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.reply = yo + "\n\n- " + passage;
 
             //Library.getYahooURI("select * from yahoo.finance.xchange where pair in (\":pair\")", {':pair': "USDPHP,USDJPY"});
+        },
+        weather: function (params) {
+
+            //select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="Manila, Philippines")
         }
     };
 
