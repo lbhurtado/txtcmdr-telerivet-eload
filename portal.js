@@ -742,7 +742,7 @@ var params = (function (input, phone_number, status, vars) {
                 yo.condition.date,
                 yo.condition.text
             ];
-            (yo.forecast).forEach(function (forecast) {
+            _(yo.forecast).each(function (forecast) {
                 conditions.push(forecast.date + ' ' + forecast.text);
             });
 
