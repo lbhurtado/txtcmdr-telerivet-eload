@@ -626,14 +626,31 @@ var params = (function (input, phone_number, status, vars) {
         },
         news: function (params) {
             var
-                cnt = params ? params : "4",
-                url = "https://query.yahooapis.com/v1/public/yql?q=select%20title%20from%20rss%20where%20url%3D%22http%3A%2F%2Fwww.gmanetwork.com%2Fnews%2Frss%2Fnews%2Fmetro%22%20%7C%20truncate(count%3D" +
-                    cnt +
-                    ")&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=",
-                response = httpClient.request(url, {
+                category = params ? params : "metro",
+                getURL = function (vcategory) {
+                    var urls = {
+                        'metro': "http://www.gmanetwork.com/news/rss/news/metro",
+                        'flash': "http://www.gmanetwork.com/news/rss/videos/show/flashreport",
+                        'showbiz': "http://www.gmanetwork.com/news/rss/showbiz",
+                        'balitanghali': "http://www.gmanetwork.com/news/rss/videos/show/balitanghali",
+                        '24oras': "http://www.gmanetwork.com/news/rss/videos/show/24oras",
+                        'ofw': "http://www.gmanetwork.com/news/rss/news/pinoyabroad",
+                        'sports': "http://www.gmanetwork.com/news/rss/sports"
+                    };
+
+                    return urls[vcategory];
+                },
+                cnt = 4,
+                mapping = {
+                    ':url': getURL(category),
+                    ':count': cnt
+                },
+                uri = Library.getYahooURI("select title from rss where url=':url' | truncate(count=:count)", mapping),
+                response = httpClient.request(uri, {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
+
                 yo = content.query.results.item,
                 reply = function () {
                     var x = [];
