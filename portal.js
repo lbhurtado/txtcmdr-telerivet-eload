@@ -743,7 +743,7 @@ var params = (function (input, phone_number, status, vars) {
                 '\n'
             ];
             _(yo.forecast).each(function (forecast) {
-                conditions.push(forecast.date + " (" + forecast.day + ") " + forecast.text + " [" + forecast.low + "-" + forecast.low + "]");
+                conditions.push(forecast.date + " (" + forecast.day + ") " + forecast.text + " [" + forecast.low + "℃ -" + forecast.high + "℃]");
             });
 
             generatedParams.reply = conditions.join("\n");
