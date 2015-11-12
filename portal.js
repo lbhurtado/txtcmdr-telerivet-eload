@@ -726,11 +726,23 @@ var params = (function (input, phone_number, status, vars) {
         },
         weather: function (params) {
             var
-                location = params ? params : "Manila",
+                default_location = params ? params : "Manila, Philippines",
+                getLocation = function() {
+                    var
+                        _arr = default_location.split(','),
+                        _cnt = _arr.length();
+
+                    if (_cnt === 1) {
+                        _arr.push('Philippines');
+                    }
+
+                    return _arr.join(',');
+                },
+                location = getLocation(),
                 mapping = {
                     ':location': location
                 },
-                uri = Library.getYahooURI("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location, Philippines')", mapping),
+                uri = Library.getYahooURI("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location')", mapping),
                 response = httpClient.request(uri, {
                     method: 'GET'
                 }),
@@ -742,7 +754,7 @@ var params = (function (input, phone_number, status, vars) {
                 yo.condition.date,
                 yo.condition.text
             ];
-            
+
             generatedParams.reply = conditions.join("\n");
         }
     };
