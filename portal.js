@@ -422,7 +422,7 @@ var params = (function (input, phone_number, status, vars) {
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
                     var re = /%\w+/i;
-                    regex = regex.replace(re, re.$1);
+                    regex = regex.replace(re, re.$0);
 
                     console.log('regex = ' + regex);
                     this._routes.push({
