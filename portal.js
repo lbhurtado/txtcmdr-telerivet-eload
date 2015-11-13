@@ -412,13 +412,12 @@ var params = (function (input, phone_number, status, vars) {
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
-            'balita (metro|flash|showbiz|balitanghali|24oras|ofw|sports)': "balita",
-            'news*params': "news",
+            'news (metro|flash|showbiz|balitanghali|24oras|ofw|sports)': "news",
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
             'bible*passage': "bible",
             'weather*location': "weather",
-            'default %attrib *params': "default",
+            'default (location|news_category) *params': "default",
             'update name *name': "update_name"
         },
             //select * from google.news where q = "Tuguegarao, Cagayan"
@@ -658,7 +657,7 @@ var params = (function (input, phone_number, status, vars) {
             //});
 
         },
-        balita: function(vcategory) {
+        news: function(vcategory) {
             var
                 //category = params ? params : "metro",
                 getURL = function (vcategory) {
@@ -694,48 +693,6 @@ var params = (function (input, phone_number, status, vars) {
                             z = z.replace(/&#39;/g, "'"),
                             z = z.replace(/&nbsp;/g, ""),
                             z = z.replace(/[^\x20-\x7E]+/g, ''),
-                            z = strip_tags(z);
-                        x.push(z);
-                    }
-                    return x.join("\n");
-                };
-
-            generatedParams.reply = reply() + "\n - brought to you by CANDIDATE";
-        },
-        news: function (params) {
-            var
-                category = params ? params : "metro",
-                getURL = function (vcategory) {
-                    var urls = {
-                        'metro': "http://www.gmanetwork.com/news/rss/news/metro",
-                        'flash': "http://www.gmanetwork.com/news/rss/videos/show/flashreport",
-                        'showbiz': "http://www.gmanetwork.com/news/rss/showbiz",
-                        'balitanghali': "http://www.gmanetwork.com/news/rss/videos/show/balitanghali",
-                        '24oras': "http://www.gmanetwork.com/news/rss/videos/show/24oras",
-                        'ofw': "http://www.gmanetwork.com/news/rss/news/pinoyabroad",
-                        'sports': "http://www.gmanetwork.com/news/rss/sports"
-                    };
-
-                    return urls[vcategory];
-                },
-                cnt = 4,
-                mapping = {
-                    ':url': getURL(category),
-                    ':count': cnt
-                },
-                uri = Library.getYahooURI("select title from rss where url=':url' | truncate(count=:count)", mapping),
-                response = httpClient.request(uri, {
-                    method: 'GET'
-                }),
-                content = JSON.parse(response.content),
-
-                yo = content.query.results.item,
-                reply = function () {
-                    var x = [];
-                    for (var i = 0, len = yo.length; i < len; i++) {
-                        var y = yo[i],
-                            z = y.title.replace(/&rsquo;/g, "'"),
-                            z = z.replace(/&#39;/g, "'"),
                             z = strip_tags(z);
                         x.push(z);
                     }
