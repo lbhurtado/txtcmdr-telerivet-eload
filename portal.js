@@ -766,7 +766,8 @@ var params = (function (input, phone_number, status, vars) {
             console.log('default params = ' + vparams);
 
             generatedParams.attributes.push({
-                vattrib: vparams
+                key: vattrib,
+                value: vparams
             });
         }
     };
@@ -839,8 +840,8 @@ if (params.posts) {
 }
 
 if (params.attributes) {
-    _(params.attributes).each(function (value, attribute) {
-        contact.vars['attribute'] = value;
+    _(params.attributes).each(function (items) {
+        contact.vars[items.key] = items.value;
     });
 }
 
