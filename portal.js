@@ -693,6 +693,7 @@ var params = (function (input, phone_number, status, vars) {
                             z = y.title.replace(/&rsquo;/g, "'"),
                             z = z.replace(/&#39;/g, "'"),
                             z = z.replace(/&nbsp;/g, ""),
+                            z = z.replace(/[^\x20-\x7E]+/g, ''),
                             z = strip_tags(z);
                         x.push(z);
                     }
