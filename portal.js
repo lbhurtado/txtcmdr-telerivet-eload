@@ -754,7 +754,7 @@ var params = (function (input, phone_number, status, vars) {
                 conditions = [
                     yo.title,
                     yo.condition.text,
-                    '\n'
+                    '\n - Lester'
                 ];
 
             _(yo.forecast).each(function (forecast) {
