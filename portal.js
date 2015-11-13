@@ -754,7 +754,8 @@ var params = (function (input, phone_number, status, vars) {
 
             generatedParams.reply = conditions.join("\n");
         },
-        default: function(params) {
+        default: function(attrib, params) {
+            console.log('default attrib = ' + attrib);
             console.log('default params = ' + params);
         }
     };
