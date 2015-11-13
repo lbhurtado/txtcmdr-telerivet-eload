@@ -748,6 +748,7 @@ var params = (function (input, phone_number, status, vars) {
                 yo = content.query.results.channel,
                 conditions = [
                     yo.item.title,
+                    yo.item.condition.temp + "℃",
                     yo.item.condition.text
                 ];
 
