@@ -745,7 +745,8 @@ var params = (function (input, phone_number, status, vars) {
         },
         weather: function (params) {
             var
-                location = params ? params : "Manila, Philippines",
+                //location = params ? params : "Manila, Philippines",
+                location = params ? params : vars.default_location,
                 mapping = {
                     ':location': location
                 },
