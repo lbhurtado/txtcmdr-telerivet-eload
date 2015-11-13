@@ -406,7 +406,9 @@ var params = (function (input, phone_number, status, vars) {
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
             'bible*passage': "bible",
-            'weather*location': "weather"
+            'weather*location': "weather",
+            'default %location *location': "default",
+            'update name *name': "update_name"
         },
         init: function () {
             this._routes = [];
@@ -415,10 +417,11 @@ var params = (function (input, phone_number, status, vars) {
                     var methodName = this.routes[route];
                     var regex = route
                             .replace(/:\w+/g, '(\\w+)')
+                            .replace(/%\w+/g, '($1)')
                             .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
-                    //console.log('regex = ' + regex);
+                    console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
                         callback: this[methodName]
@@ -735,18 +738,21 @@ var params = (function (input, phone_number, status, vars) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                yo = content.query.results.channel.item;
+                yo = content.query.results.channel.item,
+                conditions = [
+                    yo.title,
+                    yo.condition.text,
+                    '\n'
+                ];
 
-            var conditions = [
-                yo.title,
-                yo.condition.text,
-                '\n'
-            ];
             _(yo.forecast).each(function (forecast) {
                 conditions.push(forecast.day + " " + forecast.date +  " " + forecast.text + " " + forecast.low + "℃-" + forecast.high + "℃");
             });
 
             generatedParams.reply = conditions.join("\n");
+        },
+        default: function(params) {
+            console.log('default params = ' + params);
         }
     };
 
