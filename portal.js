@@ -418,11 +418,13 @@ var params = (function (input, phone_number, status, vars) {
                     var
                         regex = route
                             .replace(/:\w+/g, '(\\w+)')
+                            .replace(/%(\w+)/g, "($1)")
                             .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
-                    var re = new RegExp("%(\\w+)", 'g');
-                    regex = regex.replace(re, "($1)");
+
+                    //var re = new RegExp("%(\\w+)", 'g');
+                    //regex = regex.replace(re, "($1)");
 
                     console.log('regex = ' + regex);
                     this._routes.push({
