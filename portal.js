@@ -421,7 +421,7 @@ var params = (function (input, phone_number, status, vars) {
                             .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
-                    var re = /%(\w+)/i;
+                    var re = new RegExp("%(\\w+)");
                     regex = regex.replace(re, re.$1);
 
                     console.log('regex = ' + regex);
