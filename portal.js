@@ -365,7 +365,7 @@ var params = (function (input, phone_number, status, vars) {
 
                 return null;
             },
-            replaceAll: function (str,mapObj){
+            replaceAll: function (str, mapObj){
                 var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
 
                 return str.replace(re, function(matched){
@@ -767,9 +767,13 @@ var params = (function (input, phone_number, status, vars) {
         default: function(vattrib, vparams) {
             console.log('default attrib = ' + vattrib);
             console.log('default params = ' + vparams);
+            var lookup = {
+                'location': "default.location",
+                'news_category': "default.news_category"
+            }
 
             generatedParams.attributes.push({
-                key: vattrib,
+                key: lookup[vattrib],
                 value: vparams
             });
         }
