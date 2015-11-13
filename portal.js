@@ -417,7 +417,7 @@ var params = (function (input, phone_number, status, vars) {
             '@:group *message': "broadcast",
             'bible*passage': "bible",
             'weather*location': "weather",
-            'default (location|news_category) *params': "default",
+            'default (location|news) *params': "default",
             'update name *name': "update_name"
         },
             //select * from google.news where q = "Tuguegarao, Cagayan"
@@ -767,8 +767,8 @@ var params = (function (input, phone_number, status, vars) {
         default: function(vattrib, vparams) {
             var
                 lookup = {
-                    'location': "default_location",
-                    'news_category': "default_news_category"
+                    'location': "default-location",
+                    'news': "default-news"
                 }
 
             console.log('default attrib = ' + lookup[vattrib]);
