@@ -658,7 +658,7 @@ var params = (function (input, phone_number, status, vars) {
             //});
 
         },
-        balita: function(vategory) {
+        balita: function(vcategory) {
             var
                 //category = params ? params : "metro",
                 getURL = function (vcategory) {
