@@ -767,8 +767,8 @@ var params = (function (input, phone_number, status, vars) {
         default: function(vattrib, vparams) {
             var
                 lookup = {
-                    'location': "default-location",
-                    'news': "default-news"
+                    'location': "default_location",
+                    'news': "default_news"
                 }
 
             console.log('default attrib = ' + lookup[vattrib]);
