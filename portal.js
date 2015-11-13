@@ -744,21 +744,21 @@ var params = (function (input, phone_number, status, vars) {
                 mapping = {
                     ':location': location
                 },
-                //uri = Library.getYahooURI("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location') and u='c'", mapping),
-                //response = httpClient.request(uri, {
-                //    method: 'GET'
-                //}),
-                //content = JSON.parse(response.content),
                 content = Library.getYahooContent("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location') and u='c'", mapping),
                 yo = content.query.results.channel.item,
                 conditions = [
                     yo.title,
                     yo.condition.text,
-                    '\n - Lester'
+                    '\n'
                 ];
 
             _(yo.forecast).each(function (forecast) {
-                conditions.push(forecast.day + " " + forecast.date +  " " + forecast.text + " " + forecast.low + "℃-" + forecast.high + "℃");
+                //conditions.push(forecast.day + " " + forecast.date +  " " + forecast.text + " " + forecast.low + "℃-" + forecast.high + "℃");
+                conditions.push(forecast.day);
+                conditions.push(forecast.date);
+                conditions.push(forecast.text);
+                conditions.push(forecast.low + "℃-");
+                conditions.push(forecast.high + "℃");
             });
 
             generatedParams.reply = conditions.join("\n");
