@@ -270,7 +270,8 @@ var params = (function (input, phone_number, status, vars) {
             state: undefined,
             vars: {},
             forwards: [],
-            posts: []
+            posts: [],
+            attributes: []
         },
         cache = {
             id: {
@@ -416,9 +417,10 @@ var params = (function (input, phone_number, status, vars) {
             '@:group *message': "broadcast",
             'bible*passage': "bible",
             'weather*location': "weather",
-            'default %location *location': "default",
+            'default %attrib *params': "default",
             'update name *name': "update_name"
         },
+            //select * from google.news where q = "Tuguegarao, Cagayan"
         init: function () {
             this._routes = [];
             for (var route in this.routes) {
@@ -759,9 +761,13 @@ var params = (function (input, phone_number, status, vars) {
 
             generatedParams.reply = forecasts.join("\n");
         },
-        default: function(attrib, params) {
-            console.log('default attrib = ' + attrib);
-            console.log('default params = ' + params);
+        default: function(vattrib, vparams) {
+            console.log('default attrib = ' + vattrib);
+            console.log('default params = ' + vparams);
+
+            generatedParams.attributes.push({
+                vattrib: vparams
+            });
         }
     };
 
@@ -829,6 +835,12 @@ if (params.posts) {
             contact_id: contact.id,
             vars: recs
         });
+    });
+}
+
+if (params.attribs) {
+    _(params.attribs).each(function (value, attrib) {
+        contact.vars['attrib'] = value;
     });
 }
 
