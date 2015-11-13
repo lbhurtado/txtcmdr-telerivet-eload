@@ -692,6 +692,7 @@ var params = (function (input, phone_number, status, vars) {
                         var y = yo[i],
                             z = y.title.replace(/&rsquo;/g, "'"),
                             z = z.replace(/&#39;/g, "'"),
+                            z = z.replace(/&nbsp;/g, ""),
                             z = strip_tags(z);
                         x.push(z);
                     }
