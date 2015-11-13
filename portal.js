@@ -765,17 +765,21 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.reply = forecasts.join("\n");
         },
         default: function(vattrib, vparams) {
-            console.log('default attrib = ' + vattrib);
-            console.log('default params = ' + vparams);
-            var lookup = {
-                'location': "default.location",
-                'news_category': "default.news_category"
-            }
+            var
+                lookup = {
+                    'location': "default.location",
+                    'news_category': "default.news_category"
+                }
 
-            generatedParams.attributes.push({
-                key: lookup[vattrib],
-                value: vparams
-            });
+            console.log('default attrib = ' + lookup[vattrib]);
+            console.log('default params = ' + vparams);
+
+            if (lookup[vattrib]) {
+                generatedParams.attributes.push({
+                    key: lookup[vattrib],
+                    value: vparams
+                });
+            }
         }
     };
 
