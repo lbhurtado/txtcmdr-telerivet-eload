@@ -746,20 +746,18 @@ var params = (function (input, phone_number, status, vars) {
                 },
                 content = Library.getYahooContent("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location') and u='c'", mapping),
                 yo = content.query.results.channel,
-                conditions = [
+                forecasts = [
                     yo.item.title,
-                    yo.item.condition.temp + "℃",
-                    yo.item.condition.text
+                    yo.item.condition.text + " " + yo.item.condition.temp + "℃"
                 ];
 
             _(yo.item.forecast).each(function (forecast) {
-                conditions.push("");
-                conditions.push(forecast.day + " " + forecast.date);
-                conditions.push(forecast.text + " " + forecast.low + "℃-" + " " + forecast.high + "℃");
-
+                forecasts.push("");
+                forecasts.push(forecast.day + " " + forecast.date);
+                forecasts.push(forecast.text + " " + forecast.low + "℃-" + " " + forecast.high + "℃");
             });
 
-            generatedParams.reply = conditions.join("\n");
+            generatedParams.reply = forecasts.join("\n");
         },
         default: function(attrib, params) {
             console.log('default attrib = ' + attrib);
