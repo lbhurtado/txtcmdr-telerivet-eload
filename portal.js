@@ -752,10 +752,10 @@ var params = (function (input, phone_number, status, vars) {
                 ];
 
             _(yo.forecast).each(function (forecast) {
-                //conditions.push(forecast.day + " " + forecast.date +  " " + forecast.text + " " + forecast.low + "℃-" + forecast.high + "℃");
+                conditions.push("");
                 conditions.push(forecast.day + " " + forecast.date);
                 conditions.push(forecast.text + " " + forecast.low + "℃-" + " " + forecast.high + "℃");
-                conditions.push("");
+
             });
 
             generatedParams.reply = conditions.join("\n");
