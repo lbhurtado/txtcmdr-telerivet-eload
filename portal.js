@@ -412,6 +412,7 @@ var params = (function (input, phone_number, status, vars) {
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
+            'balita (metro|showbiz|sports)': "balita",
             'news*params': "news",
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
@@ -429,7 +430,8 @@ var params = (function (input, phone_number, status, vars) {
                     var
                         regex = route
                             .replace(/:\w+/g, '(\\w+)')
-                            .replace(/%(\w+)/g, "($1)")
+                            .replace(/\(([\/]?[^\)]+)\)/g, "($1)")
+                            .replace(/%(\w+)/g, "($1)") //default value
                             .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
@@ -655,6 +657,48 @@ var params = (function (input, phone_number, status, vars) {
             //    console.log(key + ' = ' + value);
             //});
 
+        },
+        balita: function(vategory) {
+            var
+                //category = params ? params : "metro",
+                getURL = function (vcategory) {
+                    var urls = {
+                        'metro': "http://www.gmanetwork.com/news/rss/news/metro",
+                        'flash': "http://www.gmanetwork.com/news/rss/videos/show/flashreport",
+                        'showbiz': "http://www.gmanetwork.com/news/rss/showbiz",
+                        'balitanghali': "http://www.gmanetwork.com/news/rss/videos/show/balitanghali",
+                        '24oras': "http://www.gmanetwork.com/news/rss/videos/show/24oras",
+                        'ofw': "http://www.gmanetwork.com/news/rss/news/pinoyabroad",
+                        'sports': "http://www.gmanetwork.com/news/rss/sports"
+                    };
+
+                    return urls[vcategory.toLowerCase().trim()];
+                },
+                cnt = 4,
+                mapping = {
+                    ':url': getURL(vcategory),
+                    ':count': cnt
+                },
+                uri = Library.getYahooURI("select title from rss where url=':url' | truncate(count=:count)", mapping),
+                response = httpClient.request(uri, {
+                    method: 'GET'
+                }),
+                content = JSON.parse(response.content),
+
+                yo = content.query.results.item,
+                reply = function () {
+                    var x = [];
+                    for (var i = 0, len = yo.length; i < len; i++) {
+                        var y = yo[i],
+                            z = y.title.replace(/&rsquo;/g, "'"),
+                            z = z.replace(/&#39;/g, "'"),
+                            z = strip_tags(z);
+                        x.push(z);
+                    }
+                    return x.join("\n");
+                };
+
+            generatedParams.reply = reply() + "\n - brought to you by CANDIDATE";
         },
         news: function (params) {
             var
