@@ -442,6 +442,8 @@ var params = (function (input, phone_number, status, vars) {
 
                 console.log('args = ' + args);
                 if (args) {
+                    console.log('args = ' + args);
+                    console.log('args.slice(1) = ' + args.slice(1));
                     this._routes[i].callback.apply(this, args.slice(1));
                 }
             }
