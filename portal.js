@@ -434,7 +434,7 @@ var params = (function (input, phone_number, status, vars) {
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
 
-                    //console.log('regex = ' + regex);
+                    console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
                         callback: this[methodName]
@@ -838,9 +838,9 @@ if (params.posts) {
     });
 }
 
-if (params.attribs) {
-    _(params.attribs).each(function (value, attrib) {
-        contact.vars['attrib'] = value;
+if (params.attributes) {
+    _(params.attributes).each(function (value, attribute) {
+        contact.vars['attribute'] = value;
     });
 }
 
