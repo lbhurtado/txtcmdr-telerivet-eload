@@ -412,7 +412,7 @@ var params = (function (input, phone_number, status, vars) {
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
-            'balita (metro|showbiz|sports)': "balita",
+            'balita (metro|flash|showbiz|balitanghali|24oras|ofw|sports)': "balita",
             'news*params': "news",
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
