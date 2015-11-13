@@ -415,12 +415,15 @@ var params = (function (input, phone_number, status, vars) {
             for (var route in this.routes) {
                 if (this.hasOwnProperty('routes')) {
                     var methodName = this.routes[route];
-                    var regex = route
+                    var
+                        regex = route
                             .replace(/:\w+/g, '(\\w+)')
-                            .replace(/%\w+/i, "$1")
                             .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
+                    var re = new RegExp("/%\w+/i");
+                    regex = regex.replace(re,re.$1);
+
                     console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
