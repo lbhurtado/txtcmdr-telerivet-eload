@@ -421,9 +421,9 @@ var params = (function (input, phone_number, status, vars) {
                             .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
-                    var re = new RegExp("(%\\w+)", 'g');
-                    //regex = regex.replace(re, "LESTER");
-                    regex = regex.replace(/%\w+/g, "LESTER");
+                    var re = new RegExp("%(\\w+)", 'g');
+                    regex = regex.replace(re, "DENE");
+                    //regex = regex.replace(/%\w+/g, "LESTER");
 
                     console.log('regex = ' + regex);
                     this._routes.push({
