@@ -745,13 +745,13 @@ var params = (function (input, phone_number, status, vars) {
                     ':location': location
                 },
                 content = Library.getYahooContent("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location') and u='c'", mapping),
-                yo = content.query.results.channel.item,
+                yo = content.query.results.channel,
                 conditions = [
-                    yo.title,
-                    yo.condition.text
+                    yo.item.title,
+                    yo.item.condition.text
                 ];
 
-            _(yo.forecast).each(function (forecast) {
+            _(yo.item.forecast).each(function (forecast) {
                 conditions.push("");
                 conditions.push(forecast.day + " " + forecast.date);
                 conditions.push(forecast.text + " " + forecast.low + "℃-" + " " + forecast.high + "℃");
