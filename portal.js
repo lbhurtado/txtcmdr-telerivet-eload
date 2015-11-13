@@ -370,20 +370,29 @@ var params = (function (input, phone_number, status, vars) {
                 return str.replace(re, function(matched){
                     return mapObj[matched.toLowerCase()];
                 });
+                //http://stackoverflow.com/questions/15604140/replace-multiple-strings-with-multiple-other-strings
             },
             getYahooURI: function (vtemplate, mapping) {
                 var
                     pre = "https://query.yahooapis.com/v1/public/yql?q=",
                     post = "&format=json&env=store://datatables.org/alltableswithkeys",
                     str =  this.replaceAll(vtemplate, mapping),
-                    retval  = encodeURI(pre + str + post);
+                    uri  = encodeURI(pre + str + post);
 
-                console.log('retval = ' + retval);
+                return uri;
+            },
+            getYahooContent: function (vtemplate, mapping) {
+                var
+                    pre = "https://query.yahooapis.com/v1/public/yql?q=",
+                    post = "&format=json&env=store://datatables.org/alltableswithkeys",
+                    str =  this.replaceAll(vtemplate, mapping),
+                    uri  = encodeURI(pre + str + post),
+                    response = httpClient.request(uri, {
+                        method: 'GET'
+                    }),
+                    content = JSON.parse(response.content);
 
-                //http://stackoverflow.com/questions/15604140/replace-multiple-strings-with-multiple-other-strings
-
-                return retval;
-
+                return content;
             }
         },
         origin = Library.formalize(phone_number);
@@ -423,10 +432,7 @@ var params = (function (input, phone_number, status, vars) {
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
 
-                    //var re = new RegExp("%(\\w+)", 'g');
-                    //regex = regex.replace(re, "($1)");
-
-                    console.log('regex = ' + regex);
+                    //console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
                         callback: this[methodName]
@@ -738,11 +744,12 @@ var params = (function (input, phone_number, status, vars) {
                 mapping = {
                     ':location': location
                 },
-                uri = Library.getYahooURI("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location') and u='c'", mapping),
-                response = httpClient.request(uri, {
-                    method: 'GET'
-                }),
-                content = JSON.parse(response.content),
+                //uri = Library.getYahooURI("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location') and u='c'", mapping),
+                //response = httpClient.request(uri, {
+                //    method: 'GET'
+                //}),
+                //content = JSON.parse(response.content),
+                content = Library.getYahooContent("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=':location') and u='c'", mapping),
                 yo = content.query.results.channel.item,
                 conditions = [
                     yo.title,
