@@ -421,9 +421,8 @@ var params = (function (input, phone_number, status, vars) {
                             .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
-                    var re = new RegExp("%(\\w+)", 'ig');
+                    var re = new RegExp("%(\\w+)", 'g');
                     regex = regex.replace(re, "($1)");
-                    //regex = regex.replace(/%\w+/g, "LESTER");
 
                     console.log('regex = ' + regex);
                     this._routes.push({
@@ -446,8 +445,6 @@ var params = (function (input, phone_number, status, vars) {
 
                 console.log('args = ' + args);
                 if (args) {
-                    console.log('args = ' + args);
-                    console.log('args.slice(1) = ' + args.slice(1));
                     this._routes[i].callback.apply(this, args.slice(1));
                 }
             }
