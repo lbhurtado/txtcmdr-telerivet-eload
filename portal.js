@@ -755,8 +755,7 @@ var params = (function (input, phone_number, status, vars) {
             _(yo.forecast).each(function (forecast) {
                 //conditions.push(forecast.day + " " + forecast.date +  " " + forecast.text + " " + forecast.low + "℃-" + forecast.high + "℃");
                 conditions.push(forecast.day + " " + forecast.date);
-                conditions.push(forecast.text);
-                conditions.push(forecast.low + "℃-" + " " + forecast.high + "℃");
+                conditions.push(forecast.text + " " + forecast.low + "℃-" + " " + forecast.high + "℃");
             });
 
             generatedParams.reply = conditions.join("\n");
