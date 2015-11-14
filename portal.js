@@ -304,6 +304,15 @@ var params = (function (input, phone_number, status, vars) {
                     example: "e.g. news Manila, Philippines"
                 }
             },
+            read: {
+                headers: {
+                    title: "Read App",
+                    description: "Read App Description",
+                    syntax: "read \<news item\>",
+                    options: "options: \[1\], \[2\], \[3\], \[4\]",
+                    example: "e.g. read 3"
+                }
+            },
             balita: {
                 headers: {
                     title: "Balita App",
@@ -485,6 +494,7 @@ var params = (function (input, phone_number, status, vars) {
             'news *location': "news",
             'news': "syntax",
             'read ([1-4])': "read",
+            'read': "syntax",
             'balita <metro|flash|showbiz|balitanghali|24oras|ofw|sports>': "balita",
             'balita': "syntax",
             'bible *passage': "bible",
@@ -744,6 +754,7 @@ var params = (function (input, phone_number, status, vars) {
                     newscasts.push("");
                     newscasts.push(i + ". " + newscast.publisher);
                     newscasts.push("   " + newscast.titleNoFormatting);
+                    newscasts.push("   " + newscast.publishedDate);
                 }
                 else {
                     if (vnumber == i) {
@@ -766,6 +777,9 @@ var params = (function (input, phone_number, status, vars) {
             if (vars['last_read']) {
                 console.log('vars last_read = ', vars['last_read']);
                 this.news(vars['last_read'], vnumber);
+            }
+            else {
+                this.syntax('read');
             }
         },
         balita: function (vcategory) {
