@@ -735,10 +735,8 @@ var params = (function (input, phone_number, status, vars) {
             //else {
             //    content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             //}
-
-            while (!(content && content.query && content.query.results && content.query.results)) {
-                content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-            }
+            content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+            content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
 
             var yo = content.query.results.results,
                 newscasts = [];
