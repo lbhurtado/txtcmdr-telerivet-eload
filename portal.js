@@ -722,6 +722,8 @@ var params = (function (input, phone_number, status, vars) {
                 yo = content.query.results,
                 newscasts = [];
 
+            console.log('yo.results.publisher = ' + yo.results.publisher);
+
             _(yo.results).each(function (newscasts) {
                 newscasts.push("");
                 newscasts.push(yo.publisher);
