@@ -802,8 +802,8 @@ var params = (function (input, phone_number, status, vars) {
                 params = input,
                 text = [];
 
-            _(keywords[params]).each(function(object) {
-                text.push(object.headers);
+            _(keywords[params].headers).each(function(object) {
+                text.push(object);
             });
 
             //switch (params) {
