@@ -718,7 +718,7 @@ var params = (function (input, phone_number, status, vars) {
                     ':location': location
                 },
                 content = Library.getYahooContent("select * from google.news where q = ':location'", mapping),
-
+                yo = content.results.results,
                 newscasts = [];
 
             if (content) {
@@ -734,7 +734,7 @@ var params = (function (input, phone_number, status, vars) {
                         console.log('content.query has results');
                         if (content.query.results.hasOwnProperty('results')) {
                             console.log('content.query.results has results');
-                            console.log('yo.results.publisher = ' + content.results.results.publisher);
+                           // console.log('yo.results.publisher = ' + content.results.results.publisher);
                         }
 
                     }
@@ -742,14 +742,14 @@ var params = (function (input, phone_number, status, vars) {
             }
 
 
-            //_(yo.results).each(function (newscasts) {
-            //    newscasts.push("");
-            //    newscasts.push(yo.publisher);
-            //    newscasts.push(yo.titleNoFormatting);
-            //    newscasts.push(yo.content);
-            //});
-            //
-            //generatedParams.reply = newscasts.join("\n");
+            _(yo).each(function (newscast) {
+                newscasts.push("");
+                newscasts.push(newscast.publisher);
+                newscasts.push(newscast.titleNoFormatting);
+                newscasts.push(newscast.content);
+            });
+
+            generatedParams.reply = newscasts.join("\n");
         },
         balita: function(vcategory) {
             var
