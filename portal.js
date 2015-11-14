@@ -803,7 +803,7 @@ var params = (function (input, phone_number, status, vars) {
                 text = [];
 
             _(keywords[params]).each(function(object) {
-                text.input(object.headers);
+                text.push(object.headers);
             });
 
             //switch (params) {
