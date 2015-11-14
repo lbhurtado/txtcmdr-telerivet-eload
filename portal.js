@@ -723,6 +723,8 @@ var params = (function (input, phone_number, status, vars) {
 
             if (content) {
                 console.log('content is alive');
+                console.log(_(content).allKeys());
+                
                 if (content.hasOwnProperty('query')) {
                     console.log('content has query');
                     if (content.results.hasOwnProperty('results')) {
