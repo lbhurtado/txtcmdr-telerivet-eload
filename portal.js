@@ -752,9 +752,8 @@ var params = (function (input, phone_number, status, vars) {
 
             var reply = newscasts
                 .join("\n")
-                .replace(/&#39;/g, "'")
-                .replace(/&nbsp;/g, "");
-            
+                .value;
+
             generatedParams.reply = reply;
         },
         balita: function(vcategory) {
