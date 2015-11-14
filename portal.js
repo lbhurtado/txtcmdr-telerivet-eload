@@ -799,7 +799,7 @@ var params = (function (input, phone_number, status, vars) {
         },
         syntax: function() {
             var
-                params = input,
+                params = input.toLowerCase(),
                 text = [];
 
             _(keywords[params].headers).each(function(object) {
