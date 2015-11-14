@@ -751,6 +751,8 @@ var params = (function (input, phone_number, status, vars) {
                 .parseHtmlEnteties()
                 .replace(/&quot;/g, "'");
 
+            console.log("Lester was here!");
+            
             generatedParams.reply = reply;
         },
         balita: function (vcategory) {
