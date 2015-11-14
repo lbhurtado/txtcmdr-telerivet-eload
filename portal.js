@@ -751,8 +751,14 @@ var params = (function (input, phone_number, status, vars) {
                     newscasts.push(newscast.publisher);
                     newscasts.push(newscast.titleNoFormatting);
                 }
-                
-                //newscasts.push(newscast.content);
+                else {
+                    if (vnumber == i) {
+                        newscasts.push("");
+                        newscasts.push(newscast.publisher);
+                        newscasts.push(newscast.content);
+                    }
+                }
+
             });
 
             var reply = _(newscasts.join("\n"))
