@@ -717,9 +717,7 @@ var params = (function (input, phone_number, status, vars) {
                 mapping = {
                     ':location': location
                 },
-                content = Library.getYahooContent("select * from google.news where q = ':location'", mapping),
-                yo = content.query.results.results,
-                newscasts = [];
+                content = Library.getYahooContent("select * from google.news where q = ':location'", mapping);
 
             if (content) {
                 console.log('content is alive');
@@ -741,6 +739,8 @@ var params = (function (input, phone_number, status, vars) {
                 }
             }
 
+            var yo = content.query.results.results,
+                newscasts = [];
 
             _(yo).each(function (newscast) {
                 newscasts.push("");
