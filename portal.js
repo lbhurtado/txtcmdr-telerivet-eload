@@ -289,13 +289,13 @@ var params = (function (input, phone_number, status, vars) {
             }
         },
         keywords = {
-            news: {
+            balita: {
                 headers: {
-                    title: "News App",
-                    description: "News App Description",
+                    title: "Balita App",
+                    description: "Balita App Description",
                     syntax: "news \<option\>",
                     options: "options: metro,flash,showbiz,balitanghali,24oras,ofw,sports",
-                    example: "e.g. news flash"
+                    example: "e.g. balita flash"
                 }
             },
             bible: {
@@ -460,8 +460,8 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
 
-            'news (metro|flash|showbiz|balitanghali|24oras|ofw|sports)': "news",
-            'news': "syntax",
+            'balita (metro|flash|showbiz|balitanghali|24oras|ofw|sports)': "balita",
+            'balita': "syntax",
             'bible *passage': "bible",
             'bible': "syntax",
             'weather *location': "weather",
@@ -714,7 +714,7 @@ var params = (function (input, phone_number, status, vars) {
             //});
 
         },
-        news: function(vcategory) {
+        balita: function(vcategory) {
             var
                 //category = params ? params : "metro",
                 getURL = function (vcategory) {
