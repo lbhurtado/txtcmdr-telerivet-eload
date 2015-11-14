@@ -759,15 +759,13 @@ var params = (function (input, phone_number, status, vars) {
                 .parseHtmlEnteties()
                 .replace(/&quot;/g, "'");
 
+            this.default('read', params);
             generatedParams.reply = reply;
-            generatedParams.attributes.push({
-                key: 'last_news_query',
-                value: params
-            });
         },
         read: function(vnumber) {
-            if (vars['last_news_query']) {
-                this.news(vars['last_news_query'], vnumber);
+            if (vars['last_read']) {
+                console.log('vars last_read = ', vars['last_read']);
+                this.news(vars['last_read'], vnumber);
             }
         },
         balita: function (vcategory) {
@@ -900,7 +898,9 @@ var params = (function (input, phone_number, status, vars) {
             var
                 lookup = {
                     'location': "default_location",
-                    'news': "default_news"
+                    'news': "default_news",
+                    'read': "last_read"
+
                 }
 
             console.log('default attrib = ' + lookup[vattrib]);
