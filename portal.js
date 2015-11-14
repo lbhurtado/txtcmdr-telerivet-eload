@@ -756,6 +756,7 @@ var params = (function (input, phone_number, status, vars) {
                         newscasts.push("");
                         newscasts.push(newscast.publisher);
                         newscasts.push(newscast.content);
+                        newscasts.push(newscast.unescapedUrl);
                     }
                 }
 
