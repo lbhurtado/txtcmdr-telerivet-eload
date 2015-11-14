@@ -717,7 +717,7 @@ var params = (function (input, phone_number, status, vars) {
                 mapping = {
                     ':location': location
                 },
-                content = Library.getYahooContent("select * from google.news where q = ':location')", mapping),
+                content = Library.getYahooContent("select * from google.news where q = ':location'", mapping),
 
                 newscasts = [];
 
