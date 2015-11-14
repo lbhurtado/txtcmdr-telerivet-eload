@@ -484,6 +484,7 @@ var params = (function (input, phone_number, status, vars) {
             'news *location ([1-4])': "news",
             'news *location': "news",
             'news': "syntax",
+            'read ([1-4])': "read",
             'balita <metro|flash|showbiz|balitanghali|24oras|ofw|sports>': "balita",
             'balita': "syntax",
             'bible *passage': "bible",
@@ -731,16 +732,9 @@ var params = (function (input, phone_number, status, vars) {
                 mapping = {
                     ':search': params
                 },
-                content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-
-            console.log('news params = ' + params);
-            console.log('news number = ' + vnumber);
-
-            content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-            //content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-            //content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-
-            var yo = content.query.results.results,
+                _content = Library.getYahooContent("select * from google.news where q = ':search'", mapping),
+                content = Library.getYahooContent("select * from google.news where q = ':search'", mapping),
+                yo = content.query.results.results,
                 newscasts = [],
                 i = 0;
 
@@ -766,6 +760,15 @@ var params = (function (input, phone_number, status, vars) {
                 .replace(/&quot;/g, "'");
 
             generatedParams.reply = reply;
+            generatedParams.attributes.push({
+                key: 'last_news_query',
+                value: params
+            });
+        },
+        read: function(vnumber) {
+            if (vars['last_news_query']) {
+                this.news(vars['last_news_query'], vnumber);
+            }
         },
         balita: function (vcategory) {
             var
