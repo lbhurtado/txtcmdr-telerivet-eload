@@ -27,6 +27,12 @@ var params = (function (input, phone_number, status, vars) {
                 'input': input,
                 'parts': parts
             };
+        },
+        parseHtmlEnteties: function (str) {
+            return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
+                var num = parseInt(numStr, 10); // read num as normal number
+                return String.fromCharCode(num);
+            });
         }
     });
 
@@ -421,10 +427,10 @@ var params = (function (input, phone_number, status, vars) {
 
                 return null;
             },
-            replaceAll: function (str, mapObj){
-                var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
+            replaceAll: function (str, mapObj) {
+                var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
 
-                return str.replace(re, function(matched){
+                return str.replace(re, function (matched) {
                     return mapObj[matched.toLowerCase()];
                 });
                 //http://stackoverflow.com/questions/15604140/replace-multiple-strings-with-multiple-other-strings
@@ -433,8 +439,8 @@ var params = (function (input, phone_number, status, vars) {
                 var
                     pre = "https://query.yahooapis.com/v1/public/yql?q=",
                     post = "&format=json&env=store://datatables.org/alltableswithkeys",
-                    str =  this.replaceAll(vtemplate, mapping),
-                    uri  = encodeURI(pre + str + post);
+                    str = this.replaceAll(vtemplate, mapping),
+                    uri = encodeURI(pre + str + post);
 
                 return uri;
             },
@@ -442,14 +448,20 @@ var params = (function (input, phone_number, status, vars) {
                 var
                     pre = "https://query.yahooapis.com/v1/public/yql?q=",
                     post = "&format=json&env=store://datatables.org/alltableswithkeys",
-                    str =  this.replaceAll(vtemplate, mapping),
-                    uri  = encodeURI(pre + str + post),
+                    str = this.replaceAll(vtemplate, mapping),
+                    uri = encodeURI(pre + str + post),
                     response = httpClient.request(uri, {
                         method: 'GET'
                     }),
                     content = JSON.parse(response.content);
 
                 return content;
+            },
+            parseHtmlEnteties: function (str) {
+                return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
+                    var num = parseInt(numStr, 10); // read num as normal number
+                    return String.fromCharCode(num);
+                });
             }
         },
         origin = Library.formalize(phone_number);
@@ -488,7 +500,7 @@ var params = (function (input, phone_number, status, vars) {
             'default (location|news) *params': "default",
             'update name *name': "update_name"
         },
-            //select * from google.news where q = "Tuguegarao, Cagayan"
+        //select * from google.news where q = "Tuguegarao, Cagayan"
         init: function () {
             this._routes = [];
             for (var route in this.routes) {
@@ -750,13 +762,11 @@ var params = (function (input, phone_number, status, vars) {
                 //newscasts.push(newscast.content);
             });
 
-            var reply = newscasts
-                .join("\n")
-                .value;
+            var reply = _(newscasts.join("\n")).parseHtmlEnteties();
 
             generatedParams.reply = reply;
         },
-        balita: function(vcategory) {
+        balita: function (vcategory) {
             var
             //category = params ? params : "metro",
                 getURL = function (vcategory) {
@@ -819,7 +829,7 @@ var params = (function (input, phone_number, status, vars) {
         },
         weather: function (params) {
             var
-                //location = params ? params : "Manila, Philippines",
+            //location = params ? params : "Manila, Philippines",
                 location = params ? params : vars.default_location,
                 mapping = {
                     ':location': location
@@ -856,7 +866,7 @@ var params = (function (input, phone_number, status, vars) {
             if (_(content.query.results.rate).isArray()) {
                 var _pairs = pair.split(',');
                 var _rates = _(content.query.results.rate).pluck('Rate');
-                for (i = 0, j=_rates.length ; i <j ; i++) {
+                for (i = 0, j = _rates.length; i < j; i++) {
                     yo = yo + _pairs[i].toUpperCase() + '=' + _rates[i] + "\n";
                 }
             }
@@ -882,7 +892,7 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.reply = yo[0];
         },
 
-        default: function(vattrib, vparams) {
+        default: function (vattrib, vparams) {
             var
                 lookup = {
                     'location': "default_location",
@@ -899,12 +909,12 @@ var params = (function (input, phone_number, status, vars) {
                 });
             }
         },
-        syntax: function() {
+        syntax: function () {
             var
                 params = input.toLowerCase(),
                 text = [];
 
-            _(keywords[params].headers).each(function(object) {
+            _(keywords[params].headers).each(function (object) {
                 text.push(object);
             });
 
