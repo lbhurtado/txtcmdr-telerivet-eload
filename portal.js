@@ -729,7 +729,8 @@ var params = (function (input, phone_number, status, vars) {
 
                 if (content.hasOwnProperty('query')) {
                     console.log('content has query');
-                    if (content.results.hasOwnProperty('results')) {
+
+                    if (content.query.hasOwnProperty('results')) {
                         console.log('content.query has results');
                         console.log('yo.results.publisher = ' + content.results.results.publisher);
                     }
