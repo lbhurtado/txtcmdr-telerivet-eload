@@ -719,39 +719,24 @@ var params = (function (input, phone_number, status, vars) {
                 },
                 content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
 
-            if (content) {
-                if (content.hasOwnProperty('query')) {
-                    if (content.query.hasOwnProperty('results')) {
+            //if (content) {
+            //    if (content.hasOwnProperty('query')) {
+            //        if (content.query.hasOwnProperty('results')) {
+            //
+            //        }
+            //        else {
+            //            content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+            //        }
+            //    }
+            //    else {
+            //        content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+            //    }
+            //}
+            //else {
+            //    content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+            //}
 
-                    }
-                    else {
-                        content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-                    }
-                }
-                else {
-                    content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-                }
-
-
-                //console.log('content is alive');
-                //_(content).each(function(value, key) {
-                //   console.log("key = " + key);
-                //});
-                //
-                //
-                //    console.log('content has query');
-                //
-                //
-                //        console.log('content.query has results');
-                //        if (content.query.results.hasOwnProperty('results')) {
-                //            console.log('content.query.results has results');
-                //           // console.log('yo.results.publisher = ' + content.results.results.publisher);
-                //        }
-                //
-                //    }
-                //}
-            }
-            else {
+            while (!content.query.results.results) {
                 content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             }
 
