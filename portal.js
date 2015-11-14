@@ -746,7 +746,7 @@ var params = (function (input, phone_number, status, vars) {
                 newscasts.push("");
                 newscasts.push(newscast.publisher);
                 newscasts.push(newscast.titleNoFormatting);
-                newscasts.push(newscast.content);
+                //newscasts.push(newscast.content);
             });
 
             generatedParams.reply = newscasts.join("\n");
