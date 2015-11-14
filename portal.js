@@ -302,8 +302,8 @@ var params = (function (input, phone_number, status, vars) {
                 headers: {
                     title: "Bible App",
                     description: "Bible App Description",
-                    syntax: "bible \<passage\>",
-                    options: "options: \<book\> \<chapter\>:\<verse\>",
+                    syntax: "bible \[passage\]",
+                    options: "options: \[book\] \[chapter\]:\[verse\]",
                     example: "e.g. bible John 3:16"
                 }
             },
@@ -312,8 +312,26 @@ var params = (function (input, phone_number, status, vars) {
                     title: "Weather App",
                     description: "Weather App Description",
                     syntax: "weather \<location\>",
-                    options: "options: \<city\>, \<country\>",
+                    options: "options: \[city\], \[country\]",
                     example: "e.g. weather Manila, Philippines"
+                }
+            },
+            rate: {
+                headers: {
+                    title: "Rate App",
+                    description: "Rate App Description",
+                    syntax: "rate \<pair\>",
+                    options: "options: USDPHP,PHPJPY,SGDPHP,HKDPHP,CNYPHP",
+                    example: "e.g. rate USDPHP,PHPUSD"
+                }
+            },
+            ping: {
+                headers: {
+                    title: "Ping App",
+                    description: "Ping App Description",
+                    syntax: "ping \<host\>",
+                    options: "options:  \[ip address\], \[host@domain name\]",
+                    example: "e.g. ping yahoo.com"
                 }
             }
         },
@@ -435,9 +453,9 @@ var params = (function (input, phone_number, status, vars) {
             'info': "info",
             'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
             'confirm (\\d{4,6})': "confirm",
-            'ping*host': "ping",
+
             'bayan': "bayan",
-            'rate*pair': "forex",
+
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
@@ -448,10 +466,13 @@ var params = (function (input, phone_number, status, vars) {
             'bible': "syntax",
             'weather *location': "weather",
             'weather': "syntax",
+            'rate *pair': "forex",
+            'rate': "syntax",
+            'ping *host': "ping",
+            'ping': "syntax",
 
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
-
 
             'default (location|news) *params': "default",
             'update name *name': "update_name"
