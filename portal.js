@@ -748,12 +748,11 @@ var params = (function (input, phone_number, status, vars) {
                 i = i+ 1;
                 if (!vnumber) {
                     newscasts.push("");
-                    newscasts.push(newscast.publisher);
-                    newscasts.push(newscast.titleNoFormatting);
+                    newscasts.push(i + "." + newscast.publisher);
+                    newscasts.push("   " + newscast.titleNoFormatting);
                 }
                 else {
                     if (vnumber == i) {
-                        newscasts.push("");
                         newscasts.push(newscast.publisher);
                         newscasts.push(newscast.content);
                         newscasts.push(newscast.unescapedUrl);
