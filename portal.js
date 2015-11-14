@@ -748,7 +748,11 @@ var params = (function (input, phone_number, status, vars) {
                 //newscasts.push(newscast.content);
             });
 
-            generatedParams.reply = newscasts.join("\n");
+            var reply = newscasts
+                .join("\n")
+                .replace(/&#39;/g, "'");
+            
+            generatedParams.reply = reply;
         },
         balita: function(vcategory) {
             var
