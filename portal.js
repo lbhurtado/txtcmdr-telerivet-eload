@@ -762,7 +762,9 @@ var params = (function (input, phone_number, status, vars) {
                 //newscasts.push(newscast.content);
             });
 
-            var reply = _(newscasts.join("\n")).parseHtmlEnteties().replace(/&rsquo;/g, "'");
+            var reply = _(newscasts.join("\n"))
+                .parseHtmlEnteties()
+                .replace(/&quot;/g, "'");
 
             generatedParams.reply = reply;
         },
