@@ -288,6 +288,20 @@ var params = (function (input, phone_number, status, vars) {
                 }
             }
         },
+        keywords = {
+            news: {
+                headers: {
+                    title: "News App",
+                    description: "News App Description",
+                    syntax: "news \<option\>",
+                    options: "options: metro,flash,showbiz,balitanghali,24oras,ofw,sports",
+                    example: "e.g. news flash"
+                },
+                parameters: {
+
+                }
+            }
+        },
         Library = {
             loader: function (telco) {
                 switch (telco) {
@@ -788,13 +802,17 @@ var params = (function (input, phone_number, status, vars) {
                 params = input,
                 text = [];
 
-            switch (params) {
-                case 'news':
-                    text.push("'news' gives you the latest news.");
-                    text.push("syntax: 'news \<metro|flash|showbiz|balitanghali|24oras|ofw|sports\>'");
-                    text.push("e.g. news flash");
-                    break;
-            }
+            _(keywords[params]).each(function(object) {
+                text.input(object.headers);
+            });
+
+            //switch (params) {
+            //    case 'news':
+            //        text.push("'news' gives you the latest news.");
+            //        text.push("syntax: 'news \<metro|flash|showbiz|balitanghali|24oras|ofw|sports\>'");
+            //        text.push("e.g. news flash");
+            //        break;
+            //}
 
             generatedParams.reply = text.join("\n");
         }
