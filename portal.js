@@ -737,7 +737,7 @@ var params = (function (input, phone_number, status, vars) {
             console.log('news number = ' + vnumber);
 
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-            //content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+            content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             //content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
 
             var yo = content.query.results.results,
