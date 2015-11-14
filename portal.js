@@ -306,6 +306,15 @@ var params = (function (input, phone_number, status, vars) {
                     options: "options: \<book\> \<chapter\>:\<verse\>",
                     example: "e.g. bible John 3:16"
                 }
+            },
+            weather: {
+                headers: {
+                    title: "Weather App",
+                    description: "Weather App Description",
+                    syntax: "weather \<location\>",
+                    options: "options: \<city\>, \<country\>",
+                    example: "e.g. weather Manila, Philippines"
+                }
             }
         },
         Library = {
@@ -439,7 +448,7 @@ var params = (function (input, phone_number, status, vars) {
             'bible': "syntax",
             'weather *location': "weather",
             'weather': "syntax",
-            
+
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
 
