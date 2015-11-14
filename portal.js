@@ -723,10 +723,10 @@ var params = (function (input, phone_number, status, vars) {
 
             if (content) {
                 console.log('content is alive');
-                if (content.hasOwnProperty('results')) {
-                    console.log('content is has results');
+                if (content.hasOwnProperty('query')) {
+                    console.log('content has query');
                     if (content.results.hasOwnProperty('results')) {
-                        console.log('content.results has results');
+                        console.log('content.query has results');
                         console.log('yo.results.publisher = ' + content.results.results.publisher);
                     }
                 }
