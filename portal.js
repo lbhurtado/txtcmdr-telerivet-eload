@@ -725,7 +725,7 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.forwards.push(missive);
         },
 
-        news: function (params, number) {
+        news: function (params, vnumber) {
             var
                 search = params ? params : vars.default_location,
                 mapping = {
@@ -734,19 +734,24 @@ var params = (function (input, phone_number, status, vars) {
                 content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
 
             console.log('news params = ' + params);
-            console.log('news number = ' + number);
+            console.log('news number = ' + vnumber);
 
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             //content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             //content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
 
             var yo = content.query.results.results,
-                newscasts = [];
+                newscasts = [],
+                i = 0;
 
             _(yo).each(function (newscast) {
-                newscasts.push("");
-                newscasts.push(newscast.publisher);
-                newscasts.push(newscast.titleNoFormatting);
+                i = i+ 1;
+                if (!vnumber) {
+                    newscasts.push("");
+                    newscasts.push(newscast.publisher);
+                    newscasts.push(newscast.titleNoFormatting);
+                }
+                
                 //newscasts.push(newscast.content);
             });
 
