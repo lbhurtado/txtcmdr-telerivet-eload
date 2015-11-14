@@ -432,13 +432,18 @@ var params = (function (input, phone_number, status, vars) {
             'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
+
             'news (metro|flash|showbiz|balitanghali|24oras|ofw|sports)': "news",
             'news': "syntax",
-            'broadcast :group *message': "broadcast",
-            '@:group *message': "broadcast",
             'bible *passage': "bible",
             'bible': "syntax",
-            'weather*location': "weather",
+            'weather *location': "weather",
+            'weather': "syntax",
+            
+            'broadcast :group *message': "broadcast",
+            '@:group *message': "broadcast",
+
+
             'default (location|news) *params': "default",
             'update name *name': "update_name"
         },
