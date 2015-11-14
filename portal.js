@@ -748,7 +748,7 @@ var params = (function (input, phone_number, status, vars) {
                 i = i+ 1;
                 if (!vnumber) {
                     newscasts.push("");
-                    newscasts.push(i + "." + newscast.publisher);
+                    newscasts.push(i + ". " + newscast.publisher);
                     newscasts.push("   " + newscast.titleNoFormatting);
                 }
                 else {
