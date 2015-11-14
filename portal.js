@@ -737,7 +737,9 @@ var params = (function (input, phone_number, status, vars) {
             //}
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-
+            content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+            content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+            
             var yo = content.query.results.results,
                 newscasts = [];
 
@@ -750,8 +752,10 @@ var params = (function (input, phone_number, status, vars) {
 
             var reply = newscasts
                 .join("\n")
-                .replace(/&#39;/g, "'");
-            
+                .replace(/&#39;/g, "'")
+                .replace(/&nbsp;/g, "")
+                .replace(/[^\x20-\x7E]+/g, "");
+
             generatedParams.reply = reply;
         },
         balita: function(vcategory) {
