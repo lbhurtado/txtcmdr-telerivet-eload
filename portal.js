@@ -733,7 +733,7 @@ var params = (function (input, phone_number, status, vars) {
                 },
                 content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
 
-
+            console.log('news params = ' + params);
             console.log('news number = ' + number);
 
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
