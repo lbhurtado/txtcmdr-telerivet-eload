@@ -736,7 +736,7 @@ var params = (function (input, phone_number, status, vars) {
             //    content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             //}
 
-            while (!content.query.results.results) {
+            while (!(content && content.query && content.query.results && content.query.results)) {
                 content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             }
 
