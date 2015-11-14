@@ -481,9 +481,10 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
 
+            //'news ()': "news",
             'news *location': "news",
             'news': "syntax",
-            'balita (metro|flash|showbiz|balitanghali|24oras|ofw|sports)': "balita",
+            'balita <metro|flash|showbiz|balitanghali|24oras|ofw|sports>': "balita",
             'balita': "syntax",
             'bible *passage': "bible",
             'bible': "syntax",
@@ -509,7 +510,8 @@ var params = (function (input, phone_number, status, vars) {
                     var
                         regex = route
                             .replace(/:\w+/g, '(\\w+)')
-                            .replace(/\(([\/]?[^\)]+)\)/g, "($1)")
+                            //.replace(/\(([\/]?[^\)]+)\)/g, "($1)")
+                            .replace(/<([\/]?[^\)]+)>/g, "($1)")
                             .replace(/%(\w+)/g, "($1)") //default value
                             .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
@@ -723,7 +725,7 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.forwards.push(missive);
         },
 
-        news: function (params) {
+        news: function (params, number) {
             var
                 search = params ? params : vars.default_location,
                 mapping = {
@@ -731,23 +733,6 @@ var params = (function (input, phone_number, status, vars) {
                 },
                 content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
 
-            //if (content) {
-            //    if (content.hasOwnProperty('query')) {
-            //        if (content.query.hasOwnProperty('results')) {
-            //
-            //        }
-            //        else {
-            //            content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-            //        }
-            //    }
-            //    else {
-            //        content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-            //    }
-            //}
-            //else {
-            //    content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
-            //}
-            content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
