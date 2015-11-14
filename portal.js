@@ -713,25 +713,34 @@ var params = (function (input, phone_number, status, vars) {
 
         news: function (params) {
             var
-            //location = params ? params : "Manila, Philippines",
                 location = params ? params : vars.default_location,
                 mapping = {
                     ':location': location
                 },
                 content = Library.getYahooContent("select * from google.news where q = ':location')", mapping),
-                yo = content.query.results,
+
                 newscasts = [];
 
-            console.log('yo.results.publisher = ' + yo.results.publisher);
+            if (content) {
+                console.log('content is alive');
+                if (content.hasOwnProperty('results')) {
+                    console.log('content is has results');
+                    if (content.results.hasOwnProperty('results')) {
+                        console.log('content.results has results');
+                        console.log('yo.results.publisher = ' + content.results.results.publisher);
+                    }
+                }
+            }
 
-            _(yo.results).each(function (newscasts) {
-                newscasts.push("");
-                newscasts.push(yo.publisher);
-                newscasts.push(yo.titleNoFormatting);
-                newscasts.push(yo.content);
-            });
 
-            generatedParams.reply = newscasts.join("\n");
+            //_(yo.results).each(function (newscasts) {
+            //    newscasts.push("");
+            //    newscasts.push(yo.publisher);
+            //    newscasts.push(yo.titleNoFormatting);
+            //    newscasts.push(yo.content);
+            //});
+            //
+            //generatedParams.reply = newscasts.join("\n");
         },
         balita: function(vcategory) {
             var
