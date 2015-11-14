@@ -413,6 +413,7 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
             'news (metro|flash|showbiz|balitanghali|24oras|ofw|sports)': "news",
+            'news': "syntax",
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
             'bible*passage': "bible",
@@ -781,6 +782,21 @@ var params = (function (input, phone_number, status, vars) {
                     value: vparams
                 });
             }
+        },
+        syntax: function() {
+            var
+                params = input,
+                text = [];
+
+            switch (params) {
+                case 'news':
+                    text.push("'news' gives you the latest news.");
+                    text.push("syntax: 'news \<metro|flash|showbiz|balitanghali|24oras|ofw|sports\>'");
+                    text.push("e.g. news flash");
+                    break;
+            }
+
+            generatedParams.reply = text.join("\n");
         }
     };
 
