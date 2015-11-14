@@ -296,9 +296,15 @@ var params = (function (input, phone_number, status, vars) {
                     syntax: "news \<option\>",
                     options: "options: metro,flash,showbiz,balitanghali,24oras,ofw,sports",
                     example: "e.g. news flash"
-                },
-                parameters: {
-
+                }
+            },
+            bible: {
+                headers: {
+                    title: "Bible App",
+                    description: "Bible App Description",
+                    syntax: "bible \<passage\>",
+                    options: "options: \<book\> \<chapter\>:\<verse\>",
+                    example: "e.g. bible John 3:16"
                 }
             }
         },
@@ -430,7 +436,8 @@ var params = (function (input, phone_number, status, vars) {
             'news': "syntax",
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
-            'bible*passage': "bible",
+            'bible *passage': "bible",
+            'bible': "syntax",
             'weather*location': "weather",
             'default (location|news) *params': "default",
             'update name *name': "update_name"
@@ -805,14 +812,6 @@ var params = (function (input, phone_number, status, vars) {
             _(keywords[params].headers).each(function(object) {
                 text.push(object);
             });
-
-            //switch (params) {
-            //    case 'news':
-            //        text.push("'news' gives you the latest news.");
-            //        text.push("syntax: 'news \<metro|flash|showbiz|balitanghali|24oras|ofw|sports\>'");
-            //        text.push("e.g. news flash");
-            //        break;
-            //}
 
             generatedParams.reply = text.join("\n");
         }
