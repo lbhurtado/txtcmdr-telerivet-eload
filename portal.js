@@ -481,7 +481,7 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
 
-            //'news ()': "news",
+            'news *location ([1-4])': "news",
             'news *location': "news",
             'news': "syntax",
             'balita <metro|flash|showbiz|balitanghali|24oras|ofw|sports>': "balita",
@@ -733,6 +733,8 @@ var params = (function (input, phone_number, status, vars) {
                 },
                 content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
 
+
+            console.log('news number = ' + number);
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
             content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
@@ -751,8 +753,6 @@ var params = (function (input, phone_number, status, vars) {
                 .parseHtmlEnteties()
                 .replace(/&quot;/g, "'");
 
-            console.log("Lester was here!");
-            
             generatedParams.reply = reply;
         },
         balita: function (vcategory) {
