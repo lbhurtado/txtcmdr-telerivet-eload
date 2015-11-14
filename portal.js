@@ -719,10 +719,10 @@ var params = (function (input, phone_number, status, vars) {
                     ':location': location
                 },
                 content = Library.getYahooContent("select * from google.news where q = ':location')", mapping),
-                yo = content.query.results.results,
+                yo = content.query.results,
                 newscasts = [];
 
-            _(yo.item.forecast).each(function (forecast) {
+            _(yo.results).each(function (newscasts) {
                 newscasts.push("");
                 newscasts.push(yo.publisher);
                 newscasts.push(yo.titleNoFormatting);
