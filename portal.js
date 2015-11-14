@@ -720,16 +720,28 @@ var params = (function (input, phone_number, status, vars) {
                 content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
 
             if (content) {
-                content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+                if (content.hasOwnProperty('query')) {
+                    if (content.query.hasOwnProperty('results')) {
+
+                    }
+                    else {
+                        content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+                    }
+                }
+                else {
+                    content = Library.getYahooContent("select * from google.news where q = ':search'", mapping);
+                }
+
+
                 //console.log('content is alive');
                 //_(content).each(function(value, key) {
                 //   console.log("key = " + key);
                 //});
                 //
-                //if (content.hasOwnProperty('query')) {
+                //
                 //    console.log('content has query');
                 //
-                //    if (content.query.hasOwnProperty('results')) {
+                //
                 //        console.log('content.query has results');
                 //        if (content.query.results.hasOwnProperty('results')) {
                 //            console.log('content.query.results has results');
