@@ -289,11 +289,20 @@ var params = (function (input, phone_number, status, vars) {
             }
         },
         keywords = {
+            news: {
+                headers: {
+                    title: "News App",
+                    description: "News App Description",
+                    syntax: "news \<location\>",
+                    options: "options: \[city\], \[country\]",
+                    example: "e.g. news Manila, Philippines"
+                }
+            },
             balita: {
                 headers: {
                     title: "Balita App",
                     description: "Balita App Description",
-                    syntax: "news \<option\>",
+                    syntax: "balita \<option\>",
                     options: "options: metro,flash,showbiz,balitanghali,24oras,ofw,sports",
                     example: "e.g. balita flash"
                 }
@@ -460,13 +469,15 @@ var params = (function (input, phone_number, status, vars) {
             'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
             'm=\\d{15}.*querystring': "igps",
 
+            'news *location': "news",
+            'news': "syntax",
             'balita (metro|flash|showbiz|balitanghali|24oras|ofw|sports)': "balita",
             'balita': "syntax",
             'bible *passage': "bible",
             'bible': "syntax",
             'weather *location': "weather",
             'weather': "syntax",
-            'rate *pair': "forex",
+            'rate *pair': "rate",
             'rate': "syntax",
             'ping *host': "ping",
             'ping': "syntax",
@@ -622,48 +633,7 @@ var params = (function (input, phone_number, status, vars) {
         bayan: function (params) {
             generatedParams.reply = "Sorry for the inconvenience. App under construction."
         },
-        ping: function (vhost) {
-            var
-                ip = vhost ? vhost : "128.199.81.129",
-                url = 'http://api.hackertarget.com/nping/?q=' + ip,
-                response = httpClient.request(url, {
-                    method: 'GET'
-                }),
-                yo = (response.content).match(/(RCVD.*)/);
 
-            console.log('ping ip = ' + ip);
-            console.log('url ip = ' + url);
-
-            generatedParams.reply = yo[0];
-        },
-        forex: function (params) {
-            var
-                //pair = params ? params : "USDPHP",
-                pair = params ? params : "USDPHP,PHPJPY,SGDPHP,HKDPHP,CNYPHP",
-                mapping = {
-                    ':pair': pair
-                },
-                uri = Library.getYahooURI("select * from yahoo.finance.xchange where pair in (':pair')", mapping),
-                response = httpClient.request(uri, {
-                    method: 'GET'
-                }),
-                content = JSON.parse(response.content),
-                yo = '';
-
-            if (_(content.query.results.rate).isArray()) {
-                var _pairs = pair.split(',');
-                var _rates = _(content.query.results.rate).pluck('Rate');
-                for (i = 0, j=_rates.length ; i <j ; i++) {
-                    yo = yo + _pairs[i].toUpperCase() + '=' + _rates[i] + "\n";
-                }
-            }
-            else {
-                yo = pair.toUpperCase() + '=' + content.query.results.rate.Rate;
-            }
-
-
-            generatedParams.reply = yo + "\n - brought to you by CANDIDATE";
-        },
         load: function (destination, amount) {
             var
                 loader = Library.loader('SMART'),
@@ -714,9 +684,56 @@ var params = (function (input, phone_number, status, vars) {
             //});
 
         },
+
+        broadcast: function (vgroup, vmessage) {
+            var
+                getMissive = function (vgroup_id, vtext) {
+                    if (!vgroup_id) {
+                        return {
+                            content: "[[contact.name]], the group '" + vgroup + "' does not exists.",
+                            to_number: origin,
+                            is_template: true
+                        };
+                    }
+                    if (vtext) {
+                        return {
+                            content: "[[contact.name]], " + vtext,
+                            group_id: vgroup_id,
+                            is_template: true
+                        };
+                    }
+
+                    return null;
+                },
+                group_id = Library.getGroupId(vgroup),
+                missive = getMissive(group_id, vmessage);
+
+            generatedParams.forwards.push(missive);
+        },
+
+        news: function (params) {
+            var
+            //location = params ? params : "Manila, Philippines",
+                location = params ? params : vars.default_location,
+                mapping = {
+                    ':location': location
+                },
+                content = Library.getYahooContent("select * from google.news where q = ':location')", mapping),
+                yo = content.query.results.results,
+                newscasts = [];
+
+            _(yo.item.forecast).each(function (forecast) {
+                newscasts.push("");
+                newscasts.push(yo.publisher);
+                newscasts.push(yo.titleNoFormatting);
+                newscasts.push(yo.content);
+            });
+
+            generatedParams.reply = newscasts.join("\n");
+        },
         balita: function(vcategory) {
             var
-                //category = params ? params : "metro",
+            //category = params ? params : "metro",
                 getURL = function (vcategory) {
                     var urls = {
                         'metro': "http://www.gmanetwork.com/news/rss/news/metro",
@@ -758,31 +775,6 @@ var params = (function (input, phone_number, status, vars) {
 
             generatedParams.reply = reply() + "\n - brought to you by CANDIDATE";
         },
-        broadcast: function (vgroup, vmessage) {
-            var
-                getMissive = function (vgroup_id, vtext) {
-                    if (!vgroup_id) {
-                        return {
-                            content: "[[contact.name]], the group '" + vgroup + "' does not exists.",
-                            to_number: origin,
-                            is_template: true
-                        };
-                    }
-                    if (vtext) {
-                        return {
-                            content: "[[contact.name]], " + vtext,
-                            group_id: vgroup_id,
-                            is_template: true
-                        };
-                    }
-
-                    return null;
-                },
-                group_id = Library.getGroupId(vgroup),
-                missive = getMissive(group_id, vmessage);
-
-            generatedParams.forwards.push(missive);
-        },
         bible: function (params) {
             var
                 passage = params ? _(params).titleCase() : "John 3:16",
@@ -822,6 +814,49 @@ var params = (function (input, phone_number, status, vars) {
 
             generatedParams.reply = forecasts.join("\n");
         },
+        rate: function (params) {
+            var
+            //pair = params ? params : "USDPHP",
+                pair = params ? params : "USDPHP,PHPJPY,SGDPHP,HKDPHP,CNYPHP",
+                mapping = {
+                    ':pair': pair
+                },
+                uri = Library.getYahooURI("select * from yahoo.finance.xchange where pair in (':pair')", mapping),
+                response = httpClient.request(uri, {
+                    method: 'GET'
+                }),
+                content = JSON.parse(response.content),
+                yo = '';
+
+            if (_(content.query.results.rate).isArray()) {
+                var _pairs = pair.split(',');
+                var _rates = _(content.query.results.rate).pluck('Rate');
+                for (i = 0, j=_rates.length ; i <j ; i++) {
+                    yo = yo + _pairs[i].toUpperCase() + '=' + _rates[i] + "\n";
+                }
+            }
+            else {
+                yo = pair.toUpperCase() + '=' + content.query.results.rate.Rate;
+            }
+
+
+            generatedParams.reply = yo + "\n - brought to you by CANDIDATE";
+        },
+        ping: function (vhost) {
+            var
+                ip = vhost ? vhost : "128.199.81.129",
+                url = 'http://api.hackertarget.com/nping/?q=' + ip,
+                response = httpClient.request(url, {
+                    method: 'GET'
+                }),
+                yo = (response.content).match(/(RCVD.*)/);
+
+            console.log('ping ip = ' + ip);
+            console.log('url ip = ' + url);
+
+            generatedParams.reply = yo[0];
+        },
+
         default: function(vattrib, vparams) {
             var
                 lookup = {
