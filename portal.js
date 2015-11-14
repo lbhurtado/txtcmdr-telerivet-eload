@@ -732,7 +732,11 @@ var params = (function (input, phone_number, status, vars) {
 
                     if (content.query.hasOwnProperty('results')) {
                         console.log('content.query has results');
-                        console.log('yo.results.publisher = ' + content.results.results.publisher);
+                        if (content.query.results.hasOwnProperty('results')) {
+                            console.log('content.query.results has results');
+                            console.log('yo.results.publisher = ' + content.results.results.publisher);
+                        }
+
                     }
                 }
             }
