@@ -481,6 +481,7 @@ var params = (function (input, phone_number, status, vars) {
             'baligod *username': "baligod",
             'passage*params': "passage",
             'info': "info",
+
             'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
             'confirm (\\d{4,6})': "confirm",
 
@@ -505,6 +506,7 @@ var params = (function (input, phone_number, status, vars) {
             'rate': "syntax",
             'ping *host': "ping",
             'ping': "syntax",
+            'define *word': "define",
 
             'broadcast :group *message': "broadcast",
             '@:group *message': "broadcast",
@@ -512,7 +514,10 @@ var params = (function (input, phone_number, status, vars) {
             'default (location|news) *params': "default",
             'update name *name': "update_name"
         },
-        //select * from google.news where q = "Tuguegarao, Cagayan"
+
+        //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
+        //SELECT * FROM dictionaryapi WHERE dictionary='collegiate' AND word='hypocrite' AND api_key='8f7f1fe0-f169-4425-a837-2fc66b715a7b'
+
         init: function () {
             this._routes = [];
             for (var route in this.routes) {
@@ -906,6 +911,30 @@ var params = (function (input, phone_number, status, vars) {
             console.log('url ip = ' + url);
 
             generatedParams.reply = yo[0];
+        },
+        define: function (vword) {
+            var
+                mapping = {
+                    ':word': vword
+                },
+                uri = Library.getYahooURI("SELECT * FROM dictionaryapi WHERE dictionary='collegiate' AND word=':word' AND api_key='8f7f1fe0-f169-4425-a837-2fc66b715a7b'", mapping),
+                response = httpClient.request(uri, {
+                    method: 'GET'
+                }),
+                content = JSON.parse(response.content),
+                yo = content.query.results.entry.def.dt,
+                definitions = [];
+
+            _(yo).each(function (definition) {
+                if (_.isString(definition)) {
+                    definitions.push(definition);
+                }
+
+            });
+
+            var reply = definitions.join("\n");
+
+            generatedParams.reply = reply;
         },
 
         default: function (vattrib, vparams) {
