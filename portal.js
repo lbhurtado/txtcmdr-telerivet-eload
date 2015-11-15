@@ -926,9 +926,9 @@ var params = (function (input, phone_number, status, vars) {
                 definitions = [];
 
             console.log("Lester was here.");
-            _(yo).each(function (entry) {
-                if (_.isString(entry.def.dt)) {
-                    definitions.push(entry.def.dt);
+            _(yo.entry[0].def.dt).each(function (entry) {
+                if (_.isString(entry)) {
+                    definitions.push(entry);
                 }
 
             });
