@@ -922,7 +922,7 @@ var params = (function (input, phone_number, status, vars) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                yo = content.query.results.entry,
+                yo = content.query.results,
                 definitions = [];
 
             console.log("Lester was here.");
