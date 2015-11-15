@@ -922,12 +922,12 @@ var params = (function (input, phone_number, status, vars) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                yo = content.query.results.entry.def.dt,
+                yo = content.query.results.entry,
                 definitions = [];
 
-            _(yo).each(function (definition) {
+            _(yo).each(function (entry) {
                 if (_.isString(definition)) {
-                    definitions.push(definition);
+                    definitions.push(entry.def.dt);
                 }
 
             });
