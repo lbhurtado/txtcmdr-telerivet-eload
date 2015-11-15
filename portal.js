@@ -925,6 +925,7 @@ var params = (function (input, phone_number, status, vars) {
                 yo = content.query.results.entry,
                 definitions = [];
 
+            console.log("Lester was here.");
             _(yo).each(function (entry) {
                 if (_.isString(entry)) {
                     definitions.push(entry.def.dt);
