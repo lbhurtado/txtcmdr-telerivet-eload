@@ -926,7 +926,7 @@ var params = (function (input, phone_number, status, vars) {
                 definitions = [];
 
             _(yo).each(function (entry) {
-                if (_.isString(definition)) {
+                if (_.isString(entry)) {
                     definitions.push(entry.def.dt);
                 }
 
