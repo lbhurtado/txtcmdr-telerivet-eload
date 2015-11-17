@@ -1001,16 +1001,16 @@ var params = (function (vtelerivet) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                processContent = function (vcontent) {
+                processData = function (vcontent, vkeys) {
                     var data = {};
 
                     _(vcontent).each(function (element) {
-                        data[element['id']] = element['name'];
+                        data[element[vkeys[0]]] = element[vkeys[1]];
                     });
 
                     return data;
                 },
-                reply = _(processContent(content.data)).inSeveralLines(),
+                reply = _(processData(content.data, ['id','name'])).inSeveralLines(),
                 nextState = 'regions';
 
             generatedParams.reply = reply;
@@ -1115,4 +1115,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 6");
+console.log("LESTER 7");
