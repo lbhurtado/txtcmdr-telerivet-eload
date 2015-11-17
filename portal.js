@@ -514,7 +514,7 @@ var params = (function (input, phone_number, status, vars) {
             'default (location|news) *params': "default",
             'update name *name': "update_name",
 
-            'islands': "islandgroups"
+            'islands': "islands"
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
@@ -750,6 +750,7 @@ var params = (function (input, phone_number, status, vars) {
                     ':search': params
                 },
                 _content = Library.getYahooContent("select * from google.news where q = ':search'", mapping),
+                __content = Library.getYahooContent("select * from google.news where q = ':search'", mapping),
                 content = Library.getYahooContent("select * from google.news where q = ':search'", mapping),
                 yo = content.query.results.results,
                 newscasts = [],
@@ -971,10 +972,9 @@ var params = (function (input, phone_number, status, vars) {
             generatedParams.reply = text.join("\n");
         },
 
-        islandgroups: function () {
+        islands: function () {
             var
-                urlFormat = "http://lumen.txtcmdr.net/islandgroups",
-                url = encodeURI(urlFormat),
+                url = "http://lumen.txtcmdr.net/islandgroups",
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
