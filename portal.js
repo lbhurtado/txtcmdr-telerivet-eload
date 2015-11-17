@@ -1019,7 +1019,7 @@ var params = (function (input, vtelerivet) {
 
     return generatedParams;
 
-}(message.content, state.id, telerivet));
+}(message.content, telerivet));
 
 if (params.name)
     contact.name = params.name;
