@@ -6,8 +6,8 @@ var telerivet = {
     'project': project,
     'contact': contact,
     'message': message,
-    'state' : state.id
-}
+    'state': state.id
+};
 
 var params = (function (vtelerivet) {
     'use strict';
@@ -34,11 +34,19 @@ var params = (function (vtelerivet) {
                 'parts': parts
             };
         },
-        parseHtmlEnteties: function (str) {
+        parseHtmlEntities: function (str) {
             return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
                 var num = parseInt(numStr, 10); // read num as normal number
                 return String.fromCharCode(num);
             });
+        },
+        inSeveralLines: function (choices) {
+            var list = "\n";
+            for (var key in choices) {
+                list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices, key)) ? "\n" : "");
+            }
+
+            return list;
         }
     });
 
@@ -472,12 +480,12 @@ var params = (function (vtelerivet) {
 
                 return content;
             },
-            parseHtmlEnteties: function (str) {
-                return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
-                    var num = parseInt(numStr, 10); // read num as normal number
-                    return String.fromCharCode(num);
-                });
-            }
+            //parseHtmlEntities: function (str) {
+            //    return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
+            //        var num = parseInt(numStr, 10); // read num as normal number
+            //        return String.fromCharCode(num);
+            //    });
+            //}
         },
         vars = vtelerivet.contact.vars,
         input = vtelerivet.message.content,
@@ -610,7 +618,12 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply;
         },
         info: function (param) {
-            generatedParams.reply = "The quick brown fox jumps over the lazy dog.";
+            var data = {
+                'q1': "question 1",
+                'q2': "question 2"
+            };
+
+            generatedParams.reply = _(data).inSeveralLines();
         },
         recruit: function (vmobile) {
             var
@@ -784,7 +797,7 @@ var params = (function (vtelerivet) {
             });
 
             var reply = _(newscasts.join("\n"))
-                .parseHtmlEnteties()
+                .parseHtmlEntities()
                 .replace(/&quot;/g, "'");
 
             this.default('read', params);
