@@ -1001,22 +1001,17 @@ var params = (function (vtelerivet) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                getData = function () {
+                processContent = function (vcontent) {
                     var data = {};
 
-                    _(content.data).each(function (element) {
+                    _(vcontent).each(function (element) {
                         data[element['id']] = element['name'];
                     });
 
                     return data;
                 },
-                reply = _(getData(content.data)).inSeveralLines(),
+                reply = _(processContent(content.data)).inSeveralLines(),
                 nextState = 'regions';
-
-            //_(content.data).each(function (element) {
-            //    var rec = "[" + element['id'] + "] " + element['name'];
-            //    output.push(rec);
-            //});
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
@@ -1120,4 +1115,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 5");
+console.log("LESTER 6");
