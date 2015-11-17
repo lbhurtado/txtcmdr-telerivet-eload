@@ -512,7 +512,9 @@ var params = (function (input, phone_number, status, vars) {
             '@:group *message': "broadcast",
 
             'default (location|news) *params': "default",
-            'update name *name': "update_name"
+            'update name *name': "update_name",
+
+            'islands': "islandgroups"
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
@@ -967,6 +969,18 @@ var params = (function (input, phone_number, status, vars) {
             });
 
             generatedParams.reply = text.join("\n");
+        },
+
+        islandgroups: function () {
+            var
+                urlFormat = "http://lumen.txtcmdr.net/islandgroups",
+                url = encodeURI(urlFormat),
+                response = httpClient.request(url, {
+                    method: 'GET'
+                }),
+                reply = response.data;
+
+            generatedParams.reply = reply;
         }
     };
 
