@@ -486,17 +486,17 @@ var params = (function (vtelerivet) {
                         method: 'GET'
                     }),
                     content = JSON.parse(response.content),
-                    processData = function (vcontent, vkeys) {
+                    processData = function (vcontent, ikeys) {
                         var data = {};
 
                         _(vcontent).each(function (element) {
-                            data[element[vkeys[0]]] = element[vkeys[1]];
+                            data[element[ikeys[0]]] = element[ikeys[1]];
                         });
 
                         return data;
                     };
 
-                return processData(content, vkeys);
+                return processData(content.data, vkeys);
             },
             //parseHtmlEntities: function (str) {
             //    return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
