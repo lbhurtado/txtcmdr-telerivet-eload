@@ -480,6 +480,24 @@ var params = (function (vtelerivet) {
 
                 return content;
             },
+            getTxtCmdrData: function (vurl, vkeys) {
+                var
+                    response = httpClient.request(vurl, {
+                        method: 'GET'
+                    }),
+                    content = JSON.parse(response.content),
+                    processData = function (vcontent, vkeys) {
+                        var data = {};
+
+                        _(vcontent).each(function (element) {
+                            data[element[vkeys[0]]] = element[vkeys[1]];
+                        });
+
+                        return data;
+                    };
+
+                return processData(content, vkeys);
+            },
             //parseHtmlEntities: function (str) {
             //    return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
             //        var num = parseInt(numStr, 10); // read num as normal number
@@ -997,20 +1015,21 @@ var params = (function (vtelerivet) {
         islands: function () {
             var
                 url = "http://lumen.txtcmdr.net/ph/islandgroups",
-                response = httpClient.request(url, {
-                    method: 'GET'
-                }),
-                content = JSON.parse(response.content),
-                processData = function (vcontent, vkeys) {
-                    var data = {};
-
-                    _(vcontent).each(function (element) {
-                        data[element[vkeys[0]]] = element[vkeys[1]];
-                    });
-
-                    return data;
-                },
-                reply = _(processData(content.data, ['id','name'])).inSeveralLines(),
+                //response = httpClient.request(url, {
+                //    method: 'GET'
+                //}),
+                //content = JSON.parse(response.content),
+                //processData = function (vcontent, vkeys) {
+                //    var data = {};
+                //
+                //    _(vcontent).each(function (element) {
+                //        data[element[vkeys[0]]] = element[vkeys[1]];
+                //    });
+                //
+                //    return data;
+                //},
+                data = Library.getTxtCmdrData(url, ['id','name']),
+                reply = _(data).inSeveralLines(),
                 nextState = 'regions';
 
             generatedParams.reply = reply;
@@ -1115,4 +1134,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 7");
+console.log("LESTER 8");
