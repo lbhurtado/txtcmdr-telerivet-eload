@@ -978,7 +978,7 @@ var params = (function (input, phone_number, status, vars) {
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
-                reply = response.data;
+                reply = _(response.data).pluck('name');
 
             generatedParams.reply = reply;
 
