@@ -9,7 +9,7 @@ var telerivet = {
     'state' : state.id
 }
 
-var params = (function (input, phone_number, status, vtelerivet) {
+var params = (function (input, status, vtelerivet) {
     'use strict';
 
     _.mixin({
@@ -1019,7 +1019,7 @@ var params = (function (input, phone_number, status, vtelerivet) {
 
     return generatedParams;
 
-}(message.content, contact.phone_number, state.id, telerivet));
+}(message.content, state.id, telerivet));
 
 if (params.name)
     contact.name = params.name;
@@ -1090,4 +1090,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 1")
+console.log("LESTER 2")
