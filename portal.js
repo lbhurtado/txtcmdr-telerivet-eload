@@ -757,7 +757,7 @@ var params = (function (input, phone_number, status, vars) {
                 i = 0;
 
             _(yo).each(function (newscast) {
-                i = i+ 1;
+                i = i + 1;
                 if (!vnumber) {
                     newscasts.push("");
                     newscasts.push(i + ". " + newscast.publisher);
@@ -781,7 +781,7 @@ var params = (function (input, phone_number, status, vars) {
             this.default('read', params);
             generatedParams.reply = reply;
         },
-        read: function(vnumber) {
+        read: function (vnumber) {
             if (vars['last_read']) {
                 console.log('vars last_read = ', vars['last_read']);
                 this.news(vars['last_read'], vnumber);
@@ -978,9 +978,13 @@ var params = (function (input, phone_number, status, vars) {
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
-                reply = _(response.data).pluck('name');
+                output = [];
 
-            generatedParams.reply = reply;
+            (response.data).each(function (element) {
+                output.push(element['name']);
+            });
+
+            generatedParams.reply = output.join("\n");
 
             console.log("Lester was here!");
         }
