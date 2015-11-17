@@ -3,7 +3,7 @@
  */
 
 
-var params = (function (input, phone_number, status, vars) {
+var params = (function (input, phone_number, status, vars, vcontact) {
     'use strict';
 
     _.mixin({
@@ -473,7 +473,7 @@ var params = (function (input, phone_number, status, vars) {
                 });
             }
         },
-        origin = Library.formalize(phone_number);
+        origin = Library.formalize(vcontact.phone_number);
 
     var Router = {
         routes: {
@@ -555,7 +555,7 @@ var params = (function (input, phone_number, status, vars) {
                     regex = new RegExp(this._routes[i].pattern, "i"),
                     args = path.match(regex);
 
-                console.log('args = ' + args);
+                //console.log('args = ' + args);
                 if (args) {
                     this._routes[i].callback.apply(this, args.slice(1));
                 }
@@ -1012,7 +1012,7 @@ var params = (function (input, phone_number, status, vars) {
 
     return generatedParams;
 
-}(message.content, contact.phone_number, state.id, contact.vars));
+}(message.content, contact.phone_number, state.id, contact.vars), contact);
 
 if (params.name)
     contact.name = params.name;
@@ -1041,8 +1041,11 @@ if (params.vars) {
         contact.vars[key] = value;
     });
 }
-if (params.reply)
+if (params.reply) {
     sendReply(params.reply);
+    contact.vars.lastReply = params.reply;
+}
+
 
 if (params.forwards) {
     _(params.forwards).each(function (option) {
