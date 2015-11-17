@@ -992,7 +992,8 @@ var params = (function (vtelerivet) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                output = [];
+                output = [],
+                nextState = 'regions';
 
             _(content.data).each(function (element) {
                 var rec = "[" + element['id'] + "] " + element['name'];
@@ -1000,6 +1001,7 @@ var params = (function (vtelerivet) {
             });
 
             generatedParams.reply = output.join("\n");
+            generatedParams.state = nextState;
         },
         regions: function (visland_id) {
             var
@@ -1008,7 +1010,8 @@ var params = (function (vtelerivet) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                output = [];
+                output = [],
+                nextState = null;
 
             _(content.data).each(function (element) {
                 var rec = "[" + element['code'] + "] " + element['name'];
@@ -1016,6 +1019,7 @@ var params = (function (vtelerivet) {
             });
 
             generatedParams.reply = output.join("\n");
+            generatedParams.state = nextState;
         }
     };
 
