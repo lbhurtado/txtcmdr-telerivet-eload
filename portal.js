@@ -1039,7 +1039,7 @@ var params = (function (vtelerivet) {
             //    output.push(rec);
             //});
 
-            generatedParams.reply = output.join("\n");
+            generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
         regions_error: function () {
