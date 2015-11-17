@@ -523,7 +523,8 @@ var params = (function (vtelerivet) {
             'update name *name': "update_name",
 
             'islands': "islands",
-            'regions (L|V|M)': "regions"
+            'regions (L|V|M)': "regions",
+            'regions ((?!L|V|M).)': "regions_error"
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
@@ -565,13 +566,6 @@ var params = (function (vtelerivet) {
                 //console.log('args = ' + args);
                 if (args) {
                     this._routes[i].callback.apply(this, args.slice(1));
-                }
-                else {
-                    console.log('not ARGS');
-                    
-                    if (vtelerivet.state && vars.lastReply) {
-                        generatedParams.reply = vars.lastReply;
-                    }
                 }
             }
         },
@@ -1022,6 +1016,9 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = output.join("\n");
             generatedParams.state = nextState;
+        },
+        regions_error: function () {
+            generatedParams.reply = vars.lastReply;
         }
     };
 
@@ -1101,4 +1098,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 5")
+console.log("LESTER 5");
