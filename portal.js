@@ -514,7 +514,8 @@ var params = (function (input, phone_number, status, vars) {
             'default (location|news) *params': "default",
             'update name *name': "update_name",
 
-            'islands': "islands"
+            'islands': "islands",
+            'regions (L|V|M)': "regions"
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
@@ -987,8 +988,22 @@ var params = (function (input, phone_number, status, vars) {
             });
 
             generatedParams.reply = output.join("\n");
+        },
+        regions: function (visland_id) {
+            var
+                url = "http://lumen.txtcmdr.net/ph/" + visland_id + "/regions",
+                response = httpClient.request(url, {
+                    method: 'GET'
+                }),
+                content = JSON.parse(response.content),
+                output = [];
 
-            console.log("Lester was here!");
+            _(content.data).each(function (element) {
+                var rec = "[" + element['code'] + "] " + element['name'];
+                output.push(rec);
+            });
+
+            generatedParams.reply = output.join("\n");
         }
     };
 
