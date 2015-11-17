@@ -9,7 +9,7 @@ var telerivet = {
     'state' : state.id
 }
 
-var params = (function (input, status, vtelerivet) {
+var params = (function (input, vtelerivet) {
     'use strict';
 
     _.mixin({
@@ -553,7 +553,7 @@ var params = (function (input, status, vtelerivet) {
         },
         nav: function (vpath) {
             var
-                path = status ? status + " " + vpath : vpath,
+                path = vtelerivet.state ? vtelerivet.state + " " + vpath : vpath,
                 i = this._routes.length;
 
             console.log('path = ' + path);
