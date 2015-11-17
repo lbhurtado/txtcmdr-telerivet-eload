@@ -978,9 +978,10 @@ var params = (function (input, phone_number, status, vars) {
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
-                output = [];
+                content = JSON.parse(response.content),
+                output = ['LESTER'];
 
-            _(response.content.data).each(function (element) {
+            _(content.data).each(function (element) {
                 output.push(element['name']);
             });
 
