@@ -2,8 +2,14 @@
  * Created by lbhurtado on 06/11/15.
  */
 
+var sms = {
+    'project': project,
+    'contact': contact,
+    'message': message,
+    'state' : state.id
+}
 
-var params = (function (input, phone_number, status, vars, vcontact) {
+var params = (function (input, phone_number, status, vars, vsms) {
     'use strict';
 
     _.mixin({
@@ -473,7 +479,7 @@ var params = (function (input, phone_number, status, vars, vcontact) {
                 });
             }
         },
-        origin = Library.formalize(vcontact.phone_number);
+        origin = Library.formalize(vsms.contact.phone_number);
 
     var Router = {
         routes: {
@@ -1012,7 +1018,7 @@ var params = (function (input, phone_number, status, vars, vcontact) {
 
     return generatedParams;
 
-}(message.content, contact.phone_number, state.id, contact.vars), contact);
+}(message.content, contact.phone_number, state.id, contact.vars, sms);
 
 if (params.name)
     contact.name = params.name;
