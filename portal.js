@@ -981,6 +981,8 @@ var params = (function (input, phone_number, status, vars) {
                 reply = response.data;
 
             generatedParams.reply = reply;
+
+            console.log("Lester was here!");
         }
     };
 
