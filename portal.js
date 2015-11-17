@@ -979,10 +979,11 @@ var params = (function (input, phone_number, status, vars) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                output = ['LESTER'];
+                output = [];
 
             _(content.data).each(function (element) {
-                output.push(element['name']);
+                var rec = "[" + element[id] + "] " + element['name'];
+                output.push(rec);
             });
 
             generatedParams.reply = output.join("\n");
