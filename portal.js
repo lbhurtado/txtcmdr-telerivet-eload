@@ -1018,7 +1018,7 @@ var params = (function (input, phone_number, status, vars, vsms) {
 
     return generatedParams;
 
-}(message.content, contact.phone_number, state.id, contact.vars, sms);
+}(message.content, contact.phone_number, state.id, contact.vars, sms));
 
 if (params.name)
     contact.name = params.name;
