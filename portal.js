@@ -2,14 +2,14 @@
  * Created by lbhurtado on 06/11/15.
  */
 
-var sms = {
+var telerivet = {
     'project': project,
     'contact': contact,
     'message': message,
     'state' : state.id
 }
 
-var params = (function (input, phone_number, status, vars, vsms) {
+var params = (function (input, phone_number, status, vtelerivet) {
     'use strict';
 
     _.mixin({
@@ -479,7 +479,8 @@ var params = (function (input, phone_number, status, vars, vsms) {
                 });
             }
         },
-        origin = Library.formalize(vsms.contact.phone_number);
+        vars = vtelerivet.contact.vars,
+        origin = Library.formalize(vtelerivet.contact.phone_number);
 
     var Router = {
         routes: {
@@ -1018,7 +1019,7 @@ var params = (function (input, phone_number, status, vars, vsms) {
 
     return generatedParams;
 
-}(message.content, contact.phone_number, state.id, contact.vars, sms));
+}(message.content, contact.phone_number, state.id, telerivet));
 
 if (params.name)
     contact.name = params.name;
