@@ -567,6 +567,8 @@ var params = (function (vtelerivet) {
                     this._routes[i].callback.apply(this, args.slice(1));
                 }
                 else {
+                    console.log('not ARGS');
+                    
                     if (vtelerivet.state && vars.lastReply) {
                         generatedParams.reply = vars.lastReply;
                     }
@@ -1099,4 +1101,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 4")
+console.log("LESTER 5")
