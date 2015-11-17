@@ -974,7 +974,7 @@ var params = (function (input, phone_number, status, vars) {
 
         islands: function () {
             var
-                url = "http://lumen.txtcmdr.net/islandgroups",
+                url = "http://lumen.txtcmdr.net/ph/islandgroups",
                 response = httpClient.request(url, {
                     method: 'GET'
                 }),
