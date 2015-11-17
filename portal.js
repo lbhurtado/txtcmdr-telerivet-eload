@@ -41,7 +41,7 @@ var params = (function (vtelerivet) {
             });
         },
         inSeveralLines: function (choices) {
-            var list = "\n";
+            var list = "";
             for (var key in choices) {
                 list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices, key)) ? "\n" : "");
             }
@@ -486,11 +486,11 @@ var params = (function (vtelerivet) {
                         method: 'GET'
                     }),
                     content = JSON.parse(response.content),
-                    processData = function (vcontent, ikeys) {
+                    processData = function (vcontent, vkeys) {
                         var data = {};
 
                         _(vcontent).each(function (element) {
-                            data[element[ikeys[0]]] = element[ikeys[1]];
+                            data[element[vkeys[0]]] = element[vkeys[1]];
                         });
 
                         return data;
@@ -1015,19 +1015,6 @@ var params = (function (vtelerivet) {
         islands: function () {
             var
                 url = "http://lumen.txtcmdr.net/ph/islandgroups",
-                //response = httpClient.request(url, {
-                //    method: 'GET'
-                //}),
-                //content = JSON.parse(response.content),
-                //processData = function (vcontent, vkeys) {
-                //    var data = {};
-                //
-                //    _(vcontent).each(function (element) {
-                //        data[element[vkeys[0]]] = element[vkeys[1]];
-                //    });
-                //
-                //    return data;
-                //},
                 data = Library.getTxtCmdrData(url, ['id','name']),
                 reply = _(data).inSeveralLines(),
                 nextState = 'regions';
@@ -1038,17 +1025,19 @@ var params = (function (vtelerivet) {
         regions: function (visland_id) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + visland_id + "/regions",
-                response = httpClient.request(url, {
-                    method: 'GET'
-                }),
-                content = JSON.parse(response.content),
-                output = [],
+                //response = httpClient.request(url, {
+                //    method: 'GET'
+                //}),
+                //content = JSON.parse(response.content),
+                //output = [],
+                data = Library.getTxtCmdrData(url, ['code','name']),
+                reply = _(data).inSeveralLines(),
                 nextState = null;
 
-            _(content.data).each(function (element) {
-                var rec = "[" + element['code'] + "] " + element['name'];
-                output.push(rec);
-            });
+            //_(content.data).each(function (element) {
+            //    var rec = "[" + element['code'] + "] " + element['name'];
+            //    output.push(rec);
+            //});
 
             generatedParams.reply = output.join("\n");
             generatedParams.state = nextState;
@@ -1134,4 +1123,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 8");
+console.log("LESTER 9");
