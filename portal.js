@@ -527,7 +527,6 @@ var params = (function (vtelerivet) {
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
-        //SELECT * FROM dictionaryapi WHERE dictionary='collegiate' AND word='hypocrite' AND api_key='8f7f1fe0-f169-4425-a837-2fc66b715a7b'
 
         init: function () {
             this._routes = [];
@@ -566,6 +565,11 @@ var params = (function (vtelerivet) {
                 //console.log('args = ' + args);
                 if (args) {
                     this._routes[i].callback.apply(this, args.slice(1));
+                }
+                else {
+                    if (vtelerivet.state && vars.lastReply) {
+                        generatedParams.reply = vars.lastReply;
+                    }
                 }
             }
         },
@@ -1091,4 +1095,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 3")
+console.log("LESTER 4")
