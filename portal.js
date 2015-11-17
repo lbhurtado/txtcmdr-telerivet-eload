@@ -982,7 +982,7 @@ var params = (function (input, phone_number, status, vars) {
                 output = [];
 
             _(content.data).each(function (element) {
-                var rec = "[" + element[id] + "] " + element['name'];
+                var rec = "[" + element['id'] + "] " + element['name'];
                 output.push(rec);
             });
 
