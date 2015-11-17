@@ -550,7 +550,8 @@ var params = (function (vtelerivet) {
 
             'islands': "islands",
             'regions (L|V|M)': "regions",
-            'regions ((?!L|V|M).)': "regions_error"
+            'regions ((?!L|V|M).)': "regions_error",
+            'provinces (1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS)': "provinces",
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
@@ -1025,26 +1026,26 @@ var params = (function (vtelerivet) {
         regions: function (visland_id) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + visland_id + "/regions",
-                //response = httpClient.request(url, {
-                //    method: 'GET'
-                //}),
-                //content = JSON.parse(response.content),
-                //output = [],
                 data = Library.getTxtCmdrData(url, ['code','name']),
                 reply = _(data).inSeveralLines(),
-                nextState = null;
-
-            //_(content.data).each(function (element) {
-            //    var rec = "[" + element['code'] + "] " + element['name'];
-            //    output.push(rec);
-            //});
+                nextState = "provinces";
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
         regions_error: function () {
             generatedParams.reply = vars.lastReply;
-        }
+        },
+        provinces: function (vregion_code) {
+            var
+                url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
+                data = Library.getTxtCmdrData(url, ['id','name']),
+                reply = _(data).inSeveralLines(),
+                nextState = null;
+
+            generatedParams.reply = reply;
+            generatedParams.state = nextState;
+        },
     };
 
     Router.init();
