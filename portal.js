@@ -551,7 +551,7 @@ var params = (function (vtelerivet) {
             'islands': "islands",
             'regions (L|V|M)': "regions",
             'regions ((?!L|V|M).)': "regions_error",
-            'provinces (1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS)': "provinces",
+            'provinces (1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS)': "provinces"
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
@@ -1043,6 +1043,7 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = null;
 
+            console.log('provinces url = ' + url);
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
@@ -1124,4 +1125,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 9");
+console.log("LESTER 10");
