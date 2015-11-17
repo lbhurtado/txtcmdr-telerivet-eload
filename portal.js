@@ -980,7 +980,7 @@ var params = (function (input, phone_number, status, vars) {
                 }),
                 output = [];
 
-            (response.data).each(function (element) {
+            _(response.content.data).each(function (element) {
                 output.push(element['name']);
             });
 
