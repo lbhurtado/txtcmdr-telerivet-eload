@@ -1001,15 +1001,24 @@ var params = (function (vtelerivet) {
                     method: 'GET'
                 }),
                 content = JSON.parse(response.content),
-                output = [],
+                getData = function () {
+                    var data = {};
+
+                    _(content.data).each(function (element) {
+                        data[element['id']] = element['name'];
+                    });
+
+                    return data;
+                },
+                reply = _(getData(content.data)).inSeveralLines(),
                 nextState = 'regions';
 
-            _(content.data).each(function (element) {
-                var rec = "[" + element['id'] + "] " + element['name'];
-                output.push(rec);
-            });
+            //_(content.data).each(function (element) {
+            //    var rec = "[" + element['id'] + "] " + element['name'];
+            //    output.push(rec);
+            //});
 
-            generatedParams.reply = output.join("\n");
+            generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
         regions: function (visland_id) {
