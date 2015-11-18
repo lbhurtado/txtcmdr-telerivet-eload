@@ -990,8 +990,12 @@ var params = (function (vtelerivet) {
                 lookup = {
                     'location': "default_location",
                     'news': "default_news",
-                    'read': "last_read"
-
+                    'read': "last_read",
+                    'island_group_id': "default_island_group_id",
+                    'regions': "regions_data",
+                    'region_id': "default_region_id",
+                    'province_id': "default_region_id",
+                    'town_id': "default_town_id"
                 }
 
             console.log('default attrib = ' + lookup[vattrib]);
@@ -1023,6 +1027,8 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = 'regions';
 
+            this.default('regions', JSON.stringify(data));
+
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
@@ -1032,6 +1038,8 @@ var params = (function (vtelerivet) {
                 data = Library.getTxtCmdrData(url, ['code','name']),
                 reply = _(data).inSeveralLines(),
                 nextState = "provinces";
+
+            //this.default('island_group_id', visland_id);
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
@@ -1055,7 +1063,7 @@ var params = (function (vtelerivet) {
         towns: function (vprovince_code) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + vprovince_code + "/towns",
-                data = Library.getTxtCmdrData(url, ['id','name']),
+                data = Library.getTxtCmdrData(url, ['code','name']),
                 reply = _(data).inSeveralLines(),
                 nextState = null;
 
