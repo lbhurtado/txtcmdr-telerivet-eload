@@ -1080,7 +1080,7 @@ var params = (function (vtelerivet) {
                 var regions_data = JSON.parse(row.vars.value);
                 var region_data = _.findWhere(regions_data, {code: vregion_code});
 
-                console.log('region name = ' + region_data.name);
+                console.log('region name = ' + region_data);
 
             }
 
