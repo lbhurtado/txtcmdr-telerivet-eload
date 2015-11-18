@@ -1166,9 +1166,7 @@ if (params.lookups) {
                 if (cursor.hasNext()) {
                     var
                         row = cursor.next(),
-                        row
-                .
-                    vars.value = vvalue;
+                        row.vars.value = vvalue;
 
                     row.save();
                 }
@@ -1210,4 +1208,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 15");
+console.log("LESTER 16");
