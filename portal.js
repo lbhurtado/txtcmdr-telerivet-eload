@@ -1089,45 +1089,21 @@ var params = (function (vtelerivet) {
                 data = Library.getTxtCmdrData(url, ['code', 'name']),
                 reply = _(data).inSeveralLines(),
                 nextState = "towns",
-            //    table = project.initDataTableById(cache.id.table.lookup),
-            //    cursor = table.queryRows({
-            //        contact_id: vtelerivet.contact.id,
-            //        vars: {'code': "regions"}
-            //    });
-            //
-            //cursor.limit(1); if (cursor.hasNext()) {
-            //    var
-            //        row = cursor.next(),
-            //        regions_data = JSON.parse(row.vars.value);
-            //
-            //    generatedParams.lookups.push({
-            //        table: {
-            //            id: cache.id.table.lookup,
-            //            name: "lookup"
-            //        },
-            //        record: {
-            //            code: "region",
-            //            key: vregion_code,
-            //            value: regions_data[vregion_code]
-            //        }
-            //    });
-            //}
-
-            regionData = Library.getLookupTableData("regions");
-
-            if (regionData) {
-                generatedParams.lookups.push({
+                regionData = Library.getLookupTableData("regions"),
+                lookup = {
                     table: {
                         id: cache.id.table.lookup,
                         name: "lookup"
                     },
                     record: {
                         code: "region",
+                        context: input,
                         key: vregion_code,
                         value: regionData.value[vregion_code]
                     }
-                });
-            }
+                };
+
+            !regionData || generatedParams.lookups.push(lookup);
 
             generatedParams.lookups.push({
                 table: {
