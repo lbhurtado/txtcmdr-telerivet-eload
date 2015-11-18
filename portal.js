@@ -1041,7 +1041,7 @@ var params = (function (vtelerivet) {
 
             generatedParams.lookups.push({
                 table: {
-                    id: "lookup",
+                    id: null,
                     name: "lookup"
                 },
                 key: "regions",
