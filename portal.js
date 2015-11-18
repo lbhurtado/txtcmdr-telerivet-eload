@@ -1075,13 +1075,15 @@ var params = (function (vtelerivet) {
             cursor.limit(1);
             if (cursor.hasNext()) {
                 var row = cursor.next();
-                var regions_data = JSON.parse(row.value);
+
+                console.log('row.value =' + row.vars.value);
+                var regions_data = JSON.parse(row.vars.value);
                 var region_data = _.findWhere(regions_data, {code: vregion_code});
 
                 console.log('region name = ' + region_data.name);
 
             }
-            
+
             generatedParams.lookups.push({
                 table: {
                     id: cache.id.table.lookup,
