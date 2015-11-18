@@ -1028,8 +1028,6 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = 'regions';
 
-            console.log('region_data = ' + vars.ni_network_name);
-
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
@@ -1040,7 +1038,12 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = "provinces";
 
-            this.default('regions', JSON.stringify(data));
+            generatedParams.posts.push({
+                table: "lookup",
+                data: {
+                    'regions': JSON.stringify(data)
+                }
+            });
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
@@ -1052,13 +1055,17 @@ var params = (function (vtelerivet) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
                 data = Library.getTxtCmdrData(url, ['code','name']),
-                regions_data = JSON.parse(vars['regions_data']),
-                region_data = _.findWhere(regions_data, {code: vregion_code}),
+                //regions_data = JSON.parse(vars['regions_data']),
+                //region_data = _.findWhere(regions_data, {code: vregion_code}),
                 reply = _(data).inSeveralLines(),
                 nextState = "towns";
 
-            this.default('provinces', JSON.stringify(data));
-            this.default('region', JSON.stringify(region_data));
+            generatedParams.posts.push({
+                table: "lookup",
+                data: {
+                    'provinces': JSON.stringify(data)
+                }
+            });
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
@@ -1073,7 +1080,12 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = null;
 
-            this.default('towns', JSON.stringify(data));
+            generatedParams.posts.push({
+                table: "lookup",
+                data: {
+                    'towns': JSON.stringify(data)
+                }
+            });
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
