@@ -582,7 +582,8 @@ var params = (function (vtelerivet) {
             'regions ((?!L|V|M).)': "regions_error",
             'provinces (1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS)': "provinces",
             'provinces ((?!1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS).)': "provinces_error",
-            'towns (0[1-9][0-9][0-9])': "towns"
+            'towns (0[1-9][0-9][0-9])': "towns",
+            'town (0[1-9][0-9][0-9][0-9][0-9])': "town"
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
@@ -1133,7 +1134,7 @@ var params = (function (vtelerivet) {
                 data = Library.getTxtCmdrData(url, ['code', 'name']),
                 provinceData = Library.getLookupTableData("provinces"),
                 reply = _(data).inSeveralLines(),
-                nextState = null;
+                nextState = "town";
 
             if (provinceData) {
                 generatedParams.lookups.push({
@@ -1162,6 +1163,30 @@ var params = (function (vtelerivet) {
                     value: JSON.stringify(data)
                 }
             });
+
+            generatedParams.reply = reply;
+            generatedParams.state = nextState;
+        },
+        town: function (vtown_code) {
+            var
+                townData = Library.getLookupTableData("towns"),
+                reply = "Thank you.",
+                nextState = null;
+
+            if (townData) {
+                generatedParams.lookups.push({
+                    table: {
+                        id: cache.id.table.lookup,
+                        name: "lookup"
+                    },
+                    record: {
+                        code: "town",
+                        context: PATH,
+                        key: vtown_code,
+                        value: townData.value[vtown_code]
+                    }
+                });
+            }
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
