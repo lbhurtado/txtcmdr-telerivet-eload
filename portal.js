@@ -1152,23 +1152,33 @@ if (params.posts) {
 }
 
 if (params.lookups) {
-    var updateLookup = function (vtable, vkey, vvalue) {
-        console.log('updateLookup start');
+    var
+        lookupTable = function(vtable) {
+            if (vtable.id) {
+                var table = project.initDataTableById(vtable.id);
 
-        if (vtable.id) {
+                if (!table) {
+                    table = project.getOrCreateDataTable(vtable.name);
+                }
+
+                return table;
+            }
+            else {
+                return project.getOrCreateDataTable(vtable.name);
+            }
+        },
+        updateLookup = function (vtable, vkey, vvalue) {
             var
-                table = project.initDataTableById(vtable.id),
+                table = lookupTable(vtable);
                 cursor = table.queryRows({
                     contact_id: contact.id,
                     vars: {
                         'key': vkey
-                    }
-                });
+                    }});
 
             cursor.limit(1);
             if (cursor.hasNext()) {
-                var
-                    row = cursor.next()
+                var row = cursor.next();
 
                 row.vars.value = vvalue;
                 row.save();
@@ -1182,19 +1192,7 @@ if (params.lookups) {
                     }
                 });
             }
-        }
-        else {
-            var table = project.getOrCreateDataTable(vtable.name);
-
-            table.createRow({
-                contact_id: contact.id,
-                vars: {
-                    'key': vkey,
-                    'value': vvalue
-                }
-            });
-        }
-    };
+        };
 
     _(params.lookups).each(function (lookup) {
         updateLookup(lookup.table, lookup.key, lookup.value);
