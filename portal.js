@@ -603,7 +603,7 @@ var params = (function (vtelerivet) {
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
 
-                    console.log('regex = ' + regex);
+                    //console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
                         callback: this[methodName]
