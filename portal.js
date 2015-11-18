@@ -1153,50 +1153,48 @@ if (params.posts) {
 
 if (params.lookups) {
     var updateLookup = function (vtable, vkey, vvalue) {
-            if (vtable.id) {
+        console.log('updateLookup start');
+
+        if (vtable.id) {
+            var
+                table = project.initDataTableById(vtable.id),
+                cursor = table.queryRows({
+                    contact_id: contact.id,
+                    vars: {
+                        'key': vkey
+                    }
+                });
+
+            cursor.limit(1);
+            if (cursor.hasNext()) {
                 var
-                    table = project.initDataTableById(vtable.id),
-                    cursor = table.queryRows({
-                        contact_id: contact.id,
-                        vars: {
-                            'key': vkey
-                        }
-                    });
+                    row = cursor.next()
 
-                cursor.limit(1);
-                if (cursor.hasNext()) {
-                    var
-                        row = cursor.next()
-
-                    row.vars.value = vvalue;
-                    row.save();
-                }
-                else {
-                    table.createRow({
-                        contact_id: contact.id,
-                        vars: {
-                            'key': vkey,
-                            'value': vvalue
-                        }
-                    });
-                }
-
-                return table;
+                row.vars.value = vvalue;
+                row.save();
             }
             else {
-                var
-                    table = project.getOrCreateDataTable(vtable.name),
-                    row = pollTable.createRow({
-                        contact_id: contact.id,
-                        vars: {
-                            'key': vkey,
-                            'value': vvalue
-                        }
-                    });
-
-                return table;
+                table.createRow({
+                    contact_id: contact.id,
+                    vars: {
+                        'key': vkey,
+                        'value': vvalue
+                    }
+                });
             }
-        };
+        }
+        else {
+            var table = project.getOrCreateDataTable(vtable.name);
+
+            table.createRow({
+                contact_id: contact.id,
+                vars: {
+                    'key': vkey,
+                    'value': vvalue
+                }
+            });
+        }
+    };
 
     _(params.lookups).each(function (lookup) {
         updateLookup(lookup.table, lookup.key, lookup.value);
