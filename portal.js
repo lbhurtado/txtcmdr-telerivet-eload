@@ -1061,8 +1061,6 @@ var params = (function (vtelerivet) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
                 data = Library.getTxtCmdrData(url, ['code', 'name']),
-            //regions_data = JSON.parse(vars['regions_data']),
-            //region_data = _.findWhere(regions_data, {code: vregion_code}),
                 reply = _(data).inSeveralLines(),
                 nextState = "towns";
 
@@ -1208,13 +1206,13 @@ if (params.lookups) {
                 return project.getOrCreateDataTable(vtable.name);
             }
         },
-        updateLookup = function (vtable, vkey, vvalue) {
+        updateLookup = function (vlookup) {
             var
-                table = lookupTable(vtable);
+                table = lookupTable(vlookup.table);
                 cursor = table.queryRows({
                     contact_id: contact.id,
                     vars: {
-                        'key': vkey
+                        'key': vlookup.key
                     }});
 
             console.log('table id = ' + table.id);
@@ -1223,22 +1221,22 @@ if (params.lookups) {
             if (cursor.hasNext()) {
                 var row = cursor.next();
 
-                row.vars.value = vvalue;
+                row.vars.value = vlookup.value;
                 row.save();
             }
             else {
                 table.createRow({
                     contact_id: contact.id,
                     vars: {
-                        'key': vkey,
-                        'value': vvalue
+                        'key': vlookup.key,
+                        'value': vlookup.value
                     }
                 });
             }
         };
 
     _(params.lookups).each(function (lookup) {
-        updateLookup(lookup.table, lookup.key, lookup.value);
+        updateLookup(lookup);
     });
 }
 
