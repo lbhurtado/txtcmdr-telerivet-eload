@@ -1047,8 +1047,10 @@ var params = (function (vtelerivet) {
                     id: cache.id.table.lookup,
                     name: "lookup"
                 },
-                key: "regions",
-                value: JSON.stringify(data)
+                record: {
+                    key: "regions",
+                    value: JSON.stringify(data)
+                }
             });
 
             generatedParams.reply = reply;
@@ -1076,7 +1078,6 @@ var params = (function (vtelerivet) {
 
                 console.log('row.value =' + row.vars.value);
                 var regions_data = JSON.parse(row.vars.value);
-                var region_data = _.findWhere(regions_data, {code: vregion_code});
 
                 console.log('region name = ' + regions_data[vregion_code]);
 
@@ -1087,8 +1088,10 @@ var params = (function (vtelerivet) {
                     id: cache.id.table.lookup,
                     name: "lookup"
                 },
-                key: "provinces",
-                value: JSON.stringify(data)
+                record: {
+                    key: "provinces",
+                    value: JSON.stringify(data)
+                }
             });
 
             generatedParams.reply = reply;
@@ -1109,8 +1112,10 @@ var params = (function (vtelerivet) {
                     id: cache.id.table.lookup,
                     name: "lookup"
                 },
-                key: "towns",
-                value: JSON.stringify(data)
+                record: {
+                    key: "towns",
+                    value: JSON.stringify(data)
+                }
             });
 
             generatedParams.reply = reply;
@@ -1212,7 +1217,7 @@ if (params.lookups) {
                 cursor = table.queryRows({
                     contact_id: contact.id,
                     vars: {
-                        'key': vlookup.key
+                        'key': vlookup.record.key
                     }});
 
             console.log('table id = ' + table.id);
@@ -1221,16 +1226,13 @@ if (params.lookups) {
             if (cursor.hasNext()) {
                 var row = cursor.next();
 
-                row.vars.value = vlookup.value;
+                row.vars = vlookup.record;
                 row.save();
             }
             else {
                 table.createRow({
                     contact_id: contact.id,
-                    vars: {
-                        'key': vlookup.key,
-                        'value': vlookup.value
-                    }
+                    vars: vlookup.record
                 });
             }
         };
