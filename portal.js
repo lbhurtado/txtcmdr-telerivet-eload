@@ -503,6 +503,29 @@ var params = (function (vtelerivet) {
 
                 return processData(content.data, vkeys);
             },
+            getLookupTableData: function (vcode) {
+                var
+                    table = project.initDataTableById(cache.id.table.lookup),
+                    cursor = table.queryRows({
+                        contact_id: vtelerivet.contact.id,
+                        vars: {'code': vcode}
+                    });
+
+                cursor.limit(1);
+
+                if (cursor.hasNext()) {
+                    var row = cursor.next();
+
+                    return {
+                        code: row.vars.code,
+                        context: row.vars.context,
+                        key: row.vars.key,
+                        value: JSON.parse(row.vars.value)
+                    };
+                }
+
+                return false;
+            },
             //parseHtmlEntities: function (str) {
             //    return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
             //        var num = parseInt(numStr, 10); // read num as normal number
@@ -1065,21 +1088,34 @@ var params = (function (vtelerivet) {
                 url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
                 data = Library.getTxtCmdrData(url, ['code', 'name']),
                 reply = _(data).inSeveralLines(),
-                nextState = "towns";
+                nextState = "towns",
+            //    table = project.initDataTableById(cache.id.table.lookup),
+            //    cursor = table.queryRows({
+            //        contact_id: vtelerivet.contact.id,
+            //        vars: {'code': "regions"}
+            //    });
+            //
+            //cursor.limit(1); if (cursor.hasNext()) {
+            //    var
+            //        row = cursor.next(),
+            //        regions_data = JSON.parse(row.vars.value);
+            //
+            //    generatedParams.lookups.push({
+            //        table: {
+            //            id: cache.id.table.lookup,
+            //            name: "lookup"
+            //        },
+            //        record: {
+            //            code: "region",
+            //            key: vregion_code,
+            //            value: regions_data[vregion_code]
+            //        }
+            //    });
+            //}
 
-            var
-                table = project.initDataTableById(cache.id.table.lookup),
-                cursor = table.queryRows({
-                    contact_id: vtelerivet.contact.id,
-                    vars: {'code': "regions"}
-                });
+            regionData = Library.getLookupTableData("regions");
 
-            cursor.limit(1);
-            if (cursor.hasNext()) {
-                var row = cursor.next();
-                //console.log('row.value =' + row.vars.value);
-                var regions_data = JSON.parse(row.vars.value);
-                //console.log('region name = ' + regions_data[vregion_code]);
+            if (regionData) {
                 generatedParams.lookups.push({
                     table: {
                         id: cache.id.table.lookup,
@@ -1088,7 +1124,7 @@ var params = (function (vtelerivet) {
                     record: {
                         code: "region",
                         key: vregion_code,
-                        value: regions_data[vregion_code]
+                        value: regionData.value[vregion_code]
                     }
                 });
             }
@@ -1261,4 +1297,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 16");
+console.log("LESTER 17");
