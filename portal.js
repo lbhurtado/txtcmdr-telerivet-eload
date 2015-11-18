@@ -1048,7 +1048,8 @@ var params = (function (vtelerivet) {
                     name: "lookup"
                 },
                 record: {
-                    key: "regions",
+                    context: url,
+                    key: visland_id,
                     value: JSON.stringify(data)
                 }
             });
@@ -1089,7 +1090,8 @@ var params = (function (vtelerivet) {
                     name: "lookup"
                 },
                 record: {
-                    key: "provinces",
+                    context: url,
+                    key: vregion_code,
                     value: JSON.stringify(data)
                 }
             });
@@ -1113,7 +1115,8 @@ var params = (function (vtelerivet) {
                     name: "lookup"
                 },
                 record: {
-                    key: "towns",
+                    context: url,
+                    key: vprovince_code,
                     value: JSON.stringify(data)
                 }
             });
