@@ -583,7 +583,9 @@ var params = (function (vtelerivet) {
             'provinces (1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS)': "provinces",
             'provinces ((?!1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS).)': "provinces_error",
             'towns (0[1-9][0-9][0-9])': "towns",
-            'town (0[1-9][0-9][0-9][0-9][0-9])': "town"
+            'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
+
+            'ring': "ring"
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
@@ -617,6 +619,9 @@ var params = (function (vtelerivet) {
 
             PATH = vtelerivet.state ? vtelerivet.state + " " + vpath : vpath;
 
+            if (vtelerivet.message.message_type == 'call') {
+                PATH = 'ring';
+            }
             console.log('PATH = ' + PATH);
             while (i--) {
                 var
@@ -1188,6 +1193,15 @@ var params = (function (vtelerivet) {
                 });
             }
 
+            generatedParams.reply = reply;
+            generatedParams.state = nextState;
+        },
+
+        ring: function () {
+            var
+                reply = "Missed call",
+                nextState = null;
+            
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         }
