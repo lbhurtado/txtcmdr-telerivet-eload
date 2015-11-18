@@ -1027,8 +1027,6 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = 'regions';
 
-            this.default('regions', JSON.stringify(data));
-
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
@@ -1039,7 +1037,7 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = "provinces";
 
-            //this.default('island_group_id', visland_id);
+            this.default('regions', JSON.stringify(data));
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
@@ -1051,8 +1049,11 @@ var params = (function (vtelerivet) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
                 data = Library.getTxtCmdrData(url, ['code','name']),
+                regions_data = JSON.parse(vars['regions_data']),
                 reply = _(data).inSeveralLines(),
                 nextState = "towns";
+
+            this.default('provinces', JSON.stringify(data));
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
@@ -1066,6 +1067,8 @@ var params = (function (vtelerivet) {
                 data = Library.getTxtCmdrData(url, ['code','name']),
                 reply = _(data).inSeveralLines(),
                 nextState = null;
+
+            this.default('towns', JSON.stringify(data));
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
