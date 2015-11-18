@@ -1048,6 +1048,7 @@ var params = (function (vtelerivet) {
             generatedParams.state = nextState;
         },
         provinces_error: function () {
+            console.log('Lester was here.');
             generatedParams.reply = vars.lastReply;
         }
     };
