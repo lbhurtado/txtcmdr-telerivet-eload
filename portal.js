@@ -1066,6 +1066,31 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = "towns";
 
+            var
+                table = project.initDataTableById(cache.id.table.lookup),
+                cursor = table.queryRows({
+                    vars: {'key': "regions"}
+                });
+
+            cursor.limit(1);
+            if (cursor.hasNext()) {
+                var row = cursor.next();
+                var regions_data = JSON.parse(row.value);
+                var region_data = _.findWhere(regions_data, {code: vregion_code});
+
+                console.log('region name = ' + region_data.name);
+
+            }
+            
+            generatedParams.lookups.push({
+                table: {
+                    id: cache.id.table.lookup,
+                    name: "lookup"
+                },
+                key: "provinces",
+                value: JSON.stringify(data)
+            });
+
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
@@ -1078,6 +1103,15 @@ var params = (function (vtelerivet) {
                 data = Library.getTxtCmdrData(url, ['code', 'name']),
                 reply = _(data).inSeveralLines(),
                 nextState = null;
+
+            generatedParams.lookups.push({
+                table: {
+                    id: cache.id.table.lookup,
+                    name: "lookup"
+                },
+                key: "towns",
+                value: JSON.stringify(data)
+            });
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
