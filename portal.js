@@ -554,6 +554,7 @@ var params = (function (vtelerivet) {
             'regions ((?!L|V|M).)': "regions_error",
             'provinces (1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS)': "provinces",
             'provinces ((?!1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS).)': "provinces_error",
+            'towns (0[1-9][0-9][0-9])': "towns"
         },
 
         //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
@@ -1043,13 +1044,23 @@ var params = (function (vtelerivet) {
                 url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
                 data = Library.getTxtCmdrData(url, ['code','name']),
                 reply = _(data).inSeveralLines(),
-                nextState = null;
+                nextState = "towns";
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
         provinces_error: function () {
             generatedParams.reply = vars.lastReply;
+        },
+        towns: function (vprovince_code) {
+            var
+                url = "http://lumen.txtcmdr.net/ph/" + vprovince_code + "/towns",
+                data = Library.getTxtCmdrData(url, ['id','name']),
+                reply = _(data).inSeveralLines(),
+                nextState = null;
+
+            generatedParams.reply = reply;
+            generatedParams.state = nextState;
         }
     };
 
@@ -1129,4 +1140,4 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 13");
+console.log("LESTER 14");
