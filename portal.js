@@ -1089,9 +1089,10 @@ var params = (function (vtelerivet) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
                 data = Library.getTxtCmdrData(url, ['code', 'name']),
+                regionData = Library.getLookupTableData("regions"),
                 reply = _(data).inSeveralLines(),
-                nextState = "towns",
-                regionData = Library.getLookupTableData("regions");
+                nextState = "towns";
+
 
             if (regionData) {
                 generatedParams.lookups.push({
@@ -1130,8 +1131,24 @@ var params = (function (vtelerivet) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + vprovince_code + "/towns",
                 data = Library.getTxtCmdrData(url, ['code', 'name']),
+                provinceData = Library.getLookupTableData("provinces"),
                 reply = _(data).inSeveralLines(),
                 nextState = null;
+
+            if (provinceData) {
+                generatedParams.lookups.push({
+                    table: {
+                        id: cache.id.table.lookup,
+                        name: "lookup"
+                    },
+                    record: {
+                        code: "province",
+                        context: PATH,
+                        key: vprovince_code,
+                        value: provinceData.value[vprovince_code]
+                    }
+                });
+            }
 
             generatedParams.lookups.push({
                 table: {
