@@ -993,6 +993,7 @@ var params = (function (vtelerivet) {
                     'read': "last_read",
                     'island_group_id': "default_island_group_id",
                     'regions': "regions_data",
+                    'region': "region_data",
                     'region_id': "default_region_id",
                     'province_id': "default_region_id",
                     'town_id': "default_town_id"
@@ -1050,10 +1051,12 @@ var params = (function (vtelerivet) {
                 url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
                 data = Library.getTxtCmdrData(url, ['code','name']),
                 regions_data = JSON.parse(vars['regions_data']),
+                region_data = _.findWhere(regions_data, {code: vregion_code}),
                 reply = _(data).inSeveralLines(),
                 nextState = "towns";
 
             this.default('provinces', JSON.stringify(data));
+            this.default('region', JSON.stringify(region_data));
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
