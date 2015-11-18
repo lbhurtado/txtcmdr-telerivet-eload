@@ -1176,6 +1176,8 @@ if (params.lookups) {
                         'key': vkey
                     }});
 
+            console.log('table id = ' + table.id);
+
             cursor.limit(1);
             if (cursor.hasNext()) {
                 var row = cursor.next();
