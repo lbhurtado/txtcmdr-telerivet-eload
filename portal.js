@@ -43,7 +43,8 @@ var params = (function (vtelerivet) {
         inSeveralLines: function (choices) {
             var list = "";
             for (var key in choices) {
-                list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices, key)) ? "\n" : "");
+                //list = list + "'" + key + "' (" + choices[key] + ")" + ((_.last(choices, key)) ? "\n" : "");
+                list = list + "[" + key + "] \"" + choices[key] + "\"" + ((_.last(choices, key)) ? "\n" : "");
             }
 
             return list;
@@ -1048,7 +1049,6 @@ var params = (function (vtelerivet) {
             generatedParams.state = nextState;
         },
         provinces_error: function () {
-            console.log('Lester was here.');
             generatedParams.reply = vars.lastReply;
         }
     };
