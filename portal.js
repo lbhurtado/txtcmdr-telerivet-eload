@@ -993,7 +993,7 @@ var params = (function (vtelerivet) {
                     'read': "last_read",
                     'island_group_id': "default_island_group_id",
                     'regions': "regions_data",
-                    'region': "region_data",
+                    'region': "ni_network_name",
                     'region_id': "default_region_id",
                     'province_id': "default_region_id",
                     'town_id': "default_town_id"
@@ -1028,8 +1028,8 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = 'regions';
 
-            console.log('region_data = ' + vars.region_data);
-            
+            console.log('region_data = ' + vars.ni_network_name);
+
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
