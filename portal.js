@@ -307,6 +307,9 @@ var params = (function (vtelerivet) {
                     'samsung_smart': "PN59a2e385cb40a474",
                     'lg_smart': "PN9e8765e33c2c1743",
                     'oppo_globe': "PN9483093de6bafd0b"
+                },
+                table: {
+                    'lookup': "DTe78aa9a4d878c1b3"
                 }
             }
         },
@@ -1041,7 +1044,7 @@ var params = (function (vtelerivet) {
 
             generatedParams.lookups.push({
                 table: {
-                    id: null,
+                    id: cache.id.table.lookup,
                     name: "lookup"
                 },
                 key: "regions",
@@ -1160,6 +1163,8 @@ if (params.lookups) {
                 if (!table) {
                     table = project.getOrCreateDataTable(vtable.name);
                 }
+
+                console.log('lookup table, ' + vtable.id + 'was used.');
 
                 return table;
             }
