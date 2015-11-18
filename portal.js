@@ -1041,7 +1041,7 @@ var params = (function (vtelerivet) {
         provinces: function (vregion_code) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
-                data = Library.getTxtCmdrData(url, ['id','name']),
+                data = Library.getTxtCmdrData(url, ['code','name']),
                 reply = _(data).inSeveralLines(),
                 nextState = null;
 
