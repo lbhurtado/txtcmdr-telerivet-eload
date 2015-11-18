@@ -1165,9 +1165,9 @@ if (params.lookups) {
                 cursor.limit(1);
                 if (cursor.hasNext()) {
                     var
-                        row = cursor.next(),
-                        row.vars.value = vvalue;
+                        row = cursor.next()
 
+                    row.vars.value = vvalue;
                     row.save();
                 }
                 else {
