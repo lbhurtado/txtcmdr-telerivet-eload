@@ -1024,7 +1024,7 @@ var params = (function (vtelerivet) {
         islands: function () {
             var
                 url = "http://lumen.txtcmdr.net/ph/islandgroups",
-                data = Library.getTxtCmdrData(url, ['id','name']),
+                data = Library.getTxtCmdrData(url, ['id', 'name']),
                 reply = _(data).inSeveralLines(),
                 nextState = 'regions';
 
@@ -1034,15 +1034,17 @@ var params = (function (vtelerivet) {
         regions: function (visland_id) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + visland_id + "/regions",
-                data = Library.getTxtCmdrData(url, ['code','name']),
+                data = Library.getTxtCmdrData(url, ['code', 'name']),
                 reply = _(data).inSeveralLines(),
                 nextState = "provinces";
 
-            generatedParams.posts.push({
-                table: "lookup",
-                data: {
-                    'regions': JSON.stringify(data)
-                }
+            generatedParams.lookups.push({
+                table: {
+                    id: "lookup",
+                    name: "lookup"
+                },
+                key: "regions",
+                value: JSON.stringify(data)
             });
 
             generatedParams.reply = reply;
@@ -1054,18 +1056,11 @@ var params = (function (vtelerivet) {
         provinces: function (vregion_code) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + vregion_code + "/provinces",
-                data = Library.getTxtCmdrData(url, ['code','name']),
-                //regions_data = JSON.parse(vars['regions_data']),
-                //region_data = _.findWhere(regions_data, {code: vregion_code}),
+                data = Library.getTxtCmdrData(url, ['code', 'name']),
+            //regions_data = JSON.parse(vars['regions_data']),
+            //region_data = _.findWhere(regions_data, {code: vregion_code}),
                 reply = _(data).inSeveralLines(),
                 nextState = "towns";
-
-            generatedParams.posts.push({
-                table: "lookup",
-                data: {
-                    'provinces': JSON.stringify(data)
-                }
-            });
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
@@ -1076,16 +1071,9 @@ var params = (function (vtelerivet) {
         towns: function (vprovince_code) {
             var
                 url = "http://lumen.txtcmdr.net/ph/" + vprovince_code + "/towns",
-                data = Library.getTxtCmdrData(url, ['code','name']),
+                data = Library.getTxtCmdrData(url, ['code', 'name']),
                 reply = _(data).inSeveralLines(),
                 nextState = null;
-
-            generatedParams.posts.push({
-                table: "lookup",
-                data: {
-                    'towns': JSON.stringify(data)
-                }
-            });
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
@@ -1162,10 +1150,64 @@ if (params.posts) {
     });
 }
 
+if (params.lookups) {
+    var updateLookup = function (vtable, vkey, vvalue) {
+            if (vtable.id) {
+                var
+                    table = project.initDataTableById(vtable.id),
+                    cursor = table.queryRows({
+                        contact_id: contact.id,
+                        vars: {
+                            'key': vkey
+                        }
+                    });
+
+                cursor.limit(1);
+                if (cursor.hasNext()) {
+                    var
+                        row = cursor.next(),
+                        row
+                .
+                    vars.value = vvalue;
+
+                    row.save();
+                }
+                else {
+                    table.createRow({
+                        contact_id: contact.id,
+                        vars: {
+                            'key': vkey,
+                            'value': vvalue
+                        }
+                    });
+                }
+
+                return table;
+            }
+            else {
+                var
+                    table = project.getOrCreateDataTable(vtable.name),
+                    row = pollTable.createRow({
+                        contact_id: contact.id,
+                        vars: {
+                            'key': vkey,
+                            'value': vvalue
+                        }
+                    });
+
+                return table;
+            }
+        };
+
+    _(params.lookups).each(function (lookup) {
+        updateLookup(lookup.table, lookup.key, lookup.value);
+    });
+}
+
 if (params.attributes) {
     _(params.attributes).each(function (items) {
         contact.vars[items.key] = items.value;
     });
 }
 
-console.log("LESTER 14");
+console.log("LESTER 15");
