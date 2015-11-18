@@ -1071,7 +1071,7 @@ var params = (function (vtelerivet) {
                 table = project.initDataTableById(cache.id.table.lookup),
                 cursor = table.queryRows({
                     contact_id: vtelerivet.contact.id,
-                    vars: {'key': "regions"}
+                    vars: {'code': "regions"}
                 });
 
             cursor.limit(1);
@@ -1097,7 +1097,6 @@ var params = (function (vtelerivet) {
                     value: JSON.stringify(data)
                 }
             });
-
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
