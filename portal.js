@@ -1028,6 +1028,8 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = 'regions';
 
+            console.log('region_data = ' + vars.region_data);
+            
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
