@@ -534,8 +534,9 @@ var params = (function (vtelerivet) {
             //}
         },
         vars = vtelerivet.contact.vars,
-        input = vtelerivet.message.content,
-        origin = Library.formalize(vtelerivet.contact.phone_number);
+        INPUT = vtelerivet.message.content,
+        PATH = INPUT,
+        ORIGIN = Library.formalize(vtelerivet.contact.phone_number);
 
     var Router = {
         routes: {
@@ -611,14 +612,15 @@ var params = (function (vtelerivet) {
         },
         nav: function (vpath) {
             var
-                path = vtelerivet.state ? vtelerivet.state + " " + vpath : vpath,
                 i = this._routes.length;
 
-            console.log('path = ' + path);
+            PATH = vtelerivet.state ? vtelerivet.state + " " + vpath : vpath;
+
+            console.log('PATH = ' + PATH);
             while (i--) {
                 var
                     regex = new RegExp(this._routes[i].pattern, "i"),
-                    args = path.match(regex);
+                    args = PATH.match(regex);
 
                 //console.log('args = ' + args);
                 if (args) {
@@ -677,7 +679,7 @@ var params = (function (vtelerivet) {
         recruit: function (vmobile) {
             var
                 destination = Library.formalize(vmobile),
-                url = "http://128.199.81.129/txtcmdr/challenge/" + origin + "/" + destination,
+                url = "http://128.199.81.129/txtcmdr/challenge/" + ORIGIN + "/" + destination,
                 response = httpClient.request(url, {
                     method: 'POST'
                 }),
@@ -697,7 +699,7 @@ var params = (function (vtelerivet) {
             var
                 destination = vars.mobile,
                 pin = vpin,
-                url = "http://128.199.81.129/txtcmdr/confirm/" + origin + "/" + destination + "/" + pin,
+                url = "http://128.199.81.129/txtcmdr/confirm/" + ORIGIN + "/" + destination + "/" + pin,
                 response = !pin || httpClient.request(url, {
                         method: 'POST'
                     }),
@@ -767,7 +769,7 @@ var params = (function (vtelerivet) {
         },
         igps: function () {
             var
-                uri = input,
+                uri = INPUT,
                 records = {};
 
             uri.replace(
@@ -794,7 +796,7 @@ var params = (function (vtelerivet) {
                     if (!vgroup_id) {
                         return {
                             content: "[[contact.name]], the group '" + vgroup + "' does not exists.",
-                            to_number: origin,
+                            to_number: ORIGIN,
                             is_template: true
                         };
                     }
@@ -1038,7 +1040,7 @@ var params = (function (vtelerivet) {
         },
         syntax: function () {
             var
-                params = input.toLowerCase(),
+                params = INPUT.toLowerCase(),
                 text = [];
 
             _(keywords[params].headers).each(function (object) {
@@ -1089,21 +1091,22 @@ var params = (function (vtelerivet) {
                 data = Library.getTxtCmdrData(url, ['code', 'name']),
                 reply = _(data).inSeveralLines(),
                 nextState = "towns",
-                regionData = Library.getLookupTableData("regions"),
-                lookup = {
+                regionData = Library.getLookupTableData("regions");
+
+            if (regionData) {
+                generatedParams.lookups.push({
                     table: {
                         id: cache.id.table.lookup,
                         name: "lookup"
                     },
                     record: {
                         code: "region",
-                        context: input,
+                        context: PATH,
                         key: vregion_code,
                         value: regionData.value[vregion_code]
                     }
-                };
-
-            !regionData || generatedParams.lookups.push(lookup);
+                });
+            }
 
             generatedParams.lookups.push({
                 table: {
@@ -1149,7 +1152,7 @@ var params = (function (vtelerivet) {
     };
 
     Router.init();
-    Router.nav(input);
+    Router.nav(INPUT);
 
     return generatedParams;
 
