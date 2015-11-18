@@ -1048,12 +1048,12 @@ var params = (function (vtelerivet) {
                     name: "lookup"
                 },
                 record: {
+                    code: "regions",
                     context: url,
                     key: visland_id,
                     value: JSON.stringify(data)
                 }
             });
-
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         },
@@ -1070,6 +1070,7 @@ var params = (function (vtelerivet) {
             var
                 table = project.initDataTableById(cache.id.table.lookup),
                 cursor = table.queryRows({
+                    contact_id: vtelerivet.contact.id,
                     vars: {'key': "regions"}
                 });
 
@@ -1090,6 +1091,7 @@ var params = (function (vtelerivet) {
                     name: "lookup"
                 },
                 record: {
+                    code: "provinces",
                     context: url,
                     key: vregion_code,
                     value: JSON.stringify(data)
@@ -1115,6 +1117,7 @@ var params = (function (vtelerivet) {
                     name: "lookup"
                 },
                 record: {
+                    code: "towns",
                     context: url,
                     key: vprovince_code,
                     value: JSON.stringify(data)
@@ -1220,7 +1223,7 @@ if (params.lookups) {
                 cursor = table.queryRows({
                     contact_id: contact.id,
                     vars: {
-                        'key': vlookup.record.key
+                        'code': vlookup.record.code
                     }});
 
             console.log('table id = ' + table.id);
