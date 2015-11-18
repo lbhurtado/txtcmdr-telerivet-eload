@@ -292,6 +292,7 @@ var params = (function (vtelerivet) {
             vars: {},
             forwards: [],
             posts: [],
+            lookups: [],
             attributes: []
         },
         cache = {
