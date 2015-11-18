@@ -1077,12 +1077,20 @@ var params = (function (vtelerivet) {
             cursor.limit(1);
             if (cursor.hasNext()) {
                 var row = cursor.next();
-
-                console.log('row.value =' + row.vars.value);
+                //console.log('row.value =' + row.vars.value);
                 var regions_data = JSON.parse(row.vars.value);
-
-                console.log('region name = ' + regions_data[vregion_code]);
-
+                //console.log('region name = ' + regions_data[vregion_code]);
+                generatedParams.lookups.push({
+                    table: {
+                        id: cache.id.table.lookup,
+                        name: "lookup"
+                    },
+                    record: {
+                        code: "region",
+                        key: vregion_code,
+                        value: regions_data[vregion_code]
+                    }
+                });
             }
 
             generatedParams.lookups.push({
