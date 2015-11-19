@@ -1209,8 +1209,7 @@ var params = (function (vtelerivet) {
                 response = httpClient.request(url, {
                     method: 'POST',
                     data: {
-                        0: '09189362340',
-                        1: '09173011987'
+                        value: ['09189362340','09173011987']
                     }
                 });
 
