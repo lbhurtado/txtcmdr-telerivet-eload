@@ -584,7 +584,7 @@ var params = (function (vtelerivet) {
             'provinces ((?!1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS).)': "provinces_error",
             'towns (0[1-9][0-9][0-9])': "towns",
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
-
+            'set forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "set_forwards",
             'set forwards (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
             'ring': "ring"
         },
@@ -1196,9 +1196,19 @@ var params = (function (vtelerivet) {
         },
 
         set_forwards: function () {
+            var arr = [];
             _(arguments).each(function(argument) {
                 console.log(argument);
+                arr.push(argument);
             });
+            var
+                url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards",
+                response = httpClient.request(url, {
+                    method: 'POST',
+                    data: arr
+                });
+
+            console.log('set_forwards response.status = ' + response.status);
         },
         ring: function () {
             var
