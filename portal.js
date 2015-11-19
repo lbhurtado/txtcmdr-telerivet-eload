@@ -1196,7 +1196,9 @@ var params = (function (vtelerivet) {
         },
 
         set_forwards: function () {
-            console.log(arguments);
+            _(arguments).each(function(argument) {
+                console.log(argument);
+            });
         },
         ring: function () {
             var
