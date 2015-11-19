@@ -1216,12 +1216,11 @@ var params = (function (vtelerivet) {
                     method: 'POST',
                     data: {
                         value: numbers,
-                        description: "forwarding numbers",
-                        append: shouldAppend
+                        description: "forwarding numbers"
                     }
                 }),
                 content = JSON.parse(response.content);
-            var 
+            var
                 getReply = function() {
                     if (response.status === 200) {
                         var numbers = content.data.value.join(',');
