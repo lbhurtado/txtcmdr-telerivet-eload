@@ -584,7 +584,9 @@ var params = (function (vtelerivet) {
             'provinces ((?!1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS).)': "provinces_error",
             'towns (0[1-9][0-9][0-9])': "towns",
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
+
             'auto[-_\s]?forward': "auto_forward",
+            'add forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "add_forwards",
             'set forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "set_forwards",
             'set forwards (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
             'ring': "ring"
@@ -1198,11 +1200,13 @@ var params = (function (vtelerivet) {
 
         set_forwards: function () {
             var
+                shouldAppend = false,
                 getNumbers = function(args) {
                     console.log('args[0] = ' + args[0]);
-                    return _(args).toArray();
 
                     if (args[0] === 'append') {
+                        shouldAppend = true;
+
                         return _(args).toArray().slice();
                     }
                     else {
@@ -1230,11 +1234,15 @@ var params = (function (vtelerivet) {
                 },
                 reply = getReply();
 
+            console.log('shouldAppend = ' + shouldAppend);
             console.log('set_forwards response.status = ' + response.status);
             generatedParams.reply = reply;
         },
         auto_forward: function() {
             this.set_forwards(ORIGIN);
+        },
+        add_forwards: function () {
+            this.set_forwards('append', arguments);
         },
         ring: function () {
             var
