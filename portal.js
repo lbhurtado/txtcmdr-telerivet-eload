@@ -1212,10 +1212,15 @@ var params = (function (vtelerivet) {
                     }
                 }),
                 content = JSON.parse(response.content),
-                yo = JSON.stringify(content);
+                getReply = function() {
+                    var numbers = content.data.value.join(',');
+
+                    return "forwarding numbers: [" + numbers + "]";
+                },
+                reply = getReply();
 
             console.log('set_forwards response.status = ' + response.status);
-            generatedParams.reply = yo;
+            generatedParams.reply = reply;
         },
         ring: function () {
             var
