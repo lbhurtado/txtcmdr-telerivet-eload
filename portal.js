@@ -585,7 +585,7 @@ var params = (function (vtelerivet) {
             'towns (0[1-9][0-9][0-9])': "towns",
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
 
-            'auto[-_\s]?forward': "auto_forward",
+            'auto[-_\\s]?forward': "auto_forward",
             'add forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "add_forwards",
             'set forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "set_forwards",
             'set forwards (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
