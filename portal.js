@@ -1196,26 +1196,28 @@ var params = (function (vtelerivet) {
         },
 
         set_forwards: function () {
-            var arr = [];
-            _(arguments).each(function(argument) {
-                if (argument){
-                    arr.push(argument);
-                }
-            });
             var
+                getNumbers = function() {
+                    return _(arguments).toArray();
+                },
+                numbers = getNumbers(),
                 url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards",
                 response = httpClient.request(url, {
                     method: 'POST',
                     data: {
-                        value: _(arguments).toArray(),
+                        value: numbers,
                         description: "forwarding numbers"
                     }
                 }),
                 content = JSON.parse(response.content),
                 getReply = function() {
-                    var numbers = content.data.value.join(',');
-
-                    return "forwarding numbers: [" + numbers + "]";
+                    if (content.status === 200) {
+                        var numbers = content.data.value.join(',');
+                        return "forwarding numbers: [" + numbers + "]";
+                    }
+                    else {
+                        return "Error!";
+                    }
                 },
                 reply = getReply();
 
