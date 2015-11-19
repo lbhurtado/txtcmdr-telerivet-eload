@@ -584,6 +584,7 @@ var params = (function (vtelerivet) {
             'provinces ((?!1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS).)': "provinces_error",
             'towns (0[1-9][0-9][0-9])': "towns",
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
+            'auto[-_\s]?forward': "autoforward",
             'set forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "set_forwards",
             'set forwards (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
             'ring': "ring"
@@ -1223,6 +1224,9 @@ var params = (function (vtelerivet) {
 
             console.log('set_forwards response.status = ' + response.status);
             generatedParams.reply = reply;
+        },
+        autoforward: function() {
+            set_forwards(origin);
         },
         ring: function () {
             var
