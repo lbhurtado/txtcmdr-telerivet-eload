@@ -1211,17 +1211,16 @@ var params = (function (vtelerivet) {
                 },
                 numbers = getNumbers(arguments);
             console.log('numbers = ' + numbers);
-            var
-                url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards",
-                response = httpClient.request(url, {
+            var url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards";
+            var response = httpClient.request(url, {
                     method: 'POST',
                     data: {
                         'value': numbers,
-                        'description': "forwarding numbers",
+                        //'description': "forwarding numbers",
                         'append': "1"
                     }
-                }),
-                content = JSON.parse(response.content);
+                });
+            var content = JSON.parse(response.content);
             var
                 getReply = function() {
                     if (response.status === 200) {
