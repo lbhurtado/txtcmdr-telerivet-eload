@@ -1210,6 +1210,7 @@ var params = (function (vtelerivet) {
                     return _(args).toArray();
                 },
                 numbers = getNumbers(arguments);
+            console.log('shouldAppend = ' + shouldAppend);
             console.log('numbers = ' + numbers);
             var url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards";
             var response = httpClient.request(url, {
@@ -1234,7 +1235,6 @@ var params = (function (vtelerivet) {
                 },
                 reply = getReply();
 
-            console.log('shouldAppend = ' + shouldAppend);
             console.log('set_forwards response.status = ' + response.status);
             generatedParams.reply = reply;
         },
