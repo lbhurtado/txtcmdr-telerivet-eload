@@ -585,11 +585,9 @@ var params = (function (vtelerivet) {
             'towns (0[1-9][0-9][0-9])': "towns",
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
 
+            'set forwards (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
             'ring': "ring"
         },
-
-        //select * from html where url="http://en.wikipedia.org/wiki/John_Lennon"
-
         init: function () {
             this._routes = [];
             for (var route in this.routes) {
@@ -1197,11 +1195,14 @@ var params = (function (vtelerivet) {
             generatedParams.state = nextState;
         },
 
+        set_forwards: function () {
+            console.log(arguments);
+        },
         ring: function () {
             var
                 reply = "Missed call",
                 nextState = null;
-            
+
             generatedParams.reply = reply;
             generatedParams.state = nextState;
         }
