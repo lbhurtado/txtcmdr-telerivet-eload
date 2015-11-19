@@ -1205,10 +1205,11 @@ var params = (function (vtelerivet) {
                     console.log('args[0] = ' + args[0]);
                     if (args[0] === 'append') {
                         shouldAppend = true;
-                        if (typeof args[1] === 'object')
-                            return _(args[1]).toArray();
-                        else
-                            return args[1];
+                        //if (typeof args[1] === 'object')
+                        //    return _(args[1]).toArray();
+                        //else
+                        //    return args[1];
+                        return _(args[1]).toArray();
                     }
                     return _(args).toArray();
                 },
