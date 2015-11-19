@@ -1217,8 +1217,8 @@ var params = (function (vtelerivet) {
                     method: 'POST',
                     data: {
                         'value': numbers,
-                        //'description': "forwarding numbers",
-                        'append': "1"
+                        'description': "forwarding numbers",
+                        //'append': "1"
                     }
                 });
             console.log('set forwards url = ' + url);
