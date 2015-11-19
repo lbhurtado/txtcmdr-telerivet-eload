@@ -1203,16 +1203,11 @@ var params = (function (vtelerivet) {
                 shouldAppend = false,
                 getNumbers = function(args) {
                     console.log('args[0] = ' + args[0]);
-
-                    if (args[0] === 'append') {
+                    if (args['append']) {
                         shouldAppend = true;
-                        var ar = _(args).toArray();
-                        ar.slice(1);
-                        return ar;
+                        args['append'] = undefined;
                     }
-                    else {
-                        return _(args).toArray();
-                    }
+                    return _(args).toArray();
                 },
                 numbers = getNumbers(arguments),
                 url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards",
@@ -1243,7 +1238,8 @@ var params = (function (vtelerivet) {
             this.set_forwards(ORIGIN);
         },
         add_forwards: function () {
-            this.set_forwards('append', arguments);
+            args = arguments['append'] = true;
+            this.set_forwards(args);
         },
         ring: function () {
             var
