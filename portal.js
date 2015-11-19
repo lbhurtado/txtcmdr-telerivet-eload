@@ -1216,9 +1216,9 @@ var params = (function (vtelerivet) {
                 response = httpClient.request(url, {
                     method: 'POST',
                     data: {
-                        value: numbers,
-                        description: "forwarding numbers",
-                        append: "1"
+                        'value': numbers,
+                        'description': "forwarding numbers",
+                        'append': "0"
                     }
                 }),
                 content = JSON.parse(response.content);
