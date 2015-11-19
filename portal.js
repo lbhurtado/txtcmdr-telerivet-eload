@@ -1206,8 +1206,8 @@ var params = (function (vtelerivet) {
 
                     if (args[0] === 'append') {
                         shouldAppend = true;
-
-                        return _(args).toArray().slice(1);
+                        args[0] = undefined;
+                        return _(args).toArray();
                     }
                     else {
                         return _(args).toArray();
