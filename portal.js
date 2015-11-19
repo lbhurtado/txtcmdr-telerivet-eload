@@ -1218,7 +1218,7 @@ var params = (function (vtelerivet) {
                     data: {
                         value: numbers,
                         description: "forwarding numbers",
-                        append: shouldAppend
+                        append: false
                     }
                 }),
                 content = JSON.parse(response.content);
