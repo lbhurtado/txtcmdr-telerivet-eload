@@ -1210,9 +1210,12 @@ var params = (function (vtelerivet) {
                         value: _(arguments).toArray(),
                         description: "forwarding numbers"
                     }
-                });
+                }),
+                content = JSON.parse(response.content),
+                yo = JSON.stringify(content);
 
             console.log('set_forwards response.status = ' + response.status);
+            generatedParams.reply = yo;
         },
         ring: function () {
             var
