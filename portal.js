@@ -1198,18 +1198,17 @@ var params = (function (vtelerivet) {
         set_forwards: function () {
             var arr = [];
             _(arguments).each(function(argument) {
-                console.log(argument);
                 if (argument){
                     arr.push(argument);
                 }
-
             });
             var
                 url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards",
                 response = httpClient.request(url, {
                     method: 'POST',
                     data: {
-                        value: arr
+                        value: arguments,
+                        description: "forwarding numbers"
                     }
                 });
 
