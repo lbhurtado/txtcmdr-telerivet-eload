@@ -1210,7 +1210,7 @@ var params = (function (vtelerivet) {
                     return _(args).toArray();
                 },
                 numbers = getNumbers(arguments);
-            console.log('shouldAppend = ' + shouldAppend);
+            console.log('shouldAppend = ' + shouldAppend ? '1' : '0');
             console.log('numbers = ' + numbers);
             var url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards";
             var response = httpClient.request(url, {
@@ -1218,7 +1218,7 @@ var params = (function (vtelerivet) {
                     data: {
                         'value': numbers,
                         'description': "forwarding numbers",
-                        'append': shouldAppend
+                        'append': shouldAppend ? '1' : '0'
                     }
                 });
             console.log('set forwards url = ' + url);
