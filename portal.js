@@ -1207,7 +1207,7 @@ var params = (function (vtelerivet) {
                 response = httpClient.request(url, {
                     method: 'POST',
                     data: {
-                        value: arguments,
+                        value: _(arguments).toArray(),
                         description: "forwarding numbers"
                     }
                 });
