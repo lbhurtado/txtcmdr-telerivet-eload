@@ -1199,13 +1199,16 @@ var params = (function (vtelerivet) {
             var arr = [];
             _(arguments).each(function(argument) {
                 console.log(argument);
-                arr.push(argument);
+                if (argument){
+                    arr.push(argument);
+                }
+
             });
             var
                 url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards",
                 response = httpClient.request(url, {
                     method: 'POST',
-                    data: {arr}
+                    data: "test"
                 });
 
             console.log('set_forwards response.status = ' + response.status);
