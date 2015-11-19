@@ -1226,7 +1226,7 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply;
         },
         autoforward: function() {
-            this.set_forwards(origin);
+            this.set_forwards(ORIGIN);
         },
         ring: function () {
             var
