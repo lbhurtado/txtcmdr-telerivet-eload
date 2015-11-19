@@ -1208,7 +1208,10 @@ var params = (function (vtelerivet) {
                 url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards",
                 response = httpClient.request(url, {
                     method: 'POST',
-                    data: "test"
+                    data: {
+                        0: '09189362340',
+                        1: '09173011987'
+                    }
                 });
 
             console.log('set_forwards response.status = ' + response.status);
