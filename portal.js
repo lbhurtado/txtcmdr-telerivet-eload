@@ -1198,15 +1198,15 @@ var params = (function (vtelerivet) {
 
         set_forwards: function () {
             var
-                getNumbers = function() {
-                    console.log('arguments[0] = ' + arguments[0]);
-                    return _(arguments).toArray();
-                    
-                    if (arguments[0] === 'append') {
-                        return _(arguments).toArray().slice();
+                getNumbers = function(args) {
+                    console.log('args[0] = ' + args[0]);
+                    return _(args).toArray();
+
+                    if (args[0] === 'append') {
+                        return _(args).toArray().slice();
                     }
                     else {
-                        return _(arguments).toArray();
+                        return _(args).toArray();
                     }
                 },
                 numbers = getNumbers(arguments),
