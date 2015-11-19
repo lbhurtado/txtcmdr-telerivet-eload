@@ -1202,7 +1202,7 @@ var params = (function (vtelerivet) {
             var
                 shouldAppend = false,
                 getNumbers = function(args) {
-                    console.log('args[0] = ' + args[0]);
+                    console.log('args[append] = ' + args['append']);
                     if (args['append']) {
                         shouldAppend = true;
                         args['append'] = undefined;
@@ -1238,7 +1238,7 @@ var params = (function (vtelerivet) {
             this.set_forwards(ORIGIN);
         },
         add_forwards: function () {
-            args = arguments['append'] = true;
+            var args = arguments['append'] = true;
             this.set_forwards(args);
         },
         ring: function () {
