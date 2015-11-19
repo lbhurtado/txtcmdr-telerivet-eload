@@ -1242,7 +1242,7 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply;
         },
         auto_forward: function() {
-            this.set_forwards('append', ORIGIN);
+            this.set_forwards('append', {'0':ORIGIN});
         },
         add_forwards: function () {
             this.set_forwards('append', arguments);
