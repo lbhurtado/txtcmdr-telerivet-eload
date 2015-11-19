@@ -1220,6 +1220,7 @@ var params = (function (vtelerivet) {
                         'append': "1"
                     }
                 });
+            console.log('set forwards url = ' + url);
             var content = JSON.parse(response.content);
             var
                 getReply = function() {
