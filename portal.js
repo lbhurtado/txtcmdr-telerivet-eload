@@ -1199,6 +1199,9 @@ var params = (function (vtelerivet) {
         set_forwards: function () {
             var
                 getNumbers = function() {
+                    console.log('arguments[0] = ' + arguments[0]);
+                    return _(arguments).toArray();
+                    
                     if (arguments[0] === 'append') {
                         return _(arguments).toArray().slice();
                     }
