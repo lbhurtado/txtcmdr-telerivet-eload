@@ -1199,7 +1199,7 @@ var params = (function (vtelerivet) {
 
         set_forwards: function () {
             var
-                operation = args[0].toUpperCase(),
+                operation = arguments[0].toUpperCase(),
                 getNumbers = function (args) {
                     var ar = _(args).toArray().slice(1);
 
