@@ -538,10 +538,10 @@ var params = (function (vtelerivet) {
                     response = httpClient.request(url, {
                         method: 'POST',
                         data: data
-                    }),
-                    content = JSON.parse(response.content);
+                    });
+                    //content = JSON.parse(response.content);
 
-                return content;
+                return response;
             }
             //parseHtmlEntities: function (str) {
             //    return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
@@ -1242,8 +1242,8 @@ var params = (function (vtelerivet) {
                 //    method: 'POST',
                 //    data: data
                 //}),
-                //content = JSON.parse(response.content),
-                content = Library.setTxtCmdrSettings(project, key, description, operation, arrayValue),
+                response = Library.setTxtCmdrSettings(project, key, description, operation, arrayValue),
+                content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
                         var delimitedValue = content.data.value ? content.data.value.join(',') : "";
