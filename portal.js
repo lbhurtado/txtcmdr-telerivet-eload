@@ -587,7 +587,6 @@ var params = (function (vtelerivet) {
 
             'auto[-_\\s]?forward': "auto_forward",
             'add forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "add_forwards",
-            //'set forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "set_forwards",
             'set forwards? (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
             'ring': "ring"
         },
@@ -1203,7 +1202,7 @@ var params = (function (vtelerivet) {
                 shouldAppend = false,
                 getNumbers = function(args) {
                     console.log('args[0] = ' + args[0]);
-                    if (args[0] === 'append') {
+                    if (args[0] === 'add') {
                         shouldAppend = true;
                         //if (typeof args[1] === 'object')
                         //    return _(args[1]).toArray();
@@ -1243,10 +1242,10 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply;
         },
         auto_forward: function() {
-            this.set_forwards('append', {'0':ORIGIN});
+            this.set_forwards('add', {'0':ORIGIN});
         },
         add_forwards: function () {
-            this.set_forwards('append', arguments);
+            this.set_forwards('add', arguments);
         },
         ring: function () {
             var
