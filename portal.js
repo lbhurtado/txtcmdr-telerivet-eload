@@ -1200,29 +1200,34 @@ var params = (function (vtelerivet) {
         set_forwards: function () {
             var
                 shouldAppend = false,
-                getNumbers = function(args) {
+                getNumbers = function (args) {
                     console.log('args[0] = ' + args[0]);
                     shouldAppend = (args[0].toUpperCase() === 'ADD');
-                    return _(_(args).toArray().slice(1)).map(function (number) {
-                       return Library.formalize(number);
-                    });
+                    var ar = _(args).toArray().slice(1);
+                    return _(_(ar)
+                        .filter(function (number) {
+                            return typeof number === 'number';
+                        }))
+                        .map(function (number) {
+                            return Library.formalize(number);
+                        });
                 },
                 numbers = getNumbers(arguments);
             console.log('shouldAppend = ' + shouldAppend ? '1' : '0');
             console.log('numbers = ' + numbers);
             var url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards";
             var response = httpClient.request(url, {
-                    method: 'POST',
-                    data: {
-                        'value': numbers,
-                        'description': "forwarding numbers",
-                        'append': shouldAppend ? '1' : '0'
-                    }
-                });
+                method: 'POST',
+                data: {
+                    'value': numbers,
+                    'description': "forwarding numbers",
+                    'append': shouldAppend ? '1' : '0'
+                }
+            });
             console.log('set forwards url = ' + url);
             var content = JSON.parse(response.content);
             var
-                getReply = function() {
+                getReply = function () {
                     if (response.status === 200) {
                         var numbers = content.data.value ? content.data.value.join(',') : "";
                         return "forwarding numbers: [" + numbers + "]";
@@ -1236,7 +1241,7 @@ var params = (function (vtelerivet) {
             console.log('set_forwards response.status = ' + response.status);
             generatedParams.reply = reply;
         },
-        auto_forward: function() {
+        auto_forward: function () {
             this.set_forwards('add', ORIGIN);
         },
         ring: function () {
@@ -1321,7 +1326,7 @@ if (params.posts) {
 
 if (params.lookups) {
     var
-        lookupTable = function(vtable) {
+        lookupTable = function (vtable) {
             if (vtable.id) {
                 var table = project.initDataTableById(vtable.id);
 
@@ -1340,11 +1345,12 @@ if (params.lookups) {
         updateLookup = function (vlookup) {
             var
                 table = lookupTable(vlookup.table);
-                cursor = table.queryRows({
-                    contact_id: contact.id,
-                    vars: {
-                        'code': vlookup.record.code
-                    }});
+            cursor = table.queryRows({
+                contact_id: contact.id,
+                vars: {
+                    'code': vlookup.record.code
+                }
+            });
 
             console.log('table id = ' + table.id);
 
