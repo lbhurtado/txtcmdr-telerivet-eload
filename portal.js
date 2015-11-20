@@ -1205,8 +1205,8 @@ var params = (function (vtelerivet) {
                     shouldAppend = (args[0].toUpperCase() === 'ADD');
                     var ar = _(args).toArray().slice(1);
                     return _(_(ar)
-                        .filter(function (number) {
-                            return typeof number === 'number';
+                        .reject(function (number) {
+                            return (typeof number !== 'number');
                         }))
                         .map(function (number) {
                             return Library.formalize(number);
