@@ -1396,4 +1396,7 @@ if (params.attributes) {
 
 console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
-console.log('project users = ' + project.getUsers());
+
+_(project.getUsers()).each(function(user){
+    console.log('user = ' + user);
+});
