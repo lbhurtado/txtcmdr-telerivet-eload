@@ -526,6 +526,23 @@ var params = (function (vtelerivet) {
 
                 return false;
             },
+            setTxtCmdrSettings: function (vproject, vkey, vdescription, voperation, vvalue) {
+                var
+                    code = vproject + "/" + vkey,
+                    data = {
+                        'value': vvalue,
+                        'description': vdescription,
+                        'operation': voperation
+                    },
+                    url = "http://lumen.txtcmdr.net/txtcmdr/settings/" + code,
+                    response = httpClient.request(url, {
+                        method: 'POST',
+                        data: data
+                    }),
+                    content = JSON.parse(response.content);
+
+                return content;
+            }
             //parseHtmlEntities: function (str) {
             //    return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
             //        var num = parseInt(numStr, 10); // read num as normal number
@@ -1215,17 +1232,18 @@ var params = (function (vtelerivet) {
                         });
                 },
                 arrayValue = getArrayValue(arguments),
-                data = {
-                    'value': arrayValue,
-                    'description': description,
-                    'operation': operation
-                },
-                url = "http://lumen.txtcmdr.net/txtcmdr/settings/" + code,
-                response = httpClient.request(url, {
-                    method: 'POST',
-                    data: data
-                }),
-                content = JSON.parse(response.content),
+                //data = {
+                //    'value': arrayValue,
+                //    'description': description,
+                //    'operation': operation
+                //},
+                //url = "http://lumen.txtcmdr.net/txtcmdr/settings/" + code,
+                //response = httpClient.request(url, {
+                //    method: 'POST',
+                //    data: data
+                //}),
+                //content = JSON.parse(response.content),
+                content = Library.setTxtCmdrSettings(project, key, description, operation, arrayValue),
                 getReply = function () {
                     if (response.status === 200) {
                         var delimitedValue = content.data.value ? content.data.value.join(',') : "";
