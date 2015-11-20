@@ -1199,10 +1199,8 @@ var params = (function (vtelerivet) {
 
         set_forwards: function () {
             var
-                shouldAppend = false,
+                shouldAppend = (args[0].toUpperCase() === 'ADD'),
                 getNumbers = function (args) {
-                    console.log('args[0] = ' + args[0]);
-                    shouldAppend = (args[0].toUpperCase() === 'ADD');
                     var ar = _(args).toArray().slice(1);
 
                     return _(ar)
@@ -1210,7 +1208,6 @@ var params = (function (vtelerivet) {
                             return number;
                         })
                         .map(function (number) {
-                            //return number ? Library.formalize(number) : null;
                             return Library.formalize(number);
                         });
                 },
