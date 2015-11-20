@@ -1202,9 +1202,6 @@ var params = (function (vtelerivet) {
                 shouldAppend = false,
                 getNumbers = function(args) {
                     console.log('args[0] = ' + args[0]);
-                    //if (args[0].toUpperCase() === 'ADD') {
-                    //    shouldAppend = true;
-                    //}
                     shouldAppend = (args[0].toUpperCase() === 'ADD');
                     return _(args).toArray().slice(1);
                 },
@@ -1225,7 +1222,7 @@ var params = (function (vtelerivet) {
             var
                 getReply = function() {
                     if (response.status === 200) {
-                        var numbers = content.data.value.join(',');
+                        var numbers = ! content.data.value || content.data.value.join(',');
                         return "forwarding numbers: [" + numbers + "]";
                     }
                     else {
