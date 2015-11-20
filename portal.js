@@ -1207,10 +1207,10 @@ var params = (function (vtelerivet) {
                     return _(ar).map(function (number) {
                             return number ? Library.formalize(number) : null;
                     });
-                    return _(ar)
+                    return _(_(ar)
                         .filter(function (number) {
                             return number;
-                        })
+                        }))
                         .map(function (number) {
                             //return number ? Library.formalize(number) : null;
                             return Library.formalize(number);
