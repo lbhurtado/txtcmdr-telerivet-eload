@@ -554,7 +554,8 @@ var params = (function (vtelerivet) {
         vars = vtelerivet.contact.vars,
         INPUT = vtelerivet.message.content,
         PATH = INPUT,
-        ORIGIN = Library.formalize(vtelerivet.contact.phone_number);
+        ORIGIN = Library.formalize(vtelerivet.contact.phone_number),
+        PROJECT = 'baligod';
 
     var Router = {
         routes: {
@@ -605,7 +606,7 @@ var params = (function (vtelerivet) {
 
             'auto[-_\\s]?forward': "auto_forward",
             'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
-            '(get|check|set|replace|add|append|insert|delete|cut|remove|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
+            '(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             'ring': "ring"
         },
         init: function () {
@@ -616,6 +617,7 @@ var params = (function (vtelerivet) {
                     var
                         regex = route
                             .replace(/:\w+/g, '(\\w+)')
+                            .replace(/$\w+/g, '(\\w+)')
                             //.replace(/\(([\/]?[^\)]+)\)/g, "($1)")
                             .replace(/<([\/]?[^\)]+)>/g, "($1)")
                             .replace(/%(\w+)/g, "($1)") //default value
@@ -1222,29 +1224,22 @@ var params = (function (vtelerivet) {
                 code = project + "/" + key,
                 description  = "forwarding numbers",
                 operation = arguments[0],
-                getArrayValue = function (args) {
+                getValue = function (args) {
                     var ar = _(args).toArray().slice(1);
 
                     return _(ar)
                         .filter(function (value) {
                             return value;
-                        })
-                        .map(function (number) {
-                            return Library.formalize(number);
                         });
+                        //.map(function (number) {
+                        //    return Library.formalize(number);
+                        //});
                 },
-                arrayValue = getArrayValue(arguments),
-                //data = {
-                //    'value': arrayValue,
-                //    'description': description,
-                //    'operation': operation
-                //},
-                //url = "http://lumen.txtcmdr.net/txtcmdr/settings/" + code,
-                //response = httpClient.request(url, {
-                //    method: 'POST',
-                //    data: data
-                //}),
-                response = Library.setTxtCmdrSettings(project, key, description, operation, arrayValue),
+                value = _(getValue(arguments)).map(function (number) {
+                    return Library.formalize(number);
+                }),
+
+                response = Library.setTxtCmdrSettings(project, key, description, operation, value),
                 content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
