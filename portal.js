@@ -1202,11 +1202,9 @@ var params = (function (vtelerivet) {
                 shouldAppend = false,
                 getNumbers = function(args) {
                     console.log('args[0] = ' + args[0]);
-                    if (args[0] === 'add') {
+                    if (args[0].toUpperCase() === 'ADD') {
                         shouldAppend = true;
-                        //return _(args[1]).toArray();
                     }
-                    //return _(args).toArray();
                     return _(args).toArray().slice(1);
                 },
                 numbers = getNumbers(arguments);
