@@ -1222,7 +1222,7 @@ var params = (function (vtelerivet) {
             var
                 getReply = function() {
                     if (response.status === 200) {
-                        var numbers = ! content.data.value || content.data.value.join(',');
+                        var numbers = content.data.value ? content.data.value.join(',') : "";
                         return "forwarding numbers: [" + numbers + "]";
                     }
                     else {
