@@ -1207,7 +1207,7 @@ var params = (function (vtelerivet) {
                         return _(args[1]).toArray();
                     }
                     //return _(args).toArray();
-                    return _(args[1]).toArray();
+                    return args.slice(1);
                 },
                 numbers = getNumbers(arguments);
             console.log('shouldAppend = ' + shouldAppend ? '1' : '0');
