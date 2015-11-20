@@ -1203,7 +1203,9 @@ var params = (function (vtelerivet) {
                 getNumbers = function(args) {
                     console.log('args[0] = ' + args[0]);
                     shouldAppend = (args[0].toUpperCase() === 'ADD');
-                    return _(args).toArray().slice(1);
+                    return _(_(args).toArray().slice(1)).map(function (number) {
+                       return Library.formalize(number);
+                    });
                 },
                 numbers = getNumbers(arguments);
             console.log('shouldAppend = ' + shouldAppend ? '1' : '0');
