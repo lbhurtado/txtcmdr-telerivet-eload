@@ -1204,9 +1204,9 @@ var params = (function (vtelerivet) {
                     console.log('args[0] = ' + args[0]);
                     shouldAppend = (args[0].toUpperCase() === 'ADD');
                     var ar = _(args).toArray().slice(1);
-                    return _(ar).map(function (number) {
-                            return number ? Library.formalize(number) : null;
-                    });
+                    //return _(ar).map(function (number) {
+                    //        return number ? Library.formalize(number) : null;
+                    //});
                     return _(_(ar)
                         .filter(function (number) {
                             return number;
