@@ -1212,7 +1212,7 @@ var params = (function (vtelerivet) {
                         });
                 },
                 numbers = getNumbers(arguments);
-            console.log('shouldAppend = ' + shouldAppend ? '1' : '0');
+            console.log('operation = ' + operation);
             console.log('numbers = ' + numbers);
             var url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards";
             var response = httpClient.request(url, {
