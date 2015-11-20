@@ -587,7 +587,7 @@ var params = (function (vtelerivet) {
 
             'auto[-_\\s]?forward': "auto_forward",
             //'add forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "add_forwards",
-            '(add|set) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
+            '(replace|append|remove|empty) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
             'ring': "ring"
         },
         init: function () {
@@ -1199,7 +1199,7 @@ var params = (function (vtelerivet) {
 
         set_forwards: function () {
             var
-                shouldAppend = (args[0].toUpperCase() === 'ADD'),
+                operation = args[0].toUpperCase(),
                 getNumbers = function (args) {
                     var ar = _(args).toArray().slice(1);
 
@@ -1220,7 +1220,7 @@ var params = (function (vtelerivet) {
                 data: {
                     'value': numbers,
                     'description': "forwarding numbers",
-                    'append': shouldAppend ? '1' : '0'
+                    'operation': operation
                 }
             });
             console.log('set forwards url = ' + url);
@@ -1241,7 +1241,7 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply;
         },
         auto_forward: function () {
-            this.set_forwards('add', ORIGIN);
+            this.set_forwards('append', ORIGIN);
         },
         ring: function () {
             var
