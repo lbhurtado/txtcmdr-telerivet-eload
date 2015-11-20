@@ -587,7 +587,7 @@ var params = (function (vtelerivet) {
 
             'auto[-_\\s]?forward': "auto_forward",
             //'add forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "add_forwards",
-            '(add|set) forwards? (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
+            '(add|set) forwards? (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
             'ring': "ring"
         },
         init: function () {
@@ -1202,9 +1202,10 @@ var params = (function (vtelerivet) {
                 shouldAppend = false,
                 getNumbers = function(args) {
                     console.log('args[0] = ' + args[0]);
-                    if (args[0].toUpperCase() === 'ADD') {
-                        shouldAppend = true;
-                    }
+                    //if (args[0].toUpperCase() === 'ADD') {
+                    //    shouldAppend = true;
+                    //}
+                    shouldAppend = (args[0].toUpperCase() === 'ADD');
                     return _(args).toArray().slice(1);
                 },
                 numbers = getNumbers(arguments);
