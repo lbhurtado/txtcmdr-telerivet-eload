@@ -604,7 +604,7 @@ var params = (function (vtelerivet) {
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
 
             'auto[-_\\s]?forward': "auto_forward",
-            'auto[-_\\s]?forward (?:remove|cut|delete)': "auto_forward_remove",
+            'auto[-_\\s]?forward (\\?:remove|cut|delete)': "auto_forward_remove",
             '(get|check|set|replace|add|append|insert|delete|cut|remove|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             'ring': "ring"
         },
