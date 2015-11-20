@@ -1204,7 +1204,7 @@ var params = (function (vtelerivet) {
                     console.log('args[0] = ' + args[0]);
                     if (args[0] === 'add') {
                         shouldAppend = true;
-                        return _(args[1]).toArray();
+                        //return _(args[1]).toArray();
                     }
                     //return _(args).toArray();
                     return _(args).toArray().slice(1);
@@ -1239,10 +1239,7 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply;
         },
         auto_forward: function() {
-            this.set_forwards('add', {'0':ORIGIN});
-        },
-        add_forwards: function () {
-            this.set_forwards('add', arguments);
+            this.set_forwards({'0':'add', '1': ORIGIN});
         },
         ring: function () {
             var
