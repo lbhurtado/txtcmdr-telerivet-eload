@@ -526,7 +526,7 @@ var params = (function (vtelerivet) {
 
                 return false;
             },
-            setTxtCmdrSettings: function (vproject, vkey, vdescription, voperation, vvalue) {
+            setTxtCmdrSettings: function (vproject, vkey, vvalue, voperation, vdescription) {
                 var
                     code = vproject + "/" + vkey,
                     data = {
@@ -543,7 +543,17 @@ var params = (function (vtelerivet) {
                     //content = JSON.parse(response.content);
 
                 return response;
-            }
+            },
+            getSettingOptionFromArguments: function (args) {
+                return args[0];
+            },
+            getSettingValueFromArguments: function (args) {
+                var ar = _(args).toArray().slice(1);
+
+                return _(ar).filter(function (value) {
+                    return value;
+                });
+            },
             //parseHtmlEntities: function (str) {
             //    return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
             //        var num = parseInt(numStr, 10); // read num as normal number
@@ -1221,25 +1231,13 @@ var params = (function (vtelerivet) {
             var
                 project = "baligod",
                 key = "forwards",
-                code = project + "/" + key,
-                description  = "forwarding numbers",
-                operation = arguments[0],
-                getValue = function (args) {
-                    var ar = _(args).toArray().slice(1);
-
-                    return _(ar)
-                        .filter(function (value) {
-                            return value;
-                        });
-                        //.map(function (number) {
-                        //    return Library.formalize(number);
-                        //});
-                },
-                value = _(getValue(arguments)).map(function (number) {
+                value = _(Library.getSettingValueFromArguments(arguments)).map(function (number) {
                     return Library.formalize(number);
                 }),
+                operation = Library.getSettingOptionFromArguments(arguments),
+                description  = "forwarding numbers",
 
-                response = Library.setTxtCmdrSettings(project, key, description, operation, value),
+                response = Library.setTxtCmdrSettings(project, key, value, operation, description),
                 content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
@@ -1396,4 +1394,6 @@ if (params.attributes) {
     });
 }
 
-console.log("LESTER 17");
+console.log('project name = ' + project.name);
+console.log('project timezone = ' + project.timezone_id);
+console.log('project users = ' + project.getUsers());
