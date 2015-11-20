@@ -586,8 +586,7 @@ var params = (function (vtelerivet) {
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
 
             'auto[-_\\s]?forward': "auto_forward",
-            //'add forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "add_forwards",
-            '(set|replace|add|append|insert|delete|cut|remove|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
+            '(set|replace|add|append|insert|delete|cut|remove|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             'ring': "ring"
         },
         init: function () {
@@ -1197,47 +1196,47 @@ var params = (function (vtelerivet) {
             generatedParams.state = nextState;
         },
 
-        set_forwards: function () {
+        forwards: function () {
             var
-                operation = arguments[0].toUpperCase(),
-                getNumbers = function (args) {
+                project = "baligod",
+                key = "forwards",
+                code = project + "/" + key,
+                description  = "forwarding numbers",
+                operation = arguments[0],
+                getArrayValue = function (args) {
                     var ar = _(args).toArray().slice(1);
 
                     return _(ar)
-                        .filter(function (number) {
-                            return number;
+                        .filter(function (value) {
+                            return value;
                         })
                         .map(function (number) {
                             return Library.formalize(number);
                         });
                 },
-                numbers = getNumbers(arguments);
-            console.log('operation = ' + operation);
-            console.log('numbers = ' + numbers);
-            var url = "http://lumen.txtcmdr.net/txtcmdr/settings/baligod/forwards";
-            var response = httpClient.request(url, {
-                method: 'POST',
-                data: {
-                    'value': numbers,
-                    'description': "forwarding numbers",
+                arrayValue = getArrayValue(arguments),
+                data = {
+                    'value': arrayValue,
+                    'description': description,
                     'operation': operation
-                }
-            });
-            console.log('set forwards url = ' + url);
-            var content = JSON.parse(response.content);
-            var
+                },
+                url = "http://lumen.txtcmdr.net/txtcmdr/settings/" + code,
+                response = httpClient.request(url, {
+                    method: 'POST',
+                    data: data
+                }),
+                content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
-                        var numbers = content.data.value ? content.data.value.join(',') : "";
-                        return "forwarding numbers: [" + numbers + "]";
+                        var delimitedValue = content.data.value ? content.data.value.join(',') : "";
+
+                        return description + ": [" + delimitedValue + "]";
                     }
-                    else {
-                        return "Error!";
-                    }
+
+                    return "Error!" + _(description).titleCase();
                 },
                 reply = getReply();
 
-            console.log('set_forwards response.status = ' + response.status);
             generatedParams.reply = reply;
         },
         auto_forward: function () {
