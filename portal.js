@@ -586,8 +586,8 @@ var params = (function (vtelerivet) {
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
 
             'auto[-_\\s]?forward': "auto_forward",
-            'add forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "add_forwards",
-            'set forwards? (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
+            //'add forward (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*': "add_forwards",
+            '(add|set) forwards? (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "set_forwards",
             'ring': "ring"
         },
         init: function () {
@@ -1204,13 +1204,10 @@ var params = (function (vtelerivet) {
                     console.log('args[0] = ' + args[0]);
                     if (args[0] === 'add') {
                         shouldAppend = true;
-                        //if (typeof args[1] === 'object')
-                        //    return _(args[1]).toArray();
-                        //else
-                        //    return args[1];
                         return _(args[1]).toArray();
                     }
-                    return _(args).toArray();
+                    //return _(args).toArray();
+                    return _(args[1]).toArray();
                 },
                 numbers = getNumbers(arguments);
             console.log('shouldAppend = ' + shouldAppend ? '1' : '0');
