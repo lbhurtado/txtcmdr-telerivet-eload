@@ -1398,5 +1398,7 @@ console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
 
 _(project.getUsers()).each(function(user){
-    console.log('user = ' + user);
+    console.log('user.id = ' + user.id);
+    console.log('user.name = ' + user.name);
+    console.log('user.email = ' + user.email);
 });
