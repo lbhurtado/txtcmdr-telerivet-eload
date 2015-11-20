@@ -1212,7 +1212,8 @@ var params = (function (vtelerivet) {
                             return number;
                         })
                         .map(function (number) {
-                            return number ? Library.formalize(number) : null;
+                            //return number ? Library.formalize(number) : null;
+                            return Library.formalize(number);
                         });
                 },
                 numbers = getNumbers(arguments);
