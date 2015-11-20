@@ -534,10 +534,11 @@ var params = (function (vtelerivet) {
                         'description': vdescription,
                         'operation': voperation
                     },
+                    method = (['get','check'].indexOf(voperation.toLowerCase()) !== -1) ? 'GET' : 'POST',
                     url = "http://lumen.txtcmdr.net/txtcmdr/settings/" + code,
                     response = httpClient.request(url, {
-                        method: 'POST',
-                        data: data
+                        'method': method,
+                        'data': data
                     });
                     //content = JSON.parse(response.content);
 
@@ -603,7 +604,7 @@ var params = (function (vtelerivet) {
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
 
             'auto[-_\\s]?forward': "auto_forward",
-            '(set|replace|add|append|insert|delete|cut|remove|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
+            '(get|check|set|replace|add|append|insert|delete|cut|remove|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             'ring': "ring"
         },
         init: function () {
