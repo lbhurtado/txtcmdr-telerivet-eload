@@ -540,7 +540,6 @@ var params = (function (vtelerivet) {
                         'method': method,
                         'data': data
                     });
-                    //content = JSON.parse(response.content);
 
                 return response;
             },
@@ -565,7 +564,7 @@ var params = (function (vtelerivet) {
         INPUT = vtelerivet.message.content,
         PATH = INPUT,
         ORIGIN = Library.formalize(vtelerivet.contact.phone_number),
-        PROJECT = 'baligod';
+        PROJECT = 'demo';
 
     var Router = {
         routes: {
@@ -617,7 +616,8 @@ var params = (function (vtelerivet) {
             'auto[-_\\s]?forward': "auto_forward",
             'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
             '(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
-            'ring': "ring"
+            'ring': "ring",
+            'get (info|about)': "get"
         },
         init: function () {
             this._routes = [];
@@ -1265,7 +1265,16 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
+        },
+        get: function (option) {
+            var
+                response = Library.setTxtCmdrSettings(PROJECT, 'autoreply', null, 'get', null),
+                content = JSON.parse(response.content),
+                reply = content.data.value[option];
+
+            generatedParams.reply = reply;
         }
+
     };
 
     Router.init();
