@@ -526,7 +526,7 @@ var params = (function (vtelerivet) {
 
                 return false;
             },
-            setTxtCmdrSettings: function (vproject, vkey, vvalue, voperation, vdescription) {
+            getsetTxtCmdrSettingsAPIResponse: function (vproject, vkey, vvalue, voperation, vdescription) {
                 var
                     code = vproject + "/" + vkey,
                     data = {
@@ -542,6 +542,9 @@ var params = (function (vtelerivet) {
                     });
 
                 return response;
+            },
+            getTxtCmdrSettingsAPIResponse: function (vproject, vkey) {
+                return this.getsetTxtCmdrSettingsAPIResponse(vproject, vkey, null, 'get', null);
             },
             getSettingOptionFromArguments: function (args) {
                 return args[0];
@@ -1237,7 +1240,7 @@ var params = (function (vtelerivet) {
                 operation = Library.getSettingOptionFromArguments(arguments),
                 description  = "forwarding numbers",
 
-                response = Library.setTxtCmdrSettings(project, key, value, operation, description),
+                response = Library.getsetTxtCmdrSettingsAPIResponse(project, key, value, operation, description),
                 content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
@@ -1268,9 +1271,16 @@ var params = (function (vtelerivet) {
         },
         get: function (option) {
             var
-                response = Library.setTxtCmdrSettings(PROJECT, 'autoreply', null, 'get', null),
+                key = 'autoreply',
+                response = Library.getTxtCmdrSettingsAPIResponse(PROJECT, key),
                 content = JSON.parse(response.content),
-                reply = content.data.value[option];
+                getReply = function () {
+                    if (response.status === 200) {
+                        return dcontent.data.value[option];
+                    }
+                    return "Error!";
+                },
+                reply = getReply();
 
             generatedParams.reply = reply;
         }
