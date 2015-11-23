@@ -1308,7 +1308,8 @@ var params = (function (vtelerivet) {
 
                                 _(content.data.value).each(function(vvalue, vkey) {
                                     var txt = vkey + "='" + vvalue + "'";
-                                    ar.push(txt);
+                                    if (option == vvalue)
+                                        ar.push(txt);
                                 });
 
                                 delimitedValue = ar.join('\n');
