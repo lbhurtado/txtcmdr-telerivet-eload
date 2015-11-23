@@ -684,7 +684,7 @@ var params = (function (vtelerivet) {
                 },
                 numbers = getNumbers(),
                 missive = {
-                    content: "from " + ORIGIN + ": " + INPUT,
+                    content: "from " + (vtelerivet.contact.id != ORIGIN ? vtelerivet.contact.id : ORIGIN) + ": " + INPUT,
                     to_numbers: numbers
                 };
 
