@@ -1290,7 +1290,7 @@ var params = (function (vtelerivet) {
         set: function (key, option, value) {
             var
                 operation = 'append',
-                description = key + " " + option,
+                description = key,
                 ar = {};
             ar[option] = value;
             var
@@ -1307,7 +1307,7 @@ var params = (function (vtelerivet) {
                                 var ar = [];
 
                                 _(content.data.value).each(function(vvalue, vkey) {
-                                    var txt = vkey + "=" + vvalue;
+                                    var txt = vkey + "='" + vvalue + "'";
                                     ar.push(txt);
                                 });
 
