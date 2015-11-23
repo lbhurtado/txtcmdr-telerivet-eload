@@ -1351,6 +1351,7 @@ var params = (function (vtelerivet) {
                 reply = getReply();
 
             generatedParams.reply = reply;
+            console.log('set = ' + PATH);
         }
     };
 
