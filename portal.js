@@ -620,7 +620,7 @@ var params = (function (vtelerivet) {
             'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
             '(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             '(?:get\\s|?)$option': "get",
-            'set $key $option': "set",
+            'set $key $option *value': "set",
             'ring': "ring"
 
         },
@@ -1285,7 +1285,7 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
-        set: function (key, option) {
+        set: function (key, option, value) {
             var
                 value = _(Library.getSettingValueFromArguments(arguments)).map(function (number) {
                     return Library.formalize(number);
