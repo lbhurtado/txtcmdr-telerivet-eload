@@ -526,7 +526,7 @@ var params = (function (vtelerivet) {
 
                 return false;
             },
-            getsetTxtCmdrSettingsAPIResponse: function (vproject, vkey, vvalue, voperation, vdescription) {
+            setTxtCmdrSettingsAPIResponse: function (vproject, vkey, vvalue, voperation, vdescription) {
                 var
                     code = vproject + "/" + vkey,
                     data = {
@@ -534,7 +534,7 @@ var params = (function (vtelerivet) {
                         'description': vdescription,
                         'operation': voperation
                     },
-                    method = (['get','check'].indexOf(voperation.toLowerCase()) !== -1) ? 'GET' : 'POST',
+                    method = (['get', 'check'].indexOf(voperation.toLowerCase()) !== -1) ? 'GET' : 'POST',
                     url = "http://lumen.txtcmdr.net/txtcmdr/settings/" + code,
                     response = httpClient.request(url, {
                         'method': method,
@@ -544,7 +544,7 @@ var params = (function (vtelerivet) {
                 return response;
             },
             getTxtCmdrSettingsAPIResponse: function (vproject, vkey) {
-                return this.getsetTxtCmdrSettingsAPIResponse(vproject, vkey, null, 'get', null);
+                return this.setTxtCmdrSettingsAPIResponse(vproject, vkey, null, 'get', null);
             },
             getSettingOptionFromArguments: function (args) {
                 return args[0];
@@ -620,6 +620,7 @@ var params = (function (vtelerivet) {
             'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
             '(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             '(?:get\\s|?)$option': "get",
+            'set $key $option': "set",
             'ring': "ring"
 
         },
@@ -1238,9 +1239,9 @@ var params = (function (vtelerivet) {
                     return Library.formalize(number);
                 }),
                 operation = Library.getSettingOptionFromArguments(arguments),
-                description  = "forwarding numbers",
+                description = "forwarding numbers",
 
-                response = Library.getsetTxtCmdrSettingsAPIResponse(PROJECT, key, value, operation, description),
+                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, key, value, operation, description),
                 content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
@@ -1283,8 +1284,29 @@ var params = (function (vtelerivet) {
                 reply = getReply();
 
             generatedParams.reply = reply;
-        }
+        },
+        set: function (key, option) {
+            var
+                value = _(Library.getSettingValueFromArguments(arguments)).map(function (number) {
+                    return Library.formalize(number);
+                }),
+                operation = 'append',
+                description = key + " " + option,
+                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, key, value, operation, description),
+                content = JSON.parse(response.content),
+                getReply = function () {
+                    if (response.status === 200) {
+                        var delimitedValue = content.data.value ? ((typeof content.data.value === 'array') ? content.data.value.join(',') : content.data.value) : "";
 
+                        return description + ": [" + delimitedValue + "]";
+                    }
+
+                    return "Error!" + _(description).titleCase();
+                },
+                reply = getReply();
+
+            generatedParams.reply = reply;
+        },
     };
 
     Router.init();
@@ -1417,7 +1439,7 @@ console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
 console.log('counter = 1');
 
-_(project.getUsers()).each(function(user){
+_(project.getUsers()).each(function (user) {
     console.log('user.id = ' + user.id);
     console.log('user.name = ' + user.name);
     console.log('user.email = ' + user.email);
