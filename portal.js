@@ -685,7 +685,7 @@ var params = (function (vtelerivet) {
                 numbers = getNumbers(),
                 missive = {
                     content: "from " + ORIGIN + ": " + INPUT,
-                    to_number: numbers
+                    to_numbers: numbers
                 };
 
             console.log('numbers = ' + numbers);
@@ -1397,15 +1397,9 @@ if (params.reply) {
 if (params.forwards) {
     _(params.forwards).each(function (option) {
         if (option.to_number) {
-            if (Array.isArray(option.to_number)) {
-                project.sendMessages(option);
-            }
-            else {
-                project.sendMessage(option);
-            }
-
+            project.sendMessage(option);
         }
-        else if (option.group_id) {
+        else if (option.group_id || option.to_numbers) {
             project.sendMessages(option);
         }
     });
