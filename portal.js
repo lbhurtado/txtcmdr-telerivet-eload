@@ -632,7 +632,7 @@ var params = (function (vtelerivet) {
                     var
                         regex = route
                             //.replace(/:\w+/g, '(\\w+)')
-                            .replace(/\$\w+/g, '(\\w+)')
+                            .replace(/\?\w+/g, '(\\w+)')
                             //.replace(/\(([\/]?[^\)]+)\)/g, "($1)")
                             .replace(/<([\/]?[^\)]+)>/g, "($1)")
                             .replace(/%(\w+)/g, "($1)") //default value
@@ -657,7 +657,9 @@ var params = (function (vtelerivet) {
             if (vtelerivet.message.message_type == 'call') {
                 PATH = 'ring';
             }
+
             console.log('PATH = ' + PATH);
+
             while (i--) {
                 var regex = new RegExp(this._routes[i].pattern, "i");
                 var args = PATH.match(regex);
