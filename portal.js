@@ -631,7 +631,7 @@ var params = (function (vtelerivet) {
                     var
                         regex = route
                             .replace(/:\w+/g, '(\\w+)')
-                            .replace(/$\w+/g, '(\\w+)')
+                            .replace(/\$\w+/g, '(\\w+)')
                             //.replace(/\(([\/]?[^\)]+)\)/g, "($1)")
                             .replace(/<([\/]?[^\)]+)>/g, "($1)")
                             .replace(/%(\w+)/g, "($1)") //default value
