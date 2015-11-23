@@ -571,7 +571,7 @@ var params = (function (vtelerivet) {
 
     var Router = {
         routes: {
-            'join --group *username': "join",
+            'join $group *username': "join",
             'baligod *username': "baligod",
             'passage*params': "passage",
             'info': "info",
@@ -602,7 +602,7 @@ var params = (function (vtelerivet) {
             'ping': "syntax",
             'define *word': "define",
 
-            'broadcast --group *message': "broadcast",
+            'broadcast $group *message': "broadcast",
             '@$group *message': "broadcast",
 
             'default (location|news) *params': "default",
@@ -619,8 +619,8 @@ var params = (function (vtelerivet) {
             'auto[-_\\s]?forward': "auto_forward",
             'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
             '(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
-            '(?:get\\s|\\?)--option': "get",
-            'set --key --option *value': "set",
+            '(?:get\\s|\\?)$option': "get",
+            'set $key $option *value': "set",
             'ring': "ring"
 
         },
@@ -633,6 +633,7 @@ var params = (function (vtelerivet) {
                         regex = route
                             //.replace(/:\w+/g, '(\\w+)')
                             .replace(/--\w+/g, '(\\w+)')
+                            .replace(/\$\w+/g, '(\\w+)')
                             //.replace(/\(([\/]?[^\)]+)\)/g, "($1)")
                             .replace(/<([\/]?[^\)]+)>/g, "($1)")
                             .replace(/%(\w+)/g, "($1)") //default value
@@ -1290,7 +1291,8 @@ var params = (function (vtelerivet) {
             var
                 operation = 'append',
                 description = key + " " + option,
-                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, key, value, operation, description),
+                ar = {'key1':"value1"},
+                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, key, ar, operation, description),
                 content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
