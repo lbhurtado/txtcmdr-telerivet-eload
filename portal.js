@@ -1290,9 +1290,7 @@ var params = (function (vtelerivet) {
         set: function (key, option, value) {
             var
                 operation = 'append',
-                description = key,
-                ar = {};
-            ar[option] = value;
+                description = key;
             var
                 response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, key, ar, operation, description),
                 content = JSON.parse(response.content),
@@ -1327,7 +1325,7 @@ var params = (function (vtelerivet) {
                 reply = getReply();
 
             generatedParams.reply = reply;
-        },
+        }
     };
 
     Router.init();
