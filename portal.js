@@ -1298,7 +1298,7 @@ var params = (function (vtelerivet) {
                 content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
-                        var delimitedValue = content.data.value ? ((typeof content.data.value === 'array') ? content.data.value.join(',') : content.data.value) : "";
+                        var delimitedValue = content.data.value ? ((content.data.value.isArray()) ? content.data.value.join(',') : content.data.value) : "";
 
                         return description + ": [" + delimitedValue + "]";
                     }
