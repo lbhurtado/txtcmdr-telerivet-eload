@@ -620,7 +620,7 @@ var params = (function (vtelerivet) {
             'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
             '(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             'ring': "ring",
-            'get $key': "get"
+            'get $option': "get"
         },
         init: function () {
             this._routes = [];
@@ -638,7 +638,7 @@ var params = (function (vtelerivet) {
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
 
-                    //console.log('regex = ' + regex);
+                    console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
                         callback: this[methodName]
@@ -1415,6 +1415,7 @@ if (params.attributes) {
 
 console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
+console.log('counter = 1');
 
 _(project.getUsers()).each(function(user){
     console.log('user.id = ' + user.id);
