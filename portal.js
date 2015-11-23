@@ -1233,7 +1233,7 @@ var params = (function (vtelerivet) {
 
         forwards: function () {
             var
-                project = "baligod",
+                //project = "baligod",
                 key = "forwards",
                 value = _(Library.getSettingValueFromArguments(arguments)).map(function (number) {
                     return Library.formalize(number);
@@ -1241,7 +1241,7 @@ var params = (function (vtelerivet) {
                 operation = Library.getSettingOptionFromArguments(arguments),
                 description  = "forwarding numbers",
 
-                response = Library.getsetTxtCmdrSettingsAPIResponse(project, key, value, operation, description),
+                response = Library.getsetTxtCmdrSettingsAPIResponse(PROJECT, key, value, operation, description),
                 content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
