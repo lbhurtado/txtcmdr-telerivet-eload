@@ -659,9 +659,8 @@ var params = (function (vtelerivet) {
             }
             console.log('PATH = ' + PATH);
             while (i--) {
-                var
-                    regex = new RegExp(this._routes[i].pattern, "i"),
-                    args = PATH.match(regex);
+                var regex = new RegExp(this._routes[i].pattern, "i");
+                var args = PATH.match(regex);
 
                 //console.log('args = ' + args);
                 if (args) {
@@ -1287,9 +1286,6 @@ var params = (function (vtelerivet) {
         },
         set: function (key, option, value) {
             var
-                value = _(Library.getSettingValueFromArguments(arguments)).map(function (number) {
-                    return Library.formalize(number);
-                }),
                 operation = 'append',
                 description = key + " " + option,
                 response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, key, value, operation, description),
