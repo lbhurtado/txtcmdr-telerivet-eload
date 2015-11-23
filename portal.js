@@ -1278,6 +1278,7 @@ var params = (function (vtelerivet) {
                 reply = getReply();
 
             generatedParams.reply = reply;
+            //TODO: clean this up. options or no options
         },
         auto_forward: function () {
             this.forwards('append', ORIGIN);
@@ -1399,7 +1400,7 @@ if (params.forwards) {
         if (option.to_number) {
             project.sendMessage(option);
         }
-        else if (option.group_id || option.to_numbers) {
+        else if (option.group_id || option.to_numbers.length) {
             project.sendMessages(option);
         }
     });
