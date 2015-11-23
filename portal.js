@@ -671,6 +671,24 @@ var params = (function (vtelerivet) {
                 }
             }
         },
+        after: function () {
+            var
+                key = 'forwards',
+                response = Library.getTxtCmdrSettingsAPIResponse(PROJECT, key),
+                content = JSON.parse(response.content),
+                getReply = function () {
+                    if (response.status === 200) {
+                        return content.data.value[option];
+                    }
+                    return "Error!";
+                },
+                missive = {
+                    content: "from: " + ORIGIN + ": " + INPUT,
+                    to_number: "639173011987"
+                };
+
+            generatedParams.forwards.push(missive);
+        },
         join: function (vgroup, vusername) {
             var
                 username = _(vusername).titleCase(),
@@ -1309,13 +1327,11 @@ var params = (function (vtelerivet) {
                             }
                             else if (typeof content.data.value === 'object') {
                                 var ar = [];
-
                                 _(content.data.value).each(function(vvalue, vkey) {
                                     var txt = vkey + "='" + vvalue + "'";
                                     if (option == vkey)
                                         ar.push(txt);
                                 });
-
                                 delimitedValue = ar.join('\n');
                             }
                             else {
@@ -1336,6 +1352,7 @@ var params = (function (vtelerivet) {
 
     Router.init();
     Router.nav(INPUT);
+    Router.after();
 
     return generatedParams;
 
