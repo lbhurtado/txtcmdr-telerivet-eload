@@ -1297,7 +1297,7 @@ var params = (function (vtelerivet) {
 
                     return ar;
                 },
-                values = getValues,
+                values = getValues(),
                 response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, key, values, operation, description),
                 content = JSON.parse(response.content),
                 getReply = function () {
