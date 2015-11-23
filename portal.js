@@ -1291,7 +1291,7 @@ var params = (function (vtelerivet) {
             var
                 operation = 'append',
                 description = key + " " + option,
-                ar = {'key1':"value1"},
+                ar = {option:value},
                 response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, key, ar, operation, description),
                 content = JSON.parse(response.content),
                 getReply = function () {
