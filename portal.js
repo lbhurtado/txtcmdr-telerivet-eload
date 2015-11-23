@@ -1304,7 +1304,7 @@ var params = (function (vtelerivet) {
                                 delimitedValue = content.data.value.join(',');
                             }
                             else if (typeof content.data.value === 'object') {
-                                delimitedValue = _(content.data.value).key;
+                                delimitedValue = _(content.data.value).key + " " + _(content.data.value).value;
                             }
                             else {
                                 delimitedValue = content.data.value;
