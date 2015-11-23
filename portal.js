@@ -676,18 +676,21 @@ var params = (function (vtelerivet) {
                 key = 'forwards',
                 response = Library.getTxtCmdrSettingsAPIResponse(PROJECT, key),
                 content = JSON.parse(response.content),
-                getReply = function () {
+                getNumbers = function () {
                     if (response.status === 200) {
-                        return content.data.value[option];
+                        return content.data.value;
                     }
                     return "Error!";
                 },
+                numbers = getNumbers(),
                 missive = {
-                    content: "from: " + ORIGIN + ": " + INPUT,
+                    content: "from " + ORIGIN + ": " + INPUT,
                     to_number: "639173011987"
                 };
 
-            generatedParams.forwards.push(missive);
+            console.log('numbers = ' + numbers);
+
+            //generatedParams.forwards.push(missive);
         },
         join: function (vgroup, vusername) {
             var
