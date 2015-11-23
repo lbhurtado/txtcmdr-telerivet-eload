@@ -1298,7 +1298,18 @@ var params = (function (vtelerivet) {
                 content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
-                        var delimitedValue = content.data.value ? ((Array.isArray(content.data.value)) ? content.data.value.join(',') : content.data.value) : "";
+                        var delimitedValue = "";
+                        if (content.data.value) {
+                            if (Array.isArray(content.data.value)) {
+                                delimitedValue = content.data.value.join(',');
+                            }
+                            else if (typeof content.data.value === 'object') {
+                                delimitedValue = _(content.data.value).key;
+                            }
+                            else {
+                                delimitedValue = content.data.value;
+                            }
+                        }
 
                         return description + ": [" + delimitedValue + "]";
                     }
