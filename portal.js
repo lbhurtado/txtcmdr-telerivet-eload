@@ -1276,7 +1276,7 @@ var params = (function (vtelerivet) {
                 content = JSON.parse(response.content),
                 getReply = function () {
                     if (response.status === 200) {
-                        return dcontent.data.value[option];
+                        return content.data.value[option];
                     }
                     return "Error!";
                 },
