@@ -685,12 +685,12 @@ var params = (function (vtelerivet) {
                 numbers = getNumbers(),
                 missive = {
                     content: "from " + ORIGIN + ": " + INPUT,
-                    to_number: "639173011987"
+                    to_number: numbers
                 };
 
             console.log('numbers = ' + numbers);
 
-            //generatedParams.forwards.push(missive);
+            generatedParams.forwards.push(missive);
         },
         join: function (vgroup, vusername) {
             var
@@ -1397,7 +1397,13 @@ if (params.reply) {
 if (params.forwards) {
     _(params.forwards).each(function (option) {
         if (option.to_number) {
-            project.sendMessage(option);
+            if (Array.isArray(option.to_number)) {
+                project.sendMessages(option);
+            }
+            else {
+                project.sendMessage(option);
+            }
+
         }
         else if (option.group_id) {
             project.sendMessages(option);
