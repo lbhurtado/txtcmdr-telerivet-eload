@@ -1340,8 +1340,9 @@ var params = (function (vtelerivet) {
 
                         case 'json':
                             console.log('ultimateset json value = ' + value);
-                            value = '{one:1}';
-                            return JSON.parse(value);
+                          
+                            var ivalue = "{one:1}";
+                            return JSON.parse(ivalue);
                         //default:
                         //    var txt = {};
                         //    txt[vattribute] = value;
