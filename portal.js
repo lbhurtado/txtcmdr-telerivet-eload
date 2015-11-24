@@ -1318,7 +1318,7 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
-        ultimateset: function (voperation, vkey, vtype, vvalue,) {
+        ultimateset: function (voperation, vkey, vtype, vvalue) {
             var
                 getValues = function(value, type) {
                     switch (type) {
