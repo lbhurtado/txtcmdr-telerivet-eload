@@ -1356,7 +1356,8 @@ var params = (function (vtelerivet) {
                 },
                 values = getValues(vvalue, vformat),
                 response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, "default"),
-                content = JSON.parse(response.content);
+                content = JSON.parse(response.content),
+                reply = (response.status === 200) ? "Yehey! Successful operation." : "Sorry! Unsuccessful operation.";
 
             console.log('ultimateset operation = ' + voperation);
             console.log('ultimateset key = ' + vkey);
@@ -1364,6 +1365,8 @@ var params = (function (vtelerivet) {
             //console.log('ultimateset description = ' + vdescription);
             console.log('ultimateset response.status = ' + response.status);
             console.log('ultimateset end end end end end end end end end end end end end end end ');
+
+            generatedParams.reply = reply;
         },
         set: function (key, option, value) {
             var
