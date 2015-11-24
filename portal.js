@@ -1337,11 +1337,11 @@ var params = (function (vtelerivet) {
                             return value;
                     }
                 },
-                values = getValues(vvalue, vtype),
-                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
-                content = JSON.parse(response.content);
+                values = getValues(vvalue, vtype);
+                //response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
+                //content = JSON.parse(response.content);
 
-            console.log('ultimateset values = ' + content.data.values);
+            console.log('ultimateset value = ' + values);
 
         },
         set: function (key, option, value) {
