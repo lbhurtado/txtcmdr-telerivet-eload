@@ -621,7 +621,8 @@ var params = (function (vtelerivet) {
             '(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             '(?:get\\s|\\?)$option': "get",
             'set <autoreply|notes> $option\\s?=\\s?*value': "set",
-            'ring': "ring"
+            'ring': "ring",
+            '<append|replace> $key $attribute $type *value \"(.*?)\"': ultimateset
 
         },
         init: function () {
@@ -632,7 +633,7 @@ var params = (function (vtelerivet) {
                     var
                         regex = route
                             //.replace(/:\w+/g, '(\\w+)')
-                            .replace(/--\w+/g, '(\\w+)')
+                            //.replace(/--\w+/g, '(\\w+)')
                             .replace(/\$\w+/g, '(\\w+)')
                             //.replace(/\(([\/]?[^\)]+)\)/g, "($1)")
                             .replace(/<([\/]?[^\)]+)>/g, "($1)")
@@ -1309,6 +1310,37 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
+        ultimateset: function (voperation, vkey, vattribute, vtype, vvalue, vdescription) {
+            var
+                getValues = function(value, type) {
+                    switch (type) {
+                        case 'array':
+                            var arr = [];
+                            value.replace(/([^,]+)/g, function(s, match) {
+                                arr.push(match);
+                            });
+
+                            return arr;
+                        case 'json':
+                            var obj = {};
+                            value.replace(/(\w+=\w+)/g, function(s, match) {
+                                var ar = match.split('=');
+                                obj[ar[0]] = ar[1];
+                            });
+
+                            return obj;
+
+                        default:
+                            return value;
+                    }
+                },
+                values = getValues(vvalue, vtype),
+                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
+                content = JSON.parse(response.content);
+
+            console.log(content.data.values);
+
+        },
         set: function (key, option, value) {
             var
                 operation = 'append',
@@ -1351,10 +1383,6 @@ var params = (function (vtelerivet) {
                 reply = getReply();
 
             generatedParams.reply = reply;
-            console.log('set = ' + PATH);
-
-            //set (autoreply,notes,status) (\w+) [ ]*([^]*)
-            //set (\w+) (\w+) [ ]*([^]*)
         }
     };
 
