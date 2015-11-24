@@ -1361,7 +1361,7 @@ var params = (function (vtelerivet) {
             console.log('ultimateset operation = ' + voperation);
             console.log('ultimateset key = ' + vkey);
             console.log('ultimateset values = ' + values);
-            console.log('ultimateset description = ' + vdescription);
+            //console.log('ultimateset description = ' + vdescription);
             console.log('ultimateset response.status = ' + response.status);
             console.log('ultimateset end end end end end end end end end end end end end end end ');
         },
