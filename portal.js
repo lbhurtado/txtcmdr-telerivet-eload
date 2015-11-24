@@ -628,7 +628,7 @@ var params = (function (vtelerivet) {
             //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
             //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
-            '[append|replace] [autoreply|forwards] [list|array|json] *value': "ultimateset"
+            '[append|replace] [list|query|json] [autoreply|forwards] *value': "ultimateset"
         },
         init: function () {
             this._routes = [];
@@ -650,7 +650,7 @@ var params = (function (vtelerivet) {
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
 
-                    console.log('regex = ' + regex);
+                    //console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
                         callback: this[methodName]
@@ -1318,18 +1318,19 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
-        ultimateset: function (voperation, vkey, vtype, vvalue) {
+        ultimateset: function (voperation, vformat, vkey, vvalue) {
             var
-                getValues = function(value, type) {
-                    switch (type) {
-                        case 'array':
+                getValues = function(value, format) {
+                    switch (format) {
+                        case 'list':
                             var arr = [];
                             value.replace(/([^,]+)/g, function(s, match) {
                                 arr.push(match);
                             });
 
                             return arr;
-                        case 'list':
+
+                        case 'query':
                             var obj = {};
                             value.replace(/(\w+=\w+)/g, function(s, match) {
                                 var ar = match.split('=');
@@ -1339,32 +1340,28 @@ var params = (function (vtelerivet) {
                             return obj;
 
                         case 'json':
-                            var crappyJSON = value;
-                            var fixedJSON1 = crappyJSON.replace(/(['"])?([a-zA-Z0-9_\s]+)(['"])?:/g, '"$2":');
-                            var fixedJSON2 = fixedJSON1.replace(/:(['"])?([a-zA-Z0-9_\s]+)(['"])?/g, ':"$2"');
-                            var aNiceObject = JSON.parse(fixedJSON2);
-
-                            console.log('ultimateset crappyJSON = ' + crappyJSON);
-                            console.log('ultimateset fixedJSON = ' + fixedJSON2);
-
-                            return aNiceObject;
+                            //JSON.parse('{}');              // {}
+                            //JSON.parse('true');            // true
+                            //JSON.parse('"foo"');           // "foo"
+                            //JSON.parse('[1, 5, "false"]'); // [1, 5, "false"]
+                            //JSON.parse('null');            // null
+                            //var crappyJSON = value;
+                            //var fixedJSON1 = crappyJSON.replace(/(['"])?([a-zA-Z0-9_\s]+)(['"])?:/g, '"$2":');
+                            //var fixedJSON2 = fixedJSON1.replace(/:(['"])?([a-zA-Z0-9_\s]+)(['"])?/g, ':"$2"');
+                            //var aNiceObject = JSON.parse(fixedJSON2);
+                            //return aNiceObject;
 
                             return JSON.parse(value);
-                        //default:
-                        //    var txt = {};
-                        //    txt[vattribute] = value;
-                        //
-                        //    return txt;
                     }
                 },
-                values = getValues(vvalue, vtype),
-                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, "default");
-                //content = JSON.parse(response.content);
+                values = getValues(vvalue, vformat),
+                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, "default"),
+                content = JSON.parse(response.content);
 
             console.log('ultimateset operation = ' + voperation);
             console.log('ultimateset key = ' + vkey);
             console.log('ultimateset values = ' + values);
-            //console.log('ultimateset description = ' + vdescription);
+            console.log('ultimateset description = ' + vdescription);
             console.log('ultimateset response.status = ' + response.status);
             console.log('ultimateset end end end end end end end end end end end end end end end ');
         },
