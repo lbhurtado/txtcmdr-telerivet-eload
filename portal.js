@@ -1340,11 +1340,12 @@ var params = (function (vtelerivet) {
 
                         case 'json':
                             var crappyJSON = value;
-                            var fixedJSON = crappyJSON.replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2": ');
-                            var aNiceObject = JSON.parse(fixedJSON);
+                            var fixedJSON1 = crappyJSON.replace(/(['"])?([a-zA-Z0-9_\s]+)(['"])?:/g, '"$2": ');
+                            var fixedJSON2 = fixedJSON1.replace(/:(['"])?([a-zA-Z0-9_\s]+)(['"])?/g, ' :"$2"');
+                            var aNiceObject = JSON.parse(fixedJSON2);
 
                             console.log('ultimateset crappyJSON = ' + crappyJSON);
-                            console.log('ultimateset fixedJSON = ' + fixedJSON);
+                            console.log('ultimateset fixedJSON = ' + fixedJSON2);
 
                             return aNiceObject;
 
