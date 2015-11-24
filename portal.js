@@ -1401,7 +1401,7 @@ var params = (function (vtelerivet) {
 
     Router.init();
     Router.nav(INPUT);
-    Router.after();
+    //Router.after();
 
     return generatedParams;
 
