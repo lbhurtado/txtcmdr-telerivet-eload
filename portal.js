@@ -1340,7 +1340,7 @@ var params = (function (vtelerivet) {
 
                         case 'json':
                             console.log('ultimateset json value = ' + value);
-                            
+
                             return JSON.parse(value);
                         //default:
                         //    var txt = {};
@@ -1356,7 +1356,7 @@ var params = (function (vtelerivet) {
             console.log('ultimateset operation = ' + voperation);
             console.log('ultimateset key = ' + vkey);
             console.log('ultimateset values = ' + values);
-            console.log('ultimateset description = ' + vdescription);
+            //console.log('ultimateset description = ' + vdescription);
             console.log('ultimateset response.status = ' + response.status);
             console.log('ultimateset end end end end end end end end end end end end end end end ');
         },
