@@ -621,11 +621,11 @@ var params = (function (vtelerivet) {
             'towns (0[1-9][0-9][0-9])': "towns",
             'town (0[1-9][0-9][0-9][0-9][0-9])': "town",
 
-            'auto[-_\\s]?forward': "auto_forward",
-            'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
-            '(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
-            '(?:get\\s|\\?)$option': "get",
-            'set <autoreply|notes> $option\\s?=\\s?*value': "set",
+            //'auto[-_\\s]?forward': "auto_forward",
+            //'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
+            //'(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
+            //'(?:get\\s|\\?)$option': "get",
+            //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
             '[append|replace] [autoreply|forwards] $attribute [text|array|json] *value \"(.*?)\"': "ultimateset"
 
@@ -1354,7 +1354,7 @@ var params = (function (vtelerivet) {
             console.log('ultimateset response.status = ' + response.status);
             console.log('ultimateset end end end end end end end end end end end end end end end ');
         },
-        set: function (key, option, value) {
+        qset: function (key, option, value) {
             var
                 operation = 'append',
                 description = key,
