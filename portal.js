@@ -627,8 +627,8 @@ var params = (function (vtelerivet) {
             //'(?:get\\s|\\?)$option': "get",
             //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
-            '[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
-
+            //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
+            '[append|replace] [autoreply|forwards] [list|array|json] *value': "ultimateset"
         },
         init: function () {
             this._routes = [];
@@ -1318,7 +1318,7 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
-        ultimateset: function (voperation, vkey, vtype, vvalue, vdescription) {
+        ultimateset: function (voperation, vkey, vtype, vvalue,) {
             var
                 getValues = function(value, type) {
                     switch (type) {
@@ -1340,9 +1340,8 @@ var params = (function (vtelerivet) {
 
                         case 'json':
                             console.log('ultimateset json value = ' + value);
-                          
-                            var ivalue = "{one:1}";
-                            return JSON.parse(ivalue);
+                            
+                            return JSON.parse(value);
                         //default:
                         //    var txt = {};
                         //    txt[vattribute] = value;
@@ -1351,7 +1350,7 @@ var params = (function (vtelerivet) {
                     }
                 },
                 values = getValues(vvalue, vtype),
-                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription);
+                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, "default");
                 //content = JSON.parse(response.content);
 
             console.log('ultimateset operation = ' + voperation);
