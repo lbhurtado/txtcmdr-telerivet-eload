@@ -627,7 +627,7 @@ var params = (function (vtelerivet) {
             //'(?:get\\s|\\?)$option': "get",
             //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
-            '[append|replace] [autoreply|forwards] $attribute [text|array|json] *value \"(.*?)\"': "ultimateset"
+            '[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
 
         },
         init: function () {
@@ -1318,7 +1318,7 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
-        ultimateset: function (voperation, vkey, vattribute, vtype, vvalue, vdescription) {
+        ultimateset: function (voperation, vkey, vtype, vvalue, vdescription) {
             var
                 getValues = function(value, type) {
                     switch (type) {
@@ -1329,7 +1329,7 @@ var params = (function (vtelerivet) {
                             });
 
                             return arr;
-                        case 'json':
+                        case 'list':
                             var obj = {};
                             value.replace(/(\w+=\w+)/g, function(s, match) {
                                 var ar = match.split('=');
@@ -1338,11 +1338,11 @@ var params = (function (vtelerivet) {
 
                             return obj;
 
-                        default:
-                            var txt = {};
-                            txt[vattribute] = value;
-
-                            return txt;
+                        //default:
+                        //    var txt = {};
+                        //    txt[vattribute] = value;
+                        //
+                        //    return txt;
                     }
                 },
                 values = getValues(vvalue, vtype),
@@ -1351,7 +1351,6 @@ var params = (function (vtelerivet) {
 
             console.log('ultimateset operation = ' + voperation);
             console.log('ultimateset key = ' + vkey);
-            console.log('ultimateset attribute = ' + vattribute);
             console.log('ultimateset value = ' + values);
             console.log('ultimateset description = ' + vdescription);
             console.log('ultimateset response.status = ' + response.status);
