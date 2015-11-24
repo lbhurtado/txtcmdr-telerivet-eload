@@ -622,7 +622,7 @@ var params = (function (vtelerivet) {
             '(?:get\\s|\\?)$option': "get",
             'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
-            '<append|replace> $key $attribute $type *value \"(.*?)\"': ultimateset
+            '<append|replace> <autoreply|forwards> $attribute <text|array|json> *value \"(.*?)\"': ultimateset
 
         },
         init: function () {
@@ -1338,7 +1338,7 @@ var params = (function (vtelerivet) {
                 response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
                 content = JSON.parse(response.content);
 
-            console.log(content.data.values);
+            console.log('ultimateset values = ' + content.data.values);
 
         },
         set: function (key, option, value) {
