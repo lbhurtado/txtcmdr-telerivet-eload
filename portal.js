@@ -1339,7 +1339,7 @@ var params = (function (vtelerivet) {
                             return obj;
 
                         case 'json':
-                            return JSON.parse(vvalue);
+                            return JSON.parse(value);
                         //default:
                         //    var txt = {};
                         //    txt[vattribute] = value;
