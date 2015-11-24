@@ -1343,6 +1343,7 @@ var params = (function (vtelerivet) {
 
             console.log('ultimateset operation = ' + voperation);
             console.log('ultimateset key = ' + vkey);
+            console.log('ultimateset attribute = ' + vattribute);
             console.log('ultimateset value = ' + values);
             console.log('ultimateset description = ' + vdescription);
 
