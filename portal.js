@@ -1339,7 +1339,10 @@ var params = (function (vtelerivet) {
                             return obj;
 
                         default:
-                            return value;
+                            var txt = {};
+                            txt[vattribute] = value;
+
+                            return txt;
                     }
                 },
                 values = getValues(vvalue, vtype),
@@ -1354,7 +1357,7 @@ var params = (function (vtelerivet) {
             console.log('ultimateset response.status = ' + response.status);
             console.log('ultimateset end end end end end end end end end end end end end end end ');
         },
-        qset: function (key, option, value) {
+        set: function (key, option, value) {
             var
                 operation = 'append',
                 description = key,
