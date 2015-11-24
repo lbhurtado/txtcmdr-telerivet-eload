@@ -622,7 +622,7 @@ var params = (function (vtelerivet) {
             '(?:get\\s|\\?)$option': "get",
             'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
-            '<append|replace> <autoreply|forwards> $attribute <text|array|json> *value \"(.*?)\"': ultimateset
+            '<append|replace> <autoreply|forwards> $attribute <text|array|json> *value \"(.*?)\"': "ultimateset"
 
         },
         init: function () {
