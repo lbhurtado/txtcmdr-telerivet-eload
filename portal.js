@@ -622,7 +622,7 @@ var params = (function (vtelerivet) {
             '(?:get\\s|\\?)$option': "get",
             'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
-            '<append|replace> <autoreply|forwards> $attribute <text|array|json> *value \"(.*?)\"': "ultimateset"
+            '[append|replace] [autoreply|forwards] $attribute [text|array|json] *value \"(.*?)\"': "ultimateset"
 
         },
         init: function () {
@@ -636,6 +636,9 @@ var params = (function (vtelerivet) {
                             //.replace(/--\w+/g, '(\\w+)')
                             .replace(/\$\w+/g, '(\\w+)')
                             //.replace(/\(([\/]?[^\)]+)\)/g, "($1)")
+
+                            .replace(/\[(.*?)\]/g, "($1)")
+
                             .replace(/<([\/]?[^\)]+)>/g, "($1)")
                             .replace(/%(\w+)/g, "($1)") //default value
                             .replace(/\*\w+/, '[ \t]*([^\n\r]*)') //everything after >
