@@ -1341,7 +1341,10 @@ var params = (function (vtelerivet) {
                 //response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
                 //content = JSON.parse(response.content);
 
+            console.log('ultimateset operation = ' + voperation);
+            console.log('ultimateset key = ' + vkey);
             console.log('ultimateset value = ' + values);
+            console.log('ultimateset description = ' + vdescription);
 
         },
         set: function (key, option, value) {
