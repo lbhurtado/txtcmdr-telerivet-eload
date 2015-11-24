@@ -1339,7 +1339,14 @@ var params = (function (vtelerivet) {
                             return obj;
 
                         case 'json':
-                            console.log('ultimateset json value = ' + value);
+                            var crappyJSON = value;
+                            var fixedJSON = crappyJSON.replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2": ');
+                            var aNiceObject = JSON.parse(fixedJSON);
+
+                            console.log('ultimateset crappyJSON = ' + crappyJSON);
+                            console.log('ultimateset fixedJSON = ' + fixedJSON);
+
+                            return aNiceObject;
 
                             return JSON.parse(value);
                         //default:
