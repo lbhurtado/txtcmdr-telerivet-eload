@@ -1338,7 +1338,7 @@ var params = (function (vtelerivet) {
                     }
                 },
                 values = getValues(vvalue, vtype),
-                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
+                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription);
                 //content = JSON.parse(response.content);
 
             console.log('ultimateset operation = ' + voperation);
