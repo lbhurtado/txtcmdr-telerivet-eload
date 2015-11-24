@@ -541,6 +541,8 @@ var params = (function (vtelerivet) {
                         'data': data
                     });
 
+                console.log('setTxtCmdrSettingsAPIResponse url = ' + url);
+                console.log('setTxtCmdrSettingsAPIResponse data = ' + data);
                 return response;
             },
             getTxtCmdrSettingsAPIResponse: function (vproject, vkey) {
