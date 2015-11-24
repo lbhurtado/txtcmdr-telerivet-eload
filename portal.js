@@ -540,9 +540,12 @@ var params = (function (vtelerivet) {
                         'method': method,
                         'data': data
                     });
-
+                console.log('setTxtCmdrSettingsAPIResponse operation = ' + data.operation);
+                console.log('setTxtCmdrSettingsAPIResponse code = ' + code);
+                console.log('setTxtCmdrSettingsAPIResponse value = ' + data.value);
+                console.log('setTxtCmdrSettingsAPIResponse description = ' + data.description);
                 console.log('setTxtCmdrSettingsAPIResponse url = ' + url);
-                console.log('setTxtCmdrSettingsAPIResponse data = ' + data);
+                console.log('setTxtCmdrSettingsAPIResponse method = ' + method);
                 return response;
             },
             getTxtCmdrSettingsAPIResponse: function (vproject, vkey) {
@@ -1349,6 +1352,7 @@ var params = (function (vtelerivet) {
             console.log('ultimateset value = ' + values);
             console.log('ultimateset description = ' + vdescription);
             console.log('ultimateset response.status = ' + response.status);
+            console.log('ultimateset end end end end end end end end end end end end end end end ');
         },
         set: function (key, option, value) {
             var
