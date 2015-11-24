@@ -1337,8 +1337,8 @@ var params = (function (vtelerivet) {
                             return value;
                     }
                 },
-                values = getValues(vvalue, vtype);
-                //response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
+                values = getValues(vvalue, vtype),
+                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
                 //content = JSON.parse(response.content);
 
             console.log('ultimateset operation = ' + voperation);
@@ -1346,7 +1346,7 @@ var params = (function (vtelerivet) {
             console.log('ultimateset attribute = ' + vattribute);
             console.log('ultimateset value = ' + values);
             console.log('ultimateset description = ' + vdescription);
-
+            console.log('ultimateset response.status = ' + response.status);
         },
         set: function (key, option, value) {
             var
