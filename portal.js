@@ -300,7 +300,8 @@ var params = (function (vtelerivet) {
                 project: "PJf3e398e4fb9f4a07",
                 group: {
                     'Sent Airtime': "CGd8a70f14651c80d5",
-                    'subscriber': "CGa9242f10f828f6ab"
+                    'subscriber': "CGa9242f10f828f6ab",
+                    'gethsemane': "CG9d590f8998e75621"
                 },
                 phone: {
                     'beverly_hills': "PN59a2e385cb40a474",
@@ -577,6 +578,7 @@ var params = (function (vtelerivet) {
     var Router = {
         routes: {
             'join $group *username': "join",
+            '(gethsemane|getshemane|gehtsemane)': "gethsemane",
             'baligod *username': "baligod",
             'passage*params': "passage",
             'info': "info",
@@ -713,6 +715,33 @@ var params = (function (vtelerivet) {
             generatedParams.name = username;
             generatedParams.group_ids = [group_id];
             generatedParams.reply = reply;
+            generatedParams.state = state;
+        },
+        gethsemane: function () {
+            var
+                group = "gethsemane",
+                group_id = Library.getGroupId(group),
+                state = null,
+                reply = [];
+
+            reply.push("Thank you for signing up with Gethsemane Parish.");
+            reply.push("You may send the following keywords for details:");
+            reply.push("");
+            reply.push("INFO");
+            reply.push("SCHEDULE");
+            reply.push("NEWS");
+            reply.push("CONFIDE");
+            reply.push("SUGGEST");
+            reply.push("SUPPORT");
+            reply.push("NOURISH");
+            reply.push("PREX");
+            reply.push("CFC");
+            reply.push("ASK");
+            reply.push("DISASTER");
+            reply.push("NOVENA");
+
+            generatedParams.group_ids = [group_id];
+            generatedParams.reply = reply.join("\n");
             generatedParams.state = state;
         },
         baligod: function (vusername) {
