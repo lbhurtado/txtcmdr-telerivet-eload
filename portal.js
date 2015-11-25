@@ -1328,6 +1328,7 @@ var params = (function (vtelerivet) {
                                 arr.push(match);
                             });
 
+                            console.log('arr = ' + arr);
                             return arr;
 
                         case 'query':
