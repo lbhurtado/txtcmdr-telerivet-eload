@@ -771,12 +771,18 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply;
         },
         info: function (param) {
-            var data = {
-                'q1': "question 1",
-                'q2': "question 2"
-            };
+            var
+                data = {
+                    'q1': "question 1",
+                    'q2': "question 2"
+                },
+                group_id = Library.getGroupId("gethsemane"),
+                group = project.initGroupById(group_id),
+                reply = "";
 
-            generatedParams.reply = _(data).inSeveralLines();
+            if (telerivet.contact.isInGroup(group)) {
+                generatedParams.reply = _(data).inSeveralLines();
+            }
         },
         recruit: function (vmobile) {
             var
