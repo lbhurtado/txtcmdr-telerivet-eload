@@ -630,7 +630,7 @@ var params = (function (vtelerivet) {
             //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
             //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
-            '[append|replace] [text,list|querystring|json] [autoreply|forwards] *value': "ultimateset"
+            '[append|replace] [text|list|querystring|json] [autoreply|forwards] *value': "ultimateset"
         },
         init: function () {
             this._routes = [];
@@ -1581,7 +1581,7 @@ if (params.attributes) {
 
 console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 1');
+console.log('counter = 2');
 
 _(project.getUsers()).each(function (user) {
     console.log('user.id = ' + user.id);
