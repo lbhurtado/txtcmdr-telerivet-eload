@@ -1358,6 +1358,7 @@ var params = (function (vtelerivet) {
                 getValues = function(value, format) {
                     switch (format) {
                         case 'text':
+                            console.log("LESTER was here!");
                             return JSON.parse("\"" + value + "\"");
                         case 'list':
                             var arr = [];
