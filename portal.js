@@ -630,7 +630,7 @@ var params = (function (vtelerivet) {
             //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
             //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
-            '[append|replace] [list|query|json] [autoreply|forwards] *value': "ultimateset"
+            '[append|replace] [list|querystring|json] [autoreply|forwards] *value': "ultimateset"
         },
         init: function () {
             this._routes = [];
@@ -1357,6 +1357,8 @@ var params = (function (vtelerivet) {
             var
                 getValues = function(value, format) {
                     switch (format) {
+                        case 'text':
+                            return JSON.parse("\"" + value + "\"");
                         case 'list':
                             var arr = [];
                             value.replace(/([^,]+)/g, function(s, match) {
@@ -1366,7 +1368,7 @@ var params = (function (vtelerivet) {
                             console.log('arr = ' + arr);
                             return arr;
 
-                        case 'query':
+                        case 'querystring':
                             var obj = {};
                             value.replace(/(\w+=\w+)/g, function(s, match) {
                                 var ar = match.split('=');
