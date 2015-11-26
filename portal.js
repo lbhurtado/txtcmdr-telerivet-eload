@@ -1362,7 +1362,11 @@ var params = (function (vtelerivet) {
                         case 'array':
                             return JSON.parse("[" + value + "]");
                         case 'paramvalue':
-                            return JSON.parse("{" + value + "}");
+                            var
+                                crappyJSON = value.replace('=',':'),
+                                fixedJSON1 = crappyJSON.replace(/(['"])?([a-zA-Z0-9_\s]+)(['"])?:/g, '"$2":');
+                            
+                            return JSON.parse("{" + fixedJSON1 + "}");
                         case 'list':
                             var arr = [];
                             value.replace(/([^,]+)/g, function(s, match) {
