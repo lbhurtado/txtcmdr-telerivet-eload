@@ -1362,8 +1362,8 @@ var params = (function (vtelerivet) {
                         case 'array':
                             var
                                 crappyArray = value.split(','),
-                                fixedArray1 = _(crappyArray).map(function(item){return '\"' + item + '\"';});
-                            
+                                fixedArray1 = _(crappyArray).map(function(item){return '\"' + item.trim() + '\"';});
+
                             return JSON.parse("[" + fixedArray1.join(',') + "]");
                         case 'querystring':
                             var
