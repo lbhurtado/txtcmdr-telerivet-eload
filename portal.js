@@ -1370,7 +1370,7 @@ var params = (function (vtelerivet) {
                             console.log('crappyJSON = ' + crappyJSON);
                             console.log('fixedJSON1 = ' + fixedJSON1);
                             console.log('fixedJSON2 = ' + fixedJSON2);
-                            return JSON.parse("{" + fixedJSON1 + "}");
+                            return JSON.parse("{" + fixedJSON2 + "}");
                         case 'list':
                             var arr = [];
                             value.replace(/([^,]+)/g, function(s, match) {
