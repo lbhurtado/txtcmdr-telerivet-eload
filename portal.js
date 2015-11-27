@@ -1429,15 +1429,22 @@ var params = (function (vtelerivet) {
                 },
                 format = getFormat(),
                 getReply = function (format, content) {
+                    var
+                        str = "",
+                        compiled = _.template(content.data.key + ": <%= data %>");
                     switch (format) {
                         case 'string':
-                            var str = content.data.value;
+                            str = content.data.value;
+                            return compiled({'data': str});
                             return content.data.key + ": " + str;
                         case 'array':
-                            var arr = content.data.value;
+                            str = content.data.value.join(",");
+                            return compiled({'data': str});
                             return content.data.key + ": " + arr.join(",");
                         case 'querystring':
                         case 'json':
+                            str = JSON.stringify(content.data.value);
+                            return compiled({'data': str});
                             return content.data.key + ": " + JSON.stringify(content.data.value);
                     }
                 },
