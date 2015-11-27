@@ -1394,16 +1394,16 @@ var params = (function (vtelerivet) {
                     case 'string':
                         var str = vcontent.data.value;
 
-                        return str;
+                        return vcontent.data.key + ": " + str;
 
                     case 'array':
                         var arr = vcontent.data.value;
 
-                        return arr.join(",");
+                        return vcontent.data.key + ": " + arr.join(",");
 
                     case 'querystring':
                     case 'json':
-                        return JSON.stringify(vcontent.data.value);
+                        return vcontent.data.key + ": " + JSON.stringify(vcontent.data.value);
 
                 }
             };
