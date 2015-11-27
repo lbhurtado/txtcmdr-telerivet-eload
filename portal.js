@@ -630,7 +630,7 @@ var params = (function (vtelerivet) {
             //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
             //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
-            '[append|replace] [string|array|querystring|json] [autoreply|forwards] *value': "ultimateset"
+            '[append|replace] [string|array|list|querystring|json] [autoreply|forwards] *value': "ultimateset"
         },
         init: function () {
             this._routes = [];
@@ -1362,9 +1362,11 @@ var params = (function (vtelerivet) {
                         case 'array':
                             var
                                 crappyArray = value.split(','),
-                                fixedArray1 = _(crappyArray).map(function(item){return '\"' + item.trim() + '\"';});
+                                fixedArray1 = _(crappyArray).map(function(item){return '\"' + item.trim() + '\"';}),
+                                commadelimitedString = fixedArray1.join(',');
 
-                            return JSON.parse("[" + fixedArray1.join(',') + "]");
+                            return JSON.parse("[" + commadelimitedString + "]");
+
                         case 'querystring':
                             var
                                 crappyJSON = value.replace(/=/g, ':'),
@@ -1372,15 +1374,12 @@ var params = (function (vtelerivet) {
                                 fixedJSON2 = fixedJSON1.replace(/:(['"])?([^&]+)(['"])?/g, ':"$2"'),
                                 fixedJSON3 = fixedJSON2.replace(/&/g, ',');
 
-                            console.log('crappyJSON = ' + crappyJSON);
-                            console.log('fixedJSON1 = ' + fixedJSON1);
-                            console.log('fixedJSON2 = ' + fixedJSON2);
-                            console.log('fixedJSON3 = ' + fixedJSON3);
                             return JSON.parse("{" + fixedJSON3 + "}");
+
                         case 'list':
                             var arr = [];
                             value.replace(/([^,]+)/g, function(s, match) {
-                                arr.push(match);
+                                arr.push(match.trim());
                             });
 
                             console.log('arr = ' + arr);
