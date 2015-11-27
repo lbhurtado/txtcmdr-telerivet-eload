@@ -1358,6 +1358,7 @@ var params = (function (vtelerivet) {
                 getValues = function(value, format) {
                     switch (format) {
                         case 'string':
+                            return value;
                             return JSON.parse("\"" + value + "\"");
                         case 'array':
                             var arr = [];
@@ -1367,24 +1368,14 @@ var params = (function (vtelerivet) {
 
                             return arr;
 
-                        //case 'querystring':
-                        //    var
-                        //        crappyJSON = value.replace(/=/g, ':'),
-                        //        fixedJSON1 = crappyJSON.replace(/(['"])?([^&]+)(['"])?:/g, '"$2":'),
-                        //        fixedJSON2 = fixedJSON1.replace(/:(['"])?([^&]+)(['"])?/g, ':"$2"'),
-                        //        fixedJSON3 = fixedJSON2.replace(/&/g, ',');
-                        //
-                        //    return JSON.parse("{" + fixedJSON3 + "}");
-
-
                         case 'querystring':
-                            var object = {};
+                            var obj = {};
 
                             value.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"), function ($0, $1, $2, $3) {
-                                object[$1.trim()] = $3.trim();
+                                obj[$1.trim()] = $3.trim();
                             });
 
-                            return object;
+                            return obj;
 
                         case 'json':
                             //JSON.parse('{}');              // {}
