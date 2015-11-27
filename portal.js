@@ -636,7 +636,7 @@ var params = (function (vtelerivet) {
             'ring': "ring",
             //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
             '[append|replace|delete] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
-            'get $format $key': "getsetting"
+            'get $key': "getsetting"
         },
         init: function () {
             this._routes = [];
@@ -1410,9 +1410,24 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
-        getsetting: function(vformat, vkey) {
+        getsetting: function(vkey) {
             var
                 content = Library.getTxtCmdrSettingsAPIContent(PROJECT, vkey),
+                getFormat = function () {
+                    if (typeof content.data.value === 'string') {
+                        return 'string';
+                    }
+                    else if (typeof content.data.value === 'object') {
+                        return 'json';
+                    }
+                    else if (Array.isArray(content.data.value)) {
+                        return 'array';
+                    }
+                    else {
+                        return 'undefined';
+                    }
+                },
+                format = getFormat(),
                 getReply = function (format, content) {
                     switch (format) {
                         case 'string':
@@ -1426,7 +1441,7 @@ var params = (function (vtelerivet) {
                             return content.data.key + ": " + JSON.stringify(content.data.value);
                     }
                 },
-                reply = getReply(vformat, content);
+                reply = getReply(format, content);
 
             generatedParams.reply = reply;
         }
