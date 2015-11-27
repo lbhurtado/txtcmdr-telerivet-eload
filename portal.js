@@ -1403,7 +1403,7 @@ var params = (function (vtelerivet) {
 
                     case 'querystring':
                     case 'json':
-                        return JSON.stringify(vcontent);
+                        return JSON.stringify(vcontent.data.value);
 
                 }
             };
