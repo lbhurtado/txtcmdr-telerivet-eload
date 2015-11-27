@@ -1366,9 +1366,9 @@ var params = (function (vtelerivet) {
                                 crappyJSON = value.replace(/=/g, ':'),
                                 //fixedJSON1 = crappyJSON.replace(/(['"])?([a-zA-Z0-9_\s]+)(['"])?:/g, '"$2":'),
                                 //fixedJSON2 = fixedJSON1.replace(/:(['"])?([a-zA-Z0-9_\s]+)(['"])?/g, ':"$2"');
-                                fixedJSON1 = crappyJSON.replace(/(['"])?([^;]+)(['"])?:/g, '"$2":'),
-                                fixedJSON2 = fixedJSON1.replace(/:(['"])?([^;]+)(['"])?/g, ':"$2"'),
-                                fixedJSON3 = fixedJSON2.replace(/;/g, ',');
+                                fixedJSON1 = crappyJSON.replace(/(['"])?([^&]+)(['"])?:/g, '"$2":'),
+                                fixedJSON2 = fixedJSON1.replace(/:(['"])?([^&]+)(['"])?/g, ':"$2"'),
+                                fixedJSON3 = fixedJSON2.replace(/&/g, ',');
 
                             console.log('crappyJSON = ' + crappyJSON);
                             console.log('fixedJSON1 = ' + fixedJSON1);
