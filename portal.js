@@ -630,7 +630,7 @@ var params = (function (vtelerivet) {
             //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
             //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
-            '[append|replace] [string|array|list|querystring|paramvalue|json] [autoreply|forwards] *value': "ultimateset"
+            '[append|replace] [string|array|querystring|json] [autoreply|forwards] *value': "ultimateset"
         },
         init: function () {
             this._routes = [];
@@ -1360,12 +1360,14 @@ var params = (function (vtelerivet) {
                         case 'string':
                             return JSON.parse("\"" + value + "\"");
                         case 'array':
-                            return JSON.parse("[" + value + "]");
-                        case 'paramvalue':
+                            var
+                                crappyArray = value.split(','),
+                                fixedArray1 = _(crappyArray).map(function(item){return '\"' + item + '\"';});
+                            
+                            return JSON.parse("[" + fixedArray1.join(',') + "]");
+                        case 'querystring':
                             var
                                 crappyJSON = value.replace(/=/g, ':'),
-                                //fixedJSON1 = crappyJSON.replace(/(['"])?([a-zA-Z0-9_\s]+)(['"])?:/g, '"$2":'),
-                                //fixedJSON2 = fixedJSON1.replace(/:(['"])?([a-zA-Z0-9_\s]+)(['"])?/g, ':"$2"');
                                 fixedJSON1 = crappyJSON.replace(/(['"])?([^&]+)(['"])?:/g, '"$2":'),
                                 fixedJSON2 = fixedJSON1.replace(/:(['"])?([^&]+)(['"])?/g, ':"$2"'),
                                 fixedJSON3 = fixedJSON2.replace(/&/g, ',');
