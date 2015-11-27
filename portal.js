@@ -552,6 +552,11 @@ var params = (function (vtelerivet) {
             getTxtCmdrSettingsAPIResponse: function (vproject, vkey) {
                 return this.setTxtCmdrSettingsAPIResponse(vproject, vkey, null, 'get', null);
             },
+            getTxtCmdrSettingsAPIContent: function (vproject, vkey) {
+                var response = this.setTxtCmdrSettingsAPIResponse(vproject, vkey, null, 'get', null);
+
+                return JSON.parse(response.content);
+            },
             getSettingOptionFromArguments: function (args) {
                 return args[0];
             },
@@ -630,7 +635,8 @@ var params = (function (vtelerivet) {
             //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
             //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
-            '[append|replace|delete] [string|array|list|querystring|json] [autoreply|forwards] *value': "ultimateset"
+            '[append|replace|delete] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
+            'get $setting': "getsetting"
         },
         init: function () {
             this._routes = [];
@@ -1353,9 +1359,9 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
-        ultimateset: function (voperation, vformat, vkey, vvalue, vdescription) {
+        setsetting: function (voperation, vformat, vkey, vvalue, vdescription) {
             var
-                getValues = function(value, format) {
+                getValues = function (value, format) {
                     switch (format) {
                         case 'string':
                             var str = value.trim();
@@ -1364,7 +1370,7 @@ var params = (function (vtelerivet) {
 
                         case 'array':
                             var arr = [];
-                            value.replace(/([^,]+)/g, function(s, match) {
+                            value.replace(/([^,]+)/g, function (s, match) {
                                 arr.push(match.trim());
                             });
 
@@ -1387,77 +1393,40 @@ var params = (function (vtelerivet) {
                 values = getValues(vvalue, vformat),
                 response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
                 content = JSON.parse(response.content),
-                reply = (response.status === 200) ? "Yehey! Successful operation." : "Sorry! Unsuccessful operation.";
-
-            var getReply = function(format, vcontent) {
-                switch (format) {
-                    case 'string':
-                        var str = vcontent.data.value;
-
-                        return vcontent.data.key + ": " + str;
-
-                    case 'array':
-                        var arr = vcontent.data.value;
-
-                        return vcontent.data.key + ": " + arr.join(",");
-
-                    case 'querystring':
-                    case 'json':
-                        return vcontent.data.key + ": " + JSON.stringify(vcontent.data.value);
-
-                }
-            };
-            reply = getReply(vformat, content);
-
-            console.log('ultimateset operation = ' + voperation);
-            console.log('ultimateset key = ' + vkey);
-            console.log('ultimateset values = ' + values);
-            //console.log('ultimateset description = ' + vdescription);
-            console.log('ultimateset response.status = ' + response.status);
-            console.log('ultimateset end end end end end end end end end end end end end end end ');
+                getReply = function (format, content) {
+                    switch (format) {
+                        case 'string':
+                            var str = content.data.value;
+                            return content.data.key + ": " + str;
+                        case 'array':
+                            var arr = content.data.value;
+                            return content.data.key + ": " + arr.join(",");
+                        case 'querystring':
+                        case 'json':
+                            return content.data.key + ": " + JSON.stringify(content.data.value);
+                    }
+                },
+                reply = getReply(vformat, content);
 
             generatedParams.reply = reply;
         },
-        set: function (key, option, value) {
+        getsetting: function(vformat, vkey) {
             var
-                operation = 'append',
-                description = key,
-                getValues = function () {
-                    var ar = {};
-                    ar[option] = value;
-
-                    return ar;
-                },
-                values = getValues(),
-                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, key, values, operation, description),
-                content = JSON.parse(response.content),
-                getReply = function () {
-                    if (response.status === 200) {
-                        var delimitedValue = "";
-                        if (content.data.value) {
-                            if (Array.isArray(content.data.value)) {
-                                delimitedValue = content.data.value.join(',');
-                            }
-                            else if (typeof content.data.value === 'object') {
-                                var ar = [];
-                                _(content.data.value).each(function(vvalue, vkey) {
-                                    var txt = vkey + "='" + vvalue + "'";
-                                    if (option == vkey)
-                                        ar.push(txt);
-                                });
-                                delimitedValue = ar.join('\n');
-                            }
-                            else {
-                                delimitedValue = content.data.value;
-                            }
-                        }
-
-                        return description + ": [" + delimitedValue + "]";
+                content = Library.getTxtCmdrSettingsAPIContent(PROJECT, vkey),
+                getReply = function (format, content) {
+                    switch (format) {
+                        case 'string':
+                            var str = content.data.value;
+                            return content.data.key + ": " + str;
+                        case 'array':
+                            var arr = content.data.value;
+                            return content.data.key + ": " + arr.join(",");
+                        case 'querystring':
+                        case 'json':
+                            return content.data.key + ": " + JSON.stringify(content.data.value);
                     }
-
-                    return "Error!" + _(description).titleCase();
                 },
-                reply = getReply();
+                reply = getReply(vformat, content);
 
             generatedParams.reply = reply;
         }
