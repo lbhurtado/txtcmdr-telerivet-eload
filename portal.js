@@ -1455,7 +1455,11 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply;
         },
         setstatus: function(vstatus) {
-            this.setsetting('replace', 'string', 'status', vstatus, 'status description');
+            var
+                compiled = _.template("<%= key %> : <%= value %>"),
+                status = compiled(ORIGIN, vstatus);
+            
+            this.setsetting('replace', 'string', 'status', status, 'status description');
         }
     };
 
