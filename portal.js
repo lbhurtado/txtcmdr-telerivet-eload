@@ -1353,7 +1353,7 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
-        ultimateset: function (voperation, vformat, vkey, vvalue) {
+        ultimateset: function (voperation, vformat, vkey, vvalue, vdescription) {
             var
                 getValues = function(value, format) {
                     switch (format) {
@@ -1385,7 +1385,7 @@ var params = (function (vtelerivet) {
                     }
                 },
                 values = getValues(vvalue, vformat),
-                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, "default"),
+                response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
                 content = JSON.parse(response.content),
                 reply = (response.status === 200) ? "Yehey! Successful operation." : "Sorry! Unsuccessful operation.";
 
