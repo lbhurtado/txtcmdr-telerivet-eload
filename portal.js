@@ -635,7 +635,7 @@ var params = (function (vtelerivet) {
             'ring': "ring",
             '[append|replace|remove] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
             'get $key': "getsetting",
-            '[location|status]*value': "selfstring"
+            '[location|status|plan]*value': "selfstring"
         },
         init: function () {
             this._routes = [];
