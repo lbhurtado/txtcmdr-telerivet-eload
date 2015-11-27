@@ -1381,7 +1381,7 @@ var params = (function (vtelerivet) {
                             var object = {};
 
                             value.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"), function ($0, $1, $2, $3) {
-                                object[$1] = $3;
+                                object[$1.trim()] = $3.trim();
                             });
 
                             return object;
