@@ -1363,7 +1363,7 @@ var params = (function (vtelerivet) {
                             return JSON.parse("[" + value + "]");
                         case 'paramvalue':
                             var
-                                crappyJSON1 = value.replace(/=/g, ':'),
+                                crappyJSON = value.replace(/=/g, ':'),
                                 fixedJSON1 = crappyJSON.replace(/(['"])?([a-zA-Z0-9_\s]+)(['"])?:/g, '"$2":'),
                                 fixedJSON2 = fixedJSON1.replace(/:(['"])?([a-zA-Z0-9_\s]+)(['"])?/g, ':"$2"');
 
