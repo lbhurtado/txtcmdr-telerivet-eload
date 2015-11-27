@@ -1360,39 +1360,35 @@ var params = (function (vtelerivet) {
                         case 'string':
                             return JSON.parse("\"" + value + "\"");
                         case 'array':
-                            var
-                                crappyArray = value.split(','),
-                                fixedArray1 = _(crappyArray).map(function(item){return '\"' + item.trim() + '\"';}),
-                                commadelimitedString = fixedArray1.join(',');
-
-                            return JSON.parse("[" + commadelimitedString + "]");
-
-                        case 'querystring':
-                            var
-                                crappyJSON = value.replace(/=/g, ':'),
-                                fixedJSON1 = crappyJSON.replace(/(['"])?([^&]+)(['"])?:/g, '"$2":'),
-                                fixedJSON2 = fixedJSON1.replace(/:(['"])?([^&]+)(['"])?/g, ':"$2"'),
-                                fixedJSON3 = fixedJSON2.replace(/&/g, ',');
-
-                            return JSON.parse("{" + fixedJSON3 + "}");
-
-                        case 'list':
                             var arr = [];
                             value.replace(/([^,]+)/g, function(s, match) {
                                 arr.push(match.trim());
                             });
 
-                            console.log('arr = ' + arr);
                             return arr;
 
-                        case 'querystring':
-                            var obj = {};
-                            value.replace(/(\w+=\w+)/g, function(s, match) {
-                                var ar = match.split('=');
-                                obj[ar[0]] = ar[1];
-                            });
+                        //case 'querystring':
+                        //    var
+                        //        crappyJSON = value.replace(/=/g, ':'),
+                        //        fixedJSON1 = crappyJSON.replace(/(['"])?([^&]+)(['"])?:/g, '"$2":'),
+                        //        fixedJSON2 = fixedJSON1.replace(/:(['"])?([^&]+)(['"])?/g, ':"$2"'),
+                        //        fixedJSON3 = fixedJSON2.replace(/&/g, ',');
+                        //
+                        //    return JSON.parse("{" + fixedJSON3 + "}");
 
-                            return obj;
+
+                        case 'querystring':
+                            var
+                                records = {};
+
+                            value.replace(
+                                new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+                                function ($0, $1, $2, $3) {
+                                    records[$1] = $3;
+                                }
+                            );
+
+                            return records;
 
                         case 'json':
                             //JSON.parse('{}');              // {}
