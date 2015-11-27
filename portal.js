@@ -635,7 +635,7 @@ var params = (function (vtelerivet) {
             'ring': "ring",
             '[append|replace|remove] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
             'get $key': "getsetting",
-            'status\\s?=*status': "setstatus"
+            '[location|status]*value': "selfstring"
         },
         init: function () {
             this._routes = [];
@@ -1454,12 +1454,13 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
         },
-        setstatus: function(vstatus) {
+        selfstring: function(vattribute, vvalue) {
             var
-                compiled = _.template("<%= key %>.status"),
-                key = compiled({'key': ORIGIN});
+                attribute = vattribute.toLowerCase(),
+                compiled = _.template("<%= mobile %>.<%= attribute %>"),
+                key = compiled({'mobile': ORIGIN, 'attribute': attribute});
 
-            this.setsetting('replace', 'string', key, vstatus, 'status description');
+            this.setsetting('replace', 'string', key, vvalue, attribute + ' description');
         }
     };
 
@@ -1592,7 +1593,7 @@ if (params.attributes) {
 
 console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 10');
+console.log('counter = 11');
 
 _(project.getUsers()).each(function (user) {
     console.log('user.id = ' + user.id);
