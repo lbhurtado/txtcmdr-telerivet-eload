@@ -1401,6 +1401,7 @@ var params = (function (vtelerivet) {
 
                         return arr.join(",");
 
+                    case 'querystring':
                     case 'json':
                         return JSON.stringify(vcontent);
 
