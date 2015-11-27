@@ -1363,14 +1363,14 @@ var params = (function (vtelerivet) {
                             return JSON.parse("[" + value + "]");
                         case 'paramvalue':
                             var
-                                crappyJSON = value.replace(/=/g, ':'),
+                                crappyJSON1 = value.replace(/=/g, ':'),
                                 fixedJSON1 = crappyJSON.replace(/(['"])?([a-zA-Z0-9_\s]+)(['"])?:/g, '"$2":'),
                                 fixedJSON2 = fixedJSON1.replace(/:(['"])?([a-zA-Z0-9_\s]+)(['"])?/g, ':"$2"');
 
                             console.log('crappyJSON = ' + crappyJSON);
                             console.log('fixedJSON1 = ' + fixedJSON1);
                             console.log('fixedJSON2 = ' + fixedJSON2);
-                            return JSON.parse("{" + fixedJSON2 + "}");
+                            return JSON.parse("{" + fixedJSON1 + "}");
                         case 'list':
                             var arr = [];
                             value.replace(/([^,]+)/g, function(s, match) {
