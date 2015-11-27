@@ -632,11 +632,10 @@ var params = (function (vtelerivet) {
             //'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
             //'(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             //'(?:get\\s|\\?)$option': "get",
-            //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
-            //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
-            '[append|replace|delete] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
-            'get $key': "getsetting"
+            '[append|replace|remove] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
+            'get $key': "getsetting",
+            'status\\s*=*status': setstatus
         },
         init: function () {
             this._routes = [];
@@ -1454,6 +1453,9 @@ var params = (function (vtelerivet) {
                 reply = getReply(format, content);
 
             generatedParams.reply = reply;
+        },
+        setstatus: function(vstatus) {
+            this.setsetting('replace', 'string', 'status', vstatus, 'status description');
         }
     };
 
