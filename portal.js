@@ -635,7 +635,7 @@ var params = (function (vtelerivet) {
             'ring': "ring",
             '[append|replace|remove] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
             'get $key': "getsetting",
-            'status\\s*=*status': setstatus
+            'status\\s?=*status': setstatus
         },
         init: function () {
             this._routes = [];
@@ -1588,7 +1588,7 @@ if (params.attributes) {
 
 console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 4');
+console.log('counter = 5');
 
 _(project.getUsers()).each(function (user) {
     console.log('user.id = ' + user.id);
