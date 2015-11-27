@@ -1457,10 +1457,12 @@ var params = (function (vtelerivet) {
         selfstring: function(vattribute, vvalue) {
             var
                 attribute = vattribute.toLowerCase(),
-                compiled = _.template("<%= mobile %>.<%= attribute %>"),
-                key = compiled({'mobile': ORIGIN, 'attribute': attribute});
+                _key = _.template("<%= mobile %>.<%= attribute %>"),
+                key = _key({'mobile': ORIGIN, 'attribute': attribute}),
+                _description = _.template("<%= attribute %> of <%= mobile %>"),
+                description = _description({'mobile': ORIGIN, 'attribute': attribute});
 
-            this.setsetting('replace', 'string', key, vvalue, attribute + ' description');
+            this.setsetting('replace', 'string', key, vvalue, description);
         }
     };
 
