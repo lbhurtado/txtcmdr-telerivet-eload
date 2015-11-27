@@ -630,7 +630,7 @@ var params = (function (vtelerivet) {
             //'set <autoreply|notes> $option\\s?=\\s?*value': "set",
             'ring': "ring",
             //'[append|replace] [autoreply|forwards] [list|array|json] *value \"(.*?)\"': "ultimateset"
-            '[append|replace] [string|array|list|querystring|json] [autoreply|forwards] *value': "ultimateset"
+            '[append|replace|delete] [string|array|list|querystring|json] [autoreply|forwards] *value': "ultimateset"
         },
         init: function () {
             this._routes = [];
