@@ -1456,10 +1456,10 @@ var params = (function (vtelerivet) {
         },
         setstatus: function(vstatus) {
             var
-                compiled = _.template("<%= key %> = <%= value %>"),
-                status = compiled({'key': ORIGIN, 'value': vstatus});
+                compiled = _.template("<%= key %>.status"),
+                key = compiled({'key': ORIGIN});
 
-            this.setsetting('append', 'querystring', 'status', status, 'status description');
+            this.setsetting('replace', 'string', key, vstatus, 'status description');
         }
     };
 
@@ -1592,7 +1592,7 @@ if (params.attributes) {
 
 console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 9');
+console.log('counter = 10');
 
 _(project.getUsers()).each(function (user) {
     console.log('user.id = ' + user.id);
