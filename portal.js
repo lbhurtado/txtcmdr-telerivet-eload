@@ -541,12 +541,12 @@ var params = (function (vtelerivet) {
                         'method': method,
                         'data': data
                     });
-                console.log('setTxtCmdrSettingsAPIResponse operation = ' + data.operation);
-                console.log('setTxtCmdrSettingsAPIResponse code = ' + code);
-                console.log('setTxtCmdrSettingsAPIResponse value = ' + data.value);
-                console.log('setTxtCmdrSettingsAPIResponse description = ' + data.description);
-                console.log('setTxtCmdrSettingsAPIResponse url = ' + url);
-                console.log('setTxtCmdrSettingsAPIResponse method = ' + method);
+                //console.log('setTxtCmdrSettingsAPIResponse operation = ' + data.operation);
+                //console.log('setTxtCmdrSettingsAPIResponse code = ' + code);
+                //console.log('setTxtCmdrSettingsAPIResponse value = ' + data.value);
+                //console.log('setTxtCmdrSettingsAPIResponse description = ' + data.description);
+                //console.log('setTxtCmdrSettingsAPIResponse url = ' + url);
+                //console.log('setTxtCmdrSettingsAPIResponse method = ' + method);
                 return response;
             },
             getTxtCmdrSettingsAPIResponse: function (vproject, vkey) {
@@ -1358,8 +1358,10 @@ var params = (function (vtelerivet) {
                 getValues = function(value, format) {
                     switch (format) {
                         case 'string':
-                            return value;
-                            return JSON.parse("\"" + value + "\"");
+                            var str = value.trim();
+
+                            return str;
+
                         case 'array':
                             var arr = [];
                             value.replace(/([^,]+)/g, function(s, match) {
@@ -1378,16 +1380,6 @@ var params = (function (vtelerivet) {
                             return obj;
 
                         case 'json':
-                            //JSON.parse('{}');              // {}
-                            //JSON.parse('true');            // true
-                            //JSON.parse('"foo"');           // "foo"
-                            //JSON.parse('[1, 5, "false"]'); // [1, 5, "false"]
-                            //JSON.parse('null');            // null
-                            //var crappyJSON = value;
-                            //var fixedJSON1 = crappyJSON.replace(/(['"])?([a-zA-Z0-9_\s]+)(['"])?:/g, '"$2":');
-                            //var fixedJSON2 = fixedJSON1.replace(/:(['"])?([a-zA-Z0-9_\s]+)(['"])?/g, ':"$2"');
-                            //var aNiceObject = JSON.parse(fixedJSON2);
-                            //return aNiceObject;
 
                             return JSON.parse(value);
                     }
@@ -1396,6 +1388,25 @@ var params = (function (vtelerivet) {
                 response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, "default"),
                 content = JSON.parse(response.content),
                 reply = (response.status === 200) ? "Yehey! Successful operation." : "Sorry! Unsuccessful operation.";
+
+            var getReply = function(format, vcontent) {
+                switch (format) {
+                    case 'string':
+                        var str = vcontent.data.value;
+
+                        return str;
+
+                    case 'array':
+                        var arr = vcontent.data.value;
+
+                        return arr.join(",");
+
+                    case 'json':
+                        return JSON.stringify(vcontent);
+
+                }
+            };
+            reply = getReply(vformat, content);
 
             console.log('ultimateset operation = ' + voperation);
             console.log('ultimateset key = ' + vkey);
