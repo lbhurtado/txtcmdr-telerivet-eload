@@ -1378,17 +1378,13 @@ var params = (function (vtelerivet) {
 
 
                         case 'querystring':
-                            var
-                                records = {};
+                            var object = {};
 
-                            value.replace(
-                                new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-                                function ($0, $1, $2, $3) {
-                                    records[$1] = $3;
-                                }
-                            );
+                            value.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"), function ($0, $1, $2, $3) {
+                                object[$1] = $3;
+                            });
 
-                            return records;
+                            return object;
 
                         case 'json':
                             //JSON.parse('{}');              // {}
