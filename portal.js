@@ -1394,17 +1394,22 @@ var params = (function (vtelerivet) {
                 response = Library.setTxtCmdrSettingsAPIResponse(PROJECT, vkey, values, voperation, vdescription),
                 content = JSON.parse(response.content),
                 getReply = function (format, content) {
+                    var
+                        str = "undefined",
+                        compiled = _.template("<%= key %> : <%= value %>");
                     switch (format) {
                         case 'string':
-                            var str = content.data.value;
-                            return content.data.key + ": " + str;
+                            str = content.data.value;
+                            break;
                         case 'array':
-                            var arr = content.data.value;
-                            return content.data.key + ": " + arr.join(",");
+                            str = content.data.value.join(",");
+                            break;
                         case 'querystring':
                         case 'json':
-                            return content.data.key + ": " + JSON.stringify(content.data.value);
+                            str = JSON.stringify(content.data.value);
+                            break;
                     }
+                    return compiled({'key': content.data.key, 'value': str});
                 },
                 reply = getReply(vformat, content);
 
@@ -1430,23 +1435,21 @@ var params = (function (vtelerivet) {
                 format = getFormat(),
                 getReply = function (format, content) {
                     var
-                        str = "",
-                        compiled = _.template(content.data.key + ": <%= data %>");
+                        str = "undefined",
+                        compiled = _.template("<%= key %> : <%= value %>");
                     switch (format) {
                         case 'string':
                             str = content.data.value;
-                            return compiled({'data': str});
-                            return content.data.key + ": " + str;
+                            break;
                         case 'array':
                             str = content.data.value.join(",");
-                            return compiled({'data': str});
-                            return content.data.key + ": " + arr.join(",");
+                            break;
                         case 'querystring':
                         case 'json':
                             str = JSON.stringify(content.data.value);
-                            return compiled({'data': str});
-                            return content.data.key + ": " + JSON.stringify(content.data.value);
+                            break;
                     }
+                    return compiled({'key': content.data.key, 'value': str});
                 },
                 reply = getReply(format, content);
 
@@ -1583,7 +1586,7 @@ if (params.attributes) {
 
 console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 3');
+console.log('counter = 4');
 
 _(project.getUsers()).each(function (user) {
     console.log('user.id = ' + user.id);
