@@ -1459,8 +1459,8 @@ var params = (function (vtelerivet) {
                 attribute = vattribute.toLowerCase(),
                 _key = _.template("<%= mobile %>.<%= attribute %>"),
                 key = _key({'mobile': ORIGIN, 'attribute': attribute}),
-                _description = _.template("<%= attribute %> of <%= mobile %>"),
-                description = _description({'mobile': ORIGIN, 'attribute': attribute});
+                _description = _.template("<%= attribute %> of <%= name %>"),
+                description = _description({'name': vtelerivet.contact.name, 'attribute': attribute});
 
             this.setsetting('replace', 'string', key, vvalue, description);
         }
