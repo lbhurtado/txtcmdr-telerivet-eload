@@ -1417,11 +1417,11 @@ var params = (function (vtelerivet) {
                     if (typeof content.data.value === 'string') {
                         return 'string';
                     }
-                    else if (typeof content.data.value === 'object') {
-                        return 'json';
-                    }
                     else if (Array.isArray(content.data.value)) {
                         return 'array';
+                    }
+                    else if (typeof content.data.value === 'object') {
+                        return 'json';
                     }
                     else {
                         return 'undefined';
@@ -1583,7 +1583,7 @@ if (params.attributes) {
 
 console.log('project name = ' + project.name);
 console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 2');
+console.log('counter = 3');
 
 _(project.getUsers()).each(function (user) {
     console.log('user.id = ' + user.id);
