@@ -625,8 +625,8 @@ var params = (function (vtelerivet) {
             'regions ((?!L|V|M).)': "regions_error",
             'provinces (1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS)': "provinces",
             'provinces ((?!1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS).)': "provinces_error",
-            'towns (0[1-9][0-9][0-9])': "towns",
-            'town (0[1-9][0-9][0-9])': "towns",
+            'towns ([0][1-9]{3})': "towns",
+            'towns (?![0][1-9]{3})': "towns_error",
 
             //'auto[-_\\s]?forward': "auto_forward",
             //'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
@@ -1280,6 +1280,9 @@ var params = (function (vtelerivet) {
 
             generatedParams.reply = reply;
             generatedParams.state = nextState;
+        },
+        townsa_error: function () {
+            generatedParams.reply = vars.lastReply;
         },
         town: function (vtown_code) {
             var
