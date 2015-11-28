@@ -1248,6 +1248,8 @@ var params = (function (vtelerivet) {
                 reply = _(data).inSeveralLines(),
                 nextState = "town";
 
+            console.log('towns url = ' + url);
+
             if (provinceData) {
                 generatedParams.lookups.push({
                     table: {
@@ -1593,12 +1595,12 @@ if (params.attributes) {
     });
 }
 
-console.log('project name = ' + project.name);
-console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 11');
+//console.log('project name = ' + project.name);
+//console.log('project timezone = ' + project.timezone_id);
+console.log('counter = 12');
 
-_(project.getUsers()).each(function (user) {
-    console.log('user.id = ' + user.id);
-    console.log('user.name = ' + user.name);
-    console.log('user.email = ' + user.email);
-});
+//_(project.getUsers()).each(function (user) {
+//    console.log('user.id = ' + user.id);
+//    console.log('user.name = ' + user.name);
+//    console.log('user.email = ' + user.email);
+//});
