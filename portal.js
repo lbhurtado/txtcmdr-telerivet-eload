@@ -633,7 +633,8 @@ var params = (function (vtelerivet) {
             //'(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             //'(?:get\\s|\\?)$option': "get",
             'ring': "ring",
-            '[append|replace|remove] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
+            //'[append|replace|remove] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
+            '<append|replace|remove> <string|array|list|querystring|json> <autoreply|forwards> *value': "setsetting",
             'get $key': "getsetting",
             '[location|status|plan]*value': "selfstring"
         },
@@ -1600,7 +1601,7 @@ if (params.attributes) {
 
 //console.log('project name = ' + project.name);
 //console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 13');
+console.log('counter = 14');
 
 //_(project.getUsers()).each(function (user) {
 //    console.log('user.id = ' + user.id);
