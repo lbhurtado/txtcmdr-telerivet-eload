@@ -657,7 +657,7 @@ var params = (function (vtelerivet) {
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
 
-                    //console.log('regex = ' + regex);
+                    console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
                         callback: this[methodName]
@@ -1600,7 +1600,7 @@ if (params.attributes) {
 
 //console.log('project name = ' + project.name);
 //console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 12');
+console.log('counter = 13');
 
 //_(project.getUsers()).each(function (user) {
 //    console.log('user.id = ' + user.id);
