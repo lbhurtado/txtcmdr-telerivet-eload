@@ -633,8 +633,7 @@ var params = (function (vtelerivet) {
             //'(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
             //'(?:get\\s|\\?)$option': "get",
             'ring': "ring",
-            //'[append|replace|remove] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
-            '<append|replace|remove> <string|array|list|querystring|json> <autoreply|forwards> *value': "setsetting",
+            '[append|replace|remove] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
             'get $key': "getsetting",
             '[location|status|plan]*value': "selfstring"
         },
