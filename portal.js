@@ -625,8 +625,8 @@ var params = (function (vtelerivet) {
             'regions ((?!L|V|M).)': "regions_error",
             'provinces (1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS)': "provinces",
             'provinces ((?!1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS).)': "provinces_error",
-            'towns (0[1-9][1-9][1-9])': "towns",
-            'towns (?!0[1-9][1-9][1-9][1-9])': "towns_error",
+            'towns (0\\d{3})': "towns",
+            'towns (?!0\\d{3})': "towns_error",
 
             //'auto[-_\\s]?forward': "auto_forward",
             //'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
@@ -1600,7 +1600,7 @@ if (params.attributes) {
 
 //console.log('project name = ' + project.name);
 //console.log('project timezone = ' + project.timezone_id);
-console.log('counter = 14');
+console.log('counter = 15');
 
 //_(project.getUsers()).each(function (user) {
 //    console.log('user.id = ' + user.id);
