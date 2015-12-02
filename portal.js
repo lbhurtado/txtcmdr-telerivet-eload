@@ -817,7 +817,7 @@ var params = (function (vtelerivet) {
                         method: 'POST'
                     }),
                 missive = {
-                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ.",
+                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ. https://twitter.com/lbhurtado/status/671920947062923264",
                     to_number: destination
                 },
                 nextState = null;
