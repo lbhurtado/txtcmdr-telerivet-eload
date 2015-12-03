@@ -19,7 +19,7 @@ var params = (function (vtelerivet) {
         titleCase: function (str) {
             return str.replace(/\w\S*/g, function (txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-            });
+            }).trim();
         },
         analyzeParams: function (params) {
             var parts = [];
@@ -293,7 +293,8 @@ var params = (function (vtelerivet) {
             forwards: [],
             posts: [],
             lookups: [],
-            attributes: []
+            attributes: [],
+            contact: {}
         },
         cache = {
             id: {
@@ -588,7 +589,7 @@ var params = (function (vtelerivet) {
             'passage*params': "passage",
             'info': "info",
 
-            'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
+            'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) *profile': "recruit",
             'confirm (\\d{4,6})': "confirm",
 
             'bayan': "bayan",
@@ -789,7 +790,7 @@ var params = (function (vtelerivet) {
                 generatedParams.reply = _(data).inSeveralLines();
             }
         },
-        recruit: function (vmobile) {
+        recruit: function (vmobile, vprofile) {
             var
                 destination = Library.formalize(vmobile),
                 url = "http://128.199.81.129/txtcmdr/challenge/" + ORIGIN + "/" + destination,
@@ -802,6 +803,24 @@ var params = (function (vtelerivet) {
             console.log('recruit url = ' + url);
 
             if (response.status === 200) {
+
+                var
+                    profile = vprofile.match(/([A-Z a-z]*)(\d*)/),
+                    name = _(profile[1]).titleCase(),
+                    age = profile[2],
+                    contact = {
+                        phone_number: destination,
+                        add_group_ids: [cache.id.group.subscriber]
+                    };
+
+                if (name) {
+                    contact.name = name;
+                }
+                if (age) {
+                    contact.vars.age = age;
+                }
+
+                generatedParams.contact = contact;
                 generatedParams.reply = reply;
                 generatedParams.vars.mobile = destination;
                 generatedParams.state = nextState;
@@ -1479,6 +1498,10 @@ var params = (function (vtelerivet) {
 
 }(telerivet));
 
+if (params.contact) {
+    project.getOrCreateContact(params.contact);
+}
+
 if (params.name)
     contact.name = params.name;
 
@@ -1500,17 +1523,16 @@ if (params.state !== undefined) {
     state.id = params.state;
 }
 
-
 if (params.vars) {
     _(params.vars).each(function (value, key) {
         contact.vars[key] = value;
     });
 }
+
 if (params.reply) {
     sendReply(params.reply);
     contact.vars.lastReply = params.reply;
 }
-
 
 if (params.forwards) {
     _(params.forwards).each(function (option) {
