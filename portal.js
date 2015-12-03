@@ -294,7 +294,7 @@ var params = (function (vtelerivet) {
             posts: [],
             lookups: [],
             attributes: [],
-            contact: {}
+            contact: undefined
         },
         cache = {
             id: {
