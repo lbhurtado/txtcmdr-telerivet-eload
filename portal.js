@@ -819,7 +819,7 @@ var params = (function (vtelerivet) {
                         method: 'POST'
                     }),
                 missive = {
-                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ.\shttps://twitter.com/77txtcmdr/status/672244567761096704",
+                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ.\nhttps://twitter.com/77txtcmdr/status/672244567761096704",
                     to_number: destination
                 },
                 nextState = null;
