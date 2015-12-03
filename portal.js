@@ -817,7 +817,7 @@ var params = (function (vtelerivet) {
                     contact.name = name;
                 }
                 if (age) {
-                    contact.vars.age = age;
+                    contact.vars = {'age': age};
                 }
 
                 generatedParams.contact = contact;
