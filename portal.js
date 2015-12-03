@@ -589,8 +589,8 @@ var params = (function (vtelerivet) {
             'passage*params': "passage",
             'info': "info",
 
-            'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) *profile': "recruit",
-            'confirm (\\d{4,6})': "confirm",
+            'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
+            'confirm (\\d{4,6})*profile': "confirm",
 
             'bayan': "bayan",
 
@@ -658,7 +658,7 @@ var params = (function (vtelerivet) {
                             .replace(/\w+=\w+/g, '(\\w+=\\w+)\\b') //query string after ?
                         ;
 
-                    console.log('regex = ' + regex);
+                    //console.log('regex = ' + regex);
                     this._routes.push({
                         pattern: '^' + regex + '$',
                         callback: this[methodName]
@@ -790,20 +790,41 @@ var params = (function (vtelerivet) {
                 generatedParams.reply = _(data).inSeveralLines();
             }
         },
-        recruit: function (vmobile, vprofile) {
+        recruit: function (vmobile) {
             var
                 destination = Library.formalize(vmobile),
                 url = "http://128.199.81.129/txtcmdr/challenge/" + ORIGIN + "/" + destination,
                 response = httpClient.request(url, {
                     method: 'POST'
                 }),
-                reply = "One-time PIN has been sent.  Ask your recruit and reply using that PIN.",
+                reply = "One-time PIN has been sent.  Ask the recruit for the PIN, his/her name and age and reply \<PIN\> \<NAME\> \<AGE\>.",
                 nextState = "confirm";
 
             console.log('recruit url = ' + url);
 
             if (response.status === 200) {
 
+                generatedParams.reply = reply;
+                generatedParams.vars.mobile = destination;
+                generatedParams.state = nextState;
+            }
+
+        },
+        confirm: function (vpin, vprofile) {
+            var
+                destination = vars.mobile,
+                pin = vpin,
+                url = "http://128.199.81.129/txtcmdr/confirm/" + ORIGIN + "/" + destination + "/" + pin,
+                response = !pin || httpClient.request(url, {
+                        method: 'POST'
+                    }),
+                missive = {
+                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ. https://twitter.com/lbhurtado/status/671920947062923264",
+                    to_number: destination
+                },
+                nextState = null;
+
+            if (response.status === 200) {
                 var
                     profile = vprofile.match(/([A-Z a-z]*)(\d*)/),
                     name = _(profile[1]).titleCase(),
@@ -821,27 +842,6 @@ var params = (function (vtelerivet) {
                 }
 
                 generatedParams.contact = contact;
-                generatedParams.reply = reply;
-                generatedParams.vars.mobile = destination;
-                generatedParams.state = nextState;
-            }
-
-        },
-        confirm: function (vpin) {
-            var
-                destination = vars.mobile,
-                pin = vpin,
-                url = "http://128.199.81.129/txtcmdr/confirm/" + ORIGIN + "/" + destination + "/" + pin,
-                response = !pin || httpClient.request(url, {
-                        method: 'POST'
-                    }),
-                missive = {
-                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ. https://twitter.com/lbhurtado/status/671920947062923264",
-                    to_number: destination
-                },
-                nextState = null;
-
-            if (response.status === 200) {
                 generatedParams.vars.mobile = null;
                 generatedParams.forwards.push(missive);
                 generatedParams.state = nextState;
