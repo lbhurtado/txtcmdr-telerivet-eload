@@ -1498,7 +1498,9 @@ var params = (function (vtelerivet) {
 
 }(telerivet));
 
-if (params.contact !== {}) {
+if (params.contact) {
+    console.log(JSON.stringify(params.contact));
+
     project.getOrCreateContact(params.contact);
 }
 
