@@ -898,6 +898,8 @@ var params = (function (vtelerivet) {
                 context: 'contact',
                 contact_id: dest.id
             });
+
+            console.log('cloud load...');
         },
         igps: function () {
             var
