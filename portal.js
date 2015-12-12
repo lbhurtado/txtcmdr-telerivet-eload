@@ -819,7 +819,8 @@ var params = (function (vtelerivet) {
                         method: 'POST'
                     }),
                 missive = {
-                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ.\ntwitter://post?message=%23txtcmdr%20rocks!&in_reply_to_status_id=672244567761096704",
+                    content: "Thank you.  You are now part of our campaign. You will receive news and messages from our HQ.  " + "https://twitter.com/77txtcmdr/status/672244567761096704",
+                    //"\ntwitter://post?message=%23txtcmdr%20rocks!&in_reply_to_status_id=672244567761096704",
                     to_number: destination
                 },
                 nextState = null;
@@ -846,6 +847,7 @@ var params = (function (vtelerivet) {
                 generatedParams.forwards.push(missive);
                 generatedParams.state = nextState;
                 this.load(destination, 20);
+                this.cloudload(destination, 20);
             }
 
             //if (response.status === 200) {
