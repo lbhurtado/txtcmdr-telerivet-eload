@@ -1558,6 +1558,7 @@ if (params.vars) {
 if (params.reply) {
     sendReply(params.reply);
     contact.vars.lastReply = params.reply;
+    console.log("reply.size = " + params.reply.length);
 }
 
 if (params.forwards) {
