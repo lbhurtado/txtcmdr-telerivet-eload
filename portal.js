@@ -302,7 +302,12 @@ var params = (function (vtelerivet) {
                 group: {
                     'Sent Airtime': "CGd8a70f14651c80d5",
                     'subscriber': "CGa9242f10f828f6ab",
-                    'gethsemane': "CG9d590f8998e75621"
+                    'gethsemane': "CG9d590f8998e75621",
+                    'baligod': "CGefc6381de8f8718d",
+                    'baligod-family': "CG0d99bd09335330a8",
+                    'baligod-freemasons': "CG4201a44b93d1d06b",
+                    'baligod-friends': "CG142380493e3cec7f",
+                    'baligod-upvanguards': "CG428482473c5000cb"
                 },
                 phone: {
                     'beverly_hills': "PN59a2e385cb40a474",
@@ -585,7 +590,11 @@ var params = (function (vtelerivet) {
         routes: {
             'join $group *username': "join",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
+
             'levi *username': "baligod",
+            'baligod': "autorecruit",
+
+
             'passage*params': "passage",
             'info': "info",
 
@@ -760,6 +769,17 @@ var params = (function (vtelerivet) {
                 state = null;
 
             generatedParams.name = username;
+            generatedParams.group_ids = [group_id];
+            generatedParams.reply = reply;
+            generatedParams.state = state;
+        },
+        autorecruit: function() {
+            var
+                group = "baligod",
+                group_id = Library.getGroupId(group),
+                reply = "BALIGOD sa Senado! Pls reply w/ ur name & 2 other cellphone numbers if possible. Help me - Levi Baligod.",
+                state = null;
+
             generatedParams.group_ids = [group_id];
             generatedParams.reply = reply;
             generatedParams.state = state;
