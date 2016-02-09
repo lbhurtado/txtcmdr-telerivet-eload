@@ -591,9 +591,8 @@ var params = (function (vtelerivet) {
             'join $group *username': "join",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
-            'baligod *username': "baligod",
             'baligod': "autorecruit",
-
+            'baligod *username': "baligod",
 
             'passage*params': "passage",
             'info': "info",
@@ -764,7 +763,7 @@ var params = (function (vtelerivet) {
                 username = _(vusername).titleCase(),
                 group = "subscriber",
                 group_id = Library.getGroupId(group),
-                replyFormat = "%s, you are now part of Atty. Baligod's campaign.",
+                replyFormat = "%s, you are now part my support group. I will not fail you! Please visit http://duterte.baligod.ph. Thank you. - Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null;
 
