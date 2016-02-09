@@ -585,7 +585,7 @@ var params = (function (vtelerivet) {
         routes: {
             'join $group *username': "join",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
-            'baligod *username': "baligod",
+            'levi *username': "baligod",
             'passage*params': "passage",
             'info': "info",
 
