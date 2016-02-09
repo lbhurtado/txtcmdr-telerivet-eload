@@ -763,7 +763,7 @@ var params = (function (vtelerivet) {
                 username = _(vusername).titleCase(),
                 group = "subscriber",
                 group_id = Library.getGroupId(group),
-                replyFormat = "%s, you are now part my support group. I will not fail you! Please visit http://duterte.baligod.ph. Thank you. - Levi Baligod",
+                replyFormat = "%s, bless you. Soon we will stop the corrupt. Click http://duterte.baligod.ph to know more. Thank you. \n- Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null;
 
