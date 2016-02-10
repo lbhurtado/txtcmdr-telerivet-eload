@@ -592,6 +592,7 @@ var params = (function (vtelerivet) {
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
             'baligod': "baligod",
+            'baligod *username': "baligodname",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
 
@@ -790,6 +791,9 @@ var params = (function (vtelerivet) {
         },
         baligodnamenumber: function (vusername, vmobile1) {
             this.baligodnamenumbernumber(vusername, vmobile1, null);
+        },
+        baligodname: function (vusername) {
+            this.baligodnamenumber(vusername, null);
         },
         baligod: function() {
             var
