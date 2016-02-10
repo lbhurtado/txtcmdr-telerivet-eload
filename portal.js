@@ -763,15 +763,20 @@ var params = (function (vtelerivet) {
                 username = _(vusername).titleCase(),
                 //group = "subscriber",
                 //group_id = Library.getGroupId(group),
-                replyFormat = "%s, bless you. Soon we will stop the corrupt. Click http://duterte.baligod.ph to know more. Thank you. \n- Levi Baligod",
+                replyFormat = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you. \n- Levi Baligod",
                 reply = sprintf(replyFormat, username),
-                state = null;
+                state = null,
+                missive = {
+                    content: "Hi. You have been invited by " + username + " to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
+                    to_number: vmobile1
+                };
 
             console.log('vmobile1 = ' + vmobile1);
             console.log('vmobile2 = ' + vmobile2);
 
             generatedParams.name = username;
             //generatedParams.group_ids = [group_id];
+            generatedParams.forwards.push(missive);
             generatedParams.reply = reply;
             generatedParams.state = state;
         },
