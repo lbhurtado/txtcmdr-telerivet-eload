@@ -768,11 +768,11 @@ var params = (function (vtelerivet) {
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
                 username = _(vusername).titleCase().substring(0,14),
-                replyFormat0 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you. \n- Levi Baligod",
-                replyFormat1 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 1 #. \n- Levi Baligod",
-                replyFormat2 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 2 #s. \n- Levi Baligod",
+                replyFormat0 = "%s, let's stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you.\n- Levi Baligod",
+                replyFormat1 = "%s, let's stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 1 #.\n- Levi Baligod",
+                replyFormat2 = "%s, let's stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 2 #s.\n- Levi Baligod",
                 replyFormat = vmobile2 ? replyFormat2 : (vmobile1 ? replyFormat1 : replyFormat0),
-                forwardFormat = "Hi! You have been invited by " + username + " (" + SHORT_ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\" to confirm your support. - Levi Baligod",
+                forwardFormat = "Hi! " + username + " (" + SHORT_ORIGIN + ") is requesting you to help me get elected to the Senate. Please reply \"BALIGOD\" to give your support.\n- Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null,
                 missive1 = {
