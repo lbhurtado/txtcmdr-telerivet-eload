@@ -768,7 +768,7 @@ var params = (function (vtelerivet) {
                 replyFormat2 = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you for sharing 2 numbers. \n- Levi Baligod",
 
                 replyFormat = vmobile2 ? replyFormat2 : (vmobile1 ? replyFormat1 : replyFormat0),
-                forwardFormat = "Hi. You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
+                forwardFormat = "Hi! You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\" to confirm you support. - Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null,
                 missive1 = {
