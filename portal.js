@@ -764,14 +764,15 @@ var params = (function (vtelerivet) {
                 //group = "subscriber",
                 //group_id = Library.getGroupId(group),
                 replyFormat = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you. \n- Levi Baligod",
+                forwardFormat = "Hi. You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null,
                 missive1 = {
-                    content: "Hi. You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
+                    content: forwardFormat,
                     to_number: vmobile1
                 },
                 missive2 = {
-                    content: "Hi. You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
+                    content: forwardFormat,
                     to_number: vmobile2
                 };
 
