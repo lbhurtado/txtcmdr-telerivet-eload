@@ -772,7 +772,7 @@ var params = (function (vtelerivet) {
                 },
                 missive2 = {
                     content: "Hi. You have been invited by " + username + " to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
-                    to_number: vmobile1
+                    to_number: vmobile2
                 };
 
             console.log('vmobile1 = ' + vmobile1);
