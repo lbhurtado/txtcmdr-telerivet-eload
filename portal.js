@@ -422,13 +422,17 @@ var params = (function (vtelerivet) {
 
                 return getTelco(this.prefixes, getPrefix());
             },
-            formalize: function (somenumber) {
+            formalize: function (somenumber, vshort) {
                 var
                     regex = /(63|0)(\d{10})$/,
                     matches = somenumber.match(regex);
 
                 if (matches) {
+                    if (vshort === true) {
+                        return '0' + matches[2];
+                    }
                     return '63' + matches[2];
+
                 }
 
                 return somenumber;
@@ -584,6 +588,7 @@ var params = (function (vtelerivet) {
         INPUT = vtelerivet.message.content,
         PATH = INPUT,
         ORIGIN = Library.formalize(vtelerivet.contact.phone_number),
+        SHORT_ORIGIN = Library.formalize(vtelerivet.contact.phone_number, true),
         PROJECT = 'demo';
 
     var Router = {
@@ -762,12 +767,12 @@ var params = (function (vtelerivet) {
         },
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
-                username = _(vusername).titleCase().substring(0,20),
+                username = _(vusername).titleCase().substring(0,14),
                 replyFormat0 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you. \n- Levi Baligod",
                 replyFormat1 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 1 #. \n- Levi Baligod",
                 replyFormat2 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 2 #s. \n- Levi Baligod",
                 replyFormat = vmobile2 ? replyFormat2 : (vmobile1 ? replyFormat1 : replyFormat0),
-                forwardFormat = "Hi! You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\" to confirm your support. - Levi Baligod",
+                forwardFormat = "Hi! You have been invited by " + username + " (" + SHORT_ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\" to confirm your support. - Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null,
                 missive1 = {
