@@ -771,7 +771,7 @@ var params = (function (vtelerivet) {
                     to_number: vmobile1
                 },
                 missive2 = {
-                    content: "Hi. You have been invited by " + username + " to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
+                    content: "Hi. You have been invited by " + username + "(" + origin + ")" + " to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
                     to_number: vmobile2
                 };
 
