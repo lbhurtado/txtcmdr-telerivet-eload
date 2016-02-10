@@ -762,7 +762,7 @@ var params = (function (vtelerivet) {
         },
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
-                username = _(vusername).titleCase().substring(0,5),
+                username = _(vusername).titleCase().substring(0,20),
                 replyFormat0 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you. \n- Levi Baligod",
                 replyFormat1 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 1 #. \n- Levi Baligod",
                 replyFormat2 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 2 #s. \n- Levi Baligod",
