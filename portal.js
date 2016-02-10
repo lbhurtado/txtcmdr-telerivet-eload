@@ -767,11 +767,11 @@ var params = (function (vtelerivet) {
                 reply = sprintf(replyFormat, username),
                 state = null,
                 missive1 = {
-                    content: "Hi. You have been invited by " + username + " to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
+                    content: "Hi. You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
                     to_number: vmobile1
                 },
                 missive2 = {
-                    content: "Hi. You have been invited by " + username + "(" + ORIGIN + ")" + " to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
+                    content: "Hi. You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
                     to_number: vmobile2
                 };
 
