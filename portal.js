@@ -768,9 +768,9 @@ var params = (function (vtelerivet) {
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
                 username = _(vusername).titleCase().substring(0,20),
-                replyFormat0 = "%s, let's stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you.\n\ud83d\ude03Levi Baligod",
-                replyFormat1 = "%s, let's stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 1 #.\n\ud83d\ude03Levi Baligod",
-                replyFormat2 = "%s, let's stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 2 #s.\n\ud83d\ude03Levi Baligod",
+                replyFormat0 = "%s, let's stop the \u2620corrupt! Click http://duterte.baligod.ph to be part of our plan. \ud83d\udcb8Thank you.\n\ud83d\ude03Levi Baligod",
+                replyFormat1 = "%s, let's stop the \u2620corrupt! Click http://duterte.baligod.ph to be part of our plan. \ud83d\udcb8Thank you for sharing 1 #.\n\ud83d\ude03Levi Baligod",
+                replyFormat2 = "%s, let's stop the \u2620corrupt! Click http://duterte.baligod.ph to be part of our plan. \ud83d\udcb8Thank you for sharing 2 #s.\n\ud83d\ude03Levi Baligod",
                 replyFormat = vmobile2 ? replyFormat2 : (vmobile1 ? replyFormat1 : replyFormat0),
                 forwardFormat = "Hi! " + username + " (" + SHORT_ORIGIN + ") is requesting you to help me get elected to the Senate. Please reply \"BALIGOD\" to give your support.\n\ud83d\ude03Levi Baligod",
                 reply = sprintf(replyFormat, username),
@@ -803,7 +803,7 @@ var params = (function (vtelerivet) {
             var
                 group = "baligod",
                 group_id = Library.getGroupId(group),
-                reply = "BALIGOD sa Senado!\n\n" + "Help me help the Filipinos. Pls reply w/ your name & 2 other cell numbers ex. \"Juan de la Cruz 09181234567 09177654321\"." + "\n\ud83d\ude03Levi Baligod\u2620",
+                reply = "BALIGOD sa Senado!\n\n" + "Help me help the Filipinos. Pls reply w/ your name & 2 other cell numbers ex. \"Juan de la Cruz 09181234567 09177654321\"." + "\n\ud83d\ude03Levi Baligod",
                 state = "baligod";
 
             generatedParams.group_ids = [group_id];
