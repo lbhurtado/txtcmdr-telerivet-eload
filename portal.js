@@ -762,10 +762,10 @@ var params = (function (vtelerivet) {
         },
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
-                username = _(vusername).titleCase(),
-                replyFormat0 = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you. \n- Levi Baligod",
-                replyFormat1 = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you for sharing 1 number. \n- Levi Baligod",
-                replyFormat2 = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you for sharing 2 numbers. \n- Levi Baligod",
+                username = _(vusername).titleCase().substring(0,5),
+                replyFormat0 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you. \n- Levi Baligod",
+                replyFormat1 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 1 #. \n- Levi Baligod",
+                replyFormat2 = "%s, bless you. Soon we'll stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 2 #s. \n- Levi Baligod",
                 replyFormat = vmobile2 ? replyFormat2 : (vmobile1 ? replyFormat1 : replyFormat0),
                 forwardFormat = "Hi! You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\" to confirm your support. - Levi Baligod",
                 reply = sprintf(replyFormat, username),
