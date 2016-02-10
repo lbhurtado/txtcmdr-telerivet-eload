@@ -592,7 +592,7 @@ var params = (function (vtelerivet) {
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
             'baligod': "autorecruit",
-            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligod",
+            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligod",
 
             'passage*params': "passage",
             'info': "info",
@@ -758,7 +758,7 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply.join("\n");
             generatedParams.state = state;
         },
-        baligod: function (vusername, vmobile) {
+        baligod: function (vusername, vmobile1, vmobile2) {
             var
                 username = _(vusername).titleCase(),
                 //group = "subscriber",
@@ -767,7 +767,8 @@ var params = (function (vtelerivet) {
                 reply = sprintf(replyFormat, username),
                 state = null;
 
-            console.log('vmobile = ' + vmobile);
+            console.log('vmobile1 = ' + vmobile1);
+            console.log('vmobile2 = ' + vmobile2);
 
             generatedParams.name = username;
             //generatedParams.group_ids = [group_id];
