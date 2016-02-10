@@ -592,6 +592,7 @@ var params = (function (vtelerivet) {
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
             'baligod': "baligod",
+            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
 
             'passage*params': "passage",
@@ -786,6 +787,9 @@ var params = (function (vtelerivet) {
             generatedParams.forwards.push(missive2);
             generatedParams.reply = reply;
             generatedParams.state = state;
+        },
+        baligodnamenumber: function (vusername, vmobile1) {
+            Library.baligodnamenumbernumber(vusername, vmobile1, null);
         },
         baligod: function() {
             var
