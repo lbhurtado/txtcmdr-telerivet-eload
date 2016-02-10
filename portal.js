@@ -766,7 +766,11 @@ var params = (function (vtelerivet) {
                 replyFormat = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you. \n- Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null,
-                missive = {
+                missive1 = {
+                    content: "Hi. You have been invited by " + username + " to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
+                    to_number: vmobile1
+                },
+                missive2 = {
                     content: "Hi. You have been invited by " + username + " to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
                     to_number: vmobile1
                 };
@@ -776,7 +780,8 @@ var params = (function (vtelerivet) {
 
             generatedParams.name = username;
             //generatedParams.group_ids = [group_id];
-            generatedParams.forwards.push(missive);
+            generatedParams.forwards.push(missive1);
+            generatedParams.forwards.push(missive2);
             generatedParams.reply = reply;
             generatedParams.state = state;
         },
