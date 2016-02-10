@@ -591,11 +591,11 @@ var params = (function (vtelerivet) {
             'join $group *username': "join",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
-            'baligod': "baligod",
-            'baligod *username': "baligodname",
-            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
-
+            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
+            'baligod *username': "baligodname",
+            'baligod': "baligod",
+            
             'passage*params': "passage",
             'info': "info",
 
