@@ -803,7 +803,7 @@ var params = (function (vtelerivet) {
             var
                 group = "baligod",
                 group_id = Library.getGroupId(group),
-                reply = "BALIGOD sa Senado!\n\n" + "Help me help the Filipinos. Pls reply w/ your name & 2 other cell numbers ex. \"Juan de la Cruz 09181234567 09177654321\"." + "\n\ud83d\ude03Levi Baligod",
+                reply = "BALIGOD sa Senado!\n\n" + "Help me help the Filipinos. Pls reply w/ your name & 2 other cell numbers ex. \"Juan de la Cruz 09181234567 09177654321\"." + "\n\ud83d\ude03Levi Baligod\u2620",
                 state = "baligod";
 
             generatedParams.group_ids = [group_id];
