@@ -767,7 +767,7 @@ var params = (function (vtelerivet) {
         },
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
-                username = _(vusername).titleCase().substring(0,14),
+                username = _(vusername).titleCase().substring(0,20),
                 replyFormat0 = "%s, let's stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you.\n- Levi Baligod",
                 replyFormat1 = "%s, let's stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 1 #.\n- Levi Baligod",
                 replyFormat2 = "%s, let's stop the corrupt! Click http://duterte.baligod.ph to be part of our plan. Thank you for sharing 2 #s.\n- Levi Baligod",
@@ -803,7 +803,7 @@ var params = (function (vtelerivet) {
             var
                 group = "baligod",
                 group_id = Library.getGroupId(group),
-                reply = "BALIGOD sa Senado!\n\n" + "Help me help the Filipinos. Pls reply w/ your name & 2 other cell numbers ex. \"Juan de la Cruz 09181234567 09177654321\"." + "\n - Levi Baligod.",
+                reply = "BALIGOD sa Senado!\n\n" + "Help me help the Filipinos. Pls reply w/ your name & 2 other cell numbers ex. \"Juan de la Cruz 09181234567 09177654321\"." + "\n - Levi Baligod",
                 state = "baligod";
 
             generatedParams.group_ids = [group_id];
