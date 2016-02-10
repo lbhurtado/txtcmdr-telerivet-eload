@@ -591,8 +591,8 @@ var params = (function (vtelerivet) {
             'join $group *username': "join",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
-            'baligod': "autorecruit",
-            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligod",
+            'baligod': "baligod",
+            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
 
             'passage*params': "passage",
             'info': "info",
@@ -758,12 +758,14 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply.join("\n");
             generatedParams.state = state;
         },
-        baligod: function (vusername, vmobile1, vmobile2) {
+        baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
                 username = _(vusername).titleCase(),
-                //group = "subscriber",
-                //group_id = Library.getGroupId(group),
-                replyFormat = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you. \n- Levi Baligod",
+                replyFormat0 = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you. \n- Levi Baligod",
+                replyFormat1 = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you for sharing 1 number. \n- Levi Baligod",
+                replyFormat2 = "%s, bless you. Soon we will stop the corrupt! Click http://duterte.baligod.ph to learn and share our plan. Thank you for sharing 2 numbers. \n- Levi Baligod",
+
+                replyFormat = vmobile2 ? replyFormat2 : (vmobile1 ? replyFormat1 : replyFormat0),
                 forwardFormat = "Hi. You have been invited by " + username + " (" + ORIGIN + ") " + "to help me get elected to the Senate. Please reply \"BALIGOD\". - Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null,
@@ -780,13 +782,12 @@ var params = (function (vtelerivet) {
             console.log('vmobile2 = ' + vmobile2);
 
             generatedParams.name = username;
-            //generatedParams.group_ids = [group_id];
             generatedParams.forwards.push(missive1);
             generatedParams.forwards.push(missive2);
             generatedParams.reply = reply;
             generatedParams.state = state;
         },
-        autorecruit: function() {
+        baligod: function() {
             var
                 group = "baligod",
                 group_id = Library.getGroupId(group),
