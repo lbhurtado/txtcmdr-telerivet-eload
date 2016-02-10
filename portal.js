@@ -789,7 +789,7 @@ var params = (function (vtelerivet) {
             generatedParams.state = state;
         },
         baligodnamenumber: function (vusername, vmobile1) {
-            Library.baligodnamenumbernumber(vusername, vmobile1, null);
+            this.baligodnamenumbernumber(vusername, vmobile1, null);
         },
         baligod: function() {
             var
