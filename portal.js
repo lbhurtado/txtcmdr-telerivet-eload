@@ -784,8 +784,8 @@ var params = (function (vtelerivet) {
             console.log('vmobile2 = ' + vmobile2);
 
             generatedParams.name = username;
-            generatedParams.forwards.push(missive1);
-            generatedParams.forwards.push(missive2);
+            if (vmobile1) generatedParams.forwards.push(missive1);
+            if (vmobile2)  generatedParams.forwards.push(missive2);
             generatedParams.reply = reply;
             generatedParams.state = state;
         },
