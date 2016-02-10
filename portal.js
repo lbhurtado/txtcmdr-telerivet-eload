@@ -762,11 +762,11 @@ var params = (function (vtelerivet) {
             var
                 username = _(vusername).titleCase(),
                 //group = "subscriber",
-                group_id = Library.getGroupId(group),
+                //group_id = Library.getGroupId(group),
                 replyFormat = "%s, bless you. Soon we will stop the corrupt. Click http://duterte.baligod.ph to know more. Thank you. \n- Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null;
-            
+
             console.log('vmobile = ' + vmobile);
 
             generatedParams.name = username;
