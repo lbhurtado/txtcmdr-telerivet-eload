@@ -592,7 +592,7 @@ var params = (function (vtelerivet) {
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
             'baligod': "autorecruit",
-            'baligod *username': "baligod",
+            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligod",
 
             'passage*params': "passage",
             'info': "info",
@@ -758,17 +758,19 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply.join("\n");
             generatedParams.state = state;
         },
-        baligod: function (vusername) {
+        baligod: function (vusername, vmobile) {
             var
                 username = _(vusername).titleCase(),
-                group = "subscriber",
+                //group = "subscriber",
                 group_id = Library.getGroupId(group),
                 replyFormat = "%s, bless you. Soon we will stop the corrupt. Click http://duterte.baligod.ph to know more. Thank you. \n- Levi Baligod",
                 reply = sprintf(replyFormat, username),
                 state = null;
+            
+            console.log('vmobile = ' + vmobile);
 
             generatedParams.name = username;
-            generatedParams.group_ids = [group_id];
+            //generatedParams.group_ids = [group_id];
             generatedParams.reply = reply;
             generatedParams.state = state;
         },
