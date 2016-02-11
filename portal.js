@@ -599,7 +599,7 @@ var params = (function (vtelerivet) {
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
             'baligod *username': "baligodname",
-            'baligod\s*': "baligod",
+            'baligod': "baligod",
 
             'passage*params': "passage",
             'info': "info",
@@ -798,7 +798,13 @@ var params = (function (vtelerivet) {
             this.baligodnamenumbernumber(vusername, vmobile1, null);
         },
         baligodname: function (vusername) {
-            this.baligodnamenumbernumber(vusername, null, null);
+            if (vusername) {
+                this.baligodnamenumbernumber(vusername, null, null);
+            }
+            else {
+                this.baligod();
+            }
+
         },
         baligod: function() {
             var
