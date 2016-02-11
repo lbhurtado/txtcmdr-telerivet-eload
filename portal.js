@@ -768,9 +768,9 @@ var params = (function (vtelerivet) {
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
                 username = _(vusername).titleCase().substring(0,20),
-                replyFormat0 = "%s, let's stop the \u2620corrupt\ud83d\ude20!\nClick http://duterte.baligod.ph to implement our plan. \ud83d\udcb8Thank you.\n\ud83d\ude03Levi Baligod",
-                replyFormat1 = "%s, let's stop the \u2620corrupt\ud83d\ude20!\nClick http://duterte.baligod.ph to implement our plan. \ud83d\udcb8Thank you for sharing 1 #.\n\ud83d\ude03Levi Baligod",
-                replyFormat2 = "%s, let's stop the \u2620corrupt\ud83d\ude20!\nClick http://duterte.baligod.ph to implement our plan. \ud83d\udcb8Thank you for sharing 2 #s.\n\ud83d\ude03Levi Baligod",
+                replyFormat0 = "%s, let's stop the \u2620corrupt\ud83d\ude20!\nClick http://duterte.baligod.ph to implement our plan. \n\ud83d\udcb8Thank you.\n\ud83d\ude03Levi Baligod",
+                replyFormat1 = "%s, let's stop the \u2620corrupt\ud83d\ude20!\nClick http://duterte.baligod.ph to implement our plan. \n\ud83d\udcb8Thank you for sharing 1 #.\n\ud83d\ude03Levi Baligod",
+                replyFormat2 = "%s, let's stop the \u2620corrupt\ud83d\ude20!\nClick http://duterte.baligod.ph to implement our plan. \n\ud83d\udcb8Thank you for sharing 2 #s.\n\ud83d\ude03Levi Baligod",
                 replyFormat = vmobile2 ? replyFormat2 : (vmobile1 ? replyFormat1 : replyFormat0),
                 forwardFormat = "\ud83d\ude4cHi!\n" + username + " (" + SHORT_ORIGIN + ") & I are requesting for your \ud83d\ude4fhelp in my Senate run. Please reply \"BALIGOD\" to give your support.\n\ud83d\ude03Levi Baligod",
                 //forwardFormat = "Testing 1,2,3",
