@@ -599,7 +599,7 @@ var params = (function (vtelerivet) {
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
             'baligod *username': "baligodname",
-            'baligod': "baligod",
+            'baligod\s*': "baligod",
 
             'passage*params': "passage",
             'info': "info",
