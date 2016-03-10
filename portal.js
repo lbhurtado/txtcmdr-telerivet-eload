@@ -777,7 +777,7 @@ var params = (function (vtelerivet) {
             generatedParams.state = state;
         },
         gethsemaneName: function (vname) {
-            this.gethsemane(null, name);
+            this.gethsemane(null, vname);
         },
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
