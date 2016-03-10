@@ -1007,7 +1007,7 @@ var params = (function (vtelerivet) {
                         if (cursor.hasNext()) {
                             var _contact = cursor.next();
                             return {
-                                content: "From " + _contact.name + ": " + vtext,
+                                content: "From " + contact.name + ": " + vtext,
                                 to_number: _contact.phone_number
                             };
                         }
