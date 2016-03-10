@@ -1008,12 +1008,12 @@ var params = (function (vtelerivet) {
                             var icontact = cursor.next();
                             if (contact.vars.handle) {
                                 return {
-                                    content: "From " + contact.name + "(" + contact.vars.handle  + ")" + ": " + vtext,
+                                    content: "From " + contact.name + " (@" + contact.vars.handle  + ")" + ": " + vtext,
                                     to_number: icontact.phone_number
                                 };
                             }
                             return {
-                                content: "From " + contact.name + "(" + ORIGIN  + ")" + ": " + vtext,
+                                content: "From " + contact.name + " (" + ORIGIN  + ")" + ": " + vtext,
                                 to_number: icontact.phone_number
                             };
 
