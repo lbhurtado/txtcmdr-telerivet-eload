@@ -742,7 +742,7 @@ var params = (function (vtelerivet) {
         },
         gethsemane: function (vhandle) {
             var
-                handle = _(vhandle).toLowerCase().substring(0,20),
+                handle = vhandle.toLowerCase().substring(0,20),
                 group = "gethsemane",
                 group_id = Library.getGroupId(group),
                 state = null,
