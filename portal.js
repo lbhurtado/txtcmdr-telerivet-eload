@@ -596,7 +596,7 @@ var params = (function (vtelerivet) {
         routes: {
             'join $group *username': "join",
             '(?:gethsemane|getshemane|gehtsemane) @$handle *name': "gethsemane",
-            '(?:gethsemane|getshemane|gehtsemane) *name': "gethsemane",
+            '(?:gethsemane|getshemane|gehtsemane) *name': "gethsemaneName",
             '(?:gethsemane|getshemane|gehtsemane) @$handle': "gethsemane",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
@@ -748,7 +748,7 @@ var params = (function (vtelerivet) {
 
             var
                 handle = vhandle ? vhandle.toLowerCase().substring(0,20) : null,
-                name = vname ? _(vname).titleCase().substring(0,20) : null, 
+                name = vname ? _(vname).titleCase().substring(0,20) : null,
                 group = "gethsemane",
                 group_id = Library.getGroupId(group),
                 state = null,
@@ -775,6 +775,9 @@ var params = (function (vtelerivet) {
             generatedParams.group_ids = [group_id];
             generatedParams.reply = reply.join("\n");
             generatedParams.state = state;
+        },
+        gethsemaneName: function (vname) {
+            this.gethsemane(null, name);
         },
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
