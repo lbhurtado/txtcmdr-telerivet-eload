@@ -997,7 +997,8 @@ var params = (function (vtelerivet) {
                     if (!vgroup_id) {
 
                         cursor = project.queryContacts({
-                            name: vgroup,
+                            handle: vgroup,
+
                         });
 
                         cursor.limit(1);
