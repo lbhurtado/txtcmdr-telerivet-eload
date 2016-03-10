@@ -595,8 +595,8 @@ var params = (function (vtelerivet) {
     var Router = {
         routes: {
             'join $group *username': "join",
+            '(gethsemane|getshemane|gehtsemane) *handle': "gethsemane",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
-            'frmel: *message': "frmel",
 
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
@@ -740,8 +740,9 @@ var params = (function (vtelerivet) {
             generatedParams.reply = reply;
             generatedParams.state = state;
         },
-        gethsemane: function () {
+        gethsemane: function (vhandle) {
             var
+                handle = _(vhandle).toLowerCase().substring(0,20),
                 group = "gethsemane",
                 group_id = Library.getGroupId(group),
                 state = null,
@@ -763,19 +764,10 @@ var params = (function (vtelerivet) {
             reply.push("DISASTER");
             reply.push("NOVENA");
 
+            generatedParams.handle = handle;
             generatedParams.group_ids = [group_id];
             generatedParams.reply = reply.join("\n");
             generatedParams.state = state;
-        },
-        frmel: function (vmessage) {
-            var
-                missive = {
-                    content: "From " + contact.name + ": " + vmessage,
-                    to_number: "09189362340"
-                },
-                nextState = null;
-
-            generatedParams.forwards.push(missive);
         },
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
@@ -1597,6 +1589,9 @@ if (params.contact) {
 
 if (params.name)
     contact.name = params.name;
+
+if (params.handle)
+    contact.vars.handle = params.handle;
 
 if (params.groups) {
     _(params.groups).each(function (group) {
