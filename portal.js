@@ -748,7 +748,7 @@ var params = (function (vtelerivet) {
 
             var
                 handle = vhandle ? vhandle.toLowerCase().substring(0,20) : null,
-                name = vname ? _(vname).titleCase().substring(0,20) : null,
+                name = vname ? _(vname).titleCase().substring(0,20) : null, 
                 group = "gethsemane",
                 group_id = Library.getGroupId(group),
                 state = null,
