@@ -595,7 +595,7 @@ var params = (function (vtelerivet) {
         routes: {
             'join $group *username': "join",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
-            '@(frmel|frmelo) *message': "frmel",
+            '@frmel *message': "frmel",
 
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
