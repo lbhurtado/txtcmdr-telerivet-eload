@@ -743,11 +743,12 @@ var params = (function (vtelerivet) {
             generatedParams.state = state;
         },
         gethsemane: function (vhandle, vname) {
+            console.log('log vhandle = ' + vhandle);
             console.log('log vname = ' + vname);
 
             var
-                handle = !vhandle || vhandle.toLowerCase().substring(0,20),
-                name = !vname || _(vname).titleCase().substring(0,20),
+                handle = vhandle ? vhandle.toLowerCase().substring(0,20) : null,
+                name = vname ? _(vname).titleCase().substring(0,20) : null,
                 group = "gethsemane",
                 group_id = Library.getGroupId(group),
                 state = null,
