@@ -595,7 +595,7 @@ var params = (function (vtelerivet) {
         routes: {
             'join $group *username': "join",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
-            '@frmel *message': "frmel",
+            'asdfrmel *message': "frmel",
 
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
@@ -775,7 +775,6 @@ var params = (function (vtelerivet) {
                 nextState = null;
 
             generatedParams.forwards.push(missive);
-            break;
         },
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
