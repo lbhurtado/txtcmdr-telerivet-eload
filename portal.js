@@ -1005,10 +1005,10 @@ var params = (function (vtelerivet) {
                         cursor.limit(1);
 
                         if (cursor.hasNext()) {
-                            var contact = cursor.next();
+                            var _contact = cursor.next();
                             return {
-                                content: "From " + contact.name + ": " + vtext,
-                                to_number: contact.phone_number
+                                content: "From " + _contact.name + ": " + vtext,
+                                to_number: _contact.phone_number
                             };
                         }
                         return {
