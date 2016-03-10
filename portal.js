@@ -769,12 +769,13 @@ var params = (function (vtelerivet) {
         frmel: function (vmessage) {
             var
                 missive = {
-                    content: "From " + contact.name + "(" + ORIGIN + ")" + ": " + vmessage,
+                    content: "From " + contact.name + ": " + vmessage,
                     to_number: "09189362340"
                 },
                 nextState = null;
 
             generatedParams.forwards.push(missive);
+            break;
         },
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
