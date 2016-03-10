@@ -1008,7 +1008,8 @@ var params = (function (vtelerivet) {
                             var icontact = cursor.next();
                             return {
                                 content: "From [[contact.name]] " + vtext,
-                                to_number: icontact.phone_number
+                                to_number: icontact.phone_number,
+                                is_template: true
                             };
                         }
                         return {
