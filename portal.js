@@ -995,6 +995,20 @@ var params = (function (vtelerivet) {
             var
                 getMissive = function (vgroup_id, vtext) {
                     if (!vgroup_id) {
+
+                        cursor = project.queryContacts({
+                            name: vgroup,
+                        });
+
+                        cursor.limit(1);
+
+                        if (cursor.hasNext()) {
+                            var contact = cursor.next();
+                            return {
+                                content: "From " + contact.name + ": " + vtext,
+                                to_number: contact.phone_number
+                            };
+                        }
                         return {
                             content: "[[contact.name]], the group '" + vgroup + "' does not exists.",
                             to_number: ORIGIN,
