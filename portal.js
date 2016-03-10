@@ -595,7 +595,7 @@ var params = (function (vtelerivet) {
     var Router = {
         routes: {
             'join $group *username': "join",
-            '(gethsemane|getshemane|gehtsemane) *handle': "gethsemane",
+            '(?:gethsemane|getshemane|gehtsemane) *handle': "gethsemane",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
