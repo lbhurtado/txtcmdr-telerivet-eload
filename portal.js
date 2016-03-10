@@ -302,7 +302,7 @@ var params = (function (vtelerivet) {
                 group: {
                     'Sent Airtime': "CGd8a70f14651c80d5",
                     'subscriber': "CGa9242f10f828f6ab",
-                    'frmel': "CG95f0ad4b429b20f6",
+                    //'frmel': "CG95f0ad4b429b20f6",
                     'gethsemane': "CG9d590f8998e75621",
                     'baligod': "CGefc6381de8f8718d",
                     'baligod-family': "CG0d99bd09335330a8",
@@ -596,7 +596,7 @@ var params = (function (vtelerivet) {
         routes: {
             'join $group *username': "join",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
-            'asdfrmel *message': "frmel",
+            'frmel: *message': "frmel",
 
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
