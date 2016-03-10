@@ -1007,14 +1007,13 @@ var params = (function (vtelerivet) {
                         if (cursor.hasNext()) {
                             var icontact = cursor.next();
                             return {
-                                content: "From " + contact.name + "(" + ORIGIN + ")" +": " + vtext,
+                                content: "From [[contact.name]] " + vtext,
                                 to_number: icontact.phone_number
                             };
                         }
                         return {
                             content: "[[contact.name]], the group '" + vgroup + "' does not exists.",
-                            to_number: ORIGIN,
-                            is_template: true
+                            to_number: ORIGIN
                         };
                     }
                     if (vtext) {
