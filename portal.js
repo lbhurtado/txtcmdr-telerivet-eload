@@ -746,7 +746,7 @@ var params = (function (vtelerivet) {
 
             var
                 handle = vhandle.toLowerCase().substring(0,20),
-                //name = _(vname).titleCase().substring(0,20),
+                name = _(vname).titleCase().substring(0,20),
                 group = "gethsemane",
                 group_id = Library.getGroupId(group),
                 state = null,
@@ -769,7 +769,7 @@ var params = (function (vtelerivet) {
             reply.push("NOVENA");
 
             generatedParams.handle = handle;
-            //generatedParams.name = name;
+            generatedParams.name = name;
             generatedParams.group_ids = [group_id];
             generatedParams.reply = reply.join("\n");
             generatedParams.state = state;
