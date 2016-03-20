@@ -600,6 +600,9 @@ var params = (function (vtelerivet) {
             '(?:gethsemane|getshemane|gehtsemane) @$handle': "gethsemane",
             '(gethsemane|getshemane|gehtsemane)': "gethsemane",
 
+            'abc1234': "alfonso",
+            'xyz5678': "amadeo",
+
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
             'baligod *username': "baligodname",
@@ -779,6 +782,20 @@ var params = (function (vtelerivet) {
         gethsemaneName: function (vname) {
             this.gethsemane(null, vname);
         },
+
+        alfonso: function () {
+            var
+                reply = "ALFONSO";
+
+            generatedParams.reply = reply;
+        },
+        amadeo: function () {
+            var
+                reply = "AMADEO";
+
+            generatedParams.reply = reply;
+        },
+
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
             var
                 username = _(vusername).titleCase().substring(0,20),
