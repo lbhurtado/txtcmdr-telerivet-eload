@@ -818,9 +818,11 @@ var params = (function (vtelerivet) {
                 //state = 'HERE',
                 reply = [];
 
+            console.log(reply);
+
             reply.push("Please proceed to Precinct 001A in Mohon Elementary School, Barangay Mohon, Sta. Teresita, Batangas. ");
-            reply.push("Please eat your breakfast and bring your ID, snacks, whistle, pen and paper.");
-            reply.push("If you are on your way, send 'Y' to proceed. - HQ");
+            //reply.push("Please eat your breakfast and bring your ID, snacks, whistle, pen and paper.");
+            //reply.push("If you are on your way, send 'Y' to proceed. - HQ");
 
             generatedParams.reply = reply;
             //generatedParams.state = state;
