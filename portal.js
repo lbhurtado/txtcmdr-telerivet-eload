@@ -605,7 +605,7 @@ var params = (function (vtelerivet) {
 
             'abc1234': "alfonso",
             'xyz5678': "amadeo",
-            'dito': "dito",
+            '(?:here|dito)': "here",
 
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
@@ -813,17 +813,19 @@ var params = (function (vtelerivet) {
             generatedParams.group_ids = [group_id];
             generatedParams.reply = reply;
         },
-        dito: function () {
+        here: function () {
             var
+                state = "here",
                 reply = [];
 
             console.log(reply);
 
             reply.push("Please proceed to Precinct 001A in Mohon Elementary School, Barangay Mohon, Sta. Teresita, Batangas. ");
-            //reply.push("Please eat your breakfast and bring your ID, snacks, whistle, pen and paper.");
-            //reply.push("If you are on your way, send 'Y' to proceed. - HQ");
+            reply.push("Please eat your breakfast and bring your ID, snacks, whistle, pen and paper.");
+            reply.push("If you are on your way, send 'Y' to proceed. - HQ");
 
-            generatedParams.reply = reply;
+            generatedParams.reply = reply.join("\n");
+            generatedParams.state = state;
         },
 
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
