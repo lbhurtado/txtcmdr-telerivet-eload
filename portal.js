@@ -308,7 +308,10 @@ var params = (function (vtelerivet) {
                     'baligod-family': "CG0d99bd09335330a8",
                     'baligod-freemasons': "CG4201a44b93d1d06b",
                     'baligod-friends': "CG142380493e3cec7f",
-                    'baligod-upvanguards': "CG428482473c5000cb"
+                    'baligod-upvanguards': "CG428482473c5000cb",
+                    'alfonso': "CGaad237367f0af14a",
+                    'amadeo': "CGd57ff225bd2372ac",
+                    'cavite': "CG9e15f7165c92d30d"
                 },
                 phone: {
                     'beverly_hills': "PN59a2e385cb40a474",
@@ -602,6 +605,7 @@ var params = (function (vtelerivet) {
 
             'abc1234': "alfonso",
             'xyz5678': "amadeo",
+            'here': "here",
 
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
@@ -785,15 +789,41 @@ var params = (function (vtelerivet) {
 
         alfonso: function () {
             var
-                reply = "ALFONSO";
+                reply = [],
+                group = "alfonso",
+                group_id = Library.getGroupId(group);
 
-            generatedParams.reply = reply;
+            reply.push( "You are now our poll watcher in the clustered precincts 1A,2A,3A in ALFONSO CENTRAL SCHOOL, BARANGAY V (POB.), ALFONSO, CAVITE");
+            reply.push("You will receive a kit with ID, instructions and UV pen.");
+            reply.push("On election day, ....");
+
+            generatedParams.group_ids = [group_id];
+            generatedParams.reply = reply.join("\n");
         },
         amadeo: function () {
             var
-                reply = "AMADEO";
+                reply = [],
+                group = "amadeo",
+                group_id = Library.getGroupId(group);
+
+            reply.push( "You are now our poll watcher in the clustered precincts 1A,1B,2A,2B,3A,3B,4A in AMADEO ELEMENTARY SCHOOL, BRGY. 1-POBLACION, AMADEO, CAVITE");
+            reply.push("You will receive a kit with ID, instructions and UV pen.");
+            reply.push("On election day, ....");
+
+            generatedParams.group_ids = [group_id];
+            generatedParams.reply = reply;
+        },
+        here: function () {
+            var
+                state = 'HERE',
+                reply = [];
+
+            reply.push("Please proceed to Precinct 001A in Mohon Elementary School, Barangay Mohon, Sta. Teresita, Batangas. ");
+            reply.push("Please eat your breakfast and bring your ID, snacks, whistle, pen and paper.");
+            reply.push("If you are on your way, send 'Y' to proceed. - HQ");
 
             generatedParams.reply = reply;
+            generatedParams.state = state;
         },
 
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
