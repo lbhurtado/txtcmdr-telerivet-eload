@@ -605,7 +605,7 @@ var params = (function (vtelerivet) {
 
             'abc1234': "alfonso",
             'xyz5678': "amadeo",
-            'here': "here",
+            'dito': "dito",
 
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
             'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
@@ -813,9 +813,8 @@ var params = (function (vtelerivet) {
             generatedParams.group_ids = [group_id];
             generatedParams.reply = reply;
         },
-        here: function () {
+        dito: function () {
             var
-                //state = 'HERE',
                 reply = [];
 
             console.log(reply);
@@ -825,7 +824,6 @@ var params = (function (vtelerivet) {
             //reply.push("If you are on your way, send 'Y' to proceed. - HQ");
 
             generatedParams.reply = reply;
-            //generatedParams.state = state;
         },
 
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
