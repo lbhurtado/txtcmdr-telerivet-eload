@@ -806,7 +806,7 @@ var params = (function (vtelerivet) {
                 group = "amadeo",
                 group_id = Library.getGroupId(group);
 
-            reply.push( "You are now our poll watcher in the clustered precincts 1A,1B,2A,2B,3A,3B,4A in AMADEO ELEMENTARY SCHOOL, BRGY. 1-POBLACION, AMADEO, CAVITE");
+            reply.push("You are now our poll watcher in the clustered precincts 1A,1B,2A,2B,3A,3B,4A in AMADEO ELEMENTARY SCHOOL, BRGY. 1-POBLACION, AMADEO, CAVITE");
             reply.push("You will receive a kit with ID, instructions and UV pen.");
             reply.push("On election day, ....");
 
@@ -815,7 +815,7 @@ var params = (function (vtelerivet) {
         },
         here: function () {
             var
-                state = 'HERE',
+                //state = 'HERE',
                 reply = [];
 
             reply.push("Please proceed to Precinct 001A in Mohon Elementary School, Barangay Mohon, Sta. Teresita, Batangas. ");
@@ -823,7 +823,7 @@ var params = (function (vtelerivet) {
             reply.push("If you are on your way, send 'Y' to proceed. - HQ");
 
             generatedParams.reply = reply;
-            generatedParams.state = state;
+            //generatedParams.state = state;
         },
 
         baligodnamenumbernumber: function (vusername, vmobile1, vmobile2) {
