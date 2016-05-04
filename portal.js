@@ -680,8 +680,8 @@ var params = (function (vtelerivet) {
                 }),
                 content = JSON.parse(response.content);
 
-            console.log(content);
-            generatedParams.reply = "You message was " + vmessage;
+            //console.log(content);
+            //generatedParams.reply = "You message was " + vmessage;
         },
         join: function (vgroup, vusername) {
             var
