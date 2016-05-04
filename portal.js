@@ -599,6 +599,7 @@ var params = (function (vtelerivet) {
         routes: {
             'ping *host': "ping",
             'ping': "syntax",
+            '*message': "catch"
         },
         init: function () {
             this._routes = [];
@@ -670,6 +671,9 @@ var params = (function (vtelerivet) {
             console.log('numbers = ' + numbers);
 
             generatedParams.forwards.push(missive);
+        },
+        catch: function(vmessage) {
+            generatedParams.reply = "You message was " + vmessage;
         },
         join: function (vgroup, vusername) {
             var
