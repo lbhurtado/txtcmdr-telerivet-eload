@@ -673,6 +673,14 @@ var params = (function (vtelerivet) {
             generatedParams.forwards.push(missive);
         },
         catch: function(vmessage) {
+            var
+                url = 'http://farmgate.txtcmdr.net/sms/' + ORIGIN + '/' + '639178251991' + vmessage,
+                response = httpClient.request(vurl, {
+                    method: 'POST'
+                }),
+                content = JSON.parse(response.content);
+
+            console.log(content);
             generatedParams.reply = "You message was " + vmessage;
         },
         join: function (vgroup, vusername) {
