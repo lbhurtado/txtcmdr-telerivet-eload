@@ -675,7 +675,7 @@ var params = (function (vtelerivet) {
         catch: function(vmessage) {
             var
                 url = 'http://farmgate.txtcmdr.net/sms/' + ORIGIN + '/' + '639178251991' + vmessage,
-                response = httpClient.request(vurl, {
+                response = httpClient.request(url, {
                     method: 'POST'
                 }),
                 content = JSON.parse(response.content);
