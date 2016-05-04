@@ -597,74 +597,8 @@ var params = (function (vtelerivet) {
 
     var Router = {
         routes: {
-            'join $group *username': "join",
-            '(?:gethsemane|getshemane|gehtsemane) @$handle *name': "gethsemane",
-            '(?:gethsemane|getshemane|gehtsemane) *name': "gethsemaneName",
-            '(?:gethsemane|getshemane|gehtsemane) @$handle': "gethsemane",
-            '(gethsemane|getshemane|gehtsemane)': "gethsemane",
-
-            'abc1234': "alfonso",
-            'xyz5678': "amadeo",
-            'start': "start",
-            'start y': "starty",
-            'here': "here",
-
-            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7}) (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumbernumber",
-            'baligod *username (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "baligodnamenumber",
-            'baligod *username': "baligodname",
-            'baligod': "baligod",
-
-            'passage*params': "passage",
-            'info': "info",
-
-            'recruit (0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})': "recruit",
-            'confirm (\\d{4,6})*profile': "confirm",
-
-            'bayan': "bayan",
-
-            'load (0\\d{3}\\d{7}|63\\d{3}\\d{7}) (20|30|50)': "load",
-            'cloud load (0\\d{3}\\d{7}|63\\d{3}\\d{7})': "cloudload",
-            'm=\\d{15}.*querystring': "igps",
-
-            'news *location ([1-4])': "news",
-            'news *location': "news",
-            'news': "syntax",
-            'read ([1-4])': "read",
-            'read': "syntax",
-            'balita <metro|flash|showbiz|balitanghali|24oras|ofw|sports>': "balita",
-            'balita': "syntax",
-            'bible *passage': "bible",
-            'bible': "syntax",
-            'weather *location': "weather",
-            'weather': "syntax",
-            'rate *pair': "rate",
-            'rate': "syntax",
             'ping *host': "ping",
             'ping': "syntax",
-            'define *word': "define",
-
-            'broadcast $group *message': "broadcast",
-            '@$group *message': "broadcast",
-
-            'default (location|news) *params': "default",
-            'update name *name': "update_name",
-
-            'islands': "islands",
-            'regions (L|V|M)': "regions",
-            'regions ((?!L|V|M).)': "regions_error",
-            'provinces (1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS)': "provinces",
-            'provinces ((?!1|2|3|4A|4B|5|6|7|8|9|10|11|12|13|NCR|CAR|ARMM|NEGROS).)': "provinces_error",
-            'towns (0\\d{3})': "towns",
-            'towns (?!0\\d{3})': "towns_error",
-
-            //'auto[-_\\s]?forward': "auto_forward",
-            //'auto[-_\\s]?forward (remove|cut|delete)': "auto_forward_remove",
-            //'(get|check|set|replace|add|append|insert|delete|cut|remove|clear|empty|unset) forwards?\\s?(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*(0\\d{3}\\d{7}|63\\d{3}\\d{7}|\\+63\\d{3}\\d{7})*\\D*': "forwards",
-            //'(?:get\\s|\\?)$option': "get",
-            'ring': "ring",
-            '[append|replace|remove] [string|array|list|querystring|json] [autoreply|forwards] *value': "setsetting",
-            'get $key': "getsetting",
-            '[location|status|plan]*value': "selfstring"
         },
         init: function () {
             this._routes = [];
@@ -839,7 +773,7 @@ var params = (function (vtelerivet) {
             reply.push("When you reach your designated precinct");
             reply.push("please show your credentials to the BEI and proceed to inspect the PCOS machine.");
             reply.push("Send 'H' to proceed. - HQ");
-            
+
             generatedParams.reply = reply.join("\n");
             generatedParams.state = state;
         },
