@@ -681,7 +681,7 @@ var params = (function (vtelerivet) {
                 content = JSON.parse(response.content);
 
             //console.log(content);
-            //generatedParams.reply = "You message was " + vmessage;
+            generatedParams.reply = "Your message is being processed. Thank you.";
         },
         join: function (vgroup, vusername) {
             var
