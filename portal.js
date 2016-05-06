@@ -678,7 +678,7 @@ var params = (function (vtelerivet) {
                 response = httpClient.request(url, {
                     method: 'POST'
                 }),
-                content = JSON.parse(response.content);
+                //content = JSON.parse(response.content);
 
             //console.log(content);
             //generatedParams.reply = "Your message is being processed. Thank you.";
