@@ -677,8 +677,8 @@ var params = (function (vtelerivet) {
                 url = 'http://farmgate.txtcmdr.net/sms/' + ORIGIN + '/' + '639178251991' + '/' +  encodeURI(vmessage),
                 response = httpClient.request(url, {
                     method: 'POST'
-                }),
-                content = JSON.parse(response.content);
+                });
+                //content = JSON.parse(response.content);
 
             //console.log(content);
             //generatedParams.reply = "Your message is being processed. Thank you.";
